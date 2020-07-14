@@ -31,7 +31,7 @@
                       {{views}}
                     </li>
                   </ul>
-                  <v-card-text>{{content}}</v-card-text>
+                  <v-card-text style="color: #000;">{{content}}</v-card-text>
                 </v-alert>
               </v-card>
             </v-col>
