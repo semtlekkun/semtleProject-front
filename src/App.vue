@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
+    <!-- <v-app-bar
       app
       color="primary"
       dark
@@ -35,22 +35,22 @@
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
-    </v-app-bar>
+    </v-app-bar> -->
 
     <v-content>
-      <HelloWorld/>
+      <ProjectView/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import ProjectView from './views/ProjectView.vue';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld
+    ProjectView
   },
 
   data: () => ({
