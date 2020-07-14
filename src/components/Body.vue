@@ -1,5 +1,7 @@
 <template>
-  <v-container>{{notice_body.md_text}}</v-container>
+  <v-container>
+    <div>{{notice_body.md_text}}</div>
+  </v-container>
 </template>
 
 <script>
