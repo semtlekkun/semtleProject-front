@@ -2,7 +2,7 @@
   <div id="projectWrite">
     <v-app>
       <v-content>
-        <v-container style="margin-top: 4rem">
+        <v-container style="margin-top: 4rem; margin-bottom: 4rem">
           <v-card>
             <v-alert outlined color="#226db2">
               <v-form>
@@ -31,9 +31,9 @@
                       <template v-slot:activator="{ on }">
                         <v-text-field v-model="date" label="마감일" readonly v-on="on"></v-text-field>
                       </template>
+
                       <v-date-picker v-model="date" no-title scrollable>
                         <v-spacer></v-spacer>
-                        <v-btn flat color="primary" @click="menu = false">취소</v-btn>
                         <v-btn flat color="primary" @click="$refs.menu.save(date)">확인</v-btn>
                       </v-date-picker>
                     </v-menu>
@@ -42,15 +42,15 @@
 
                 <v-row>
                   <v-col cols="12">
-                    <v-file-input label="파일 첨부" v-model="chosenFile"></v-file-input>
+                    <vue-markdown>
+                      <v-textarea rows="7" auto-grow outlined label="내용"></v-textarea>
+                    </vue-markdown>
                   </v-col>
                 </v-row>
 
                 <v-row>
                   <v-col cols="12">
-                    <vue-markdown>
-                      <v-textarea outlined label="내용 (마크다운)"></v-textarea>
-                    </vue-markdown>
+                    <v-file-input label="파일 첨부" outlined v-model="chosenFile"></v-file-input>
                   </v-col>
                 </v-row>
 
