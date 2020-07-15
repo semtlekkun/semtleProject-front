@@ -28,7 +28,7 @@
                     <v-date-picker v-model="date" no-title scrollable>
                       <v-spacer></v-spacer>
                       <v-btn flat color="primary" @click="menu = false">취소</v-btn>
-                      <v-btn flat color="primary" @click="$refs.menu.save(date)">확안</v-btn>
+                      <v-btn flat color="primary" @click="$refs.menu.save(date)">확인</v-btn>
                     </v-date-picker>
                   </v-menu>
                 </v-flex>
