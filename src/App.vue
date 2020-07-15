@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <vue-markdown>마크 ~~다운~~ **테스트**.</vue-markdown>
+      <vue-markdown></vue-markdown>
       <projectWrite></projectWrite>
     </v-content>
   </v-app>
