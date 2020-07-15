@@ -10,7 +10,28 @@
                 <v-text-field label="모집인원" required></v-text-field>
                 <v-text-field label="제목" required></v-text-field>
                 <v-text-field label="내용" required></v-text-field>
-                <v-text-field label="마감일" required></v-text-field>
+                <v-flex>
+                  <v-menu
+                    ref="menu"
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :return-value.sync="date"
+                    lazy
+                    transition="scale-transition"
+                    offset-y
+                    full-width
+                    min-width="290px"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field v-model="date" label="마감일" readonly v-on="on"></v-text-field>
+                    </template>
+                    <v-date-picker v-model="date" no-title scrollable>
+                      <v-spacer></v-spacer>
+                      <v-btn flat color="primary" @click="menu = false">취소</v-btn>
+                      <v-btn flat color="primary" @click="$refs.menu.save(date)">확안</v-btn>
+                    </v-date-picker>
+                  </v-menu>
+                </v-flex>
                 <v-file-input label="파일 첨부" outlined v-model="chosenFile"></v-file-input>
 
                 <v-layout>
