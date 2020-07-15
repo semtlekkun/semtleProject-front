@@ -10,9 +10,12 @@
 
 <script>
 export default {
-  computed: {
-    notice_header() {
-      return this.$store.state.notice_header;
+  props: {
+    notice_header: {
+      title: "제목제목제목제목제목제목",
+      writer: "홍길동",
+      date: "2020년 7월 14일",
+      views: "999"
     }
   }
 };
