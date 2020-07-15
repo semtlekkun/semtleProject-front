@@ -4,7 +4,7 @@
       <v-content>
         <v-container style="margin-top: 4rem">
           <v-row>
-            <v-col>
+            <v-col cols="12">
               <v-card>
                 <v-alert outlined color="#226db2">
                   <v-card-title>{{title}}</v-card-title>
@@ -31,7 +31,9 @@
                       {{views}}
                     </li>
                   </ul>
-                  <v-card-text style="color: #000;">{{content}}</v-card-text>
+                  <v-card-text style="color: #000;">
+                    <vue-markdown>{{content}}</vue-markdown>
+                  </v-card-text>
                 </v-alert>
               </v-card>
             </v-col>
