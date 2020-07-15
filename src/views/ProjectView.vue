@@ -70,7 +70,7 @@
 
             <v-col>
                 <v-card-text class="text-center">
-                    dd
+                    <VueMarkdown>{{test}}</VueMarkdown>
                 </v-card-text>
             </v-col>
         </v-row>
@@ -116,10 +116,15 @@
 </template>
 
 <script>
+    import VueMarkdown from 'vue-markdown';
     export default {
+        components:{
+            VueMarkdown
+        },
         data(){
             return{
-                members:["15김태성", "16김도현", "16박건웅","18이효진", "18전하영", "20김혜진", "20박수현"]
+                members:["15김태성", "16김도현", "16박건웅","18이효진", "18전하영", "20김혜진", "20박수현"],
+                text:'# test'
             }
         }
     }
