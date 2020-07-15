@@ -21,5 +21,6 @@ export default {
   position: fixed;
   bottom: 15px;
   right: 15px;
+  position: fixed;
 }
 </style>
