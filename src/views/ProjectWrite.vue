@@ -5,8 +5,7 @@
         <v-container style="margin-top: 4rem">
           <v-card>
             <v-alert outlined color="#226db2">
-              <v-form v-model="isValid" ref="myform
-              ">
+              <v-form>
                 <v-row>
                   <v-col cols="12">
                     <v-text-field label="제목" required></v-text-field>
