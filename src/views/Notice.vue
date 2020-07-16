@@ -1,10 +1,12 @@
 <template>
   <v-app>
-    <v-container>
-      <Header :noticeHeader="noticeHeader" />
+    <v-content>
+      <v-container>
+        <Header :noticeHeader="noticeHeader" />
 
-      <Body :noticeBody="noticeBody" />
-    </v-container>
+        <Body :noticeBody="noticeBody" />
+      </v-container>
+    </v-content>
   </v-app>
 </template>
 
@@ -26,7 +28,7 @@ export default {
         views: "999"
       },
       noticeBody: {
-        mdText: "## 마크다운으로 작성된 글",
+        mdText: `## 마크다운으로 작성된 글`,
         imagePath:
           "https://upload.wikimedia.org/wikipedia/commons/b/bb/Hwang_Ye-ji_going_to_a_Music_Bank_recording_on_August_8%2C_2019.png"
       }
