@@ -17,7 +17,7 @@
     </v-row>
 
     <v-row class="mt-5">
-      <v-col>
+      <v-col cols="12" md="3" offset-lg="2" lg="2">
         작성자 : {{writerId}}
       </v-col>
     </v-row>
@@ -39,11 +39,11 @@
     </v-row>
 
     <!-- 내용 -->
-    <v-row class="mt-5">
-      <v-col cols="12" md="3">
+    <v-row class="mt-5 justify-center">
+      <v-col cols="12" md="3" lg="2">
         <label for="contents_">내용</label>
       </v-col>
-      <v-col cols="12" md="9">
+      <v-col cols="12" md="9" lg="6">
         <v-textarea 
           id="contents_"
           outlined
@@ -58,14 +58,14 @@
 
     <!-- 사진 -->
     <!-- 추후 수정 필요 사항 : 이미지 크기 조정 -->
-    <v-row>
-      <v-col cols="12">
+    <v-row class="mt-5">
+      <v-col cols="12" md="3" offset-lg="2">
         사진 첨부
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col cols="12" md="3">
+      <v-col cols="12" md="3" offset-lg="2">
         <input ref="imageInput" type="file" hidden @change="onChangeImages">
         <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
       </v-col>
@@ -80,8 +80,21 @@
 
     <!-- 최종 확인 버튼 -->
     <v-row>
-        <v-col cols="3" md="12">
+        <v-col cols="3" md="12" offset-lg="2">
           <v-btn  color="primary" @click="alert">확인</v-btn>
+            <v-dialog
+            v-model="dialog"
+            width="500"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                확인
+                </v-btn>
+              </template>
+            </v-dialog>
         </v-col>
     </v-row>
   </v-container>
