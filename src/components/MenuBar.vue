@@ -2,53 +2,31 @@
 
   <div id="app">
 
-    <link rel="stylesheet" 
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
-    crossorigin="anonymous">
-
-    <nav class="navbar navbar-expand">
-      <a class="navbar-brand" href="#">
-        <img class="Logo" src="../assets/logo.png"/>
-      </a>
-      <button class="navbar-toggler" 
-        type="button" 
-        data-toggle="collapse" 
-        data-target="#navbarSupportedContent" 
-        aria-controls="navbarSupportedContent" 
-        aria-expanded="false" 
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="MenuBar collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">공지사항 <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">QnA</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" 
-            href="#" 
-            id="navbarDropdown" 
-            type="button" 
-            data-toggle="dropdown" 
-            aria-haspopup="true"
-            aria-expanded="false">
-              프로젝트
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">공고</a>
-              <a class="dropdown-item" href="#">등록</a>
-            </div>
-          </li>
-        </ul>  
-      </div>
-    </nav>
+    <img 
+      @mouseover="logoHover" 
+      @mouseleave="logoNoHover" 
+      class="Logo" 
+      src="../assets/logo.png" 
+      role="button"
+    />
     
+    <ul 
+    @mouseover="logoHover"
+    @mouseleave="logoNoHover"
+    :class="menuIsOpen?'Bar':'closeBar'">
+      <li :class="menuIsOpen?'':'closeli'" class="bigMenu">공지사항</li>
+      <li :class="menuIsOpen?'':'closeli'"
+       @mouseover="projectHover" 
+       @mouseleave="projectNoHover"
+       class="bigMenu"
+       >프로젝트
+        <ul :class="projectIsOpen?'MiniBar':'closeMiniBar'">
+          <li :class="projectIsOpen?'':'closeli'" class="smallMenu">공고</li>
+          <li :class="projectIsOpen?'':'closeli'" class="smallMenu">등록</li>
+        </ul>
+      </li>
+      <li :class="menuIsOpen?'':'closeli'" class="bigMenu">QnA</li>
+    </ul>
     
 
   </div>
@@ -57,24 +35,85 @@
 
 <script>
     export default {
-        el: '#app',
-        data:() => ({
-        })
-        
+
+        data(){
+          return{
+            menuIsOpen:false,
+            projectIsOpen:false
+          }
+        },
+
+        methods:{
+          logoHover(){
+            this.menuIsOpen=true;
+          },
+          logoNoHover(){
+            this.menuIsOpen=false;
+          },
+          projectHover(){
+            this.projectIsOpen=true;
+          },
+          projectNoHover(){
+            this.projectIsOpen=false;
+          }
+        },
+
+
     }
 </script>
 
 <style scoped>
   .Logo{
-    height: 100px;
-    width: 100px;
+    position: absolute;
+    width: 130px;
+    cursor: pointer;
   }
-  .MenuBar{
-    margin: -25px;
-    height: 26.5px;
-    width: 300px;
-    max-width: none !important;
-    background-color: rgb(46, 117, 182);
+  .Bar{
+    position: absolute;
+    width: 500px;
+    height: 34.45px;
+    display: flex;
+    padding: 0 50px;
+    margin: 48.1px 0px 0px 120px;
+    justify-content: space-between;
+    background-color: rgb(46,117,182);
     color: white;
+    border-radius: 5px;
+    transition: .5s width;
+    vertical-align: middle;
   }
+  .closeBar{
+    width: 0px;
+  }
+  .MiniBar{
+    display: block;
+    width: 150px;
+    padding: 0;
+    margin-top: 9px;
+    border: 1.5px solid rgb(46, 117, 182);
+    border-radius: 0 0 5px 5px;
+    color:rgb(127,127,127)
+  }
+  .closeMiniBar{
+    width: 0px;
+  }
+
+  li{
+    list-style: none;
+    text-align:center;
+    cursor: pointer;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .bigMenu:hover{
+    color:rgb(182,210,236);
+  }
+ 
+  .smallMenu:hover{
+    color:rgb(46, 117, 182)
+  }
+  .closeli{
+    display: none;
+  }
+
 </style>
