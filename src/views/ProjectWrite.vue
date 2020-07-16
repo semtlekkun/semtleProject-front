@@ -42,9 +42,7 @@
 
                 <v-row>
                   <v-col cols="12">
-                    <vue-markdown>
-                      <v-textarea rows="7" auto-grow outlined label="내용"></v-textarea>
-                    </vue-markdown>
+                    <v-textarea rows="7" auto-grow outlined label="내용"></v-textarea>
                   </v-col>
                 </v-row>
 
