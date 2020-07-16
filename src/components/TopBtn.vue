@@ -1,5 +1,10 @@
 <template>
-  <v-btn color="primary" class="top_btn" @click="go_top">TopButton</v-btn>
+  <v-row>
+    <v-col cols="11"></v-col>
+    <v-col>
+      <v-btn color="primary" class="top_btn" @click="go_top">go top</v-btn>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -18,9 +23,7 @@ export default {
 
 <style scoped>
 .top_btn {
-  position: fixed;
-  bottom: 15px;
-  right: 15px;
+  bottom: 3%;
   position: fixed;
 }
 </style>
