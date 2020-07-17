@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="11"></v-col>
     <v-col>
-      <v-btn color="primary" class="top_btn" @click="go_top">go top</v-btn>
+      <v-btn color="#BBDEFB" class="top_btn" @click="go_top">go top</v-btn>
     </v-col>
   </v-row>
 </template>
