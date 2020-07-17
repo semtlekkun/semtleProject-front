@@ -2,7 +2,6 @@
   <v-app>
     <v-content>
       <QnA/>
-
     </v-content>
   </v-app>
 </template>

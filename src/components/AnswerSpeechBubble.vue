@@ -6,12 +6,12 @@
             <div
             :class="`rounded-lg`"
             class="AnswerBubble pa-6 font-weight-bold amber lighten-2"
-          >{{msg}}</div>
+          >{{comments.comment}}</div>
         </td>
         <td>
             <div class="userInfo">
                 <div class="userImage"><img src="../assets/쿼카.jpg" width="50" height="50" ></div>
-                <p class="userName">{{name}} </p>
+                <p class="userName">{{comments.name}} </p>
             </div>
           </td>
         </tr>
@@ -20,7 +20,12 @@
 </template>
 <script>
 export default {
-  props:['msg','name']
+  props:{
+      comments:{
+          type:Object,
+          required:true
+      }
+  }
 }
 </script>
 
