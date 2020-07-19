@@ -1,5 +1,5 @@
 <template>
-  <div class="bubble">
+  <v-col class="bubble">
     <table>
       <tr>
         <td>
@@ -11,18 +11,17 @@
           </div>
         </td>
         <td>
-          <div
-            :class="`rounded-lg`"
-            class="QuestionBubble pa-6 indigo accent-2"
-          ><vue-markdown>{{comments.comment}}</vue-markdown></div>
+          <div :class="`rounded-lg`" class="QuestionBubble pa-6 indigo accent-2">
+            <vue-markdown>{{comments.comment}}</vue-markdown>
+          </div>
         </td>
       </tr>
     </table>
-  </div>
+  </v-col>
 </template>
 
 <script>
-import VueMarkdown from 'vue-markdown'; //markdown import
+import VueMarkdown from "vue-markdown"; //markdown import
 export default {
   name: "QuestionSpeechBubble",
   components: {

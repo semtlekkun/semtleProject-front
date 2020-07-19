@@ -1,22 +1,27 @@
 <template>
   <div class="bubble">
-    <table>
-      <tr>
-        <td>
-          <div :class="`rounded-lg`" class="AnswerBubble pa-6 amber lighten-2">{{comments.comment}}</div>
-        </td>
-        <td>
-          <div class="userInfo">
-            <div class="userImage">
-              <img src="../assets/쿼카.jpg" width="50" height="50" />
+    <v-col>
+      <table>
+        <tr>
+          <td>
+            <div
+              :class="`rounded-lg`"
+              class="AnswerBubble pa-6 amber lighten-2"
+            >{{comments.comment}}</div>
+          </td>
+          <td>
+            <div class="userInfo">
+              <div class="userImage">
+                <img src="../assets/쿼카.jpg" width="50" height="50" />
+              </div>
+              <p class="userName">
+                <vue-markdown>{{comments.comment}}</vue-markdown>
+              </p>
             </div>
-            <p class="userName">
-              <vue-markdown>{{comments.comment}}</vue-markdown>
-            </p>
-          </div>
-        </td>
-      </tr>
-    </table>
+          </td>
+        </tr>
+      </table>
+    </v-col>
   </div>
 </template>
 <script>

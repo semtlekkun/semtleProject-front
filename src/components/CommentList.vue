@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <div v-for="(comment, i) in commentData.comments" :key="i">
       <v-row justify="start" v-show="comment.name == commentData.writerName">
         <QuestionSpeechBubble :comments="comment"></QuestionSpeechBubble>
@@ -8,14 +8,13 @@
         <AnswerSpeechBubble :comments="comment"></AnswerSpeechBubble>
       </v-row>
     </div>
-  </v-app>
+  </div>
 </template> 
 
 
 <script>
 import QuestionSpeechBubble from "./QuestionSpeechBubble";
 import AnswerSpeechBubble from "./AnswerSpeechBubble";
-
 
 export default {
   components: {

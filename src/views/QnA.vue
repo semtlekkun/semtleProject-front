@@ -1,13 +1,10 @@
 <template>
-  <v-app>
-    <v-content>
-      <v-container>
-        <CommentList :commentData="commentData" />
-        <hr/>
-        <CommentForm/>
-      </v-container>
-    </v-content>
-  </v-app>
+  <v-container>
+    <CommentList :commentData="commentData" />
+    <hr />
+    <br />
+    <CommentForm />
+  </v-container>
 </template>
 
 <script>
