@@ -13,8 +13,8 @@
         <td>
           <div
             :class="`rounded-lg`"
-            class="QuestionBubble pa-6 font-weight-bold indigo accent-2"
-          >{{comments.comment}}</div>
+            class="QuestionBubble pa-6 indigo accent-2"
+          ><vue-markdown>{{comments.comment}}</vue-markdown></div>
         </td>
       </tr>
     </table>
@@ -22,8 +22,12 @@
 </template>
 
 <script>
+import VueMarkdown from 'vue-markdown'; //markdown import
 export default {
   name: "QuestionSpeechBubble",
+  components: {
+    VueMarkdown
+  },
   props: {
     comments: {
       type: Object,

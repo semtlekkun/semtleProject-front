@@ -16,6 +16,7 @@
 import QuestionSpeechBubble from "./QuestionSpeechBubble";
 import AnswerSpeechBubble from "./AnswerSpeechBubble";
 
+
 export default {
   components: {
     QuestionSpeechBubble,
