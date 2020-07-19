@@ -3,6 +3,8 @@
     <v-content>
       <v-container>
         <CommentList :commentData="commentData" />
+        <hr/>
+        <CommentForm/>
       </v-container>
     </v-content>
   </v-app>
@@ -10,9 +12,11 @@
 
 <script>
 import CommentList from "../components/CommentList";
+import CommentForm from "../components/CommentForm";
 export default {
   components: {
-    CommentList
+    CommentList,
+    CommentForm
   },
   data() {
     return {

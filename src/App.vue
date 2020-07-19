@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import QnA from './views/QnA.vue'
+import QnA from "./views/QnA";
 
 export default {
   name: 'App',
