@@ -1,6 +1,6 @@
 <template>
   <v-col>
-    <img src="BodyInfo.Image" alt="예지쨩 사진" />
+    <img src="BodyInfo.imagePath" alt="예지쨩 사진" />
     <vue-markdown>{{BodyInfo.Contents}}</vue-markdown>
   </v-col>
 </template>

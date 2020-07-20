@@ -41,8 +41,8 @@ export default {
         },
         Body: {
           Contents: "# 마크다운으로 작성된 글",
-          Image:
-            "https://i.pinimg.com/originals/d7/8f/a2/d78fa2deed379f6668e2995ac38362a2.jpg"
+          imagePath:
+            "https://upload.wikimedia.org/wikipedia/commons/b/bb/Hwang_Ye-ji_going_to_a_Music_Bank_recording_on_August_8%2C_2019.png"
         }
       }
     };
