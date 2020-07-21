@@ -2,23 +2,25 @@
   <div class="bubble">
     <table>
       <tr>
+        <td class="time" style="font-size:12px;">{{comments.time}}</td>
         <td>
-          <div :class="`rounded-lg`" class="AnswerBubble pa-6 amber lighten-2">{{comments.comment}}</div>
+          <div :class="`rounded-lg`" class="AnswerBubble pa-6 amber lighten-2">
+            <vue-markdown>{{comments.comment}}</vue-markdown>
+          </div>
         </td>
-        <td>
+        <td width="120px" style="text-align-last: center; vertical-align:top;">
           <div class="userInfo">
             <div class="userImage">
               <img src="../assets/쿼카.jpg" width="50" height="50" />
             </div>
-            <p class="userName">
-              <vue-markdown>{{comments.comment}}</vue-markdown>
-            </p>
+            <p class="userName">{{comments.name}}</p>
           </div>
         </td>
       </tr>
     </table>
   </div>
 </template>
+
 <script>
 import VueMarkdown from "vue-markdown"; //markdown import
 export default {
@@ -35,6 +37,11 @@ export default {
 </script>
 
 <style scope>
+.time {
+  vertical-align: bottom;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
 .bubble {
   margin: 0.3em;
 }

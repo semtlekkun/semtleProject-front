@@ -2,20 +2,20 @@
   <div class="bubble">
     <table>
       <tr>
-        <td width="120px" style="text-align-last: center; vertical-align:top;">
+        <td style="text-align-last: center;">
           <div class="userInfo">
             <div class="userImage">
               <img src="../assets/쿼카.jpg" width="50" height="50" />
             </div>
-            <p class="userName">{{comments.name}}</p>
+            <p class="userName">{{FirstQuestion.writerName}}</p>
           </div>
         </td>
         <td>
-          <div :class="`rounded-lg`" class="QuestionBubble pa-6 blue lighten-1">
-            <vue-markdown>{{comments.comment}}</vue-markdown>
+          <div :class="`rounded-lg`" class="FirstQuestion pa-6 blue lighten-1">
+            <vue-markdown>{{FirstQuestion.question}}</vue-markdown>
           </div>
         </td>
-        <td class="time" style="font-size:12px;">{{comments.time}}</td>
+        <td class="time" style="font-size:12px;">{{FirstQuestion.time}}</td>
       </tr>
     </table>
   </div>
@@ -24,12 +24,12 @@
 <script>
 import VueMarkdown from "vue-markdown"; //markdown import
 export default {
-  name: "QuestionSpeechBubble",
+  name: "FirstQuestion",
   components: {
     VueMarkdown
   },
   props: {
-    comments: {
+    FirstQuestion: {
       type: Object,
       required: true
     }
@@ -59,12 +59,12 @@ td {
   display: inline-block;
   margin: 0 1em 0 1em;
 }
-.QuestionBubble {
+.FirstQuestion {
   max-width: 40em;
   position: relative;
   display: inline-block;
 }
-.QuestionBubble:after {
+.FirstQuestion:after {
   content: "";
   position: absolute;
   border-style: solid;
