@@ -1,10 +1,9 @@
 <template>
-  <v-row>
-    <v-col cols="11"></v-col>
-    <v-col>
-      <v-btn color="#BBDEFB" class="top_btn" @click="go_top">go top</v-btn>
-    </v-col>
-  </v-row>
+  <div>
+    <v-btn color="primary" class="top_btn" @click="go_top" fab x-large dark>
+      <v-icon>mdi-arrow-up-thick</v-icon>
+    </v-btn>
+  </div>
 </template>
 
 <script>
@@ -14,16 +13,17 @@ export default {
       window.scrollTo({
         top: 0,
         left: 0,
-        behavior: "smooth"
+        behavior: "smooth",
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .top_btn {
-  bottom: 3%;
+  right: 1%;
+  bottom: 2%;
   position: fixed;
 }
 </style>
