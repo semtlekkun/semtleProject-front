@@ -60,7 +60,7 @@
     <!-- 추후 수정 필요 사항 : 이미지 크기 조정 -->
     <v-row class="mt-5">
       <v-col cols="12" md="3" offset-lg="2">
-        사진 첨부
+        사진 첨부 
       </v-col>
     </v-row>
 
@@ -81,19 +81,42 @@
     <!-- 최종 확인 버튼 -->
     <v-row>
         <v-col cols="3" md="12" offset-lg="2">
-          <v-btn  color="primary" @click="alert">확인</v-btn>
+            <!-- 다이얼로그 -->
             <v-dialog
-            v-model="dialog"
-            width="500"
-            >
+              v-model="dialog"
+              width="500"
+            ><v-spacer></v-spacer>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
+                  color="primary"
                   v-bind="attrs"
                   v-on="on"
+                  @click="check"
                 >
                 확인
                 </v-btn>
               </template>
+
+              <!-- 다이얼로그 구성 -->
+              <v-card>
+                <v-card-title class="headline grey lighten-2">
+                  {{this.dialogText}}
+                </v-card-title>
+
+                <v-divider></v-divider>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn
+                      color="green darken-1"
+                      text
+                      @click="dialog = false"
+                    >
+                      확인
+                    </v-btn>
+                </v-card-actions>
+              </v-card>
             </v-dialog>
         </v-col>
     </v-row>
@@ -119,6 +142,12 @@
 
       //내용
       contents: "",
+
+      //다이얼로그
+      dialog: false,
+
+      //다이얼로그에 띄울 문자열
+      dialogText: "",
     }),
 
     methods:{
@@ -153,16 +182,16 @@
       //제목이나 내용중에서 누락된 부분이 있는지 체크
       check() {
         if (this.title === ""){
-          alert('제목을 작성하지 않았습니다.');
+          this.dialogText = '제목을 작성하지 않았습니다.';
         }
         else if(this.contents === "") {
-          alert('내용을 작성하지 않았습니다.');
+          this.dialogText = '내용을 작성하지 않았습니다.';
         }
         else
-          alert('게시글 작성 완료.\n[확인용 메세지]\n작성 일자 : ' + this.getDateInfo()
+          this.dialogText = '게시글 작성 완료.\n[확인용 메세지]\n작성 일자 : ' + this.getDateInfo()
           + '\n작성자 : ' +this.writerId
           + '\n제목 : ' + this.title
-          + '\n내용 : ' + this.contents);
+          + '\n내용 : ' + this.contents;
       }
     },
   }
