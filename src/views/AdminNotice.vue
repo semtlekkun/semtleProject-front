@@ -3,24 +3,26 @@
     <v-row>
       <v-col cols="12">
         <nav>
-    <v-toolbar flat app>
-      <v-toolbar-title class="text-uppercase grey--text">
-        <span>[임시]동아리 아이콘, 상단바 들어갈 공간</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn flat color="blue">
-        <span>[임시]버튼</span>
-      </v-btn>
-    </v-toolbar>
-  </nav>
+          <v-toolbar flat app>
+            <v-toolbar-title class="text-uppercase grey--text">
+              <span>[임시]동아리 아이콘, 상단바 들어갈 공간</span>
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn flat color="blue">
+              <span>[임시]버튼</span>
+            </v-btn>
+          </v-toolbar>
+        </nav>
       </v-col>
     </v-row>
 
+    <!-- 작성자 정보 표시 (임시) -->
     <v-row class="mt-5">
       <v-col cols="12" md="3" offset-lg="2" lg="2">
         작성자 : {{writerId}}
       </v-col>
     </v-row>
+
     <!-- 제목 -->
     <v-row class="mt-5 justify-center">
       <v-col cols="12" md="3" lg="2">
@@ -33,6 +35,7 @@
           label="제목"
           outlined
           v-model="title"
+
           >
           </v-text-field>
       </v-col>
@@ -56,68 +59,98 @@
       </v-col>
     </v-row>
 
-    <!-- 사진 -->
-    <!-- 추후 수정 필요 사항 : 이미지 크기 조정 -->
-    <v-row class="mt-5">
-      <v-col cols="12" md="3" offset-lg="2">
-        사진 첨부 
+    <!-- 이미지 -->
+    <v-row class="mt-5 justify-center">
+      <v-col cols="12" md="3" lg="2">
+        <label for="image_">사진</label>
+      </v-col>
+
+      <v-col cols="12" md="9" lg="6">
+       <v-file-input
+          prepend-icon="mdi-camera"
+          chips
+          show-size
+          counter
+          accept="image/*"
+          label="이미지 첨부"
+          @change='onClickImageUpload'
+        >
+        </v-file-input>
       </v-col>
     </v-row>
 
+    <!-- 이미지 미리보기 -->
     <v-row>
-      <v-col cols="12" md="3" offset-lg="2">
-        <input ref="imageInput" type="file" hidden @change="onChangeImages">
-        <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
+      <v-col cols="12" offset-md="3" md="9" offset-lg="4" lg="6">
+          <v-card
+          height="400"
+          align="center"
+          color="grey lighten-3"
+          >
+            <div v-if="!this.imageUrl">
+              <p><br/><br/><br/><br/><br/><br/><br/>[ 미리보기 ]</p>      
+            </div>
+
+            <div v-else>
+              <p>{{this.imageUrl}}</p>
+              <v-img
+                :src="imageUrl"
+                width="400"
+                height="300"
+              >
+              </v-img>
+            </div>
+          </v-card>
       </v-col>
-      <v-col cols="12" md="9">  
-        <v-img
-        v-if="imageUrl" :src="imageUrl"
-        width="200"
-        height="200"
-        ></v-img>
-     </v-col> 
+
+      <!-- 기존 이미지 -->
+      <v-col cols="12" md="3" offset-lg="2">
+        <input ref="imageInput" 
+        type="file" 
+        hidden 
+        @change="onChangeImages">
+        <v-btn 
+          type="button" 
+          @click="onClickImageUpload"
+          ><v-icon right dark>mdi-cloud-upload</v-icon>이미지 업로드
+        </v-btn>
+      </v-col>
     </v-row>
 
     <!-- 최종 확인 버튼 -->
     <v-row>
-        <v-col cols="3" md="12" offset-lg="2">
-            <!-- 다이얼로그 -->
-            <v-dialog
-              v-model="dialog"
-              width="500"
-            ><v-spacer></v-spacer>
-              <template v-slot:activator="{ on, attrs }">
+        <v-col cols="6" offset="3">
+            <!-- 스낵바 --> 
+            <v-btn
+              block
+              x-large
+              dark
+              color="primary"
+              @click="check"
+            >
+              <v-icon>mdi-pencil</v-icon>확인
+            </v-btn>
+
+            <!-- 스낵바 눌렀을 때 -->
+            <v-snackbar
+              v-model="snackbar"
+              top
+              :timeout="timeout"
+            >
+            <!-- 띄울 메세지 -->
+              {{ text }}
+ 
+              <template v-slot:action="{ attrs }">
                 <v-btn
-                  color="primary"
+                  :color="color"
+                  text
                   v-bind="attrs"
-                  v-on="on"
-                  @click="check"
+                  @click="snackbar = false"
                 >
-                확인
+                  Close
                 </v-btn>
               </template>
-
-              <!-- 다이얼로그 구성 -->
-              <v-card>
-                <v-card-title class="headline grey lighten-2">
-                  {{this.dialogText}}
-                </v-card-title>
-
-                <v-divider></v-divider>
-
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-
-                    <v-btn
-                      color="green darken-1"
-                      text
-                      @click="dialog = false"
-                    >
-                      확인
-                    </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
+            </v-snackbar>
         </v-col>
     </v-row>
   </v-container>
@@ -143,18 +176,24 @@
       //내용
       contents: "",
 
-      //다이얼로그
-      dialog: false,
+      //------------------
+      //스낵바 관련 변수
+      snackbar: false,
+      
+      //스낵바에 띄울 메세지
+      text: "",
 
-      //다이얼로그에 띄울 문자열
-      dialogText: "",
+      //스낵바 지속시간
+      timeout: 3000,
+
+      //미작성부분 아이디 값 저장.
+      item: "",
+
+      //스낵바 버튼 색상
+      color:"",
     }),
 
     methods:{
-      //확인 버튼
-      alert(){
-        this.check();
-      },
 
       //이미지 첨부
       onClickImageUpload() {
@@ -181,17 +220,29 @@
 
       //제목이나 내용중에서 누락된 부분이 있는지 체크
       check() {
+        this.snackbar = true;
+
         if (this.title === ""){
-          this.dialogText = '제목을 작성하지 않았습니다.';
+          this.text = '제목을 작성하지 않았습니다.';
+          this.item = 'title_';
+          this.moveView();
+          this.color ="red";
         }
         else if(this.contents === "") {
-          this.dialogText = '내용을 작성하지 않았습니다.';
+          this.text = '내용을 작성하지 않았습니다.';
+          this.item = 'contents_';
+          this.moveView();
+          this.color ="red";
         }
-        else
-          this.dialogText = '게시글 작성 완료.\n[확인용 메세지]\n작성 일자 : ' + this.getDateInfo()
-          + '\n작성자 : ' +this.writerId
-          + '\n제목 : ' + this.title
-          + '\n내용 : ' + this.contents;
+        else {
+          this.text = '공지사항 작성완료.';
+          this.color ="blue";
+        }
+      },
+
+      //작성이 되지 않은 영역으로 이동
+      moveView() {
+        document.getElementById(this.item).focus();
       }
     },
   }
