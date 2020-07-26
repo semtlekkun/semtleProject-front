@@ -17,7 +17,7 @@
         <v-row>
           <v-spacer></v-spacer>
           <v-col>
-            <v-btn @click="onUpload" color="blue lighten-1" large dark style="float:right;">등록</v-btn>
+            <v-btn color="blue lighten-1" large dark style="float:right;">등록</v-btn>
           </v-col>
         </v-row>
       </v-form>

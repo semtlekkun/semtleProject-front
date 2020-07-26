@@ -1,7 +1,7 @@
 <template>
-  <v-app>
+  <v-app style="margin-bottom:0;">
     <v-content>
-      <QnA/>
+      <QnA />
     </v-content>
   </v-app>
 </template>
@@ -10,14 +10,14 @@
 import QnA from "./views/QnA";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    QnA
+    QnA,
   },
 
   data: () => ({
     //
-  })
-}
+  }),
+};
 </script>
