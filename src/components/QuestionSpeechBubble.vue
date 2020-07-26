@@ -7,7 +7,7 @@
             <div class="userImage">
               <img src="../assets/쿼카.jpg" width="50" height="50" />
             </div>
-            <p class="userName">{{comments.name}}</p>
+            <div class="userName">{{comments.name}}</div>
           </div>
         </td>
         <td>
@@ -26,14 +26,14 @@ import VueMarkdown from "vue-markdown"; //markdown import
 export default {
   name: "QuestionSpeechBubble",
   components: {
-    VueMarkdown
+    VueMarkdown,
   },
   props: {
     comments: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 

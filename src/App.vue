@@ -1,5 +1,5 @@
 <template>
-  <v-app style="margin-bottom:0;">
+  <v-app>
     <v-content>
       <QnA />
     </v-content>

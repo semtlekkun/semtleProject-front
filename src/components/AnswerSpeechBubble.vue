@@ -13,7 +13,7 @@
             <div class="userImage">
               <img src="../assets/쿼카.jpg" width="50" height="50" />
             </div>
-            <p class="userName ">{{comments.name}}</p>
+            <div class="userName ">{{comments.name}}</div>
           </div>
         </td>
       </tr>

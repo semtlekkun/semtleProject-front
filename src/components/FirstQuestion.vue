@@ -7,7 +7,7 @@
             <div class="userImage">
               <img src="../assets/쿼카.jpg" width="50" height="50" />
             </div>
-            <p class="userName">{{FirstQuestion.writerName}}</p>
+            <div class="userName">{{FirstQuestion.writerName}}</div>
           </div>
         </td>
         <td>
@@ -26,14 +26,14 @@ import VueMarkdown from "vue-markdown"; //markdown import
 export default {
   name: "FirstQuestion",
   components: {
-    VueMarkdown
+    VueMarkdown,
   },
   props: {
     FirstQuestion: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 

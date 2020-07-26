@@ -1,13 +1,12 @@
 <template>
   <v-container>
-    <Question :Question="QuestionData" />
+    <Question :Question="QuestionData"  style="margin-top:20px;"/>
     <br />
-    <hr />
+    <hr>
     <br />
     <CommentList :commentData="commentData" />
     <br />
-    <hr />
-    <br />
+    <hr>
     <br />
     <CommentForm />
   </v-container>
@@ -27,10 +26,11 @@ export default {
     return {
       QuestionData: {
         title: "첫번째 질문입니다 첫번째 질문입니다 !!",
-        question: "#이게뭘까요 ㅜㅜㅜㅜㅜ",
+        question: "#### 이게뭘까요 ㅜㅜㅜㅜㅜ  ```{.python}  def sum(a, b): return a+b ```",
         writerName: "18 전하영",
         time: "2020-07-21 01:01:33",
         views: 365,
+        image:"https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg"
       },
       commentData: {
         writerName: "18 전하영",
@@ -39,7 +39,7 @@ export default {
           {
             name: "16 김남주",
             comment:
-              "답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1답변 1",
+              "답변 1답변 1답변 1답변 1",
             time: "2020-07-21 01:01:33",
           },
           {
@@ -49,7 +49,7 @@ export default {
           },
           {
             name: "18 전하영",
-            comment: "마크다운 적용",
+            comment: "**마크다운** 적용 가능합니다",
             time: "2020-07-21 01:01:33",
           },
           {
@@ -79,3 +79,9 @@ export default {
   },
 };
 </script>
+<style>
+  p {
+    margin-bottom:0 !important;
+  }
+
+</style>

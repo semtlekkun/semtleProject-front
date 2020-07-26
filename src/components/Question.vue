@@ -4,20 +4,23 @@
     <table class="table">
       <tr>
         <td rowspan="2">
-          <img src="../assets/쿼카.jpg" width="40" />
+          <img src="../assets/쿼카.jpg" width="50" />
         </td>
         <td>
-          <p class="pa-0">{{Question.writerName}}</p>
+          <p style="font-weight:bold; margin-left:0.3em;">{{Question.writerName}}</p>
         </td>
       </tr>
       <tr>
         <td>
-          <p class="pa-0">{{Question.time}} 조회 {{Question.views}}</p>
+          <p style="margin-left:0.3em;">{{Question.time}} 조회 {{Question.views}}</p>
         </td>
       </tr>
     </table>
     <hr>
+    <br />
     <vue-markdown>{{Question.question}}</vue-markdown>
+    <img :src="Question.image" alt="첨부이미지" width="300px"/>
+    
   </div>
 </template> 
 
@@ -38,6 +41,7 @@ export default {
 </script>
 
 <style scoped>
-.table tr td {
+img{
+  margin-top:10px;
 }
 </style>
