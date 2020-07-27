@@ -1,21 +1,5 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12">
-        <nav>
-          <v-toolbar flat app>
-            <v-toolbar-title class="text-uppercase grey--text">
-              <span>[임시]동아리 아이콘, 상단바 들어갈 공간</span>
-            </v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-btn flat color="blue">
-              <span>[임시]버튼</span>
-            </v-btn>
-          </v-toolbar>
-        </nav>
-      </v-col>
-    </v-row>
-
     <!-- 작성자 정보 표시 (임시) -->
     <v-row class="mt-5">
       <v-col cols="12" md="3" offset-lg="2" lg="2">
@@ -35,7 +19,6 @@
           label="제목"
           outlined
           v-model="title"
-
           >
           </v-text-field>
       </v-col>
@@ -66,76 +49,76 @@
       </v-col>
 
       <v-col cols="12" md="9" lg="6">
-          <input ref="imageInput" accept="image/*" type="file" hidden @change="onChangeImages">
-          <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
+        <input ref="imageInput" accept="image/*" type="file" hidden @change="onChangeImages">
+        <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
       </v-col>
     </v-row>
 
     <!-- 이미지 미리보기 -->
     <v-row>
       <v-col cols="12" offset-md="3" md="9" offset-lg="4" lg="6">
-          <v-card
-            height="400"
-            align="center"
-            color="grey lighten-3"
-          >
-            <div v-if="!this.imageUrl">
-              <p align-center><br/><br/><br/><br/><br/><br/><br/>[ 미리보기 ] </p>
-                <!-- 미리보기 화면 -->
-            </div>
-            <div v-else>
-              <br/>
-              {{imageUrl}}
-              <v-img
-                :src="imageUrl"
-                width="400"
-                height="300"
-              >
-              </v-img>
-              <v-btn color="error"
-              @click="onClickDel">
-                X
-              </v-btn>
-            </div>
-          </v-card>
+        <v-card
+          height="400"
+          align="center"
+          color="grey lighten-3"
+        >
+          <div v-if="!this.imageUrl">
+            <p align-center><br/><br/><br/><br/><br/><br/><br/>[ 미리보기 ] </p>
+              <!-- 미리보기 화면 -->
+          </div>
+          <div v-else>
+            <br/>
+            {{imageUrl}}
+            <v-img
+              :src="imageUrl"
+              width="400"
+              height="300"
+            >
+            </v-img>
+            <v-btn color="error"
+            @click="onClickDel">
+              X
+            </v-btn>
+          </div>
+        </v-card>
       </v-col>
     </v-row>
 
     <!-- 최종 확인 버튼 -->
     <v-row>
-        <v-col cols="4" offset="4">
-            <!-- 스낵바 --> 
-            <v-btn
-              block
-              x-large
-              dark
-              color="primary"
-              @click="check"
-            >
-              <v-icon>mdi-pencil</v-icon>확인
-            </v-btn>
+      <v-col cols="4" offset="4">
+        <!-- 스낵바 --> 
+        <v-btn
+          block
+          x-large
+          dark
+          color="primary"
+          @click="check"
+        >
+          <v-icon>mdi-pencil</v-icon>확인
+        </v-btn>
 
-            <!-- 스낵바 눌렀을 때 -->
-            <v-snackbar
-              v-model="snackbar"
-              top
-              :timeout="timeout"
-            >
-            <!-- 띄울 메세지 -->
-              {{ text }}
+        <!-- 스낵바 눌렀을 때 -->
+        <v-snackbar
+          v-model="snackbar"
+          top
+          :timeout="timeout"
+        >
+        <!-- 띄울 메세지 -->
+          {{ text }}
  
-              <template v-slot:action="{ attrs }">
-                <v-btn
-                  :color="color"
-                  text
-                  v-bind="attrs"
-                  @click="snackbar = false"
-                >
-                  Close
-                </v-btn>
-              </template>
-            </v-snackbar>
-        </v-col>
+          <template v-slot:action="{ attrs }">
+            <v-btn
+              :color="color"
+              text
+              v-bind="attrs"
+              @click="snackbar = false"
+            >
+              Close
+            </v-btn>
+          </template>
+        </v-snackbar>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -189,7 +172,6 @@
       onChangeImages(e) {
           const file = e.target.files[0];
           this.imageUrl = URL.createObjectURL(file);
-          
       },
 
       onClickDel() {
