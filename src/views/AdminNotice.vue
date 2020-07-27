@@ -66,16 +66,8 @@
       </v-col>
 
       <v-col cols="12" md="9" lg="6">
-       <v-file-input
-          prepend-icon="mdi-camera"
-          chips
-          show-size
-          counter
-          accept="image/*"
-          label="이미지 첨부"
-          @change='onClickImageUpload'
-        >
-        </v-file-input>
+          <input ref="imageInput" accept="image/*" type="file" hidden @change="onChangeImages">
+          <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
       </v-col>
     </v-row>
 
@@ -83,43 +75,35 @@
     <v-row>
       <v-col cols="12" offset-md="3" md="9" offset-lg="4" lg="6">
           <v-card
-          height="400"
-          align="center"
-          color="grey lighten-3"
+            height="400"
+            align="center"
+            color="grey lighten-3"
           >
             <div v-if="!this.imageUrl">
-              <p><br/><br/><br/><br/><br/><br/><br/>[ 미리보기 ]</p>      
+              <p align-center><br/><br/><br/><br/><br/><br/><br/>[ 미리보기 ] </p>
+                <!-- 미리보기 화면 -->
             </div>
-
             <div v-else>
-              <p>{{this.imageUrl}}</p>
+              <br/>
+              {{imageUrl}}
               <v-img
                 :src="imageUrl"
                 width="400"
                 height="300"
               >
               </v-img>
+              <v-btn color="error"
+              @click="onClickDel">
+                X
+              </v-btn>
             </div>
           </v-card>
-      </v-col>
-
-      <!-- 기존 이미지 -->
-      <v-col cols="12" md="3" offset-lg="2">
-        <input ref="imageInput" 
-        type="file" 
-        hidden 
-        @change="onChangeImages">
-        <v-btn 
-          type="button" 
-          @click="onClickImageUpload"
-          ><v-icon right dark>mdi-cloud-upload</v-icon>이미지 업로드
-        </v-btn>
       </v-col>
     </v-row>
 
     <!-- 최종 확인 버튼 -->
     <v-row>
-        <v-col cols="6" offset="3">
+        <v-col cols="4" offset="4">
             <!-- 스낵바 --> 
             <v-btn
               block
@@ -163,7 +147,8 @@
     data: () => ({
       //이미지 주소 저장
       imageUrl: null,
-
+      imageName : "",
+      imageSize : "",
       //작성자
       writerId: "00 testID",
 
@@ -195,15 +180,22 @@
 
     methods:{
 
-      //이미지 첨부
+      //-----------------------
+      //이미지 관련
       onClickImageUpload() {
             this.$refs.imageInput.click();
       },
+
       onChangeImages(e) {
-          console.log(e.target.files)
           const file = e.target.files[0];
           this.imageUrl = URL.createObjectURL(file);
+          
       },
+
+      onClickDel() {
+        this.imageUrl = null;
+      },
+      //-----------------------
 
       //날짜 정보 반환
       getDateInfo(){
