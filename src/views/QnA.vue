@@ -1,12 +1,12 @@
 <template>
   <v-container>
-    <Question :Question="QuestionData"  style="margin-top:20px;"/>
+    <Question :Question="QuestionData" style="margin-top:20px;" />
     <br />
-    <hr>
+    <hr />
     <br />
     <CommentList :commentData="commentData" />
     <br />
-    <hr>
+    <hr />
     <br />
     <CommentForm />
   </v-container>
@@ -26,11 +26,12 @@ export default {
     return {
       QuestionData: {
         title: "첫번째 질문입니다 첫번째 질문입니다 !!",
-        question: "#### 이게뭘까요 ㅜㅜㅜㅜㅜ  ```{.python}  def sum(a, b): return a+b ```",
+        question: "Lorem Ipsum is simply dummy text of the printing \n # and typesetting industry. \n **Lorem Ipsum has been the industry's**\n 8-)  standard dummy text ever since the 1500s, \n when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         writerName: "18 전하영",
         time: "2020-07-21 01:01:33",
         views: 365,
-        image:"https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg"
+        image:
+          "https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg",
       },
       commentData: {
         writerName: "18 전하영",
@@ -38,8 +39,7 @@ export default {
         comments: [
           {
             name: "16 김남주",
-            comment:
-              "답변 1답변 1답변 1답변 1",
+            comment: "답변 1답변 1답변 1답변 1",
             time: "2020-07-21 01:01:33",
           },
           {
@@ -80,8 +80,7 @@ export default {
 };
 </script>
 <style>
-  p {
-    margin-bottom:0 !important;
-  }
-
+p {
+  margin-bottom: 0 !important;
+}
 </style>
