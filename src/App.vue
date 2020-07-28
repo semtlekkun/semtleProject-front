@@ -37,20 +37,20 @@
       </v-btn>
     </v-app-bar> -->
 
-    <v-content>
-      <ProjectView/>
-    </v-content>
+    <v-main>
+      <ProjectInput />
+    </v-main>
   </v-app>
 </template>
 
 <script>
-import ProjectView from './views/ProjectView.vue';
+import ProjectInput from './views/ProjectInput.vue';
 
 export default {
   name: 'App',
 
   components: {
-    ProjectView
+    ProjectInput
   },
 
   data: () => ({
