@@ -1,84 +1,100 @@
 <template>
-    <div>
-        <v-app-bar-nav-icon
-            color="rgb(46,117,182)" 
-            x-large
-            @click="hamburgerHover"
-        >
-        </v-app-bar-nav-icon>
-        <div class="whole"
-        @click="hamburgerNoHover">
-            <ul :class="menuIsOpen?'sideBar':'closeBar'">
-                <li id="nomargin">
-                    <img class="logo" src="../assets/logo.png"/>
-                </li>
-                <li :class="menuIsOpen?'':'closeli'">공지사항</li>
-                <li :class="menuIsOpen?'':'closeli'">프로젝트
-                    <ul class="miniBar">
-                        <li :class="menuIsOpen?'':'closeli'">공고</li>
-                        <li :class="menuIsOpen?'':'closeli'">등록</li>
-                    </ul>
-                </li>
-                <li :class="menuIsOpen?'':'closeli'">QnA</li>
-            </ul>
-        </div>
+    <div id="app">
+        <v-app id="inspire">
+
+            <v-app-bar-nav-icon
+                x-large
+                @click.stop="drawer = !drawer"
+                :class="drawer?'hamburgerOpen':'hamburgerClose'"
+            >
+            </v-app-bar-nav-icon>
+        
+            <v-navigation-drawer
+                v-model="drawer"
+                absolute
+                temporary
+            >
+                <v-list-item>
+        
+                <v-list-item-content class=""> <!-- 로고 크기 줄여야함 -->
+                    <v-img class="mx-auto my-4" 
+                    :max-height="imgSize" 
+                    :max-width="imgSize" 
+                    src="../assets/logo.png"></v-img>
+                </v-list-item-content>
+                
+                </v-list-item>
+        
+                <v-divider></v-divider>
+        
+                <v-list>
+                
+                <v-list-item
+                    v-for="item in mainItems"
+                    :key="item.name"
+                    link
+                >
+                    <v-list-item-content @click="item.method">
+                        <v-list-item-title class="text-center text-h5">
+                            {{ item.name }}
+
+                            <v-list v-if="item.sub!==null" :class="projectClick? '':'closeProject'">
+                                <v-list-item
+                                    v-for="subItem in item.sub"
+                                    :key="subItem"
+                                    link
+                                >
+                                    <v-list-item-content>
+                                        <v-list-item-title class="text-h6">{{ subItem }}</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </v-list>
+
+                        </v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                
+                </v-list>
+            </v-navigation-drawer>
+        </v-app>
     </div>
 </template>
 
 <script>
     export default {
-
-        data(){
-          return{
-            menuIsOpen:false
-          }
-        },
-
-        methods:{
-          hamburgerHover(){
-            this.menuIsOpen=true;
-          },
-          hamburgerNoHover(){
-            this.menuIsOpen=false;
-          },
-          
+        data () {
+            return {
+                imgSize: 150,
+                drawer: null,
+                projectClick: false,
+                mainItems: [
+                    { name: '공지사항', sub: null, method: ()=>{}},
+                    { name: '프로젝트', sub: ['공고', '등록'], method: ()=>{this.projectClick = !this.projectClick} },
+                    { name: 'QnA', sub: null, method:()=>{}},
+                ],
+            }
         },
     }
 </script>
 
 <style scoped>
-    .logo{
-        width: 45%;
-        margin-top: 20px;
+    .logoImg{
+        width:100%;
     }
-    #nomargin{
+    .hamburgerClose{
+        transition: all 0.2s;
+        color:rgb(46,117,182) !important;
+    }
+    .hamburgerOpen{
+        transition: all 0.2s;
+        position: absolute;
+        left: 256px;
+        z-index:9999;
+        color: white !important;
+    }
+    .closeProject{
+        height: 0;
+        padding:0;
         margin:0;
-    }
-    .sideBar{
-        width: 35%;
-        padding: 0;
-        height: calc(100vh - 52px);
-        box-shadow: 7px 0px 5px 0px lightgrey;
-        background-color: white;
-    }
-    .closeBar{
-        width: 0px;
-    }
-    .miniBar{
-        padding: 0px;
-    }
-    .miniBar > li{
-        font-size: 1rem;
-        margin-top: 20px;
-    }
-    li{
-        margin-top: 40px;
-        list-style: none;
-        text-align:center;
-        cursor: pointer;
-        font-size: 1.2rem;
-    }
-    .closeli{
-        display: none;
     }
 </style>
