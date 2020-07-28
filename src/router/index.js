@@ -24,6 +24,11 @@ const routes = [
     name: 'ProjectView',
     component: () => import('../views/ProjectView.vue')
   },
+  {
+    path: '/qna',
+    name: 'QnA',
+    component: () => import('../views/QnA.vue')
+  }
 ]
 
 const router = new VueRouter({
