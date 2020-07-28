@@ -1,0 +1,86 @@
+<template>
+  <v-container>
+    <Question :Question="QuestionData" style="margin-top:20px;" />
+    <br />
+    <hr />
+    <br />
+    <CommentList :commentData="commentData" />
+    <br />
+    <hr />
+    <br />
+    <CommentForm />
+  </v-container>
+</template>
+
+<script>
+import CommentList from "../components/CommentList";
+import CommentForm from "../components/CommentForm";
+import Question from "../components/Question";
+export default {
+  components: {
+    CommentList,
+    CommentForm,
+    Question,
+  },
+  data() {
+    return {
+      QuestionData: {
+        title: "첫번째 질문입니다 첫번째 질문입니다 !!",
+        question: "Lorem Ipsum is simply dummy text of the printing \n # and typesetting industry. \n **Lorem Ipsum has been the industry's**\n 8-)  standard dummy text ever since the 1500s, \n when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        writerName: "18 전하영",
+        time: "2020-07-21 01:01:33",
+        views: 365,
+        image:
+          "https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg",
+      },
+      commentData: {
+        writerName: "18 전하영",
+
+        comments: [
+          {
+            name: "16 김남주",
+            comment: "답변 1답변 1답변 1답변 1",
+            time: "2020-07-21 01:01:33",
+          },
+          {
+            name: "17 김아무개",
+            comment: "답변 2",
+            time: "2020-07-21 01:01:33",
+          },
+          {
+            name: "18 전하영",
+            comment: "**마크다운** 적용 가능합니다",
+            time: "2020-07-21 01:01:33",
+          },
+          {
+            name: "19 이아무개",
+            comment: "답변 3",
+            time: "2020-07-21 01:01:33",
+          },
+          {
+            name: "20 정아무개",
+            comment: "답변 4",
+            time: "2020-07-21 01:01:33",
+          },
+          {
+            name: "18 썽씨연",
+            comment: "제이름은 썽씨연이 아닙니다",
+            time: "2020-07-21 01:01:33",
+          },
+          {
+            name: "18 강등아",
+            comment: "너는나의 다음타음베이비야 ",
+            time: "2020-07-21 01:01:33",
+          },
+          { name: "18 전하영", comment: "ㅎㅎ", time: "2020-07-21 01:01:33" },
+        ],
+      },
+    };
+  },
+};
+</script>
+<style>
+p {
+  margin-bottom: 0 !important;
+}
+</style>

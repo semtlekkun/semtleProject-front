@@ -1,0 +1,79 @@
+<template>
+  <div class="bubble">
+    <table>
+      <tr>
+        <td width="120px" style="text-align-last: center; vertical-align:top;">
+          <div class="userInfo">
+            <div class="userImage">
+              <img src="../assets/쿼카.jpg" width="50" height="50" />
+            </div>
+            <div class="userName">{{comments.name}}</div>
+          </div>
+        </td>
+        <td>
+          <div :class="`rounded-lg`" class="QuestionBubble pa-6 blue lighten-1">
+            <vue-markdown>{{comments.comment}}</vue-markdown>
+          </div>
+        </td>
+        <td class="time" style="font-size:12px;">{{comments.time}}</td>
+      </tr>
+    </table>
+  </div>
+</template>
+
+<script>
+import VueMarkdown from "vue-markdown"; //markdown import
+export default {
+  name: "QuestionSpeechBubble",
+  components: {
+    VueMarkdown,
+  },
+  props: {
+    comments: {
+      type: Object,
+      required: true,
+    },
+  },
+};
+</script>
+
+<style scoped>
+.time {
+  vertical-align: bottom;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+.bubble {
+  margin: 0.3em;
+}
+td {
+  vertical-align: top;
+}
+.userImage {
+  text-align: center;
+}
+.userName {
+  text-align: center;
+}
+.userInfo {
+  display: inline-block;
+  margin: 0 1em 0 1em;
+}
+.QuestionBubble {
+  max-width: 40em;
+  position: relative;
+  display: inline-block;
+}
+.QuestionBubble:after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-width: 11px 14px 11px 0;
+  border-color: transparent #42a5f5;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -14px;
+  top: 17px;
+}
+</style>
