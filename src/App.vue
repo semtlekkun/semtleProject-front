@@ -39,17 +39,20 @@
 
     <v-main>
       <!-- <ProjectInput /> -->
+      <TopBtn />
       <router-view/>
+      
     </v-main>
   </v-app>
 </template>
 
 <script>
-
+import TopBtn from "./components/TopBtn.vue";
 export default {
   name: 'App',
 
   components: {
+    TopBtn
   },
 
   data: () => ({

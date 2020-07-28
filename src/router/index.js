@@ -1,16 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import ProjectInput from '../views/ProjectInput.vue'
-import ProjectView from '../views/ProjectView.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/test',
-    name: 'Test',
-    component: () => import('../views/Test.vue')
-  },
   {
     path: '/',
     name: 'Home',
@@ -19,12 +12,12 @@ const routes = [
   {
     path: '/projectInput',
     name: 'ProjectInput',
-    component: ProjectInput
+    component: () => import('../views/ProjectInput.vue')
   },
   {
     path: '/projectView',
     name: 'ProjectView',
-    component: ProjectView
+    component: () => import('../views/ProjectView.vue')
   }
 ]
 
