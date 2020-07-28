@@ -38,19 +38,18 @@
     </v-app-bar> -->
 
     <v-main>
-      <ProjectInput />
+      <!-- <ProjectInput /> -->
+      <router-view/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import ProjectInput from './views/ProjectInput.vue';
 
 export default {
   name: 'App',
 
   components: {
-    ProjectInput
   },
 
   data: () => ({
