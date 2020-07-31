@@ -28,6 +28,11 @@ const routes = [
     path: '/qna',
     name: 'QnA',
     component: () => import('../views/QnA.vue')
+  },
+  {
+    path: '/admin/notice',
+    name: 'adminNotice',
+    component: () => import('../views/AdminNotice.vue')
   }
 ]
 
