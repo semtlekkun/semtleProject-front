@@ -86,7 +86,7 @@
 
     <!-- 최종 확인 버튼 -->
     <v-row>
-      <v-col cols="4" offset="4">
+      <v-col xs="12" md="8" offset-xs="0" offset-md="2">
         <!-- 스낵바 --> 
         <v-btn
           block
