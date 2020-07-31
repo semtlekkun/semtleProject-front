@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/notice',
-    name: 'Notice',
+    name: 'notice',
     component: () => import('../views/Notice.vue')
   },
   {
@@ -16,12 +16,12 @@ const routes = [
   },
   {
     path: '/project/input',
-    name: 'ProjectInput',
+    name: 'projectInput',
     component: () => import('../views/ProjectInput.vue')
   },
   {
     path: '/project/view',
-    name: 'ProjectView',
+    name: 'projectView',
     component: () => import('../views/ProjectView.vue')
   },
   {
@@ -35,13 +35,18 @@ const routes = [
     component: () => import('../views/AdminNotice.vue')
   },
   {
+    path: '/admin/member',
+    name: 'adminMember',
+    component: () => import('../views/AdminMember.vue')
+  },
+  {
     path: '/project/announce/write',
-    name: 'ProjectAnnounceWrite',
+    name: 'projectAnnounceWrite',
     component: () => import('../views/ProjectAnnounceWrite.vue')
   },
   {
     path: '/project/announce/read',
-    name: 'ProjectAnnounceRead',
+    name: 'projectAnnounceRead',
     component: ()=> import('../views/ProjectAnnounceRead.vue')
   }
 ]
