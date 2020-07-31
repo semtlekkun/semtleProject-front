@@ -15,12 +15,12 @@ const routes = [
     component: Home
   },
   {
-    path: '/projectInput',
+    path: '/project/input',
     name: 'ProjectInput',
     component: () => import('../views/ProjectInput.vue')
   },
   {
-    path: '/projectView',
+    path: '/project/view',
     name: 'ProjectView',
     component: () => import('../views/ProjectView.vue')
   },
@@ -33,6 +33,16 @@ const routes = [
     path: '/admin/notice',
     name: 'adminNotice',
     component: () => import('../views/AdminNotice.vue')
+  },
+  {
+    path: '/project/announce/write',
+    name: 'ProjectAnnounceWrite',
+    component: () => import('../views/ProjectAnnounceWrite.vue')
+  },
+  {
+    path: '/project/announce/read',
+    name: 'ProjectAnnounceRead',
+    component: ()=> import('../views/ProjectAnnounceRead.vue')
   }
 ]
 
