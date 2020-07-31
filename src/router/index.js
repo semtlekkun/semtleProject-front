@@ -48,6 +48,11 @@ const routes = [
     path: '/project/announce/read',
     name: 'projectAnnounceRead',
     component: ()=> import('../views/ProjectAnnounceRead.vue')
+  },
+  {
+    path: '/mypage',
+    name: 'myPage',
+    component: ()=>import('../views/MyPage.vue')
   }
 ]
 
