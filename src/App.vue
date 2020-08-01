@@ -35,26 +35,29 @@
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
-    </v-app-bar> -->
+    </v-app-bar>-->
 
     <v-main>
+      <router-view />
+      <Members />
       <TopBtn />
-      <router-view/>
     </v-main>
   </v-app>
 </template>
 
 <script>
 import TopBtn from "./components/TopBtn.vue";
+import Members from "./views/Members.vue";
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    TopBtn
+    TopBtn,
+    Members,
   },
 
   data: () => ({
     //
-  })
-}
+  }),
+};
 </script>
