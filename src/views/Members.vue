@@ -24,6 +24,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                       <v-col cols="6" sm="3">
@@ -39,6 +40,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                       <v-col cols="6" sm="3">
@@ -54,6 +56,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                       <v-col cols="6" sm="3">
@@ -69,6 +72,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                     </v-row>
@@ -88,6 +92,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                       <v-col cols="6" sm="3">
@@ -103,6 +108,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                       <v-col cols="6" sm="3">
@@ -118,6 +124,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                       <v-col cols="6" sm="3">
@@ -133,6 +140,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                     </v-row>
@@ -152,6 +160,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                       <v-col cols="6" sm="3">
@@ -167,6 +176,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                       <v-col cols="6" sm="3">
@@ -182,6 +192,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                       <v-col cols="6" sm="3">
@@ -197,6 +208,7 @@
                           <p class="role">{{role}}</p>
                           <p class="number">{{number}}</p>
                           <p class="name">{{name}}</p>
+                          <p class="content">{{content}}</p>
                         </v-responsive>
                       </v-col>
                     </v-row>
@@ -218,6 +230,7 @@ export default {
     role: "회장",
     number: "20210000",
     name: "홍길동",
+    content: `00 및 000`,
   }),
 
   components: {},
@@ -235,10 +248,15 @@ export default {
 }
 .role {
   color: #727272 !important;
+  margin-top: 10px;
 }
 .name {
   font-size: 1.1em;
   font-weight: 500;
+}
+.content {
+  font-size: 0.7em;
+  color: #727272 !important;
 }
 .term {
   margin-top: 50px;
