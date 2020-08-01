@@ -10,7 +10,7 @@ const routes = [
     component: () => import('../views/Notice.vue')
   },
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home
   },
@@ -47,12 +47,17 @@ const routes = [
   {
     path: '/project/announce/read',
     name: 'projectAnnounceRead',
-    component: ()=> import('../views/ProjectAnnounceRead.vue')
+    component: () => import('../views/ProjectAnnounceRead.vue')
   },
   {
     path: '/mypage',
     name: 'myPage',
-    component: ()=>import('../views/MyPage.vue')
+    component: () => import('../views/MyPage.vue')
+  },
+  {
+    path: '/',
+    name: 'adminMentor',
+    component: () => import('../views/AdminMentor.vue')
   }
 ]
 
