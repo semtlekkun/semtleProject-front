@@ -1,12 +1,18 @@
 <template>
   <div class="LoginForm">
-    <v-form>
+    <p class="Error">{{error}}</p>
+    <v-form @submit="CheckForm" novalidate="true">
       <v-layout row wrap class="mt-5 center">
         <v-flex xs12 sm2 md2 lg1 class="text-md-right pr-5">
           <p class="text">학번</p>
         </v-flex>
         <v-flex xs12 sm10 md5 lg3>
-          <input type="text" class="StudentNumberInput" />
+          <input
+            type="text"
+            v-model="StudentNumber"
+            name="StudentNumber"
+            class="StudentNumberInput"
+          />
         </v-flex>
       </v-layout>
       <v-layout row wrap class="mt-5 center">
@@ -14,7 +20,7 @@
           <p class="text">비밀번호</p>
         </v-flex>
         <v-flex xs12 sm10 md5 lg3>
-          <input type="password" class="PasswordInput" />
+          <input type="password" class="PasswordInput" v-model="Password" name="Password" />
         </v-flex>
       </v-layout>
       <v-layout row wrap class="mt-10">
@@ -28,6 +34,24 @@
 <script>
 export default {
   name: "LoginForm",
+  data() {
+    return {
+      error: null,
+      StudentNumber: null,
+      Password: null,
+    };
+  },
+  methods: {
+    CheckForm(e) {
+      if (this.Password && this.StudentNumber) {
+        return true;
+      }
+      if (!this.Password || !this.StudentNumber) {
+        this.error = "아이디 및 비밀번호 입력을 확인해주세요";
+      }
+      e.preventDefault();
+    },
+  },
 };
 </script>
 <style scoped>
@@ -38,16 +62,16 @@ export default {
   border-radius: 60px;
   height: 60px;
   width: 100%;
-  padding-left:1em;
+  padding-left: 1em;
 }
 .LoginForm {
   margin: 0.3em;
 }
 .text {
   line-height: 60px;
-  font-family:"Microsoft GothicNeo";
-  font-size:20px;
-  font-weight:bold;
+  font-family: "Microsoft GothicNeo";
+  font-size: 20px;
+  font-weight: bold;
 }
 .center {
   margin: 0 auto;
@@ -63,5 +87,9 @@ export default {
   color: white;
   font-weight: bold;
   font-size: 20px;
+}
+.Error {
+  text-align: center;
+  color: red;
 }
 </style>
