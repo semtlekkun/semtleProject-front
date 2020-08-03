@@ -4,7 +4,7 @@
       <template v-slot:activator="{ on, attrs }">
         <v-row>
           <v-col>
-            <h1>역대 간부(멘토) 등록</h1>
+            <h1>역대 간부(회장, 부회장, 멘토) 등록</h1>
           </v-col>
         </v-row>
         <v-form @submit="checkForm" novalidate="true">
@@ -14,11 +14,16 @@
             </v-col>
 
             <v-col>
-              <v-select color="primary" v-model="Semester" :items="items" label="활동한 학기"></v-select>
+              <v-select color="primary" v-model="Semester" :items="SemesterItems" label="활동한 학기"></v-select>
             </v-col>
+          </v-row>
 
+          <v-row>
             <v-col>
               <v-text-field color="primary" placeholder="학번 (ex : 20160450)" v-model="studentId"></v-text-field>
+            </v-col>
+            <v-col>
+              <v-select color="primary" v-model="Position" :items="PositionItems" label="직책"></v-select>
             </v-col>
           </v-row>
 
@@ -58,10 +63,12 @@ export default {
 
     errorMsg: [],
 
-    items: ["1학기(여름학기)", "2학기(겨울학기)"],
+    SemesterItems: ["1학기(여름학기)", "2학기(겨울학기)"],
+    PositionItems: ["멘토", "회장", "부회장"],
 
     activeYear: "",
     Semester: "1학기(여름학기)",
+    Position: "멘토",
     studentId: "",
     contents: "",
   }),
