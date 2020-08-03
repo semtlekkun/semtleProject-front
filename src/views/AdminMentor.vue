@@ -29,7 +29,7 @@
 
           <v-row>
             <v-col>
-              <v-textarea filled label="내용" color="primary" no-resize rows="20" v-model="contents"></v-textarea>
+              <v-textarea filled label="내용" color="primary" no-resize rows="19" v-model="contents"></v-textarea>
             </v-col>
           </v-row>
 
@@ -63,11 +63,11 @@ export default {
 
     errorMsg: [],
 
-    SemesterItems: ["1학기(여름학기)", "2학기(겨울학기)"],
+    SemesterItems: ["1학기 (여름학기)", "2학기 (겨울학기)"],
     PositionItems: ["멘토", "회장", "부회장"],
 
     activeYear: "",
-    Semester: "1학기(여름학기)",
+    Semester: "1학기 (여름학기)",
     Position: "멘토",
     studentId: "",
     contents: "",
