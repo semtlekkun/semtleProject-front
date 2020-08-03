@@ -38,21 +38,20 @@
     </v-app-bar>-->
 
     <v-main>
-      <AdminMentor />
+      <TopBtn />
       <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-// import TopBtn from "./components/TopBtn.vue";
-import AdminMentor from "./views/AdminMentor.vue";
+import TopBtn from "./components/TopBtn.vue";
+
 export default {
   name: "App",
 
   components: {
-    // TopBtn,
-    AdminMentor,
+    TopBtn,
   },
 
   data: () => ({

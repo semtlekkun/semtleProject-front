@@ -10,7 +10,7 @@ const routes = [
     component: () => import('../views/Notice.vue')
   },
   {
-    path: '/home',
+    path: '/',
     name: 'Home',
     component: Home
   },
