@@ -1,9 +1,9 @@
 <template>
   <v-menu offset-y open-on-hover>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn class="child white--text" text v-bind="attrs" v-on="on">{{Attribute.Title}}</v-btn>
+      <v-btn class="child white--text" text large v-bind="attrs" v-on="on">{{Attribute.Title}}</v-btn>
     </template>
-    <v-list>
+    <v-list id="listContainer">
       <v-list-item
         v-for="(item, index) in Attribute.Items"
         :key="index"

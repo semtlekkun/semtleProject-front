@@ -4,10 +4,15 @@
       <v-col>
         <div id="top" @mouseover="menuOpen" @mouseout="menuClose">
           <img src="../assets/logo.png" width="150px" id="logo" />
-          <div id="glassBox">
+          <div>
             <div id="box">
               <div class="dummy1"></div>
-              <MenuElement v-for="item in Attributes" :key="item.index" :Attribute="item" />
+              <MenuElement
+                class="test"
+                v-for="item in Attributes"
+                :key="item.index"
+                :Attribute="item"
+              />
               <div class="dummy2"></div>
             </div>
           </div>
@@ -81,9 +86,9 @@ export default {
   methods: {
     menuOpen() {
       if (this.controller) {
-        let boxObj = document.querySelector("#glassBox");
-        boxObj.style.width = "1200px";
-        boxObj = document.querySelector("#box");
+        let topObj = document.querySelector("#top");
+        topObj.style.width = "1200px";
+        let boxObj = document.querySelector("#box");
         boxObj.style.width = "1200px";
         boxObj.style.transition = "1s";
       }
@@ -91,9 +96,9 @@ export default {
 
     menuClose() {
       if (this.controller) {
-        let boxObj = document.querySelector("#glassBox");
-        boxObj.style.width = "0px";
-        boxObj = document.querySelector("#box");
+        let topObj = document.querySelector("#top");
+        topObj.style.width = "0px";
+        let boxObj = document.querySelector("#box");
         boxObj.style.width = "0px";
         boxObj.style.transition = "1s";
       }
@@ -128,6 +133,11 @@ export default {
 </script>
 
 <style scoped>
+#top {
+  width: 0px;
+  height: 200px;
+}
+
 #myrow {
   position: sticky;
   top: 2%;
@@ -158,12 +168,6 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-
-#glassBox {
-  width: 0px;
-  height: 150px;
-}
-
 #menuBar {
   position: sticky;
   top: 0;
