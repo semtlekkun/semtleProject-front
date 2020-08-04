@@ -58,6 +58,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: ()=>import('../views/Login.vue')
+  },
+  {
+    path: '/management',
+    name: 'management',
+    component: ()=>import('../views/Management.vue')
   }
 ]
 

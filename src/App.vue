@@ -39,7 +39,6 @@
 
     <v-main>
       <router-view />
-      <Members />
       <TopBtn />
     </v-main>
   </v-app>
@@ -47,13 +46,11 @@
 
 <script>
 import TopBtn from "./components/TopBtn.vue";
-import Members from "./views/Members.vue";
 export default {
   name: "App",
 
   components: {
     TopBtn,
-    Members,
   },
 
   data: () => ({
