@@ -8,7 +8,7 @@
 
             <!-- 이름 -->
             <v-col cols="12" md="3">
-                <v-card  height="200" class="pa-5" outlined="outlined" tile="tile">
+                <v-card  height="200" class="pa-5" tile="tile">
                     <v-card-title>Name</v-card-title>
                     <v-card-text>{{myData.name}}</v-card-text>
                 </v-card>
@@ -17,11 +17,11 @@
             <!-- 전화번호 -->
             <v-col  cols="12" md="6">
                 <PhoneNum />
-                </v-col>
+            </v-col>
 
             <!-- 아이디 -->
             <v-col cols="12" md="6">
-                <v-card height="200" class="pa-5" outlined="outlined" tile="tile">
+                <v-card height="200" class="pa-5" tile="tile">
                     <v-card-title>ID</v-card-title>
                     <v-card-text>{{myData.id}}</v-card-text>
                 </v-card>

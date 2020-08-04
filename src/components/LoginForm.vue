@@ -2,45 +2,24 @@
   <div class="LoginForm">
     <p class="Error">{{error}}</p>
     <v-form @submit="CheckForm" novalidate="true">
-      <v-row class="mt-5 center">
-        <v-col cols="12"
-         sm="2"
-          md="2"
-           lg="1" class="text-md-right pr-5">
-          <p class="text">학번</p>
-        </v-col>
-        <v-col 
-        cols="12"
-         sm="10"
-          md="5"
-           lg="3">
+      <v-row class="center">
+        <v-col cols="10" sm="6" md="5" xl="3">
           <input
+            placeholder="학번"
             type="text"
             v-model="StudentNumber"
             name="StudentNumber"
-            class="StudentNumberInput"
+            class="StudentNumberInput pl-10"
           />
         </v-col>
       </v-row>
       <v-row class="mt-5 center">
-        <v-col  cols="12"
-         sm="2"
-          md="2"
-           lg="1" class="text-md-right pr-5">
-          <p class="text">비밀번호</p>
-        </v-col>
-        <v-col  cols="12"
-         sm="10"
-          md="5"
-           lg="3">
-          <input type="password" class="PasswordInput" v-model="Password" name="Password" />
+        <v-col cols="10" sm="6" md="5" xl="3">
+          <input placeholder="비밀번호" type="password" class="PasswordInput pl-10" v-model="Password" name="Password" />
         </v-col>
       </v-row>
-      <v-row class="mt-10">
-        <v-col 
-        cols="6"
-        sm="4"
-        md="3" class="center">
+      <v-row class="mt-5">
+        <v-col cols="8" sm="4" md="3" xl="2" class="center">
           <button type="submit" class="LoginButton">로그인</button>
         </v-col>
       </v-row>
@@ -73,6 +52,7 @@ export default {
 <style scoped>
 .StudentNumberInput,
 .PasswordInput {
+  outline: none;
   border: none;
   background-color: rgb(233, 233, 233);
   border-radius: 60px;
@@ -94,6 +74,7 @@ export default {
 }
 
 .LoginButton {
+  outline: none;
   border-radius: 60px;
   border: none;
   background-color: #2a404e;

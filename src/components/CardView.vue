@@ -8,14 +8,11 @@
     >
         <v-list-item>
 
-        <v-list-item-avatar 
-        v-if="contentsObj.teamName !== ''" 
-        color="grey"></v-list-item-avatar>
+        <v-list-item-avatar color="grey"></v-list-item-avatar>
 
         <v-list-item-content>
             <v-list-item-title class="headline">{{contentsObj.title}}</v-list-item-title>
-            <v-list-item-subtitle 
-            v-if="contentsObj.teamName !== ''">
+            <v-list-item-subtitle>
             by {{contentsObj.teamName}}
             </v-list-item-subtitle>
         </v-list-item-content>

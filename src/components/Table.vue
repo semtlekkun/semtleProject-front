@@ -2,13 +2,16 @@
     <v-data-table
         :headers="headers"
         :items="contents"
-        :items-per-page="5"
+        :items-per-page="perPage"
         class="elevation-1"
     ></v-data-table>
 </template>
 
 <script>
     export default {
+        props:{
+          perPage:Number
+        },
         data () {
             return {
                 headers: [
@@ -59,6 +62,115 @@
                         writer: '김태호',
                         date: '2020 / 06 / 10'
                     },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+                    {
+                        number: '6',
+                        title: '2020-1학기 멘토링 종료',
+                        writer: '김태호',
+                        date: '2020 / 06 / 10'
+                    },
+
                 ],
             }
         },

@@ -68,6 +68,21 @@ const routes = [
     path: '/admin/mentor',
     name: 'mentor',
     component: ()=>import('../views/AdminMentor.vue')
+  },
+  {
+    path: '/project/list',
+    name: 'prijectList',
+    component: ()=>import('../views/ProjectList.vue')
+  },
+  {
+    path: '/notice/list',
+    name: 'noticeList',
+    component: ()=>import('../views/NoticeList.vue')
+  },
+  {
+    path: '/project/announce/list',
+    name: 'projectAnnounceList',
+    component: ()=>import('../views/ProjectAnnounceList.vue')
   }
 ]
 

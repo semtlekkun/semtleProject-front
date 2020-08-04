@@ -3,17 +3,44 @@
     <v-row>
       <v-col>
           <v-col>
-            <h1>공지사항</h1>
-            <Table/>
+            <v-row>
+              <v-col>
+                <h1>공지사항</h1>
+              </v-col>
+              <v-col class="text-right">
+                <router-link to="/notice/list">
+                  <v-btn>더보기</v-btn>
+                </router-link>
+              </v-col>
+            </v-row>
+            <Table :perPage="5"/>
           </v-col>
           <v-col>
-            <h1>프로젝트 공고</h1>
-            <Table/>
+            <v-row>
+              <v-col>
+                <h1>프로젝트 공고</h1>
+              </v-col>
+              <v-col class="text-right">
+                <router-link to="/project/announce/list">
+                  <v-btn>더보기</v-btn>
+                </router-link>
+              </v-col>
+            </v-row>
+            <Table :perPage="5"/>
           </v-col>
       </v-col>
 
       <v-col>
-        <h1>최근 프로젝트</h1>
+        <v-row>
+          <v-col>
+            <h1>최근 프로젝트</h1>
+          </v-col>
+          <v-col class="text-right">
+            <router-link to="/project/list">
+              <v-btn>더보기</v-btn>
+            </router-link>
+          </v-col>
+        </v-row>
         <v-row id="projectView">
           <v-col
            xs="12"
@@ -90,10 +117,10 @@ export default {
           contents: "이시발 힘들었ddddddddddd다."
         },
         {
-          title: "더보기",
-          teamName: "",
-          imgSrc: "https://lh3.googleusercontent.com/zG2fdyrzYaDYmOQjU7cXEpY5fGFFUXvCav_KBPPrW0nqVJuZ6vQj8_Ez2xDBTzLbTw",
-          contents: ""
+          title: "KUMOCraft",
+          teamName: "셈틀꾼",
+          imgSrc: "https://cdn.vuetifyjs.com/images/cards/mountain.jpg",
+          contents: "이시발 힘들었ddddddddddd다."
         },
       ]
     }
@@ -103,7 +130,7 @@ export default {
 
 <style scoped>
 #projectView{
-  max-height: 780px;
+  max-height: 800px;
   overflow: auto;
 }
 </style>

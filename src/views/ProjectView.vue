@@ -1,10 +1,10 @@
 <template>
     <v-container>
         <v-row>
-            <v-col>
+            <v-col cols="12" lg="3">
                 <SubTitle :subTitleObj="subTitleObj"/>
             </v-col>
-            <v-col>
+            <v-col cols="12" lg="9">
                 <v-row>
                     <v-col
                     cols="12"
@@ -14,52 +14,35 @@
                 </v-row>
                 <v-row>
                     <v-col
-                    cols="4">
-                        <h3>작성자: ㅇㅇㅇ</h3>
-                    </v-col>
-                    <v-col
-                    cols="6">
-                        <h3>작성일: 2020-10-10</h3>
-                    </v-col>
-                    <v-col
-                    cols="2">
-                        <h3>view:00</h3>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col
-                    cols="2" 
-                    class="info text-center">
-                        Title : 
-                    </v-col>
-                    <v-col
-                    cols="10"
-                    class="text-center">
-                        title
+                    cols="12"
+                    class="text-right">
+                        <span class="mx-5">작성자: ㅇㅇㅇ</span>
+                        <span class="mx-5">작성일: 2020-10-10</span>
+                        <span class="mx-5">view:00</span>
                     </v-col>
                 </v-row>
 
                 <v-row>
                     <v-col
-                    cols="2"
+                    cols="3"
                     class="info text-center">
                         팀장:
                     </v-col>
                     <v-col
-                    cols="10"
-                    md="4"
+                    cols="9"
+                    md="3"
                     class="text-center">
                         김태성
                     </v-col>
 
                     <v-col
-                    cols="2"
+                    cols="3"
                     class="info text-center">
                         개발기간
                     </v-col>
                     <v-col
-                    cols="10"
-                    md="4"
+                    cols="9"
+                    md="3"
                     class="text-center">
                         2020-12-24 ~ 2020-12-25
                     </v-col>

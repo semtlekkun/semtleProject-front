@@ -1,15 +1,21 @@
 <template>
-  <div class="LoginLogo">
-    <router-link to="/">
-        <h1>LOGO</h1>
-    </router-link>
-    <h1 class="LoginTitle">Login</h1>
-    <div>
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="circle3"></div>
-    </div>
-  </div>
+    <v-container>
+        <v-row class="text-center">
+            <v-col>
+                <router-link to="/">
+                    <img id="loginImg" src="../assets/logo.png"/>
+                </router-link>
+            </v-col>
+        </v-row>
+
+        <v-row class="text-center">
+            <v-col>
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <style scoped>
@@ -44,5 +50,9 @@
 }
 .LoginLogo{
     text-align:center;
+}
+#loginImg{
+    width: 60vw;
+    max-width: 500px;
 }
 </style>
