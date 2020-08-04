@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-row>
+  <v-container id="container">
+    <v-row id="myrow">
       <v-col>
         <div id="top" @mouseover="logoHover" @mouseout="topOut">
           <img src="../assets/logo.png" width="150px" id="logo" />
@@ -21,25 +21,53 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      controller: false,
+    };
   },
   methods: {
     logoHover() {
-      let boxObj = document.querySelector("#box");
-      boxObj.style.width = "1200px";
-      boxObj.style.transition = "1s";
+      if (this.controller) {
+        let boxObj = document.querySelector("#box");
+        boxObj.style.width = "1200px";
+        boxObj.style.transition = "1s";
+      }
     },
 
     topOut() {
-      let boxObj = document.querySelector("#box");
-      boxObj.style.width = "0";
-      boxObj.style.transition = "1s";
+      if (this.controller) {
+        let boxObj = document.querySelector("#box");
+        boxObj.style.width = "0";
+        boxObj.style.transition = "1s";
+      }
     },
+
+    handleScroll() {
+      if ((window.scrollY || document.documentElement.scrollTop) < 10) {
+        this.logoHover();
+        this.controller = false;
+      } else {
+        this.controller = true;
+        this.topOut();
+      }
+    },
+  },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>
 
 <style scoped>
+#myrow {
+  position: sticky;
+  top: 2%;
+}
+
 #container {
   height: 10000px;
 }
@@ -53,7 +81,7 @@ export default {
 #box {
   position: absolute;
   top: 60.5px;
-  width: 0px;
+  width: 1200px;
   height: 39.5px;
   background: rgb(46, 117, 182);
   transition: 0.4s;
