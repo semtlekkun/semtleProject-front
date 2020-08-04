@@ -38,20 +38,33 @@
     </v-app-bar>-->
 
     <v-main>
+      <v-container v-if="$route.name !== 'login'">
+        <v-row>
+          <v-col class="text-left">
+             <loginBtn />
+             메뉴바자리다 건들지마라
+          </v-col>
+          <v-col class="text-right">
+            <loginBtn/>
+          </v-col>
+        </v-row>
+      </v-container>
       <router-view />
-      <TopBtn />
+      <TopBtn v-if="$route.name !== 'login'"/>
     </v-main>
   </v-app>
 </template>
 
 <script>
 import TopBtn from "./components/TopBtn.vue";
+import loginBtn from './components/LoginBtn.vue';
 
 export default {
   name: "App",
 
   components: {
-    TopBtn
+    TopBtn,
+    loginBtn
   },
 
   data: () => ({

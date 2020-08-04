@@ -1,5 +1,8 @@
 <template>
   <div class="LoginLogo">
+    <router-link to="/">
+        <h1>LOGO</h1>
+    </router-link>
     <h1 class="LoginTitle">Login</h1>
     <div>
         <div class="circle1"></div>

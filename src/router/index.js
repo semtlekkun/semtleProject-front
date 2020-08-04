@@ -21,7 +21,8 @@ const routes = [
   {
     path: '/project/view',
     name: 'projectView',
-    component: () => import('../views/ProjectView.vue')
+    component: () => import('../views/ProjectView.vue'),
+    props: true
   },
   {
     path: '/qna',
