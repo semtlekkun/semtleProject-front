@@ -46,11 +46,12 @@
 
 <script>
 import TopBtn from "./components/TopBtn.vue";
+
 export default {
   name: "App",
 
   components: {
-    TopBtn,
+    TopBtn
   },
 
   data: () => ({
@@ -58,3 +59,9 @@ export default {
   }),
 };
 </script>
+
+<style>
+*{
+    text-decoration: none;
+}
+</style>
