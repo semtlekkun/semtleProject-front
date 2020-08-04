@@ -63,6 +63,11 @@ const routes = [
     path: '/management',
     name: 'management',
     component: ()=>import('../views/Management.vue')
+  },
+  {
+    path: '/admin/mentor',
+    name: 'mentor',
+    component: ()=>import('../views/AdminMentor.vue')
   }
 ]
 
