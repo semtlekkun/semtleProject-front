@@ -69,7 +69,6 @@ export default {
 }
 .text {
   line-height: 60px;
-  font-family: "Microsoft GothicNeo";
   font-size: 20px;
   font-weight: bold;
 }

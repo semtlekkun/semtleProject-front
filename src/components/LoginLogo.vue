@@ -1,6 +1,6 @@
 <template>
   <div class="LoginLogo">
-    <h1 class="LoginTitle">로그인</h1>
+    <h1 class="LoginTitle">Login</h1>
     <div>
         <div class="circle1"></div>
         <div class="circle2"></div>
