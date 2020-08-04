@@ -1,38 +1,46 @@
 <template>
     <div id="app">
         <v-app id="inspire">
-            <v-card class="overflow-hidden">
-            <v-img 
+            <span style="position: sticky; top: 0;">
+            <v-img
+                @mouseover="logoHover" 
+                @mouseleave="logoNoHover"
                 class="logo" 
                 absolute 
                 max-height="130" 
                 max-width="130" 
-                src="../assets/logo.png"
-                @mouseover="logoHover" 
-                @mouseleave="logoNoHover"    
+                src="../assets/logo.png"    
             ></v-img>
             <v-app-bar
                 @mouseover="logoHover" 
-                @mouseleave="logoNoHover" 
+                @mouseleave="logoNoHover"
                 :collapse="!collapseOnScroll"
                 :collapse-on-scroll="collapseOnScroll"
-                :width="collapseOnScroll? '600':'0'"
+                :width="menuIsOpen? '600':'0'"
                 absolute
                 color="rgb(46,117,182)"
                 dark
-                scroll-target="#scrolling-techniques-6"
                 class="bar rounded-xl"
+                style="padding-left: 90px;"
             >
-                <v-toolbar-title></v-toolbar-title>
+
+                <v-toolbar-items style="margin: auto;">공지사항</v-toolbar-items>
+                <v-toolbar-items style="margin: auto;">프로젝트</v-toolbar-items>
+                <v-toolbar-items style="margin: auto;">QnA</v-toolbar-items>
             </v-app-bar>
+            <!--
             <v-sheet
                 id="scrolling-techniques-6"
                 class="overflow-y-auto"
                 max-height="600"
             >
                 <v-container style="height: 1000px;"></v-container>
-            </v-sheet>
-            </v-card>
+                
+            </v-sheet>-->
+            
+            </span>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </v-app>
     </div>
 </template>
@@ -41,17 +49,23 @@
     export default {
         data: () => ({
             collapseOnScroll: true,
-            menuIsOpen: false,
+            menuIsOpen: true,
             projectIsOpen: false,
+            mainItems: [
+                    { name: '공지사항', sub: null, method: ()=>{}},
+                    { name: '프로젝트', sub: ['공고', '등록'], method: ()=>{this.projectIsOpen = !this.projectIsOpen} },
+                    { name: 'QnA', sub: null, method:()=>{}},
+                ],
         }),
         methods:{
             logoHover(){
-                this.menuIsOpen=true;
-                this.collapseOnScroll=true;
+                // if(){this.menuIsOpen=true;}
+                
+                // this.collapseOnScroll=false;
             },
             logoNoHover(){
                 this.menuIsOpen=false;
-                this.collapseOnScroll=false;
+                // this.collapseOnScroll=true;
             },
             projectHover(){
                 this.projectIsOpen=true;
@@ -73,4 +87,10 @@
         top: 48.1px !important;
         z-index: 1;
     }
+    .closeProject{
+        height: 0;
+        padding:0;
+        margin:0;
+    }
 </style>
+
