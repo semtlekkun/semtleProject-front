@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-row>
       <v-col>
-        <div id="top" @mouseover="logoHover" @mouseout="topOut" style="background-color:tomato;">
+        <div id="top" @mouseover="logoHover" @mouseout="topOut">
           <img src="../assets/logo.png" width="150px" id="logo" />
           <div id="box"></div>
         </div>
@@ -18,14 +18,18 @@ export default {
   },
   methods: {
     logoHover() {
-      this.count++;
+      let browserWidth = document.body.clientWidth;
+      let rangeLogo = document.querySelector("#logo").getBoundingClientRect().x;
+
       let boxObj = document.querySelector("#box");
-      boxObj.style.width = "80%";
+
+      boxObj.style.width = (browserWidth - rangeLogo * 2).toString() + "px";
       boxObj.style.transition = "1s";
+      console.log((browserWidth - rangeLogo).toString());
+      console.log(rangeLogo);
     },
 
     topOut() {
-      this.count2++;
       let boxObj = document.querySelector("#box");
       boxObj.style.width = "0%";
       boxObj.style.transition = "1s";
