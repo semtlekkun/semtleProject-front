@@ -1,23 +1,23 @@
 <template>
   <v-app>
     <v-content>
-      <SideBar/>
+      <MenuBar3 />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import SideBar from "./components/SideBar";
+import MenuBar3 from "./components/MenuBar3.vue";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    SideBar
+    MenuBar3,
   },
 
   data: () => ({
     //
-  })
-}
+  }),
+};
 </script>
