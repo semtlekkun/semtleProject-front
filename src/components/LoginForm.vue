@@ -2,32 +2,48 @@
   <div class="LoginForm">
     <p class="Error">{{error}}</p>
     <v-form @submit="CheckForm" novalidate="true">
-      <v-layout row wrap class="mt-5 center">
-        <v-flex xs12 sm2 md2 lg1 class="text-md-right pr-5">
+      <v-row class="mt-5 center">
+        <v-col cols="12"
+         sm="2"
+          md="2"
+           lg="1" class="text-md-right pr-5">
           <p class="text">학번</p>
-        </v-flex>
-        <v-flex xs12 sm10 md5 lg3>
+        </v-col>
+        <v-col 
+        cols="12"
+         sm="10"
+          md="5"
+           lg="3">
           <input
             type="text"
             v-model="StudentNumber"
             name="StudentNumber"
             class="StudentNumberInput"
           />
-        </v-flex>
-      </v-layout>
-      <v-layout row wrap class="mt-5 center">
-        <v-flex xs12 sm2 md2 lg1 class="text-md-right pr-5">
+        </v-col>
+      </v-row>
+      <v-row class="mt-5 center">
+        <v-col  cols="12"
+         sm="2"
+          md="2"
+           lg="1" class="text-md-right pr-5">
           <p class="text">비밀번호</p>
-        </v-flex>
-        <v-flex xs12 sm10 md5 lg3>
+        </v-col>
+        <v-col  cols="12"
+         sm="10"
+          md="5"
+           lg="3">
           <input type="password" class="PasswordInput" v-model="Password" name="Password" />
-        </v-flex>
-      </v-layout>
-      <v-layout row wrap class="mt-10">
-        <v-flex xs6 sm4 md3 class="center">
+        </v-col>
+      </v-row>
+      <v-row class="mt-10">
+        <v-col 
+        cols="6"
+        sm="4"
+        md="3" class="center">
           <button type="submit" class="LoginButton">로그인</button>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-form>
   </div>
 </template>
