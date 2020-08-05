@@ -177,6 +177,8 @@
     }
 </script>
 
-<style scoped>
-
+<style>
+.v-data-footer__select{
+    display: none !important;
+}
 </style>

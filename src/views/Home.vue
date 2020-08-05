@@ -2,32 +2,29 @@
   <v-container>
     <v-row>
       <v-col>
+        <v-row>
           <v-col>
-            <v-row>
-              <v-col>
-                <h1>공지사항</h1>
-              </v-col>
-              <v-col class="text-right">
-                <router-link to="/notice/list">
-                  <v-btn>더보기</v-btn>
-                </router-link>
-              </v-col>
-            </v-row>
-            <Table :perPage="5"/>
+            <h1>공지사항</h1>
           </v-col>
+          <v-col class="text-right my-auto">
+            <router-link to="/notice/list">
+              <v-btn outlined>더보기</v-btn>
+            </router-link>
+          </v-col>
+        </v-row>
+        <Table :perPage="5"/>
+
+        <v-row class="mt-15">
           <v-col>
-            <v-row>
-              <v-col>
-                <h1>프로젝트 공고</h1>
-              </v-col>
-              <v-col class="text-right">
-                <router-link to="/project/announce/list">
-                  <v-btn>더보기</v-btn>
-                </router-link>
-              </v-col>
-            </v-row>
-            <Table :perPage="5"/>
+            <h1>프로젝트 공고</h1>
           </v-col>
+          <v-col class="text-right my-auto">
+            <router-link to="/project/announce/list">
+              <v-btn outlined>더보기</v-btn>
+            </router-link>
+          </v-col>
+        </v-row>
+        <Table :perPage="5"/>
       </v-col>
 
       <v-col>
@@ -35,9 +32,9 @@
           <v-col>
             <h1>최근 프로젝트</h1>
           </v-col>
-          <v-col class="text-right">
+          <v-col class="text-right my-auto">
             <router-link to="/project/list">
-              <v-btn>더보기</v-btn>
+              <v-btn outlined>더보기</v-btn>
             </router-link>
           </v-col>
         </v-row>
@@ -131,7 +128,7 @@ export default {
 
 <style scoped>
 #projectView{
-  max-height: 800px;
+  max-height: 785px;
   overflow: auto;
 }
 </style>

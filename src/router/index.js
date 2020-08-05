@@ -88,6 +88,11 @@ const routes = [
     path: '/project/announce/list',
     name: 'projectAnnounceList',
     component: ()=>import('../views/ProjectAnnounceList.vue')
+  },
+  {
+    path: '/admin/menu',
+    name: 'adminMenu',
+    component: ()=> import('../views/AdminMenu.vue')
   }
 ]
 

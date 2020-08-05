@@ -2,19 +2,19 @@
   <v-menu offset-y open-on-hover>
     <template v-slot:activator="{ on, attrs }">
       <router-link :to="Attribute.url">
-      <v-btn
-        id="menuBtn"
-        class="child white--text"
-        text
-        large
-        v-bind="attrs"
-        v-on="on"
-      >
-       {{Attribute.Title}}
-      </v-btn>
+        <v-btn
+          id="menuBtn"
+          class="child white--text"
+          text
+          large
+          v-bind="attrs"
+          v-on="on"
+        >
+        {{Attribute.Title}}
+        </v-btn>
       </router-link>
     </template>
-    <v-list flat class="pa-0 ma-0">
+    <v-list flat class="pa-0 ma-0 text-center">
       <v-list-item-group>
         <router-link 
           v-for="(item, index) in Attribute.Items" 

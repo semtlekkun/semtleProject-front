@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container id="loginPage">
     <LoginLogo></LoginLogo>
     <LoginForm></LoginForm>
   </v-container>
@@ -16,3 +16,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  #loginPage{
+    transform: translateY(25%);
+  }
+</style>

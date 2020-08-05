@@ -1,17 +1,17 @@
 <template>
-  <v-container id="container">
-    <v-row>
-      <v-col>
-        <router-link to="/">
-          <img src="../assets/mainLogo.png" 
-            width="150px" id="logo"
-          @mouseover="menuOpen" 
-          @mouseleave="menuClose"/>
-        </router-link>
-        <div id="box"
-        @mouseover="menuOpen"
+    <div id="container">
+      <router-link to="/">
+        <img src="../assets/mainLogo.png" 
+          width="150px" id="logo"
+        @mouseover="menuOpen" 
+        @mouseleave="menuClose"/>
+      </router-link>
+      
+      <div id="transBox"
+      @mouseover="menuOpen"
         @mouseleave="menuClose">
-
+        <div id="box">
+        
           <div class="dummy1"></div>
 
           <MenuElement
@@ -24,9 +24,8 @@
 
           <div class="dummy2"></div>
         </div>
-      </v-col>
-    </v-row>
-  </v-container>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -56,8 +55,8 @@ export default {
 
         {
           Items: [
-            { title: "프로젝트 목록", url:'/project/list' },
-            { title: "프로젝트 공고", url: '/project/announce/list' },
+            { title: "목록", url:'/project/list' },
+            { title: "공고", url: '/project/announce/list' },
           ],
           url: '',
           Title: "프로젝트",
@@ -88,13 +87,13 @@ export default {
     // 메뉴가 펼쳐지는 함수
     menuOpen() {
       if (this.controller) {
-        let boxObj = document.querySelector("#box");
-        boxObj.style.width = "1200px";
+        let boxObj = document.querySelector("#transBox");
+        boxObj.style.width = "1000px";
         boxObj.style.transition = ".5s";
       }
       else if(this.subMenu){
-        let boxObj = document.querySelector("#box");
-        boxObj.style.width = "1200px";
+        let boxObj = document.querySelector("#transBox");
+        boxObj.style.width = "1000px";
       }
       // console.log(this.subMenu)
     },
@@ -102,7 +101,7 @@ export default {
     // 메뉴가 닫히는 함수
     menuClose() {
       if (this.controller) {
-        let boxObj = document.querySelector("#box");
+        let boxObj = document.querySelector("#transBox");
         boxObj.style.width = "0px";
         boxObj.style.transition = ".5s";
       }
@@ -133,31 +132,42 @@ export default {
 </script>
 
 <style scoped>
-
+#transBox{
+  /* background: red; */
+  transform: translateY(-105%);
+  height: 150px;
+  width: 1000px;
+  border-radius: 100px 0 0 100px;
+}
 #container {
   height: 150px;
 }
 
 #logo {
-  position: absolute;
-  top: 5px;
+  /* position: absolute;
+  top: 5px; */
+  position: relative;
   z-index: 100;
   border-radius: 100%;
 }
 
 #box {
-  position: absolute;
-  top: 60.5px;
+  /* position: absolute;
+  top: 60.5px; */
+  /* position: absolute; */
+  transform: translateY(137%);
   background-color: rgb(46, 117, 182);
-  width: 1200px;
-  height: 39.5px;
+  
+  height: 40.5px;
   transition: 0.4s;
   margin-left: 4px;
   border-radius: 20px;
-
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  overflow: hidden;
 }
 
 .child {
@@ -168,11 +178,9 @@ export default {
 
 .dummy1 {
   width: 150px;
-  height: 40px;
 }
 
 .dummy2 {
   width: 0px;
-  height: 39.5px;
 }
 </style>
