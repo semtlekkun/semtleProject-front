@@ -10,9 +10,18 @@
         v-on="on"
       >{{Attribute.Title}}</v-btn>
     </template>
-    <v-list flat>
+    <v-list flat class="pa-0 ma-0">
       <v-list-item-group>
-        <v-list-item v-for="(item, index) in Attribute.Items" :key="index">
+        <v-list-item 
+        @mouseover="()=>{
+          functions.subMenuOpen();
+          functions.menuOpen();
+        }" 
+        @mouseleave="()=>{
+          functions.subMenuClose();
+          functions.menuClose();  
+        }"
+        v-for="(item, index) in Attribute.Items" :key="index">
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list-item-group>
@@ -23,20 +32,14 @@
 <script>
 export default {
   props: {
+    functions: Object,
     Attribute: {
       type: Object,
       required: true,
     },
   },
   methods: {
-    // 메뉴가 접혀질 때 버튼들을 지우고싶지만 ref가 잘안됩니다...
-    // 버그는 메뉴가 접혀져 있을 때 로고의 오른쪽에 버튼들이 조금씩 뭉쳐있습니다.
-    // eraseBtn() {
-    //   document.querySelector("#menuBtn").style.display = "none";
-    // },
-    // drawBtn() {
-    //   document.querySelector("#menuBtn").style.display = "block";
-    // },
+    
   },
 };
 </script>

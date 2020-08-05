@@ -1,11 +1,17 @@
 <template>
-  <v-container id="container">
+  <v-container id="container" fluid>
     <v-row id="glue">
       <v-col>
-        <img src="../assets/logo.png" width="150px" id="logo" @mouseover="menuOpen" />
-        <div id="box">
+        <img src="../assets/logo.png" 
+          width="150px" id="logo"
+         @mouseover="menuOpen" 
+         @mouseleave="menuClose"/>
+        <div id="box"
+        @mouseover="menuOpen"
+        @mouseleave="menuClose">
           <div class="dummy1"></div>
           <MenuElement
+            :functions = "functions"
             v-for="(item, index) in Attributes"
             :key="index"
             :Attribute="item"
@@ -28,7 +34,13 @@ export default {
     return {
       // 현재 스크롤 위치와 호버에 대한 제어를 두기 위한 변수
       controller: false,
-
+      subMenu:false,
+      functions:{
+        menuOpen : this.menuOpen,
+        menuClose : this.menuClose,
+        subMenuOpen : this.subMenuOpen,
+        subMenuClose : this.subMenuClose
+      },
       // 메뉴 버튼마다 들어갈 리스트 아이템과 버튼 제목
       Attributes: [
         {
@@ -74,13 +86,25 @@ export default {
     };
   },
   methods: {
+
+    subMenuOpen(){
+      this.subMenu = true;
+    },
+    subMenuClose(){
+      this.subMenu = false;
+    },
     // 메뉴가 펼쳐지는 함수
     menuOpen() {
       if (this.controller) {
         let boxObj = document.querySelector("#box");
         boxObj.style.width = "1200px";
-        boxObj.style.transition = "1s";
+        boxObj.style.transition = ".5s";
       }
+      else if(this.subMenu){
+        let boxObj = document.querySelector("#box");
+        boxObj.style.width = "1200px";
+      }
+      // console.log(this.subMenu)
     },
 
     // 메뉴가 닫히는 함수
@@ -88,7 +112,7 @@ export default {
       if (this.controller) {
         let boxObj = document.querySelector("#box");
         boxObj.style.width = "0px";
-        boxObj.style.transition = "1s";
+        boxObj.style.transition = ".5s";
       }
     },
 
