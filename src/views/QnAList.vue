@@ -33,8 +33,8 @@ import SubTitle from '../components/SubTitle.vue';
         data(){
             return{
                 subTitleObj:{
-                    title:"프로젝트 공고",
-                    contents:"프로젝트 공고이다."
+                    title:"Q&A 목록",
+                    contents:"질문 목록이다."
                 }
             }
         }

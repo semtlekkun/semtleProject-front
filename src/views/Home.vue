@@ -44,8 +44,9 @@
         <v-row id="projectView">
           <v-col
            xs="12"
-           md="6"
-           lg="4"
+           md="12"
+           lg="6"
+           xl="4"
            v-for="item in cardViewList" 
            :key="item.index">
             <CardView :contentsObj="item"/>

@@ -4,8 +4,8 @@
       <v-container>
         <v-row id="stickyMenu" v-if="$route.name !== 'login'">
           <v-col >
-             <!-- <MobileMenuBar /> -->
-             <PCMenuBar />
+             <MobileMenuBar />
+             <!-- <PCMenuBar /> -->
           </v-col>
           <!-- <v-col class="text-right">
             <loginBtn v-if="!isLogin"/>
@@ -25,16 +25,16 @@
 
 <script>
 import TopBtn from "./components/TopBtn.vue";
-import PCMenuBar from './components/MainMenuBar.vue';
-// import MobileMenuBar from './components/SideBar.vue';
+// import PCMenuBar from './components/MainMenuBar.vue';
+import MobileMenuBar from './components/SideBar.vue';
 
 export default {
   name: "App",
 
   components: {
     TopBtn,
-    PCMenuBar,
-    // MobileMenuBar,
+    // PCMenuBar,
+    MobileMenuBar,
   },
 
   data: () => ({

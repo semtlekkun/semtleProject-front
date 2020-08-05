@@ -16,17 +16,17 @@
     </template>
     <v-list flat class="pa-0 ma-0">
       <v-list-item-group>
-        <router-link @mouseover="()=>{
+        <router-link 
+          v-for="(item, index) in Attribute.Items" 
+          :key="index" :to="item.url">
+          <v-list-item @mouseover="()=>{
             functions.subMenuOpen();
             functions.menuOpen();
           }" 
           @mouseleave="()=>{
             functions.subMenuClose();
             functions.menuClose();  
-          }"
-          v-for="(item, index) in Attribute.Items" 
-          :key="index" :to="item.url">
-          <v-list-item>
+          }">
             <v-list-item-title>
               {{ item.title }}
             </v-list-item-title>
