@@ -7,7 +7,7 @@
             <v-alert outlined color="primary">
               <v-card-title>{{title}}</v-card-title>
               <v-card-text color="primary">
-                <h1 class="term">2021년 2학기</h1>
+                <h1 class="mt-16">2021년 2학기</h1>
                 <v-row justify="center">
                   <v-col cols="6" sm="3">
                     <v-responsive
@@ -45,7 +45,7 @@
                   <v-col cols="6" sm="3"></v-col>
                 </v-row>
 
-                <h1 class="term">2021년 1학기</h1>
+                <h1 class="mt-16">2021년 1학기</h1>
                 <v-row justify="center">
                   <v-col cols="6" sm="3">
                     <v-responsive
@@ -113,7 +113,7 @@
                   </v-col>
                 </v-row>
 
-                <h1 class="term">2020년 2학기</h1>
+                <h1 class="mt-16">2020년 2학기</h1>
                 <v-row justify="center">
                   <v-col cols="6" sm="3">
                     <v-responsive
@@ -208,9 +208,6 @@ export default {
 .content {
   font-size: 0.7em;
   color: #727272 !important;
-}
-.term {
-  margin-top: 50px;
 }
 .content {
   max-width: 10em;
