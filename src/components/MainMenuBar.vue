@@ -1,15 +1,19 @@
 <template>
-  <v-container id="container" fluid>
-    <v-row id="glue">
+  <v-container id="container">
+    <v-row>
       <v-col>
-        <img src="../assets/logo.png" 
-          width="150px" id="logo"
-         @mouseover="menuOpen" 
-         @mouseleave="menuClose"/>
+        <router-link to="/">
+          <img src="../assets/mainLogo.png" 
+            width="150px" id="logo"
+          @mouseover="menuOpen" 
+          @mouseleave="menuClose"/>
+        </router-link>
         <div id="box"
         @mouseover="menuOpen"
         @mouseleave="menuClose">
+
           <div class="dummy1"></div>
+
           <MenuElement
             :functions = "functions"
             v-for="(item, index) in Attributes"
@@ -17,6 +21,7 @@
             :Attribute="item"
             ref="args"
           />
+
           <div class="dummy2"></div>
         </div>
       </v-col>
@@ -44,42 +49,29 @@ export default {
       // 메뉴 버튼마다 들어갈 리스트 아이템과 버튼 제목
       Attributes: [
         {
-          Items: [
-            { title: "Click Me" },
-            { title: "Click Me" },
-            { title: "Click Me" },
-            { title: "Click Me" },
-          ],
+          Items: [],
+          url: '/notice/list',
           Title: "공지사항",
         },
 
         {
           Items: [
-            { title: "Click Me" },
-            { title: "Click Me" },
-            { title: "Click Me" },
-            { title: "Click Me" },
+            { title: "프로젝트 목록", url:'/project/list' },
+            { title: "프로젝트 공고", url: '/project/announce/list' },
           ],
+          url: '',
           Title: "프로젝트",
         },
 
         {
-          Items: [
-            { title: "Click Me" },
-            { title: "Click Me" },
-            { title: "Click Me" },
-            { title: "Click Me" },
-          ],
-          Title: "질의응답",
+          Items: [],
+          url: '/qna/list',
+          Title: "Q&A",
         },
 
         {
-          Items: [
-            { title: "Click Me" },
-            { title: "Click Me" },
-            { title: "Click Me" },
-            { title: "Click Me" },
-          ],
+          Items: [],
+          url: '/login',
           Title: "로그인",
         },
       ],
@@ -141,15 +133,16 @@ export default {
 </script>
 
 <style scoped>
-#glue {
-  position: sticky;
-  top: 2%;
+
+#container {
+  height: 150px;
 }
 
 #logo {
   position: absolute;
   top: 5px;
   z-index: 100;
+  border-radius: 100%;
 }
 
 #box {
@@ -160,16 +153,11 @@ export default {
   height: 39.5px;
   transition: 0.4s;
   margin-left: 4px;
-
   border-radius: 20px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-#menuBar {
-  position: sticky;
-  top: 0;
 }
 
 .child {

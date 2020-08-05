@@ -1,6 +1,7 @@
 <template>
   <v-menu offset-y open-on-hover>
     <template v-slot:activator="{ on, attrs }">
+      <router-link :to="Attribute.url">
       <v-btn
         id="menuBtn"
         class="child white--text"
@@ -8,22 +9,29 @@
         large
         v-bind="attrs"
         v-on="on"
-      >{{Attribute.Title}}</v-btn>
+      >
+       {{Attribute.Title}}
+      </v-btn>
+      </router-link>
     </template>
     <v-list flat class="pa-0 ma-0">
       <v-list-item-group>
-        <v-list-item 
-        @mouseover="()=>{
-          functions.subMenuOpen();
-          functions.menuOpen();
-        }" 
-        @mouseleave="()=>{
-          functions.subMenuClose();
-          functions.menuClose();  
-        }"
-        v-for="(item, index) in Attribute.Items" :key="index">
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
+        <router-link @mouseover="()=>{
+            functions.subMenuOpen();
+            functions.menuOpen();
+          }" 
+          @mouseleave="()=>{
+            functions.subMenuClose();
+            functions.menuClose();  
+          }"
+          v-for="(item, index) in Attribute.Items" 
+          :key="index" :to="item.url">
+          <v-list-item>
+            <v-list-item-title>
+              {{ item.title }}
+            </v-list-item-title>
+          </v-list-item>
+        </router-link>
       </v-list-item-group>
     </v-list>
   </v-menu>

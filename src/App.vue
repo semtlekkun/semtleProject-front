@@ -1,19 +1,23 @@
 <template>
   <v-app>
     <v-main>
-      <v-container v-if="$route.name !== 'login'">
-        <v-row>
-          <v-col class="text-left">
-             <MobileMenuBar />
-             <PCMenuBar/>
+      <v-container>
+        <v-row id="stickyMenu" v-if="$route.name !== 'login'">
+          <v-col >
+             <!-- <MobileMenuBar /> -->
+             <PCMenuBar />
           </v-col>
-          <v-col class="text-right">
+          <!-- <v-col class="text-right">
             <loginBtn v-if="!isLogin"/>
             <logoutBtn v-else/>
-          </v-col>
+          </v-col> -->
         </v-row>
+      <v-row>
+        <v-col>
+          <router-view />
+        </v-col>
+      </v-row>
       </v-container>
-      <router-view />
       <TopBtn v-if="$route.name !== 'login'"/>
     </v-main>
   </v-app>
@@ -21,20 +25,16 @@
 
 <script>
 import TopBtn from "./components/TopBtn.vue";
-import loginBtn from './components/LoginBtn.vue';
-import logoutBtn from './components/LogoutBtn.vue';
 import PCMenuBar from './components/MainMenuBar.vue';
-import MobileMenuBar from './components/SideBar.vue';
+// import MobileMenuBar from './components/SideBar.vue';
 
 export default {
   name: "App",
 
   components: {
     TopBtn,
-    loginBtn,
-    logoutBtn,
     PCMenuBar,
-    MobileMenuBar,
+    // MobileMenuBar,
   },
 
   data: () => ({
@@ -47,4 +47,11 @@ export default {
 *{
     text-decoration: none;
 }
+
+#stickyMenu{
+  position: sticky;
+  top: 5px;
+  z-index: 99999;
+}
+
 </style>
