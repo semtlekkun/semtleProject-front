@@ -146,10 +146,6 @@ export default {
   top: 2%;
 }
 
-#container {
-  height: 10000px;
-}
-
 #logo {
   position: absolute;
   top: 5px;

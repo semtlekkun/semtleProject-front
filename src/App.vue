@@ -4,8 +4,8 @@
       <v-container v-if="$route.name !== 'login'">
         <v-row>
           <v-col class="text-left">
-             <loginBtn />
-             메뉴바자리다 건들지마라
+             <MobileMenuBar />
+             <PCMenuBar/>
           </v-col>
           <v-col class="text-right">
             <loginBtn v-if="!isLogin"/>
@@ -23,13 +23,18 @@
 import TopBtn from "./components/TopBtn.vue";
 import loginBtn from './components/LoginBtn.vue';
 import logoutBtn from './components/LogoutBtn.vue';
+import PCMenuBar from './components/MainMenuBar.vue';
+import MobileMenuBar from './components/SideBar.vue';
+
 export default {
   name: "App",
 
   components: {
     TopBtn,
     loginBtn,
-    logoutBtn
+    logoutBtn,
+    PCMenuBar,
+    MobileMenuBar,
   },
 
   data: () => ({

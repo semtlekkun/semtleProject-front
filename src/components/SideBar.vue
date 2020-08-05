@@ -78,6 +78,9 @@
 </script>
 
 <style scoped>
+    #app{
+        position: absolute;
+    }
     .logoImg{
         width:100%;
     }
