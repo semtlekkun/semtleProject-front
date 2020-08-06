@@ -18,7 +18,5 @@ export default {
 </script>
 
 <style scoped>
-  #loginPage{
-    transform: translateY(25%);
-  }
+
 </style>

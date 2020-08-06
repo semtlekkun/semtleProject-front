@@ -4,7 +4,7 @@
       <!-- <MobileMenuBar v-show="isMobile"/> -->
       <MobileView v-show="isMobile"/>
       <PCView v-show="!isMobile"/>
-      <TopBtn v-if="$route.name !== 'login'"/>
+      <TopBtn v-show="!isMobile" v-if="$route.name !== 'login'"/>
       <AdminBtn v-if="$route.name === 'Home'"/>
     </v-main>
   </v-app>
@@ -51,8 +51,20 @@ export default {
 <style>
 *{
     text-decoration: none;
+    @font-face { 
+    font-family: 'BBTreeGL'; 
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGL.woff') 
+    format('woff'); 
+    font-weight: normal; 
+    font-style: normal; 
+    }
 }
 
+.customBtn{
+  background-color: #50829b !important;
+  color: white !important;
+  font-weight: bold;
+}
 
 ::-webkit-scrollbar {
     display: none;

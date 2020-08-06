@@ -4,11 +4,11 @@
       <v-col>
         <v-row>
           <v-col cols="8">
-            <h1>공지사항</h1>
+            <h1>📌 공지사항</h1>
           </v-col>
           <v-col class="text-right my-auto">
             <router-link to="/notice/list">
-              <v-btn outlined>더보기</v-btn>
+              <v-btn rounded depressed class="customBtn">더보기</v-btn>
             </router-link>
           </v-col>
         </v-row>
@@ -16,11 +16,11 @@
 
         <v-row class="mt-15">
           <v-col cols="8">
-            <h1>프로젝트 공고</h1>
+            <h1>📝 프로젝트 공고</h1>
           </v-col>
           <v-col class="text-right my-auto">
             <router-link to="/project/announce/list">
-              <v-btn outlined>더보기</v-btn>
+              <v-btn rounded depressed class="customBtn">더보기</v-btn>
             </router-link>
           </v-col>
         </v-row>
@@ -30,11 +30,11 @@
       <v-col>
         <v-row>
           <v-col cols="8">
-            <h1>최근 프로젝트</h1>
+            <h1>💻 최근 프로젝트</h1>
           </v-col>
           <v-col class="text-right my-auto">
             <router-link to="/project/list">
-              <v-btn outlined>더보기</v-btn>
+              <v-btn rounded depressed class="customBtn">더보기</v-btn>
             </router-link>
           </v-col>
         </v-row>

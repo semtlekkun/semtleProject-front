@@ -1,8 +1,5 @@
 <template>
-  <v-card
-    class="mx-auto overflow-auto"
-    id="menuBar"
-  >
+  <v-card class="mx-auto" id="menuBar">
     <v-app-bar
       dark
     >
@@ -23,7 +20,7 @@
     <v-navigation-drawer
       v-model="drawer"
       absolute
-      temporary
+      :stateless='!drawer'
     >
         <v-list-item>
     
@@ -153,23 +150,23 @@
 
 <style scoped>
 #menuBar{
-    height: 100vh;
+    height: 100%;
 }
 
 .v-main__wrap header{
-    z-index: 999 !important;
+    /* z-index: 999 !important;
     position: sticky !important;
-    top: 0;
-    background-color: rgb(46, 117, 182) !important;
+    top: 0; */
+    background-color: #50829b !important;
 }
 
 .v-card{
     border-radius:  0 !important;
 }
 
-.v-main__wrap aside{
+/* .v-main__wrap aside{
     z-index: 9999 !important;
-}
+} */
 
 .closeProject{
     height: 0;

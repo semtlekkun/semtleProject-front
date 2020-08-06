@@ -8,7 +8,7 @@
                 <v-row class="text-right">
                     <v-col>
                         <router-link :to="{name:'projectInput'}">
-                            <v-btn>글쓰기</v-btn>
+                            <v-btn rounded depressed class="customBtn">글쓰기</v-btn>
                         </router-link>
                     </v-col>
                 </v-row>

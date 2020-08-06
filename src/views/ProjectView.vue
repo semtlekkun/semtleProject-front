@@ -13,36 +13,39 @@
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col
-                    cols="12"
-                    class="text-right">
-                        <span class="mx-5">작성자: ㅇㅇㅇ</span>
-                        <span class="mx-5">작성일: 2020-10-10</span>
-                        <span class="mx-5">view:00</span>
-                    </v-col>
+                    <v-col cols="3" sm="2" class="info text-center">작성자</v-col>
+                    <v-col cols="9" sm="2" class="text-center">taese0ng</v-col>
+
+                    <v-col cols="3" sm="2" class="info text-center">작성일</v-col>
+                    <v-col cols="9" sm="2" class="text-center">2020-10-10</v-col>
+
+                    <v-col cols="3" sm="2" class="info text-center">view</v-col>
+                    <v-col cols="9" sm="2" class="text-center">00</v-col>
                 </v-row>
 
                 <v-row>
                     <v-col
                     cols="3"
+                    sm="2"
                     class="info text-center">
-                        팀장:
+                        팀장
                     </v-col>
                     <v-col
                     cols="9"
-                    md="3"
+                    sm="2"
                     class="text-center">
                         김태성
                     </v-col>
 
                     <v-col
                     cols="3"
+                    sm="2"
                     class="info text-center">
                         개발기간
                     </v-col>
                     <v-col
                     cols="9"
-                    md="3"
+                    sm="6"
                     class="text-center">
                         2020-12-24 ~ 2020-12-25
                     </v-col>

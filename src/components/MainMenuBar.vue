@@ -156,7 +156,7 @@ export default {
   /* position: absolute;
   top: 60.5px; */
   transform: translateY(137%);
-  background-color: rgb(46, 117, 182);
+  background-color: #50829b;
   
   height: 40.5px;
   transition: 0.4s;

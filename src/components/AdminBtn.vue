@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link to="/admin/menu" >
-        <v-img class="top_btn" src="../assets/adminBtn.png" width="70"/>
+        <v-img class="top_btn" src="../assets/adminBtn.png" width="60"/>
     </router-link>
   </div>
 </template>
