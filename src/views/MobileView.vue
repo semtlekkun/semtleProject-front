@@ -14,11 +14,9 @@
         }"></v-app-bar-nav-icon>
 
       <v-toolbar-title>
-          <router-link to="/" v-show="isMobile || $route.name === 'adminMenu'" >
-                <v-img width="90px" 
-                class="mx-auto"
-                src="../assets/logo.png"/>
-                </router-link>
+            <v-img width="90px" 
+            class="mx-auto"
+            src="../assets/menuBarLogo.png"/>
       </v-toolbar-title>
     </v-app-bar>
 
@@ -75,9 +73,9 @@
     <v-container>
         
         <v-row :id="!isMobile && 'stickyMenu'" v-if="$route.name !== 'login'">
-            <v-col>
+            <v-col offset-sm="3" sm="6" xl="6" offset-xl="3">
                 <router-link to="/" v-show="isMobile || $route.name === 'adminMenu'" >
-                <v-img width="200px" 
+                <v-img 
                 class="mx-auto"
                 src="../assets/logo.png"/>
                 </router-link>

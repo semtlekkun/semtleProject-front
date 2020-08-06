@@ -10,7 +10,7 @@
             </v-col>
         </v-row>
 
-        <v-row :id="!isMobile && 'stickyMenu'" v-if="$route.name !== 'login'">
+        <v-row id="stickyMenu" v-if="$route.name !== 'login'">
             <v-col>
                 <PCMenuBar v-show="!isMobile &&  $route.name !== 'adminMenu'" />
             </v-col>
@@ -52,5 +52,9 @@ export default {
 </script>
 
 <style scoped>
-
+#stickyMenu{
+  position: sticky;
+  top: 5px;
+  z-index: 99999;
+}
 </style>

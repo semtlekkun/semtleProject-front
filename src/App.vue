@@ -52,11 +52,7 @@ export default {
 *{
     text-decoration: none;
 }
-#stickyMenu{
-  position: sticky;
-  top: 5px;
-  z-index: 99999;
-}
+
 
 ::-webkit-scrollbar {
     display: none;
