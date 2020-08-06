@@ -55,6 +55,7 @@ export default {
 #stickyMenu{
   position: sticky;
   top: 5px;
+  width: 0px;
   z-index: 99999;
 }
 </style>
