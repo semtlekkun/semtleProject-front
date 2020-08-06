@@ -85,7 +85,6 @@
         padding-top: 20px;
         padding-left: 20px;
     }
-
     .isOpen{
         z-index: 9999999999999999;
     }

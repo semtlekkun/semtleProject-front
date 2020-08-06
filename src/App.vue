@@ -1,25 +1,9 @@
 <template>
   <v-app>
     <v-main>
-      <MobileMenuBar v-show="isMobile"/>
-      <v-container>
-        <v-row :id="!isMobile && 'stickyMenu'" v-if="$route.name !== 'login'">
-          <v-col>
-            <router-link to="/" v-show="isMobile || $route.name === 'adminMenu'" >
-              <v-img width="200px" 
-              class="mx-auto mt-13"
-              src="./assets/logo.png"/>
-            </router-link>
-
-            <PCMenuBar v-show="!isMobile &&  $route.name !== 'adminMenu'" />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <router-view />
-          </v-col>
-        </v-row>
-      </v-container>
+      <!-- <MobileMenuBar v-show="isMobile"/> -->
+      <MobileView v-show="isMobile"/>
+      <PCView v-show="!isMobile"/>
       <TopBtn v-if="$route.name !== 'login'"/>
       <AdminBtn v-if="$route.name === 'Home'"/>
     </v-main>
@@ -28,9 +12,9 @@
 
 <script>
 import TopBtn from "./components/TopBtn.vue";
-import PCMenuBar from './components/MainMenuBar.vue';
-import MobileMenuBar from './components/SideBar.vue';
 import AdminBtn from './components/AdminBtn.vue';
+import PCView from './views/PCView.vue';
+import MobileView from './views/MobileView.vue';
 
 export default {
   name: "App",
@@ -41,9 +25,9 @@ export default {
 
   components: {
     TopBtn,
-    PCMenuBar,
-    MobileMenuBar,
-    AdminBtn
+    MobileView,
+    AdminBtn,
+    PCView,
   },
 
   data: () => ({

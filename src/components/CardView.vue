@@ -1,21 +1,21 @@
 <template>
-    <router-link :to="{name: 'projectView', params:{contentsObj: contentsObj}}">
+    <router-link  :to="{name: 'projectView', params:{contentsObj: contentsObj}}">
         <v-card
+            id="link"
             height="318"
             max-height="318"
             max-width="344"
             class="mx-auto"
         >
             <v-list-item>
+                <v-list-item-avatar color="grey"></v-list-item-avatar>
 
-            <v-list-item-avatar color="grey"></v-list-item-avatar>
-
-            <v-list-item-content>
-                <v-list-item-title class="headline">{{contentsObj.title}}</v-list-item-title>
-                <v-list-item-subtitle>
-                by {{contentsObj.teamName}}
-                </v-list-item-subtitle>
-            </v-list-item-content>
+                <v-list-item-content>
+                    <v-list-item-title class="headline">{{contentsObj.title}}</v-list-item-title>
+                    <v-list-item-subtitle>
+                    by {{contentsObj.teamName}}
+                    </v-list-item-subtitle>
+                </v-list-item-content>
             </v-list-item>
 
             <v-img
@@ -49,5 +49,7 @@
 </script>
 
 <style scoped>
-
+#link{
+    z-index: 0 !important;
+}
 </style>

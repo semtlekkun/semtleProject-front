@@ -9,7 +9,7 @@
       
       <div id="transBox"
       @mouseover="menuOpen"
-        @mouseleave="menuClose">
+      @mouseleave="menuClose">
         <div id="box">
         
           <div class="dummy1"></div>
@@ -139,6 +139,7 @@ export default {
   width: 1000px;
   border-radius: 100px 0 0 100px;
 }
+
 #container {
   height: 150px;
 }
@@ -154,7 +155,6 @@ export default {
 #box {
   /* position: absolute;
   top: 60.5px; */
-  /* position: absolute; */
   transform: translateY(137%);
   background-color: rgb(46, 117, 182);
   

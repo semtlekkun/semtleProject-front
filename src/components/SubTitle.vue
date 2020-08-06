@@ -19,6 +19,6 @@
 
 <style scoped>
 h1{
-    font-size: 3.5rem;
+    font-size: 3.0rem;
 }
 </style>

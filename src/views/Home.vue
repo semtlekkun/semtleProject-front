@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <v-row>
-          <v-col>
+          <v-col cols="8">
             <h1>공지사항</h1>
           </v-col>
           <v-col class="text-right my-auto">
@@ -15,7 +15,7 @@
         <Table :perPage="5"/>
 
         <v-row class="mt-15">
-          <v-col>
+          <v-col cols="8">
             <h1>프로젝트 공고</h1>
           </v-col>
           <v-col class="text-right my-auto">
@@ -29,7 +29,7 @@
 
       <v-col>
         <v-row>
-          <v-col>
+          <v-col cols="8">
             <h1>최근 프로젝트</h1>
           </v-col>
           <v-col class="text-right my-auto">
