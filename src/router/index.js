@@ -4,14 +4,19 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/notice',
-    name: 'notice',
-    component: () => import('../views/Notice.vue')
-  },
-  {
     path: '/',
     name: 'Home',
     component: () => import('../views/Home.vue')
+  },
+  {
+    path: '/management',
+    name: 'Management',
+    component: () => import('../views/Management.vue')
+  },
+  {
+    path: '/notice',
+    name: 'notice',
+    component: () => import('../views/Notice.vue')
   },
   {
     path: '/project/input',
@@ -93,7 +98,7 @@ const routes = [
     path: '/admin/menu',
     name: 'adminMenu',
     component: ()=> import('../views/AdminMenu.vue')
-  }
+  },
 ]
 
 const router = new VueRouter({

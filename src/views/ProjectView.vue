@@ -8,18 +8,18 @@
                 <v-row>
                     <v-col
                     cols="12"
-                    class="info">
-                        <h2 class="projectTitle">{{contentsObj.title}}</h2>
+                    class="customTable text-centerZ">
+                        <h2>{{contentsObj.title}}</h2>
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col cols="3" sm="2" class="info text-center">작성자</v-col>
+                    <v-col cols="3" sm="2" class="customTable text-center">작성자</v-col>
                     <v-col cols="9" sm="2" class="text-center">taese0ng</v-col>
 
-                    <v-col cols="3" sm="2" class="info text-center">작성일</v-col>
+                    <v-col cols="3" sm="2" class="customTable text-center">작성일</v-col>
                     <v-col cols="9" sm="2" class="text-center">2020-10-10</v-col>
 
-                    <v-col cols="3" sm="2" class="info text-center">view</v-col>
+                    <v-col cols="3" sm="2" class="customTable text-center">view</v-col>
                     <v-col cols="9" sm="2" class="text-center">00</v-col>
                 </v-row>
 
@@ -27,7 +27,7 @@
                     <v-col
                     cols="3"
                     sm="2"
-                    class="info text-center">
+                    class="customTable text-center">
                         팀장
                     </v-col>
                     <v-col
@@ -40,7 +40,7 @@
                     <v-col
                     cols="3"
                     sm="2"
-                    class="info text-center">
+                    class="customTable text-center">
                         개발기간
                     </v-col>
                     <v-col
@@ -55,7 +55,7 @@
                     <v-col
                     cols="12"
                     md="2"
-                    class="info text-center">
+                    class="customTable text-center">
                         프로젝트 설명
                     </v-col>
 
@@ -70,7 +70,7 @@
                     <v-col
                     cols="12"
                     md="2"
-                    class="info text-center">
+                    class="customTable text-center">
                         팀원
                     </v-col>
                     <v-col
@@ -129,7 +129,9 @@
 </script>
 
 <style scoped>
-.projectTitle{
-    border-bottom: 1px solid black;
+
+.customTable{
+    background: rgb(56, 82, 103);
+    color: white
 }
 </style>

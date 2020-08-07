@@ -11,7 +11,7 @@
           </div>
         </td>
         <td>
-          <div :class="`rounded-lg`" class="QuestionBubble pa-6 blue lighten-1">
+          <div :class="`rounded-lg`" class="QuestionBubble pa-6">
             <vue-markdown>{{comments.comment}}</vue-markdown>
           </div>
         </td>
@@ -63,13 +63,15 @@ td {
   max-width: 40em;
   position: relative;
   display: inline-block;
+  background: #50829b;
+  color: white;
 }
 .QuestionBubble:after {
   content: "";
   position: absolute;
   border-style: solid;
   border-width: 11px 14px 11px 0;
-  border-color: transparent #42a5f5;
+  border-color: transparent #50829b;
   display: block;
   width: 0;
   z-index: 1;

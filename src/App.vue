@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <v-main>
-      <!-- <MobileMenuBar v-show="isMobile"/> -->
+    <Intro v-show="isIntro" :functions="switchScreen"/>
+    <v-main v-show="!isIntro">
       <MobileView v-show="isMobile"/>
       <PCView v-show="!isMobile"/>
       <TopBtn v-show="!isMobile" v-if="$route.name !== 'login'"/>
@@ -15,27 +15,37 @@ import TopBtn from "./components/TopBtn.vue";
 import AdminBtn from './components/AdminBtn.vue';
 import PCView from './views/PCView.vue';
 import MobileView from './views/MobileView.vue';
+import Intro from './views/Intro.vue';
 
 export default {
   name: "App",
   beforeMount(){
     this.windowResize();
     window.addEventListener('resize', this.windowResize);
+    if(sessionStorage.getItem("isIntro") === 'false'){
+      this.isIntro = false
+    }
+    
   },
-
   components: {
     TopBtn,
     MobileView,
     AdminBtn,
     PCView,
+    Intro
   },
 
   data: () => ({
     isMobile : false,
-    isLogin: false
+    isLogin: false,
+    isIntro: true
   }),
 
   methods:{
+    switchScreen(){
+      this.isIntro = false;
+      sessionStorage.setItem("isIntro", this.isIntro)
+    },
     windowResize(){
       if(window.innerWidth <= 1263){
         this.isMobile = true;

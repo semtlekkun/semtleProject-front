@@ -61,7 +61,11 @@ export default {
           url: '',
           Title: "프로젝트",
         },
-
+        {
+          Items: [],
+          url: '/management',
+          Title: "역대 간부"
+        },
         {
           Items: [],
           url: '/qna/list',

@@ -4,7 +4,7 @@
       <tr>
         <td class="time" style="font-size:12px;">{{comments.time}}</td>
         <td>
-          <div :class="`rounded-lg`" class="AnswerBubble pa-6 amber lighten-2">
+          <div :class="`rounded-lg`" class="AnswerBubble pa-6">
             <vue-markdown>{{comments.comment}}</vue-markdown>
           </div>
         </td>
@@ -59,13 +59,14 @@ export default {
   max-width: 40em;
   position: relative;
   display: inline-block;
+  background: rgb(215,206,207);
 }
 .AnswerBubble:after {
   content: "";
   position: absolute;
   border-style: solid;
   border-width: 11px 0 11px 14px;
-  border-color: transparent #ffd54f;
+  border-color: transparent rgb(215,206,207);
   display: block;
   width: 0;
   z-index: 1;
