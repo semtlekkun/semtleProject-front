@@ -10,7 +10,13 @@
         <v-form @submit="checkForm" novalidate="true">
           <v-row>
             <v-col>
-              <v-text-field color="primary" placeholder="활동 년도 (ex : 2016)" v-model="activeYear"></v-text-field>
+              <v-text-field
+                color="primary"
+                placeholder="활동 년도 (ex : 2016)"
+                v-model="activeYear"
+                @keypress="checkNumber"
+                @keyup="checkHan"
+              ></v-text-field>
             </v-col>
 
             <v-col>
@@ -20,10 +26,28 @@
 
           <v-row>
             <v-col>
-              <v-text-field color="primary" placeholder="학번 (ex : 20160450)" v-model="studentId"></v-text-field>
+              <v-text-field
+                color="primary"
+                placeholder="학번 (ex : 20160450)"
+                v-model="studentId"
+                @keypress="checkNumber"
+                @keyup="checkHan"
+              ></v-text-field>
             </v-col>
             <v-col>
               <v-select color="primary" v-model="Position" :items="PositionItems" label="직책"></v-select>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col>
+              <v-select
+                v-if="Position==='멘토'"
+                color="primary"
+                v-model="Subject"
+                :items="MentorSubject"
+                label="과목"
+              ></v-select>
             </v-col>
           </v-row>
 
@@ -64,11 +88,22 @@ export default {
     errorMsg: [],
 
     SemesterItems: ["1학기 (여름학기)", "2학기 (겨울학기)"],
-    PositionItems: ["멘토", "회장", "부회장"],
+    PositionItems: ["회장", "부회장", "멘토"],
+    MentorSubject: [
+      "C",
+      "C++",
+      "Python",
+      "Java",
+      "Linux",
+      "Computer Architecture",
+      "Data Structure",
+      "Web Programming",
+    ],
 
     activeYear: "",
-    Semester: "1학기 (여름학기)",
-    Position: "멘토",
+    Semester: "",
+    Position: "",
+    Subject: "",
     studentId: "",
     contents: "",
   }),
@@ -88,10 +123,25 @@ export default {
       if (this.contents === "")
         this.errorMsg.push("간단하게라도 내용을 적어주세요.");
 
-      if (!this.errorMsg.length) return true;
-      else this.dialog = true;
+      if (!this.errorMsg.length) {
+        if (this.Position !== "멘토") this.Subject = "";
+        return true;
+      } else this.dialog = true;
 
       e.preventDefault();
+    },
+
+    checkNumber(e) {
+      if (e.keyCode < 48 || e.keyCode > 57) {
+        e.returnValue = false;
+      }
+    },
+
+    checkHan(e) {
+      e = e || window.e;
+      var keyID = e.which ? e.which : e.keyCode;
+      if (keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39) return;
+      else e.target.value = e.target.value.replace(/[^0-9]/g, "");
     },
   },
 };
