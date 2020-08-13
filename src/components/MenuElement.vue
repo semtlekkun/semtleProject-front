@@ -9,6 +9,7 @@
           large
           v-bind="attrs"
           v-on="on"
+          @click="Attribute.method"
         >
         {{Attribute.Title}}
         </v-btn>
@@ -16,7 +17,7 @@
     </template>
     <v-list flat class="pa-0 ma-0 text-center">
       <v-list-item-group>
-        <router-link 
+        <router-link
           v-for="(item, index) in Attribute.Items" 
           :key="index" :to="item.url">
           <v-list-item @mouseover="()=>{

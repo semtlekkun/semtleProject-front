@@ -20,7 +20,27 @@
             :key="index"
             :Attribute="item"
             ref="args"
+          />          
+          <!-- 로그인시 메뉴
+          <div v-if="getLogin()">
+          <MenuElement
+            :functions = "functions"
+            v-for="(item, index) in AttributesLogIn"
+            :key="index"
+            :Attribute="item"
+            ref="args"
           />
+          </div>-->
+          <!-- 로그아웃시 메뉴
+          <div v-if="!getLogin()">
+          <MenuElement
+            :functions = "functions"
+            v-for="(item, index) in AttributesLogOut"
+            :key="index"
+            :Attribute="item"
+            ref="args"
+          />
+          </div>-->
 
           <div class="dummy2"></div>
         </div>
@@ -30,6 +50,8 @@
 
 <script>
 import MenuElement from "./MenuElement.vue";
+import {mapMutations} from 'vuex';
+import {mapGetters} from 'vuex';
 export default {
   components: {
     MenuElement,
@@ -39,20 +61,21 @@ export default {
       // 현재 스크롤 위치와 호버에 대한 제어를 두기 위한 변수
       controller: false,
       subMenu:false,
+      Attributes: null,
       functions:{
         menuOpen : this.menuOpen,
         menuClose : this.menuClose,
         subMenuOpen : this.subMenuOpen,
         subMenuClose : this.subMenuClose
       },
-      // 메뉴 버튼마다 들어갈 리스트 아이템과 버튼 제목
-      Attributes: [
+      // 로그아웃 시 들어갈 리스트 아이템과 버튼 제목
+      AttributesLogOut:[
         {
           Items: [],
           url: '/notice/list',
           Title: "공지사항",
+          method: ()=>{}
         },
-
         {
           Items: [
             { title: "목록", url:'/project/list' },
@@ -60,28 +83,89 @@ export default {
           ],
           url: '',
           Title: "프로젝트",
+          method: ()=>{}
         },
         {
           Items: [],
           url: '/management',
-          Title: "역대 간부"
+          Title: "역대 간부",
+          method: ()=>{}
         },
         {
           Items: [],
           url: '/qna/list',
           Title: "Q&A",
+          method: ()=>{}
         },
-
         {
           Items: [],
           url: '/login',
           Title: "로그인",
+          method: ()=>{}
         },
       ],
+      // 로그인 시 들어갈 리스트 아이템과 버튼 제목
+      AttributesLogIn:[
+        {
+          Items: [],
+          url: '/notice/list',
+          Title: "공지사항",
+          method: ()=>{}
+        },
+        {
+          Items: [
+            { title: "목록", url:'/project/list' },
+            { title: "공고", url: '/project/announce/list' },
+          ],
+          url: '',
+          Title: "프로젝트",
+          method: ()=>{}
+        },
+        {
+          Items: [],
+          url: '/management',
+          Title: "역대 간부",
+          method: ()=>{}
+        },
+        {
+          Items: [],
+          url: '/qna/list',
+          Title: "Q&A",
+          method: ()=>{}
+        },
+        {
+          Items: [],
+          url: '/mypage',
+          Title: "마이페이지",
+          method: ()=>{}
+        },
+        {
+          Items: [],
+          url: '',
+          Title: "로그아웃",
+          method: ()=>{this.setLogout()}
+        },
+      ]
     };
   },
   methods: {
-
+    ...mapGetters([
+      'getLogin'
+    ]),
+    ...mapMutations([
+      'setLogout'
+    ]),
+    isLogin(){
+      console.log("test")
+      if (this.getLogin()){
+        console.log("login success")
+        this.Attributes = this.AttributesLogIn
+      }
+      else {
+        console.log("login fail")
+        this.Attributes = this.AttributesLogOut
+      }
+    },
     subMenuOpen(){
       this.subMenu = true;
     },
@@ -126,6 +210,7 @@ export default {
   // 스크롤 시 수행되는 함수를 인스턴스 생성 시 호출
   created() {
     window.addEventListener("scroll", this.handleScroll);
+    this.isLogin();
   },
 
   // 사용한 함수는 인스턴스 소멸 시 제거

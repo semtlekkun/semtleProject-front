@@ -16,6 +16,8 @@ import AdminBtn from './components/AdminBtn.vue';
 import PCView from './views/PCView.vue';
 import MobileView from './views/MobileView.vue';
 import Intro from './views/Intro.vue';
+import {mapMutations} from 'vuex';
+
 
 export default {
   name: "App",
@@ -25,7 +27,11 @@ export default {
     if(sessionStorage.getItem("isIntro") === 'false'){
       this.isIntro = false
     }
-    
+  },
+  mounted(){
+    if(sessionStorage.getItem('token') !== null){
+      this.setLogin();
+    }
   },
   components: {
     TopBtn,
@@ -42,6 +48,9 @@ export default {
   }),
 
   methods:{
+    ...mapMutations([
+      'setLogin'
+    ]),
     switchScreen(){
       this.isIntro = false;
       sessionStorage.setItem("isIntro", this.isIntro)
