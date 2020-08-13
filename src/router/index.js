@@ -30,7 +30,7 @@ const routes = [
     props: true
   },
   {
-    path: '/qna',
+    path: '/qna/detail/:id',
     name: 'QnA',
     component: () => import('../views/QnA.vue')
   },
@@ -38,6 +38,11 @@ const routes = [
     path: '/qna/list',
     name: 'QnAList',
     component: () => import('../views/QnAList.vue')
+  },
+  {
+    path: '/qna/input',
+    name: 'QuestionInput',
+    component: () => import('../views/QuestionInput.vue')
   },
   {
     path: '/admin/notice',

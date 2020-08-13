@@ -1,16 +1,22 @@
 <template>
     <v-data-table
-        :headers="headers"
-        :items="contents"
+        :headers="getHeaders"
+        :items="getList"
         :items-per-page="perPage"
         class="elevation-1"
+        @click:row="rowClick"
     ></v-data-table>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
     export default {
+        computed:{
+            ...mapGetters(['getList', 'getHeaders'])
+        },
         props:{
-          perPage:Number
+            tableName:String,
+            perPage:Number
         },
         data () {
             return {
@@ -174,6 +180,14 @@
                 ],
             }
         },
+        methods:{
+            rowClick(row){
+                console.log(row)
+                if(this.tableName === 'qna'){
+                    this.$router.push({name:'QnA', params:{id:row.id}})
+                }
+            }
+        }
     }
 </script>
 

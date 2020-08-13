@@ -7,14 +7,14 @@
             <v-col cols="12" md="8" lg="8" xl="9">
                 <v-row class="text-right">
                     <v-col>
-                        <router-link :to="{name:'projectInput'}">
+                        <router-link :to="{name:'QuestionInput'}">
                             <v-btn rounded depressed class="customBtn">글쓰기</v-btn>
                         </router-link>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col>
-                        <Table :perPage="10"/>
+                        <Table :perPage="10" tableName="qna"/>
                     </v-col>
                 </v-row>
             </v-col>
@@ -25,7 +25,20 @@
 <script>
 import Table from '../components/Table.vue';
 import SubTitle from '../components/SubTitle.vue';
+import {mapMutations} from 'vuex';
+
     export default {
+        mounted(){
+            this.axios.get('http://49.50.166.64/api/question')
+            .then(res=>{
+                console.log(res)
+                if(res.status === 200){
+                    this.setList(res)
+                }
+            }).catch(err=>{
+                console.log(err)
+            })
+        },
         components:{
             Table,
             SubTitle
@@ -37,6 +50,9 @@ import SubTitle from '../components/SubTitle.vue';
                     contents:"질문 목록이다."
                 }
             }
+        },
+        methods:{
+            ...mapMutations(['setList'])
         }
     }
 </script>

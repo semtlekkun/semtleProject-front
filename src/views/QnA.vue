@@ -17,6 +17,46 @@ import CommentList from "../components/CommentList";
 import CommentForm from "../components/CommentForm";
 import Question from "../components/Question";
 export default {
+  mounted(){
+    let id = this.$route.params.id;
+    this.axios.get(`http://49.50.166.64/api/question/${id}`)
+    .then(res=>{
+      // console.log(res)
+      if(res.status === 200){
+        this.QuestionData = {
+          title: res.data.title,
+          question: res.data.contents,
+          writerName: res.data.writer,
+          time: res.data.date,
+          views: 365,
+          image: res.data.image
+        }
+
+        this.commentData.writerName = res.data.writer
+      }
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+
+
+    this.axios.get(`http://49.50.166.64/api/answer/${id}`)
+    .then(res=>{
+      console.log(res)
+      res.data.forEach(el=>{
+        let obj = {
+          name: el.writer,
+          comment: el.contents,
+          time: el.date,
+          id: el._id
+        }
+        this.commentData.comments.push(obj)
+      })
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  },
   components: {
     CommentList,
     CommentForm,
@@ -25,58 +65,23 @@ export default {
   data() {
     return {
       QuestionData: {
-        title: "첫번째 질문입니다 첫번째 질문입니다 !!",
-        question: "Lorem Ipsum is simply dummy text of the printing \n # and typesetting industry. \n **Lorem Ipsum has been the industry's**\n 8-)  standard dummy text ever since the 1500s, \n when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        writerName: "18 전하영",
-        time: "2020-07-21 01:01:33",
+        title: "",
+        question: "",
+        writerName: "",
+        time: "",
         views: 365,
-        image:
-          "https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg",
+        image: ""
       },
       commentData: {
-        writerName: "18 전하영",
+        writerName: "",
 
-        comments: [
-          {
-            name: "16 김남주",
-            comment: "답변 1답변 1답변 1답변 1",
-            time: "2020-07-21 01:01:33",
-          },
-          {
-            name: "17 김아무개",
-            comment: "답변 2",
-            time: "2020-07-21 01:01:33",
-          },
-          {
-            name: "18 전하영",
-            comment: "**마크다운** 적용 가능합니다",
-            time: "2020-07-21 01:01:33",
-          },
-          {
-            name: "19 이아무개",
-            comment: "답변 3",
-            time: "2020-07-21 01:01:33",
-          },
-          {
-            name: "20 정아무개",
-            comment: "답변 4",
-            time: "2020-07-21 01:01:33",
-          },
-          {
-            name: "18 썽씨연",
-            comment: "제이름은 썽씨연이 아닙니다",
-            time: "2020-07-21 01:01:33",
-          },
-          {
-            name: "18 강등아",
-            comment: "너는나의 다음타음베이비야 ",
-            time: "2020-07-21 01:01:33",
-          },
-          { name: "18 전하영", comment: "ㅎㅎ", time: "2020-07-21 01:01:33" },
-        ],
+        comments: [],
       },
-    };
+    }
   },
+  methods:{
+
+  }
 };
 </script>
 <style>

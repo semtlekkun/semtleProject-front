@@ -12,7 +12,7 @@
         </td>
         <td>
           <div :class="`rounded-lg`" class="QuestionBubble pa-6">
-            <vue-markdown>{{comments.comment}}</vue-markdown>
+            <VueMarkdown :source="comments.comment"></VueMarkdown>
           </div>
         </td>
         <td class="time" style="font-size:12px;">{{comments.time}}</td>
