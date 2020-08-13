@@ -39,7 +39,25 @@ export default {
   methods: {
     CheckForm(e) {
       if (this.Password && this.StudentNumber) {
-        return true;
+        this.axios.post('http://49.50.166.64/api/log/in',{
+          _id: this.StudentNumber,
+          pw: this.Password,
+        }).then((res) => {
+          if(res.status === 200){
+            const admin = res.data.admin;
+            const token = res.data.token;
+            sessionStorage.setItem("admin", admin);
+            sessionStorage.setItem("token", token);
+            this.error = "성공";
+          }
+          else{
+            this.error = "아이디 및 비밀번호 입력을 확인해주세요";
+          }
+          
+        }).catch(err=>{
+          console.log(err)
+          this.error = "통신에 문제가 생겼습니다. 다시 시도해주세요."
+        })
       }
       if (!this.Password || !this.StudentNumber) {
         this.error = "아이디 및 비밀번호 입력을 확인해주세요";
