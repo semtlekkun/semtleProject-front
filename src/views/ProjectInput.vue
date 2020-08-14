@@ -159,7 +159,7 @@ export default {
       members: [],
       memberNum: "",
       files: [],
-      errorMsg: "",
+      errorMsg: [],
       rules: [
         (value) =>
           !value ||
@@ -189,54 +189,68 @@ export default {
       if (this.memberNum === "") {
         alert("입력을 해주세요.");
       } else {
-        this.members.push(this.memberNum.toString());
-        this.memberNum = "";
+        if (this.memberNum.toString().length != 8) {
+          alert("학번을 제대로 입력해주세요");
+        } else {
+          this.members.push(this.memberNum.toString());
+          this.memberNum = "";
+        }
       }
     },
     delMember(member) {
       this.members = this.members.filter((el) => el !== member);
     },
     writeConents() {
-      if (this.projectTitle === "")
-        this.errorMsg = this.errorMsg +"제목을 입력해주세요.\n";
-      if (this.contents === "") this.errorMsg= this.errorMsg +"내용을 입력해주세요.\n";
+      this.errorMsg = [];
+
+      if (this.projectTitle === "") this.errorMsg.push("제목을 입력해주세요.");
+      if (this.contents === "") this.errorMsg.push("내용을 입력해주세요.");
       if (this.teamLeader === "")
-        this.errorMsg= this.errorMsg +"팀장의 학번을 입력해주세요.\n";
-      if (this.teamName === "") this.errorMsg= this.errorMsg +"팀 이름을 입력해주세요.\n";
+        this.errorMsg.push("팀장의 학번을 입력해주세요.");
+      if (this.teamName === "") this.errorMsg.push("팀 이름을 입력해주세요.");
+      if (this.teamLeader.toString().length != 8)
+        this.errorMsg.push("팀장의 학번을 제대로 입력해주세요.");
 
-      if (this.errorMsg !== "") return;
-      
-      var form = new FormData();
-      form.append("projectTitle", this.projectTitle);
-      form.append("students", this.members);
-      form.append("contents", this.contents);
-      form.append("link", this.link);
-      form.append("projectStartData", this.startDate);
-      form.append("projectEndDate", this.endDate);
-      form.append("projectTeamName", this.teamName);
-      form.append("teamLeaderCode", this.teamLeader);
-      form.append("projectImages", this.files);
+      // 에러가 있을 경우
+      if (this.errorMsg.length != 0) {
+        var message = "";
+        for (var idx = 0; idx < this.errorMsg.length; idx++) {
+          message = message + this.errorMsg[idx] + "\n";
+        }
+        alert(message);
+      } else {
+        var form = new FormData();
+        form.append("projectTitle", this.projectTitle);
+        form.append("students", this.members);
+        form.append("contents", this.contents);
+        form.append("link", this.link);
+        form.append("projectStartData", this.startDate);
+        form.append("projectEndDate", this.endDate);
+        form.append("projectTeamName", this.teamName);
+        form.append("teamLeaderCode", this.teamLeader);
+        form.append("projectImages", this.files);
 
-      for (var value of form.values()) {
-        console.log(value);
+        for (var value of form.values()) {
+          console.log(value);
+        }
+
+        let config = {
+          headers: {
+            token: sessionStorage.getItem("token"),
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json",
+          },
+        };
+
+        this.axios
+          .post(`http://49.50.166.64/api/pf/input`, form, config)
+          .then((res) => {
+            console.log(res.status);
+          })
+          .catch((err) => {
+            console.log(err.response);
+          });
       }
-
-      let config = {
-        headers: {
-          token: sessionStorage.getItem("token"),
-          "Content-Type": "multipart/form-data",
-          Accept: "application/json",
-        },
-      };
-
-      this.axios
-        .post(`http://49.50.166.64/api/pf/input`, form, config)
-        .then((res) => {
-          console.log(res.status);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
     },
   },
 };
