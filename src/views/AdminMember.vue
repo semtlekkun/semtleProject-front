@@ -21,7 +21,7 @@
                     inset
                     vertical
                 ></v-divider>
-                
+
                 <v-spacer></v-spacer>
 
                 <!-- 검색 -->
@@ -61,7 +61,8 @@
                                 type="number" 
                                 v-model="editedItem._id" 
                                 label="학번"
-                                :rules="idRule"
+                                :rules="[rules.required, rules.counter8]"
+                                :disabled = "controll ? false : true"
                             ></v-text-field>
                             </v-col>
                             <v-col cols="12">
@@ -70,13 +71,59 @@
                                 label="이름">
                             </v-text-field>
                             </v-col>
+                            <!--
                             <v-col cols="12">
                             <v-text-field 
                                 v-model="editedItem.phoneNum" 
                                 label="전화번호"
                                 type="">
                             </v-text-field>
+                            </v-col> -->
+
+                            <!-- 전화번호 입력값 테스트 -->
+                            <v-col cols="3">
+                            <v-text-field 
+                                v-model="phonenum[0]" 
+                                label="전화번호"
+                                type="number"
+                                :rules="[rules.counter3]"
+                                counter
+                                maxlength="3"
+                                >
+                            </v-text-field>
                             </v-col>
+
+                            <v-col cols="1">
+                                <p><br/>-</p>
+                            </v-col>
+
+                            <v-col cols="3">
+                            <v-text-field 
+                                v-model="phonenum[1]" 
+                                label="전화번호"
+                                type="number"
+                                :rules="[rules.counter4]"
+                                counter
+                                maxlength="4"
+                                 >
+                            </v-text-field>
+                            </v-col>
+
+                            <v-col cols="1">
+                                <p><br/>-</p>
+                            </v-col>
+
+                            <v-col cols="3">
+                            <v-text-field 
+                                v-model="phonenum[2]" 
+                                label="전화번호"
+                                type="number"
+                                :rules="[rules.counter4]"
+                                counter
+                                maxlength="4" >
+                            </v-text-field>
+                            </v-col>
+                            <!-- 전화번호 입력값 테스트 -->
                         </v-row>
                         </v-container>
                     </v-card-text>
@@ -90,8 +137,6 @@
                 </v-dialog>
                 </v-toolbar>
             </template>
-
-
 
             <!-- 수정, 이미지는 정렬 불가능 -->
             <!-- 수정기능 -->
@@ -157,16 +202,27 @@
         },
         data: () => ({
         //학번 입력값 확인
-        idRule: [
-            v => !!v || '입력값이 없습니다.',
-            v => (v.length === 8) || '학번은 8자리로 입력되어야 합니다.',
-        ],
+
         //이름 입력값 확인
-        //전화번호 입력값 확인
+        //입력값 확인
+        rules: {
+            required: value => !!value || '필수 입력사항.',
+            counter3: value => value.length <= 3 || '최대 3자리',
+            counter4: value => value.length <= 4 || '최대 4자리',
+            counter8: value => value.length === 8 || '학번은 8자리로 입력되어야 합니다.'
+        },
+
         search:'',
         dialog: false,
         update : "2020.07.29",
         token :'',
+        //데이터 추가 제어 변수
+        canAdd : true,
+
+        //전화번호 테스트
+        phonenum : ['', '', ''],
+        //학번 입력여부 제어 변수
+        controll : true,
 
         //여기에 토큰 저장해서 넘김.
         head : '',
@@ -246,7 +302,8 @@
            }
         },
 
-        //get
+        //-----통신 시작
+        //가져오기,get
         getData(){
             let config = {
                 headers : {
@@ -254,7 +311,7 @@
                 }
             }
 
-            this.axios.get("http://49.50.166.64/api/student/list/1", config)
+            this.axios.get("http://49.50.166.64/api/student/list", config)
             .then((res) => {
                 console.log("성공");
                 //console.log(res);
@@ -289,9 +346,9 @@
                 console.log(err);
             })
         },
-
         //추가 post
         addData(adddata){
+            console.log(adddata.phoneNum)
             let config = {
                 headers : {
                     "token" : sessionStorage.getItem("token")
@@ -306,10 +363,15 @@
             .then((res) => {
                 console.log(res);
                 console.log("post 성공");
-
+                this.canAdd = true;
+                //res.status400 -> 중복 
             })
             .catch((err) => {
                 console.log(err);
+                console.log("에러코드 : " + err.response.status);
+                console.log("중복된 학번");
+                this.canAdd = false;
+                this.student.pop();
             })
         },
         //삭제 delete
@@ -330,15 +392,11 @@
                 console.log(err);
             })
         },
-        //-----
-
-        //보낼값, config
-        //통신 끝
+        //-----통신 끝
 
         //수정 -> 해당 회원 삭제시 실제로 삭제가 이뤄지는 부분
         del(index) {
             //디비로 삭제 요청
-
             this.delDate(this.student[index]._id);
 
             //배열에서 삭제
@@ -347,11 +405,23 @@
 
         //Action 에서 수정하는 부분
         editItem (item) {
+            console.log("수정시작")
+            this.controll = false;
             this.editedIndex = this.student.indexOf(item)
 
             //editedItem 에 기본 값으로 ''을 주고
             //assign 함수로 해당 위치 값을들 가져와서 assign으로 복사
             this.editedItem = Object.assign({}, item)
+
+            //수정 버튼을 눌렀을때의 위치에서 전화 번호 값을 가지는 부분
+            this.editedItem.phoneNum
+
+            //전화번호를 '-' 로 잘라서 각 배열에 저장.
+            this.phonenum = this.editedItem.phoneNum.split('-');
+
+            //console.log("원본 데이터 : " + this.editedItem.phoneNum);
+            //console.log("문자열 자른 결과 : " + this.phonenum);
+
             this.dialog = true
         },
 
@@ -363,6 +433,12 @@
 
         //수정, 삭제 할때 뜨는 창에서 닫는 부분
         close () {
+            if(!this.controll){
+                this.controll = !this.controll;
+            }
+
+            //닫을때 마다 전화번호값 초기화
+            this.phonenum = ['', '', ''];
             this.dialog = false
             this.$nextTick(() => {
             this.editedItem = Object.assign({}, this.defaultItem)
@@ -371,25 +447,37 @@
         },
 
         //수정, 삭제 할때 뜨는 창에서 저장하는 부분
-
         //여기서 put, delete ㄱㄱ
         save () {
-            if (this.editedIndex > -1) {
+
+            //입력값 확인
+            if(this.phonenum[0].length != 3 || this.phonenum[1].length != 4 || this.phonenum[2].length != 4 || this.editedItem.name.length === null || this.editedItem._id.length != 8) {
+                    alert("입력폼 형식 오류");
+                    console.log("입력폼 형식 오류")
+            }
+
+            //입력값이 확인된 경우
+            else {
+                //수정하는경우
+                if (this.editedIndex > -1) {
                 Object.assign(this.student[this.editedIndex], this.editedItem)
-                if(this.student[this.editedIndex]._id.length <= 0) {
-                    console.log("학번이 없음.");
-                    return;
-                }
+                this.student[this.editedIndex].phoneNum = this.phonenum[0] + "-" + this.phonenum[1] + "-" + this.phonenum[2]
                 //put
                 this.modiDate(this.student[this.editedIndex]);
-                //console.log("수정");
-            } 
-            else {
-                this.student.push(this.editedItem)
-                const index = this.student.indexOf(this.editedItem)
-                //post
-                this.addData(this.student[index]);
-                //console.log("추가");
+                alert("수정완료");
+                console.log("수정완료");
+                }
+                
+                //추가하는 경우
+                else {
+                    this.editedItem.phoneNum = this.phonenum[0] + "-" + this.phonenum[1] + "-" + this.phonenum[2];
+                    this.student.push(this.editedItem)
+                    const index = this.student.indexOf(this.editedItem)
+                    //post
+                    this.addData(this.student[index]);
+                    alert("추가완료");
+                    console.log("추가완료");
+                }
             }
             this.close()
         },
