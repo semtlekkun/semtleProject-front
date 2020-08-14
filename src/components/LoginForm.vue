@@ -50,10 +50,8 @@ export default {
             const token = res.data.token;
             sessionStorage.setItem("admin", admin);
             sessionStorage.setItem("token", token);
-            this.setLogin()
-            // this.error = "성공";
-            // location.href="/";
-            this.$router.push('/')
+            this.setLogin() // 로그인 함수
+            this.$router.push('/') // 메인페이지로 이동
           }
           else{
             this.error = "아이디 및 비밀번호 입력을 확인해주세요";

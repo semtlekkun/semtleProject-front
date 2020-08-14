@@ -21,26 +21,6 @@
             :Attribute="item"
             ref="args"
           />          
-          <!-- 로그인시 메뉴
-          <div v-if="getLogin()">
-          <MenuElement
-            :functions = "functions"
-            v-for="(item, index) in AttributesLogIn"
-            :key="index"
-            :Attribute="item"
-            ref="args"
-          />
-          </div>-->
-          <!-- 로그아웃시 메뉴
-          <div v-if="!getLogin()">
-          <MenuElement
-            :functions = "functions"
-            v-for="(item, index) in AttributesLogOut"
-            :key="index"
-            :Attribute="item"
-            ref="args"
-          />
-          </div>-->
 
           <div class="dummy2"></div>
         </div>
@@ -155,15 +135,15 @@ export default {
     ...mapMutations([
       'setLogout'
     ]),
+    // 로그인 됐는 지 확인하는 함수
     isLogin(){
-      console.log("test")
-      if (this.getLogin()){
-        console.log("login success")
-        this.Attributes = this.AttributesLogIn
+      if (this.getLogin()){ // 로그인일 때
+        // console.log("login success")
+        this.Attributes = this.AttributesLogIn // 로그인 메뉴 받음
       }
-      else {
-        console.log("login fail")
-        this.Attributes = this.AttributesLogOut
+      else { // 로그아웃일 때
+        // console.log("login fail")
+        this.Attributes = this.AttributesLogOut // 로그아웃 메뉴 받음
       }
     },
     subMenuOpen(){

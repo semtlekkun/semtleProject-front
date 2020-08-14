@@ -24,7 +24,7 @@
     >
         <v-list-item>
     
-            <v-list-item-content> <!-- 로고 크기 줄여야함 -->
+            <v-list-item-content>
                 <v-img class="mx-auto my-4" 
                 :max-height="imgSize" 
                 :max-width="imgSize" 
@@ -63,7 +63,7 @@
                 </v-list-item>
             </router-link>
             
-            <div v-if="getLogin()">
+            <div v-if="getLogin()"> <!-- 로그인일 때 메뉴 -->
             <router-link
             v-for="item in mainItemsLogIn"
             :key="item.Title" :to="item.url">
@@ -76,7 +76,7 @@
             </router-link>
             </div>
 
-            <div v-if="!getLogin()">
+            <div v-if="!getLogin()"> <!-- 로그아웃일 때 메뉴 -->
             <router-link
             v-for="item in mainItemsLogOut"
             :key="item.Title" :to="item.url">
@@ -112,15 +112,6 @@
             </v-col>
         </v-row>
         
-        <!--
-        <v-snackbar
-            v-model="issnackBar"
-            top
-            :timeout="timeout">
-            로그아웃 되었습니다.
-        </v-snackbar>
-        -->
-
     </v-container>
   </v-card>
 </template>
@@ -190,12 +181,7 @@ import {mapGetters} from 'vuex'
                     url: '',
                     Title: "로그아웃",
                     method: ()=>{
-                        this.setLogout()
-                        // this.setLogin()
-                        // sessionStorage.removeItem("token")
-                        // sessionStorage.removeItem("admin")
-                        // this.$router.go()
-                        // this.issnackBar = true;                    
+                        this.setLogout()                 
                     }
                 },
             ]
