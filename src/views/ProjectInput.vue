@@ -14,7 +14,12 @@
 
         <v-row>
           <v-col cols="6">
-            <v-text-field label="Team Leader" v-model="teamLeader" />
+            <v-text-field
+              label="Team Leader"
+              v-model="teamLeader"
+              @keypress="checkNumber"
+              @keyup="checkHan"
+            />
           </v-col>
           <v-col cols="6">
             <v-text-field label="Team Name" v-model="teamName" />
@@ -65,7 +70,12 @@
         </v-row>
         <v-row class="align-center">
           <v-col cols="9">
-            <v-text-field v-model.number="memberNum" label="Team Member" />
+            <v-text-field
+              @keypress="checkNumber"
+              @keyup="checkHan"
+              v-model.number="memberNum"
+              label="Team Member"
+            />
           </v-col>
           <v-col cols="3">
             <v-btn @click="addMember" lage color="primary" block>Add</v-btn>
@@ -149,6 +159,7 @@ export default {
       members: [],
       memberNum: "",
       files: [],
+      errorMsg: "",
       rules: [
         (value) =>
           !value ||
@@ -163,14 +174,38 @@ export default {
     };
   },
   methods: {
+    checkNumber(e) {
+      if (e.keyCode < 48 || e.keyCode > 57) {
+        e.returnValue = false;
+      }
+    },
+    checkHan(e) {
+      e = e || window.e;
+      var keyID = e.which ? e.which : e.keyCode;
+      if (keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39) return;
+      else e.target.value = e.target.value.replace(/[^0-9]/g, "");
+    },
     addMember() {
-      this.members.push(this.memberNum);
-      this.memberNum = "";
+      if (this.memberNum === "") {
+        alert("입력을 해주세요.");
+      } else {
+        this.members.push(this.memberNum.toString());
+        this.memberNum = "";
+      }
     },
     delMember(member) {
       this.members = this.members.filter((el) => el !== member);
     },
     writeConents() {
+      if (this.projectTitle === "")
+        this.errorMsg = this.errorMsg +"제목을 입력해주세요.\n";
+      if (this.contents === "") this.errorMsg= this.errorMsg +"내용을 입력해주세요.\n";
+      if (this.teamLeader === "")
+        this.errorMsg= this.errorMsg +"팀장의 학번을 입력해주세요.\n";
+      if (this.teamName === "") this.errorMsg= this.errorMsg +"팀 이름을 입력해주세요.\n";
+
+      if (this.errorMsg !== "") return;
+      
       var form = new FormData();
       form.append("projectTitle", this.projectTitle);
       form.append("students", this.members);
@@ -186,19 +221,21 @@ export default {
         console.log(value);
       }
 
+      let config = {
+        headers: {
+          token: sessionStorage.getItem("token"),
+          "Content-Type": "multipart/form-data",
+          Accept: "application/json",
+        },
+      };
+
       this.axios
-        .post(
-          `http://49.50.166.64/api/pf/input`,
-          { form },
-          {
-            headers: sessionStorage.getItem("token"),
-          }
-        )
+        .post(`http://49.50.166.64/api/pf/input`, form, config)
         .then((res) => {
-          console.log(res);
+          console.log(res.status);
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response);
         });
     },
   },
