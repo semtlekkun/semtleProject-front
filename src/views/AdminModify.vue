@@ -2,11 +2,21 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-data-table :headers="headers" :items="mentors" class="elevation-1">
+        <v-data-table :headers="headers" :items="mentors" :search="search" class="elevation-1">
           <template v-slot:top>
             <v-toolbar flat color="white">
               <v-toolbar-title>역대 간부 관리</v-toolbar-title>
               <v-divider class="mx-4" inset vertical></v-divider>
+              <v-spacer></v-spacer>
+              <v-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search"
+                single-line
+                hide-details
+                clearable
+              ></v-text-field>
+
               <v-spacer></v-spacer>
 
               <v-dialog v-model="dialog" width="3000px">
@@ -22,7 +32,12 @@
                     <v-container>
                       <v-row>
                         <v-col cols="12" sm="6" md="4">
-                          <v-text-field v-model="editedItem.studentCode" label="학번"></v-text-field>
+                          <v-text-field
+                            v-model="editedItem.studentCode"
+                            label="학번"
+                            @keypress="checkNumber"
+                            @keyup="checkHan"
+                          ></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
                           <v-select v-model="editedItem.position" :items="positionItems" label="직책"></v-select>
@@ -36,7 +51,12 @@
                           ></v-select>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
-                          <v-text-field v-model="editedItem.activeYear" label="활동년도"></v-text-field>
+                          <v-text-field
+                            v-model="editedItem.activeYear"
+                            label="활동년도"
+                            @keypress="checkNumber"
+                            @keyup="checkHan"
+                          ></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
                           <v-select v-model="editedItem.season" :items="seasonItems" label="활동학기"></v-select>
@@ -72,6 +92,7 @@
 <script>
 export default {
   data: () => ({
+    search: "",
     dialog: false,
     headers: [
       { text: "이름", value: "name", sortable: false, align: "start" },
@@ -93,6 +114,7 @@ export default {
       activeYear: "",
       season: "",
       contents: "",
+      _id: "",
     },
 
     defaultItem: {
@@ -140,26 +162,32 @@ export default {
     initialize() {
       // axios 로 데이터 받아와서 this.mentors 데이터 배열에 삽입 (+)
 
-      // this.axios.get("http://49.50.166.64/api/management/list");
+      this.axios.get("http://49.50.166.64/api/management/list").then((res) => {
+        console.log(res);
 
-      this.mentors = [
-        {
-          name: "박건웅",
-          studentCode: "20160450",
-          position: "멘토",
-          language: "C++",
-          activeYear: "2016",
-          season: "1학기 (여름학기)",
-        },
-        {
-          name: "전하영",
-          studentCode: "20181061",
-          position: "회장",
-          language: "",
-          activeYear: "2018",
-          season: "2학기 (겨울학기)",
-        },
-      ];
+        for (let idx = 0; idx < res.data.management.length; ++idx) {
+          var tempObj = {
+            name: "",
+            studentCode: "",
+            position: "",
+            language: "",
+            activeYear: "",
+            season: "",
+            contents: "",
+            _id: "",
+          };
+          tempObj.name = res.data.management[idx].Info[0].name;
+          tempObj.studentCode = res.data.management[idx].studentCode;
+          tempObj.position = res.data.management[idx].position;
+          tempObj.language = res.data.management[idx].language;
+          tempObj.activeYear = res.data.management[idx].activeYear;
+          tempObj.season = res.data.management[idx].season;
+          tempObj.contents = res.data.management[idx].contents;
+          tempObj._id = res.data.management[idx]._id;
+
+          this.mentors.push(tempObj);
+        }
+      });
     },
 
     editItem(item) {
@@ -169,11 +197,18 @@ export default {
     },
 
     deleteItem(item) {
-      const index = this.mentors.indexOf(item);
-
       if (confirm("정말 지우시겠습니까?")) {
-        this.mentors.splice(index, 1);
         // 여기 DELETE 비동기 함수 작성
+
+        this.axios
+          .delete("http://49.50.166.64/api/management/delete", {
+            headers: { token: sessionStorage.getItem("token") },
+            data: { _id: item._id },
+          })
+          .then((res) => {
+            if (res.status === 200) alert("성공적으로 삭제!");
+            this.$router.go();
+          });
       }
     },
 
@@ -188,17 +223,49 @@ export default {
     save() {
       // 기존 간부 수정
       if (this.editedIndex > -1) {
-        Object.assign(this.mentors[this.editedIndex], this.editedItem);
         // 여기 PUT 비동기 함수 작성
+        this.modifyMentor();
       }
       // 새로 간부 추가
       else {
-        this.sendForm();
+        this.addMentor();
       }
     },
 
+    modifyMentor() {
+      let sendObj = {
+        activeYear: this.editedItem.activeYear,
+        season: this.editedItem.season,
+        position: this.editedItem.position,
+        language: this.editedItem.language,
+        studentCode: this.editedItem.studentCode,
+        contents: this.editedItem.contents,
+        _id: this.editedItem._id,
+      };
+
+      console.log(sendObj);
+
+      let config = {
+        headers: { token: sessionStorage.getItem("token") },
+      };
+
+      this.axios
+        .put("http://49.50.166.64/api/management/update", sendObj, config)
+        .then((res) => {
+          if (res.status === 200) {
+            alert("수정 성공!");
+            this.$router.go();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      this.close();
+    },
+
     // 여기 POST 비동기 함수 작성
-    sendForm() {
+    addMentor() {
       this.errorMsg = [];
 
       if (this.editedItem.studentCode.length != 8)
@@ -232,8 +299,6 @@ export default {
       }
       // 예외처리에 걸리지 않을 경우 -> 데이터 전송 후 닫기
       else {
-        this.mentors.push(this.editedItem);
-
         let sendObj = {
           activeYear: this.editedItem.activeYear,
           season: this.editedItem.season,
@@ -259,6 +324,7 @@ export default {
           .then((res) => {
             if (res.status === 200) {
               alert("등록 성공!");
+              this.$router.go();
             } else if (res.status === 400) {
               alert("유효하지 않은 학생입니다.");
             } else if (res.status === 401) {
@@ -273,6 +339,19 @@ export default {
 
         this.close();
       }
+    },
+
+    checkNumber(e) {
+      if (e.keyCode < 48 || e.keyCode > 57) {
+        e.returnValue = false;
+      }
+    },
+
+    checkHan(e) {
+      e = e || window.e;
+      var keyID = e.which ? e.which : e.keyCode;
+      if (keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39) return;
+      else e.target.value = e.target.value.replace(/[^0-9]/g, "");
     },
   },
 };
