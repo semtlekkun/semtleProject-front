@@ -151,7 +151,6 @@ export default {
           }
         )
         .then((response) => {
-          console.log("a");
           if (response.status === 200) {
             console.log(response.data);
             alert("성공");
