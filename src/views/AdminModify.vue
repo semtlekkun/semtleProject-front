@@ -139,6 +139,9 @@ export default {
   methods: {
     initialize() {
       // axios 로 데이터 받아와서 this.mentors 데이터 배열에 삽입 (+)
+
+      // this.axios.get("http://49.50.166.64/api/management/list");
+
       this.mentors = [
         {
           name: "박건웅",
@@ -240,6 +243,8 @@ export default {
           contents: this.editedItem.contents,
         };
 
+        console.log(sendObj);
+
         if (this.editedItem.position !== "멘토") {
           sendObj.Subject = "";
         }
@@ -254,8 +259,12 @@ export default {
           .then((res) => {
             if (res.status === 200) {
               alert("등록 성공!");
-            } else {
-              alert("실패!");
+            } else if (res.status === 400) {
+              alert("유효하지 않은 학생입니다.");
+            } else if (res.status === 401) {
+              alert("권한이 없습니다.");
+            } else if (res.status === 500) {
+              alert("서버에 문제가 있습니다.");
             }
           })
           .catch((err) => {
