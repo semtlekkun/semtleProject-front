@@ -5,22 +5,22 @@
         <v-data-table :headers="headers" :items="mentors" class="elevation-1">
           <template v-slot:top>
             <v-toolbar flat color="white">
-              <v-toolbar-title>역대 간부 수정</v-toolbar-title>
+              <v-toolbar-title>역대 간부 관리</v-toolbar-title>
               <v-divider class="mx-4" inset vertical></v-divider>
               <v-spacer></v-spacer>
 
               <v-dialog v-model="dialog" width="3000px">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">새로 등록</v-btn>
+                </template>
                 <v-card>
                   <v-card-title>
-                    <span class="headline">수정</span>
+                    <span class="headline">{{formTitle}}</span>
                   </v-card-title>
 
                   <v-card-text>
                     <v-container>
                       <v-row>
-                        <v-col cols="12" sm="6" md="4">
-                          <v-text-field v-model="editedItem.name" label="이름"></v-text-field>
-                        </v-col>
                         <v-col cols="12" sm="6" md="4">
                           <v-text-field v-model="editedItem.studentCode" label="학번"></v-text-field>
                         </v-col>
@@ -74,12 +74,7 @@ export default {
   data: () => ({
     dialog: false,
     headers: [
-      {
-        text: "이름",
-        align: "start",
-        sortable: true,
-        value: "name",
-      },
+      { text: "이름", value: "name", sortable: false, align: "start" },
       { text: "학번", value: "studentCode", sortable: false },
       { text: "직책", value: "position", sortable: false },
       { text: "과목", value: "language", sortable: false },
@@ -92,20 +87,20 @@ export default {
     editedIndex: -1,
 
     editedItem: {
-      name: "",
-      studentCode: 0,
+      studentCode: "",
       language: "",
-      activeYear: 0,
-      season: 0,
+      position: "",
+      activeYear: "",
+      season: "",
       contents: "",
     },
 
     defaultItem: {
-      name: "",
-      studentCode: 0,
+      studentCode: "",
       language: "",
-      activeYear: 0,
-      season: 0,
+      position: "",
+      activeYear: "",
+      season: "",
       contents: "",
     },
 
@@ -121,7 +116,15 @@ export default {
       "Web Programming",
     ],
     seasonItems: ["1학기 (여름학기)", "2학기 (겨울학기)"],
+
+    errorMsg: [],
   }),
+
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1 ? "새로 등록" : "수정";
+    },
+  },
 
   watch: {
     dialog(val) {
@@ -139,18 +142,18 @@ export default {
       this.mentors = [
         {
           name: "박건웅",
-          studentCode: 20160450,
+          studentCode: "20160450",
           position: "멘토",
           language: "C++",
-          activeYear: 2016,
+          activeYear: "2016",
           season: "1학기 (여름학기)",
         },
         {
           name: "전하영",
-          studentCode: 20181061,
+          studentCode: "20181061",
           position: "회장",
           language: "",
-          activeYear: 2018,
+          activeYear: "2018",
           season: "2학기 (겨울학기)",
         },
       ];
@@ -175,13 +178,92 @@ export default {
       this.dialog = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
       });
     },
 
     save() {
-      Object.assign(this.mentors[this.editedIndex], this.editedItem);
-      // 여기 PUT 비동기 함수 작성
-      this.close();
+      // 기존 간부 수정
+      if (this.editedIndex > -1) {
+        Object.assign(this.mentors[this.editedIndex], this.editedItem);
+        // 여기 PUT 비동기 함수 작성
+      }
+      // 새로 간부 추가
+      else {
+        this.sendForm();
+      }
+    },
+
+    // 여기 POST 비동기 함수 작성
+    sendForm() {
+      this.errorMsg = [];
+
+      if (this.editedItem.studentCode.length != 8)
+        this.errorMsg.push("학번을 정확하게 입력해주세요.");
+
+      if (this.editedItem.position === "")
+        this.errorMsg.push("직책을 선택해주세요.");
+
+      if (this.editedItem.activeYear.length != 4)
+        this.errorMsg.push("활동 년도를 정확하게 입력해주세요.");
+
+      if (this.editedItem.season === "")
+        this.errorMsg.push("활동한 학기를 선택해주세요.");
+
+      if (this.editedItem.contents === "")
+        this.errorMsg.push("간단하게라도 내용을 적어주세요.");
+
+      // 예외처리에 걸린 경우 -> 알람 띄우고 다시 폼 입력
+      if (this.errorMsg.length !== 0) {
+        let errString = "";
+        for (let idx = 0; idx < this.errorMsg.length; ++idx) {
+          errString = errString.concat(this.errorMsg[idx]);
+
+          if (idx === this.errorMsg.length - 1) {
+            break;
+          }
+          errString = errString.concat("\n");
+        }
+
+        alert(errString);
+      }
+      // 예외처리에 걸리지 않을 경우 -> 데이터 전송 후 닫기
+      else {
+        this.mentors.push(this.editedItem);
+
+        let sendObj = {
+          activeYear: this.editedItem.activeYear,
+          season: this.editedItem.season,
+          position: this.editedItem.position,
+          language: this.editedItem.language,
+          studentCode: this.editedItem.studentCode,
+          contents: this.editedItem.contents,
+        };
+
+        if (this.editedItem.position !== "멘토") {
+          sendObj.Subject = "";
+        }
+
+        // 관리자임을 알 수 있도록 헤더 추가
+        let config = {
+          headers: { token: sessionStorage.getItem("token") },
+        };
+
+        this.axios
+          .post("http://49.50.166.64/api/management/input", sendObj, config)
+          .then((res) => {
+            if (res.status === 200) {
+              alert("등록 성공!");
+            } else {
+              alert("실패!");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        this.close();
+      }
     },
   },
 };
