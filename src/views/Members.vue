@@ -101,6 +101,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -115,10 +116,11 @@ export default {
   },
 
   mounted() {
-    console.log("ㄹㄹㄹ");
-    this.axios
+    console.log("111");
+    axios
       .get("http://49.50.166.64/api/management/list")
       .then((res) => {
+        console.log("222");
         console.log(res);
         this.season = res.season;
         this.studentCode = res.studentCode;
@@ -128,6 +130,7 @@ export default {
         this.managementList = res.managementList;
       })
       .catch((error) => {
+        console.log("333");
         console.log(error);
       });
   },
