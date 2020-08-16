@@ -1,12 +1,5 @@
 <template>
   <v-container>
-    <!-- 작성자 정보 표시 (임시) -->
-    <v-row class="mt-5">
-      <v-col cols="12" md="3" offset-lg="2" lg="2">
-        작성자 : {{writerId}}
-      </v-col>
-    </v-row>
-
     <!-- 제목 -->
     <v-row class="mt-5 justify-center">
       <v-col cols="12" md="3" lg="2">
@@ -49,38 +42,13 @@
       </v-col>
 
       <v-col cols="12" md="9" lg="6">
-        <input ref="imageInput" accept="image/*" type="file" hidden @change="onChangeImages">
-        <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
-      </v-col>
-    </v-row>
-
-    <!-- 이미지 미리보기 -->
-    <v-row>
-      <v-col cols="12" offset-md="3" md="9" offset-lg="4" lg="6">
-        <v-card
-          height="400"
-          align="center"
-          color="grey lighten-3"
+        <v-file-input
+        label="이미지 첨부"
+        accept="image/*"
+        prepend-icon="mdi-camera"
+        v-model="imageUrl"
         >
-          <div v-if="!this.imageUrl">
-            <p align-center><br/><br/><br/><br/><br/><br/><br/>[ 미리보기 ] </p>
-              <!-- 미리보기 화면 -->
-          </div>
-          <div v-else>
-            <br/>
-
-            <v-img
-              :src="imageUrl"
-              width="400"
-              height="300"
-            >
-            </v-img>
-            <v-btn color="error"
-            @click="onClickDel">
-              X
-            </v-btn>
-          </div>
-        </v-card>
+        </v-file-input>
       </v-col>
     </v-row>
 
@@ -130,13 +98,6 @@
     data: () => ({
       //이미지 주소 저장
       imageUrl: null,
-      imageName : "",
-      imageSize : "",
-      //작성자
-      writerId: "00 testID",
-
-      //작성일 정보
-      dateInfo: "0000년 00월 00일 00시 00분",
       
       //제목
       title: "",
@@ -162,34 +123,37 @@
     }),
 
     methods:{
-
-      //-----------------------
-      //이미지 관련
-      onClickImageUpload() {
-            this.$refs.imageInput.click();
-      },
-
-      onChangeImages(e) {
-          const file = e.target.files[0];
-          this.imageUrl = URL.createObjectURL(file);
-      },
-
-      onClickDel() {
-        this.imageUrl = '';
-      },
-      //-----------------------
-
-      //날짜 정보 반환
-      getDateInfo(){
-          let date = new Date();
-          this.dateInfo = 
-          date.getFullYear() + '년 ' +
-          date.getMonth() + '월 ' +
-          date.getDay() + '일 ' +
-          date.getHours() + '시 ' +
-          date.getMinutes() + '분';
-          
-          return this.dateInfo;
+      //확인 버튼에서 넘어오는걸로 수정
+      CheckForm() {
+        let form = new FormData();
+        form.append("title",this.title)
+        form.append("contents",this.contents)
+        form.append("image",this.imageUrl)
+        this.axios
+          .post(
+            "http://49.50.166.64/api/notice/input",form,
+            {
+              headers: {
+                token: sessionStorage.getItem("token"),
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+          )
+          .then((response) => {
+            if(response.status === 200) {
+              console.log(response.data);
+              alert("성공");
+              location.href = "/";
+            }
+          })
+          .catch((error) => {
+            if(sessionStorage.getItem("token") === null) {
+              alert("로그인후 작성해 주세요");
+              location.href = "/login";
+            }
+            console.log(error);
+          });
+          //e.preventDefault(); 
       },
 
       //제목이나 내용중에서 누락된 부분이 있는지 체크
@@ -211,16 +175,17 @@
         else {
           this.text = '공지사항 작성완료.';
           this.color ="blue";
+          this.CheckForm();
         }
       },
 
       //작성이 되지 않은 영역으로 이동
       moveView() {
         if(this.item === 'title_') {
-          window.scrollBy(0,-650);
+          window.scrollBy(0,-200);
         }
         else {
-          window.scrollBy(0,-500);
+          window.scrollBy(0,-50);
         }
       }
     },
