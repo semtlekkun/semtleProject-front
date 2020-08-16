@@ -12,6 +12,9 @@
                         <h2>{{contentsObj.title}}</h2>
                     </v-col>
                 </v-row>
+
+                <v-divider></v-divider>
+
                 <v-row>
                     <v-col cols="3" sm="2" class="customTable text-center">작성자</v-col>
                     <v-col cols="9" sm="2" class="text-center">taese0ng</v-col>
@@ -22,7 +25,9 @@
                     <v-col cols="3" sm="2" class="customTable text-center">view</v-col>
                     <v-col cols="9" sm="2" class="text-center">00</v-col>
                 </v-row>
-
+                
+                <v-divider></v-divider>
+                
                 <v-row>
                     <v-col
                     cols="3"
@@ -51,6 +56,8 @@
                     </v-col>
                 </v-row>
 
+                <v-divider></v-divider>
+
                 <v-row>
                     <v-col
                     cols="12"
@@ -65,6 +72,8 @@
                         </v-card-text>
                     </v-col>
                 </v-row>
+
+                <v-divider></v-divider>
 
                 <v-row>
                     <v-col
@@ -131,7 +140,13 @@
 <style scoped>
 
 .customTable{
+    /*기존
     background: rgb(56, 82, 103);
     color: white
+    */
+
+    background: #50829b;
+    color: white;
+    
 }
 </style>
