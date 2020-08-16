@@ -5,7 +5,14 @@
           <v-col cols="12">
             <v-card>
               <v-alert outlined color="#226db2">
-                <v-card-title>{{title}}</v-card-title>
+                <v-row class="py-0">
+                  <v-col cols="10" class="py-0">
+                    <v-card-title>{{title}}</v-card-title>
+                  </v-col>
+                  <v-col cols="2">
+                    <v-btn v-show="admin" color="error" @click="deleteAnnounce">삭제</v-btn>
+                  </v-col>
+                </v-row>
                 <v-divider class="mb-2"></v-divider>
                 <ul class="announceInfo">
                   <li>
@@ -45,8 +52,9 @@ import VueMarkdown from "vue-markdown";
 
 export default {
   created(){
-    const projectAnnounceID = this.$route.params.id
-    this.axios.get(`http://49.50.166.64/api/recruit/${projectAnnounceID}`)
+    this.admin = JSON.parse(sessionStorage.getItem("admin"));
+    this.projectAnnounceID = this.$route.params.id
+    this.axios.get(`http://49.50.166.64/api/recruit/${this.projectAnnounceID}`)
     .then(res=>{
       // console.log(res)
       if(res.status === 200){
@@ -64,6 +72,8 @@ export default {
     })
   },
   data: () => ({
+    admin:false,
+    projectAnnounceID:"",
     title: "",
     writer: "",
     date: "",
@@ -75,6 +85,20 @@ export default {
 
   components: {
     VueMarkdown
+  },
+  methods:{
+    deleteAnnounce(){
+      this.axios.delete(`http://49.50.166.64/api/recruit/${this.projectAnnounceID}`,{
+        headers:{
+          'token': sessionStorage.getItem('token')
+        }
+      })
+      .then(res=>{
+        if(res.status === 200){
+          this.$router.push({name:'projectAnnounceList'})
+        }
+      })
+    }
   }
 };
 </script>

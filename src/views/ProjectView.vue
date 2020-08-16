@@ -8,15 +8,19 @@
                 <v-row>
                     <v-col cols="12" class="customTable text-centerZ">
                         <v-row class="pl-5">
-                            <h2 cols="9">{{title}}</h2>
-
-                            <v-col cols="3" class="py-0">
+                            <v-col cols="6">
+                                <h2>{{title}}</h2>
+                            </v-col>
+                            <v-col cols="3" class="py-0 text-right">
                                 <v-btn
                                     :href="link"
                                     target="_blank"
                                     rounded="rounded"
                                     depressed="depressed"
                                     class="customBtn">Github</v-btn>
+                            </v-col>
+                            <v-col cols="3" class="py-0 text-right">
+                                <v-btn v-show="admin" color="error" @click="deleteProject">삭제</v-btn>
                             </v-col>
                         </v-row>
 
@@ -100,8 +104,9 @@
 
     export default {
         created() {
-            const projectID = this.$route.params.id
-            this.axios.get(`http://49.50.166.64/api/pf/${projectID}`)
+            this.admin = JSON.parse(sessionStorage.getItem("admin"));
+            this.projectID = this.$route.params.id
+            this.axios.get(`http://49.50.166.64/api/pf/${this.projectID}`)
                 .then((res) => {
                     // handle success
                     // console.log(res)
@@ -129,6 +134,8 @@
         },
         data() {
             return {
+                projectID:"",
+                admin:false,
                 title:"",
                 startDate:"",
                 endDate:"",
@@ -148,9 +155,20 @@
         methods: {
             goLinkEvent(){
                 console.log("Why not");
+            },
+            deleteProject(){
+                this.axios.delete(`http://49.50.166.64/api/pf/${this.projectID}`,{
+                headers:{
+                    'token': sessionStorage.getItem('token')
+                    }
+                },{})
+                .then(res=>{
+                    if(res.status === 200){
+                        this.$router.push({name:'projectList'})
+                    }
+                })
             }
         },
-        
     }
 </script>
 

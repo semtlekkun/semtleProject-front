@@ -44,15 +44,17 @@ export default {
   },
   methods:{
     deleteNotice(){
-      console.log("delete")
+      // console.log("delete")
       this.axios.delete(`http://49.50.166.64/api/notice/${this.noticeID}`,{
         headers:{
           'token': sessionStorage.getItem('token')
         }
       },{})
       .then(res=>{
-        console.log(res)
-        this.$router.push({name:'noticeList'})
+        // console.log(res)
+        if(res.status === 200){
+          this.$router.push({name:'noticeList'})
+        }
       })
       .catch(err => {
         console.log(err)

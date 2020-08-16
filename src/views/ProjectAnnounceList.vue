@@ -31,7 +31,7 @@ import SubTitle from '../components/SubTitle.vue';
         created(){
             this.axios.get('http://49.50.166.64/api/recruit/list')
             .then(res=>{
-                console.log(res)
+                // console.log(res)
                 if(res.status === 200){
                     res.data.recruitList.forEach((item,index)=>{
                         let obj = new Object;
