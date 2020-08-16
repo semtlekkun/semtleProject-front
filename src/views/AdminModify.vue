@@ -37,6 +37,7 @@
                             label="학번"
                             @keypress="checkNumber"
                             @keyup="checkHan"
+                            type="number"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
@@ -56,6 +57,7 @@
                             label="활동년도"
                             @keypress="checkNumber"
                             @keyup="checkHan"
+                            type="number"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
@@ -206,8 +208,16 @@ export default {
             data: { _id: item._id },
           })
           .then((res) => {
-            if (res.status === 200) alert("성공적으로 삭제!");
-            this.$router.go();
+            if (res.status === 200) {
+              alert("성공적으로 삭제!");
+              this.$router.go();
+            } else if (res.status === 400) {
+              alert("유효하지 않은 학생입니다.");
+            } else if (res.status === 401) {
+              alert("권한이 없습니다.");
+            } else if (res.status === 500) {
+              alert("서버에 문제가 있습니다.");
+            }
           });
       }
     },
@@ -255,6 +265,12 @@ export default {
           if (res.status === 200) {
             alert("수정 성공!");
             this.$router.go();
+          } else if (res.status === 400) {
+            alert("유효하지 않은 학생입니다.");
+          } else if (res.status === 401) {
+            alert("권한이 없습니다.");
+          } else if (res.status === 500) {
+            alert("서버에 문제가 있습니다.");
           }
         })
         .catch((err) => {
