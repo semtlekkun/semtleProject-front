@@ -4,13 +4,13 @@
         <v-col cols="12">
             <!-- :items="student" = 테이블 내용을 student(배열)로 채움. -->
             <v-data-table
-            item-key="name"
+            item-key="_id"
             show-select
             v-model="selected"
             :headers="headers"
             :items="student"
             :search="search"
-            sort-by="calories"
+            sort-by="_id"
             class="elevation-1"
             >
             <template v-slot:top>
@@ -56,22 +56,28 @@
                     <v-card-text>
                         <v-container>
                         <v-row>
+                            <!-- 학번 -->
                             <v-col cols="12">
                             <v-text-field
                                 type="number" 
                                 v-model="editedItem._id" 
                                 label="학번"
+                                counter
+                                maxlength="8"
                                 :rules="[rules.required, rules.counter8]"
                                 :disabled = "controll ? false : true"
                             ></v-text-field>
                             </v-col>
+
+                            <!-- 이름 -->
                             <v-col cols="12">
                             <v-text-field 
                                 v-model="editedItem.name" 
                                 label="이름">
                             </v-text-field>
                             </v-col>
-                            <!--
+                            
+                            <!-- 이건 기존 전화번호 입력 방식
                             <v-col cols="12">
                             <v-text-field 
                                 v-model="editedItem.phoneNum" 
@@ -80,7 +86,9 @@
                             </v-text-field>
                             </v-col> -->
 
-                            <!-- 전화번호 입력값 테스트 -->
+                            <!-- 전화번호 입력시작 -->
+
+                            <!--맨앞 3자리 -->
                             <v-col cols="3">
                             <v-text-field 
                                 v-model="phonenum[0]" 
@@ -97,6 +105,7 @@
                                 <p><br/>-</p>
                             </v-col>
 
+                            <!--가운데 4자리 -->
                             <v-col cols="3">
                             <v-text-field 
                                 v-model="phonenum[1]" 
@@ -113,6 +122,7 @@
                                 <p><br/>-</p>
                             </v-col>
 
+                            <!--마지막 4자리 -->
                             <v-col cols="3">
                             <v-text-field 
                                 v-model="phonenum[2]" 
@@ -123,7 +133,7 @@
                                 maxlength="4" >
                             </v-text-field>
                             </v-col>
-                            <!-- 전화번호 입력값 테스트 -->
+                            <!-- 전화번호 끝 -->
                         </v-row>
                         </v-container>
                     </v-card-text>
@@ -158,27 +168,17 @@
 
             <!-- 유저 이미지 -->
             <!-- 이미지가 없으면 assets 에 저장된 sample 이미지로 대체 -->
+            <!-- 이미지 처리 시작 12:54 
+            -->
             <template v-slot:item.image="{ item }">
-                <div v-if="item.image===''">
-                    <v-img
-                        style="border-radius:30px"
-                        :title="item.name"
-                        alt="User Image"
-                        :src="require('../assets/sample.png')"
-                        width="30px"
-                        height="30px"
-                    ></v-img>
-                </div>
-                <div v-else>
-                    <v-img 
-                        style="border-radius:30px"
-                        :title="item.name"
-                        alt="User Image"
-                        :src="item.image"
-                        width="30px"
-                        height="30px"
-                    ></v-img>
-                </div>
+                <v-img 
+                    style="border-radius:30px"
+                    :title="item.name"
+                    alt="User Image"
+                    :src="imageSrc + item.image"
+                    width="30px"
+                    height="30px"
+                ></v-img>
             </template>
             </v-data-table>
         </v-col>
@@ -188,107 +188,96 @@
 
 <script>
     //import VueMarkdown from 'vue-markdown';
-    //할일 : 전화번호 입력폼 맞추기
-    //학번 : 8자리 맞추기
-    //입력값 확인해서 해당하는 폼에 안맞으면 추가 X
-    //입력값 확인해서 없으면 추가 X
-    //세션값 사라지면 없다고 메세지
-    //Notice 에 스낵바 컴퓨터 화면에서 상단으로 안올라가는 버그 수정
-
-    //세션값이 없으면 표내용을 가져올수 없음 -> 아무데이터도 안보임.
     export default {
         components: {
             //VueMarkdown
         },
         data: () => ({
-        //학번 입력값 확인
 
-        //이름 입력값 확인
-        //입력값 확인
-        rules: {
-            required: value => !!value || '필수 입력사항.',
-            counter3: value => value.length <= 3 || '최대 3자리',
-            counter4: value => value.length <= 4 || '최대 4자리',
-            counter8: value => value.length === 8 || '학번은 8자리로 입력되어야 합니다.'
-        },
+            //여기에 이미지 받아서 더해서 출력
+            imageSrc : 'http://49.50.166.64/api/student/',
 
-        search:'',
-        dialog: false,
-        update : "2020.07.29",
-        token :'',
-        //데이터 추가 제어 변수
-        canAdd : true,
-
-        //전화번호 테스트
-        phonenum : ['', '', ''],
-        //학번 입력여부 제어 변수
-        controll : true,
-
-        //여기에 토큰 저장해서 넘김.
-        head : '',
-        headers: [
-            {
-            text: '학번',
-            align: 'start',
-            sortable: true,
-            value: '_id',
+            //각 폼에서 입력값 확인
+            rules: {
+                required: value => !!value || '필수 입력사항.',
+                counter3: value => value.length <= 3 || '최대 3자리',
+                counter4: value => value.length <= 4 || '최대 4자리',
+                counter8: value => value.length === 8 || '학번은 8자리로 입력되어야 합니다.'
             },
-            { text: '이름', value: 'name' },
-            { text: '전화번호', value: 'phoneNum' },
-            { text: '사진', value: 'image', sortable: false },
-            { text: '수정', value: 'actions', sortable: false },
-        ],
+            //검색
+            search : '',
 
-        //선택된 값 저장 배열
-        selected: [],
+            //다이얼로그 제어
+            dialog: false,
 
-        //학생 정보를 저장할 배열
-        //여기에 서버에서 불러온 정보를
-        student: [],
+            //토큰 저장
+            token :'',
 
-        editedIndex: -1,
+            //데이터 추가 제어 변수
+            canAdd : true,
 
-        //_id -> 학번
-        editedItem: {
-            _id: '',
-            name: '',
-            phoneNum: '',
-            image: '',
-        },
-        defaultItem: {
-            _id: '',
-            name: '',
-            phoneNum: '',
-            image: '',
-        },
+            //전화번호 테스트
+            phonenum : ['', '', ''],
+
+            //선택된 값 저장 배열
+            selected :[],
+
+            //학번 입력여부 제어 변수
+            controll : true,
+
+            //여기에 토큰 저장해서 넘김.
+            headers: [
+                {
+                text: '학번',
+                align: 'start',
+                sortable: true,
+                value: '_id',
+                },
+                { text: '이름', value: 'name' },
+                { text: '전화번호', value: 'phoneNum' },
+                { text: '사진', value: 'image', sortable: false },
+                { text: '수정', value: 'actions', sortable: false },
+            ],
+
+            //학생 정보를 저장
+            student: [],
+
+            //정보 추가, 수정 상태를 제어하기 위한 변수
+            editedIndex: -1,
+
+            editedItem: {
+                _id: '',
+                name: '',
+                phoneNum: '',
+                image: '',
+            },
+            defaultItem: {
+                _id: '',
+                name: '',
+                phoneNum: '',
+                image: '',
+            },
         }),
 
         computed: {
-        formTitle () {
-            return this.editedIndex === -1 ? '새 회원 등록' : '회원 정보 수정'
-        },
+            formTitle () {
+                return this.editedIndex === -1 ? '새 회원 등록' : '회원 정보 수정'
+            },
         },
 
         watch: {
-        dialog (val) {
-            val || this.close()
-        },
-        },
-
-        created () {
-            //this.initialize()
+            dialog (val) {
+                val || this.close()
+            },
         },
 
-        //마운티드에서 부착.
-        beforeMount() {
+        created() {
             this.check();
         },
 
         methods: {
-        //-----
-        //통신
-        //조회
-        //res.status === 200 인게 성공한경우.
+        
+        //관리자 확인
         check() {
             //이게 참이면 관리자
             //토큰값 가져와서 저장한다음에 넘겨줌
@@ -297,12 +286,13 @@
            }
            //아니면 관리자 아님.
            else {
-                //container -> display:none?
-                console.log("관리자 아님")
+               alert("접근 권한이 없습니다.")
+               console.log("관리자 아님")
            }
         },
 
         //-----통신 시작
+        //성공여부 확인 : res.status === 200 
         //가져오기,get
         getData(){
             let config = {
@@ -313,12 +303,20 @@
 
             this.axios.get("http://49.50.166.64/api/student/list", config)
             .then((res) => {
-                console.log("성공");
-                //console.log(res);
+                if(res.status === 200) {
+                    console.log("성공");
+                    console.log(res);
+                     
+                    //모든 학생정보를 가져와서 student 에 저장.
+                    //저장하면 알아서 다 뜸.
 
-                //모든 학생정보를 가져와서 student 에 저장.
-                //저장하면 알아서 다 뜸.
-                this.student = res.data.students;
+                    //let imageSrc = 'http://49.50.166.64/api/student/'
+                    this.student = res.data.students;
+                }
+                else {
+                    console.log(res);
+                    console.log("ststus : " + res.status)
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -339,8 +337,16 @@
             
             this.axios.put("http://49.50.166.64/api/student/update",data, config)
             .then((res) => {
-                console.log(res);
-                console.log("put 성공");
+                if(res.status === 200) {
+                    console.log(res);
+                    console.log("put 성공");
+                    alert("수정완료");
+                    console.log("수정완료");
+                }
+                else {
+                    console.log(res);
+                    console.log("ststus : " + res.status)
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -359,15 +365,20 @@
                 phoneNum : adddata.phoneNum,
                 name : adddata.name
             }
+
             this.axios.post("http://49.50.166.64/api/student/input",data,config)
             .then((res) => {
-                console.log(res);
-                console.log("post 성공");
-                this.canAdd = true;
-                //res.status400 -> 중복 
+                if(res.ststus === 200) {
+                    console.log(res);
+                    console.log("post 성공");
+                    this.canAdd = true;
+                    alert("추가완료");
+                    console.log("추가완료");
+                }
             })
             .catch((err) => {
                 console.log(err);
+                alert("[에러]중복데이터 존재");
                 console.log("에러코드 : " + err.response.status);
                 console.log("중복된 학번");
                 this.canAdd = false;
@@ -375,18 +386,26 @@
             })
         },
         //삭제 delete
-        delDate(id){
+        //idsArr 에는 삭제될 학번들이 있음.
+        delDate(idsArr){
             this.axios.delete("http://49.50.166.64/api/student/delete",{
             headers: {
                     token: sessionStorage.getItem("token")
                 },
                 data: {
-                    studentCode : id
+                    //배열로 넘겨줄 부분
+                    ids : idsArr,
                 }
             })
             .then((res) => {
-                console.log("delete 성공");
-                console.log(res);
+                if(res.status === 200) {
+                    console.log("delete 성공");
+                    console.log(res);
+                }
+                else {
+                    console.log(res);
+                    console.log("ststus : " + res.status)
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -395,12 +414,24 @@
         //-----통신 끝
 
         //수정 -> 해당 회원 삭제시 실제로 삭제가 이뤄지는 부분
-        del(index) {
-            //디비로 삭제 요청
-            this.delDate(this.student[index]._id);
+        del() {
+            let index = 0;
+            let idsArr = [];
+            this.selected.forEach(
+                element => {
+                    console.log(element.name)
+                    //백 : 서버에 넘겨주기 위해 학번을 배열에 하나씩 저장
+                    idsArr.push(element._id);
 
-            //배열에서 삭제
-            this.student.splice(index, 1)
+                    //프로트 : 현재 인덱스 를 가지고 배열에서 삭제.
+                    index = this.student.indexOf(element);
+                    this.student.splice(index, 1)
+                }
+            );
+
+            this.selected = [];
+            //디비로 삭제 요청
+            this.delDate(idsArr);
         },
 
         //Action 에서 수정하는 부분
@@ -426,9 +457,18 @@
         },
 
         //Action 에서 삭제하는 부분
+        //체크박스 추가
         deleteItem (item) {
-            const index = this.student.indexOf(item)
-            confirm('삭제하시겠습니까?') && this.del(index);
+            //여러개
+            if(this.selected.length != 0) {
+                confirm('삭제하시겠습니까?') && this.del();
+            }
+            //한개
+            else {
+                this.selected.push(item);
+                confirm('삭제하시겠습니까?') && this.del();
+            }
+            this.selected = [];
         },
 
         //수정, 삭제 할때 뜨는 창에서 닫는 부분
@@ -447,7 +487,6 @@
         },
 
         //수정, 삭제 할때 뜨는 창에서 저장하는 부분
-        //여기서 put, delete ㄱㄱ
         save () {
 
             //입력값 확인
@@ -460,12 +499,11 @@
             else {
                 //수정하는경우
                 if (this.editedIndex > -1) {
-                Object.assign(this.student[this.editedIndex], this.editedItem)
-                this.student[this.editedIndex].phoneNum = this.phonenum[0] + "-" + this.phonenum[1] + "-" + this.phonenum[2]
-                //put
-                this.modiDate(this.student[this.editedIndex]);
-                alert("수정완료");
-                console.log("수정완료");
+                    Object.assign(this.student[this.editedIndex], this.editedItem)
+                    this.student[this.editedIndex].phoneNum = this.phonenum[0] + "-" + this.phonenum[1] + "-" + this.phonenum[2]
+
+                    //put
+                    this.modiDate(this.student[this.editedIndex]);
                 }
                 
                 //추가하는 경우
@@ -473,10 +511,9 @@
                     this.editedItem.phoneNum = this.phonenum[0] + "-" + this.phonenum[1] + "-" + this.phonenum[2];
                     this.student.push(this.editedItem)
                     const index = this.student.indexOf(this.editedItem)
+
                     //post
                     this.addData(this.student[index]);
-                    alert("추가완료");
-                    console.log("추가완료");
                 }
             }
             this.close()
