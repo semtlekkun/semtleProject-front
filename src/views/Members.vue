@@ -6,65 +6,18 @@
         <v-col cols="6" sm="3">
           <v-card class="pa-10">
             <img v-bind:src="image" />
-            <p class="role">{{managementList}}</p>
+            <p class="position">{{language}}{{position}}</p>
             <p class="number">{{studentCode}}</p>
             <p class="name">{{name}}</p>
-            <p class="position">{{language}}{{position}}</p>
             <p class="contents">{{contents}}</p>
           </v-card>
         </v-col>
         <v-col cols="6" sm="3">
           <v-card class="pa-10">
             <img v-bind:src="image" />
-            <p class="role">{{managementList}}</p>
+            <p class="position">{{language}}{{position}}</p>
             <p class="studentCode">{{studentCode}}</p>
             <p class="name">{{name}}</p>
-            <p class="position">{{language}}{{position}}</p>
-            <p class="contents">{{contents}}</p>
-          </v-card>
-        </v-col>
-      </v-row>
-
-      <v-divider class="mt-16"></v-divider>
-      <h1 class="mt-5 text-left">{{activeYear}} {{season}}</h1>
-      <v-row>
-        <v-col cols="6" sm="3">
-          <v-card class="pa-10">
-            <img v-bind:src="image" />
-            <p class="role">{{managementList}}</p>
-            <p class="studentCode">{{studentCode}}</p>
-            <p class="name">{{name}}</p>
-            <p class="position">{{language}}{{position}}</p>
-            <p class="contents">{{contents}}</p>
-          </v-card>
-        </v-col>
-        <v-col cols="6" sm="3">
-          <v-card class="pa-10">
-            <img v-bind:src="image" />
-            <p class="role">{{managementList}}</p>
-            <p class="studentCode">{{studentCode}}</p>
-            <p class="name">{{name}}</p>
-            <p class="position">{{language}}{{position}}</p>
-            <p class="contents">{{contents}}</p>
-          </v-card>
-        </v-col>
-        <v-col cols="6" sm="3">
-          <v-card class="pa-10">
-            <img v-bind:src="image" />
-            <p class="role">{{managementList}}</p>
-            <p class="studentCode">{{studentCode}}</p>
-            <p class="name">{{name}}</p>
-            <p class="position">{{language}}{{position}}</p>
-            <p class="contents">{{contents}}</p>
-          </v-card>
-        </v-col>
-        <v-col cols="6" sm="3">
-          <v-card class="pa-10">
-            <img v-bind:src="image" />
-            <p class="role">{{managementList}}</p>
-            <p class="studentCode">{{studentCode}}</p>
-            <p class="name">{{name}}</p>
-            <p class="position">{{language}}{{position}}</p>
             <p class="contents">{{contents}}</p>
           </v-card>
         </v-col>
@@ -76,30 +29,68 @@
         <v-col cols="6" sm="3">
           <v-card class="pa-10">
             <img v-bind:src="image" />
-            <p class="role">{{managementList}}</p>
+            <p class="position">{{language}}{{position}}</p>
             <p class="studentCode">{{studentCode}}</p>
             <p class="name">{{name}}</p>
-            <p class="position">{{language}}{{position}}</p>
             <p class="contents">{{contents}}</p>
           </v-card>
         </v-col>
         <v-col cols="6" sm="3">
           <v-card class="pa-10">
             <img v-bind:src="image" />
-            <p class="role">{{managementList}}</p>
+            <p class="position">{{language}}{{position}}</p>
             <p class="studentCode">{{studentCode}}</p>
             <p class="name">{{name}}</p>
-            <p class="position">{{language}}{{position}}</p>
             <p class="contents">{{contents}}</p>
           </v-card>
         </v-col>
         <v-col cols="6" sm="3">
           <v-card class="pa-10">
             <img v-bind:src="image" />
-            <p class="role">{{managementList}}</p>
+            <p class="position">{{language}}{{position}}</p>
             <p class="studentCode">{{studentCode}}</p>
             <p class="name">{{name}}</p>
+            <p class="contents">{{contents}}</p>
+          </v-card>
+        </v-col>
+        <v-col cols="6" sm="3">
+          <v-card class="pa-10">
+            <img v-bind:src="image" />
             <p class="position">{{language}}{{position}}</p>
+            <p class="studentCode">{{studentCode}}</p>
+            <p class="name">{{name}}</p>
+            <p class="contents">{{contents}}</p>
+          </v-card>
+        </v-col>
+      </v-row>
+
+      <v-divider class="mt-16"></v-divider>
+      <h1 class="mt-5 text-left">{{activeYear}} {{season}}</h1>
+      <v-row>
+        <v-col cols="6" sm="3">
+          <v-card class="pa-10">
+            <img v-bind:src="image" />
+            <p class="position">{{language}}{{position}}</p>
+            <p class="studentCode">{{studentCode}}</p>
+            <p class="name">{{name}}</p>
+            <p class="contents">{{contents}}</p>
+          </v-card>
+        </v-col>
+        <v-col cols="6" sm="3">
+          <v-card class="pa-10">
+            <img v-bind:src="image" />
+            <p class="position">{{language}}{{position}}</p>
+            <p class="studentCode">{{studentCode}}</p>
+            <p class="name">{{name}}</p>
+            <p class="contents">{{contents}}</p>
+          </v-card>
+        </v-col>
+        <v-col cols="6" sm="3">
+          <v-card class="pa-10">
+            <img v-bind:src="image" />
+            <p class="position">{{language}}{{position}}</p>
+            <p class="studentCode">{{studentCode}}</p>
+            <p class="name">{{name}}</p>
             <p class="contents">{{contents}}</p>
           </v-card>
         </v-col>
@@ -135,21 +126,25 @@ export default {
       axios.get("http://49.50.166.64/api/management/list")
       .then((res) => {
         console.log("콘솔로그 시작");
-        console.log(res);
-        console.log(res.status);
-        console.log(res.management);
-        console.log(res.management.activeYear);
-        console.log(res.management.Info.name);
+        // console.log(res);
+        // console.log(res.status);
+        // console.log(res.data);
+        // console.log(res.data.management);
+        // console.log(res.data.management[0]);
+        console.log(res.data.management[0].Info);
+        // console.log(res.data.management[0].activeYear);
+        // console.log(res.data.management[0].image);
         console.log("콘솔로그 끝");
-        this.activeYear = res.management.activeYear;
-        this.season = res.management.season;
-        this.language = res.management.language;
-        this.position = res.management.position;
-        this.studentCode = res.management.studentCode;
-        this.name = res.management.name;
-        this.image = res.management.image;
-        this.contents = res.management.contents;
-        this.managementList = res.management.managementList;
+
+        this.activeYear = `${res.data.management[0].activeYear}년`;
+        this.season = res.data.management[0].season;
+        this.language = res.data.management[0].language;
+        this.position = res.data.management[0].position;
+        this.studentCode = res.data.management[0].studentCode;
+        this.name = res.data.management[0].Info[0].name;
+        this.image = `http://49.50.166.64/${res.data.management[0].Info[0].image}`;
+        this.contents = res.data.management[0].contents;
+        this.managementList = res.data.management[0].managementList;
       })
       .catch((error) => {
         console.log(error);
@@ -225,19 +220,19 @@ export default {
 -->
 
 <style>
-img {
+v-card img {
   border-radius: 5px;
   width: 100%;
 }
 .v-application p {
   margin-bottom: 0;
 }
-.role,
+.position,
 .number,
 .contents {
   font-size: 0.9em;
 }
-.role {
+.position {
   color: #727272 !important;
   margin-top: 20px;
 }
