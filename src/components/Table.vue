@@ -1,7 +1,7 @@
 <template>
     <v-data-table
-        :headers="getHeaders"
-        :items="getList"
+        :headers="headers"
+        :items="contents"
         :items-per-page="perPage"
         class="elevation-1"
         @click:row="rowClick"
@@ -9,11 +9,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
     export default {
-        computed:{
-            ...mapGetters(['getList', 'getHeaders'])
-        },
         props:{
             tableName:String,
             perPage:Number

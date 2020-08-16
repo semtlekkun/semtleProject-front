@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VueRouter from 'vue-router'
 
 Vue.use(Vuex)
-Vue.use(VueRouter)
 
 export default new Vuex.Store({
   state: {
@@ -18,7 +16,7 @@ export default new Vuex.Store({
       // 세션스토리지 token,admin 삭제
       sessionStorage.removeItem("token")
       sessionStorage.removeItem("admin")
-      location.reload(true); // 페이지 새로고침
+      location.href = '/'; // 홈화면으로 이동
     }
   },
   getters:{

@@ -14,13 +14,13 @@
     </v-row>
     <v-row class="text-center">
       <v-col>
-        <router-link to="/admin/mentor">
-          <v-btn class="py-10" block>역대 간부추가</v-btn>
+        <router-link to="/admin/modify">
+          <v-btn class="py-10" block>역대 간부수정</v-btn>
         </router-link>
       </v-col>
       <v-col>
-        <router-link to="/admin/modify">
-          <v-btn class="py-10" block>역대 간부수정</v-btn>
+        <router-link to="/">
+          <v-btn class="py-10" block>홈으로가기</v-btn>
         </router-link>
       </v-col>
     </v-row>

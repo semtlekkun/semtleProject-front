@@ -80,11 +80,6 @@ const routes = [
     component: () => import('../views/Management.vue')
   },
   {
-    path: '/admin/mentor',
-    name: 'mentor',
-    component: () => import('../views/AdminMentor.vue')
-  },
-  {
     path: '/project/list',
     name: 'prijectList',
     component: () => import('../views/ProjectList.vue')

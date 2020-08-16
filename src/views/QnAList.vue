@@ -25,15 +25,14 @@
 <script>
 import Table from '../components/Table.vue';
 import SubTitle from '../components/SubTitle.vue';
-import {mapMutations} from 'vuex';
 
     export default {
         mounted(){
-            this.axios.get('http://49.50.166.64/api/question')
+            this.axios.get('http://49.50.166.64/api/question/list/1')
             .then(res=>{
                 console.log(res)
                 if(res.status === 200){
-                    this.setList(res)
+                    console.log("200")
                 }
             }).catch(err=>{
                 console.log(err)
@@ -52,7 +51,6 @@ import {mapMutations} from 'vuex';
             }
         },
         methods:{
-            ...mapMutations(['setList'])
         }
     }
 </script>
