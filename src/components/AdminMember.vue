@@ -122,6 +122,7 @@
 
 <script>
   export default {
+    //페이지 들어와서 바로 받아서
     data: () => ({
       search:'',
       dialog: false,
@@ -167,12 +168,16 @@
         val || this.close()
       },
     },
-
+    //여기서 받아옴
     created () {
-      this.initialize()
+      this.initialize();
+    },
+    destroyed() {
+      
     },
 
     methods: {
+
       //표에 들어갈 내용 초기화.
       initialize () {
         this.student = [
@@ -197,6 +202,7 @@
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
+
       //Action 에서 삭제하는 부분
       deleteItem (item) {
         const index = this.student.indexOf(item)
