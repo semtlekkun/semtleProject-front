@@ -36,6 +36,7 @@ export default {
       }
     })
     .catch(err=>{
+      
       console.log(err)
     })
 
@@ -53,7 +54,7 @@ export default {
         this.commentData.comments.push(obj)
       })
     })
-    .catch(err=>{
+    .catch((err)=>{
       console.log(err)
     })
   },

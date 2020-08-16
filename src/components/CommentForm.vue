@@ -39,22 +39,32 @@ export default {
 
   methods:{
     inputAnswer(){
-      this.axios.post(`http://49.50.166.64/api/answer`,
-      {
-        contents: this.contents,
-        question: this.questionID
-      },
-      {
-        headers:{'token': this.userToken}
-      },)
-      .then(res=>{
-        if(res.status === 200){
-          this.$router.go()
-        }
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+      if(this.contents === "") {
+        alert("입력값이 없습니다.")
+      }
+      else {
+        this.axios.post(`http://49.50.166.64/api/answer`,
+        {
+          contents: this.contents,
+          question: this.questionID
+        },
+        {
+          headers:{'token': this.userToken}
+        },)
+        .then(res=>{
+          if(res.status === 200){
+            this.$router.go()
+          }
+        })
+        .catch((err)=>{
+          if(err.response.status===401) {
+            console.log("상태 코드" + err.response.status)
+            alert("로그인후 이용 가능 합니다.");
+            location.href = "/login";
+          }
+          console.log(err)
+        })
+      }
     }
   }
 }

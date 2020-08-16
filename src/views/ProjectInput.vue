@@ -285,9 +285,7 @@ export default {
 
             }
             console.log(err.response);
-
-            //팀장학번, 팀원 학번 찾아서 없으면 에러 받야하 하는거 추가되어야 함.
-          });
+          })
       }
     },
   },
