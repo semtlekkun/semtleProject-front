@@ -8,7 +8,7 @@
                 <v-row>
                     <v-col cols="12" class="customTable text-centerZ">
                         <v-row class="pl-5">
-                            <h2 cols="9">{{this.Project.projectTitle}}</h2>
+                            <h2 cols="9">{{title}}</h2>
 
                             <v-col cols="3" class="py-0">
                                 <v-btn
@@ -24,13 +24,13 @@
                 </v-row>
                 <v-row>
                     <v-col cols="3" sm="2" class="customTable text-center">작성자</v-col>
-                    <v-col cols="9" sm="2" class="text-center">{{this.Project.writer}}</v-col>
+                    <v-col cols="9" sm="2" class="text-center">{{writer}}</v-col>
 
                     <v-col cols="3" sm="2" class="customTable text-center">작성일</v-col>
-                    <v-col cols="9" sm="2" class="text-center">{{this.Project.date}}</v-col>
+                    <v-col cols="9" sm="2" class="text-center">{{date}}</v-col>
 
                     <v-col cols="3" sm="2" class="customTable text-center">view</v-col>
-                    <v-col cols="9" sm="2" class="text-center">{{this.Project.view}}</v-col>
+                    <v-col cols="9" sm="2" class="text-center">{{view}}</v-col>
                 </v-row>
 
                 <v-row>
@@ -38,16 +38,16 @@
                         팀장
                     </v-col>
                     <v-col cols="9" sm="2" class="text-center">
-                        {{this.Project.teamLeaderCode}}
+                        {{leaderNick}}
                     </v-col>
 
                     <v-col cols="3" sm="2" class="customTable text-center">
                         개발기간
                     </v-col>
                     <v-col cols="9" sm="6" class="text-center">
-                        {{this.Project.date}}
+                        {{startDate}}
                         ~
-                        {{this.Project.projectEndDate}}
+                        {{endDate}}
                     </v-col>
                 </v-row>
 
@@ -58,7 +58,7 @@
 
                     <v-col>
                         <v-card-text class="text-center">
-                            <VueMarkdown :source="this.Project.contents"></VueMarkdown>
+                            <VueMarkdown :source="contents"></VueMarkdown>
 
                         </v-card-text>
                     </v-col>
@@ -74,12 +74,12 @@
                                 <v-row align="center">
                                     <v-col cols="6">
                                         <v-img
-                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
+                                            :src="member.image"
                                             alt="test_img"/>
                                     </v-col>
 
                                     <v-col cols="6">
-                                        {{member}}
+                                        {{member.nick}}
                                     </v-col>
                                 </v-row>
                             </v-col>
@@ -99,16 +99,46 @@
     import SubTitle from '../components/SubTitle.vue';
 
     export default {
+        created() {
+            const projectID = this.$route.params.id
+            this.axios.get(`http://49.50.166.64/api/pf/${projectID}`)
+                .then((res) => {
+                    // handle success
+                    // console.log(res)
+                    this.title = res.data.portfolio.projectTitle;
+                    this.startDate = res.data.portfolio.projectStartDate;
+                    this.endDate = res.data.portfolio.projectEndDate;
+                    this.contents = res.data.portfolio.contents;
+                    this.leaderNick = res.data.portfolio.leaderNick;
+                    this.writer = res.data.portfolio.writer;
+                    this.view = res.data.portfolio.view;
+                    this.date = res.data.portfolio.date;
+                    this.link = res.data.portfolio.link;
+                    res.data.portfolio.studentInfo.forEach(student=>{
+                        this.members.push(student)
+                    });
+                })
+                .catch((err) => {
+                    // handle error
+                    console.log(err);
+                })
+        },
         components: {
             VueMarkdown,
             SubTitle
         },
         data() {
             return {
-                Project: "",
+                title:"",
+                startDate:"",
+                endDate:"",
+                contents:"",
+                leaderNick:"",
+                writer:"",
+                view:"",
+                date:"",
                 members: [],
                 link:"",
-                test: '# test',
                 subTitleObj: {
                     title: "프로젝트",
                     contents: "프로젝트이다."
@@ -120,21 +150,7 @@
                 console.log("Why not");
             }
         },
-        beforeCreate() {
-            this
-                .axios
-                .get("http://49.50.166.64/api/pf/detail/5f35616dfdd21421cc3a8f76", {})
-                .then((res) => {
-                    // handle success
-                    this.Project = res.data.portfolio[0],
-                    this.members = this.Project.students,
-                    this.link = this.Project.link
-                })
-                .catch((err) => {
-                    // handle error
-                    console.log(err);
-                })
-        }
+        
     }
 </script>
 

@@ -1,7 +1,5 @@
 <template>
   <div id="projectWrite">
-    <v-app>
-      <v-content>
         <v-container style="margin-top: 4rem; margin-bottom: 4rem">
           <v-card>
             <v-alert outlined color="#226db2">
@@ -61,8 +59,6 @@
             </v-alert>
           </v-card>
         </v-container>
-      </v-content>
-    </v-app>
   </div>
 </template>
 

@@ -60,7 +60,7 @@ const routes = [
     component: () => import('../views/ProjectAnnounceWrite.vue')
   },
   {
-    path: '/project/announce/read',
+    path: '/project/announce/detail/:id',
     name: 'projectAnnounceRead',
     component: () => import('../views/ProjectAnnounceRead.vue')
   },

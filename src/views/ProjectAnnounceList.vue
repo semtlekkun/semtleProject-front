@@ -14,7 +14,9 @@
                 </v-row>
                 <v-row>
                     <v-col>
-                        <Table :perPage="10"/>
+                        <Table :perPage="10"
+                        tableName="projectAnnounce"
+                        :contents="contents"/>
                     </v-col>
                 </v-row>
             </v-col>
@@ -26,12 +28,33 @@
 import Table from '../components/Table.vue';
 import SubTitle from '../components/SubTitle.vue';
     export default {
+        created(){
+            this.axios.get('http://49.50.166.64/api/recruit/list')
+            .then(res=>{
+                console.log(res)
+                if(res.status === 200){
+                    res.data.recruitList.forEach((item,index)=>{
+                        let obj = new Object;
+                        obj.number = index+1;
+                        obj.title = item.title;
+                        obj.writer = item.writer;
+                        obj.date = item.endDate;
+                        obj._id = item._id;
+                        this.contents.push(obj)
+                    })
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        },
         components:{
             Table,
             SubTitle
         },
         data(){
             return{
+                contents:[],
                 subTitleObj:{
                     title:"프로젝트 공고",
                     contents:"프로젝트 공고이다."

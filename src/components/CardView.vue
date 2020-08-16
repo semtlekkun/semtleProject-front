@@ -1,5 +1,5 @@
 <template>
-    <router-link  :to="{name: 'projectView', params:{contentsObj: contentsObj}}">
+    <router-link  :to="{name: 'project', params:{id:123}}">
         <v-card
             id="link"
             height="318"

@@ -16,16 +16,18 @@ export default {
     this.axios.get(`http://49.50.166.64/api/notice/${noticeID}`)
     .then(res=>{
       // console.log(res)
-      this.noticeHeader = {
-        title:res.data.notice.title,
-        writerName:res.data.notice.writer,
-        date: res.data.notice.date,
-        views: res.data.notice.view
-      }
+      if(res.status === 200){
+        this.noticeHeader = {
+          title:res.data.notice.title,
+          writerName:res.data.notice.writer,
+          date: res.data.notice.date,
+          views: res.data.notice.view
+        }
 
-      this.noticeBody = {
-        mdText: res.data.notice.contents,
-        imagePath: res.data.notice.image
+        this.noticeBody = {
+          mdText: res.data.notice.contents,
+          imagePath: res.data.notice.image
+        }
       }
     })
     .catch(err=>{

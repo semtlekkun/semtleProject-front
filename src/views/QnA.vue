@@ -43,15 +43,17 @@ export default {
     this.axios.get(`http://49.50.166.64/api/answer/${id}`)
     .then(res=>{
       // console.log(res)
-      res.data.answer.forEach(el=>{
-        let obj = {
-          name: el.writer,
-          comment: el.contents,
-          time: el.date,
-          id: el._id
-        }
-        this.commentData.comments.push(obj)
-      })
+      if(res.status === 200){
+        res.data.answer.forEach(el=>{
+          let obj = {
+            name: el.writer,
+            comment: el.contents,
+            time: el.date,
+            id: el._id
+          }
+          this.commentData.comments.push(obj)
+        })
+      }
     })
     .catch(err=>{
       console.log(err)

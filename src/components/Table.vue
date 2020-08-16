@@ -190,6 +190,9 @@
                 else if(this.tableName === 'project'){
                     this.$router.push({name:"project", params:{id:row._id}})
                 }
+                else if(this.tableName === 'projectAnnounce'){
+                    this.$router.push({name:"projectAnnounceRead", params:{id:row._id}})
+                }
             }
         }
     }
