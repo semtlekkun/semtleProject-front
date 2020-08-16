@@ -4,7 +4,6 @@
       <template v-slot:activator="{on, attrs}">
         <v-card height="200" light="light" class="pa-5">
           <v-card-title primary="primary" class="title">PASSWORD</v-card-title>
-          <v-card-text></v-card-text>
 
           <v-card-actions>
             <v-btn v-bind="attrs" v-on="on" dark="dark" class="btn btn-dark m-3">변경</v-btn>
@@ -47,11 +46,17 @@ export default {
 
     errMsg: [],
   }),
+
   methods: {
     submit() {
+      this.errMsg = [];
       // 데이터베이스에서 불러온 비밀번호와 이전 비밀번호가 다를 경우 에러 추가
-      if (this.after != this.checkafter)
+      if (this.after != this.checkafter) {
         this.errMsg.push("비밀번호가 다릅니다.");
+        this.after = "";
+        this.before = "";
+        this.checkafter = "";
+      }
 
       if (this.errMsg.length !== 0) {
         let errString = "";
@@ -84,7 +89,9 @@ export default {
             }
           })
           .catch((err) => {
-            console.log(err);
+            if (err.response.status === 400) {
+              alert("비밀번호가 틀립니다!");
+            }
           });
       }
     },

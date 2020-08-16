@@ -4,7 +4,6 @@
       <template v-slot:activator="{on, attrs}">
         <v-card height="200" light="light" class="pa-5">
           <v-card-title primary="primary" class="title">Phone Number</v-card-title>
-          <v-card-text>{{Data.phoneNum}}</v-card-text>
 
           <v-card-actions>
             <v-btn v-bind="attrs" v-on="on" dark="dark" class="btn btn-dark m-3">변경</v-btn>
@@ -19,7 +18,7 @@
 
         <v-col>
           <v-text-field
-            v-model="after"
+            v-model="phoneNum"
             solo
             maxlength="11"
             @keypress="checkNumber"
@@ -31,7 +30,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn class="btn btn-dark" text="text" @click="check()">확인</v-btn>
+          <v-btn class="btn btn-dark" text="text" @click="submit">확인</v-btn>
         </v-card-actions>
       </div>
     </v-dialog>
@@ -41,16 +40,54 @@
 <script>
 export default {
   data: () => ({
-    Data: {
-      phoneNum: "000-0000-0000",
-    },
     dialog: false,
+    errMsg: [],
 
-    after: "",
+    phoneNum: "",
   }),
   methods: {
-    check() {
-      return (this.Data.phoneNum = this.after), (this.dialog = false);
+    submit() {
+      this.errMsg = [];
+      if (this.phoneNum.length < 11) {
+        this.errMsg.push("휴대폰 번호를 정확하게 입력해주세요.");
+      }
+
+      if (this.errMsg.length !== 0) {
+        let errString = "";
+        for (let idx = 0; idx < this.errMsg.length; ++idx) {
+          errString = errString.concat(this.errMsg[idx]);
+
+          if (idx === this.errMsg.length - 1) {
+            break;
+          }
+          errString = errString.concat("\n");
+        }
+
+        alert(errString);
+      } else {
+        let sendObj = {
+          phoneNum: this.phoneNum,
+        };
+
+        let config = {
+          headers: {
+            token: sessionStorage.getItem("token"),
+          },
+        };
+
+        this.axios
+          .put(
+            "http://49.50.166.64/api/mypage/phoneNum/update",
+            sendObj,
+            config
+          )
+          .then((res) => {
+            if (res.status === 200) {
+              alert("변경 성공!");
+              this.dialog = false;
+            }
+          });
+      }
     },
 
     checkNumber(e) {
