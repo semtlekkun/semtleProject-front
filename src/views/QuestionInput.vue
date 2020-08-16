@@ -95,6 +95,7 @@ import SubTitle from '../components/SubTitle.vue';
                 })
                 .then(res=>{
                     console.log(res)
+                    this.$router.push({name:"QnAList"})
                 })
                 .catch(err=>{
                     console.log(err)

@@ -149,6 +149,12 @@ import {mapGetters} from 'vuex'
                     Title: "프로젝트",
                     method: ()=>{this.projectClick = !this.projectClick}
                 },
+                {
+                    Items: [],
+                    url: '/management',
+                    Title: "역대 간부",
+                    method: ()=>{}
+                },
 
                 {
                     Items: null,

@@ -12,7 +12,8 @@
     export default {
         props:{
             tableName:String,
-            perPage:Number
+            perPage:Number,
+            contents:Array
         },
         data () {
             return {
@@ -27,7 +28,7 @@
                     { text: '작성자', value: 'writer' },
                     { text: '작성 일시', value: 'date' },
                 ],
-                contents: [
+                content: [
                     {
                         number: '1',
                         title: '파이썬 여름 방학 특강 안내',
@@ -180,7 +181,8 @@
             rowClick(row){
                 console.log(row)
                 if(this.tableName === 'qna'){
-                    this.$router.push({name:'QnA', params:{id:row.id}})
+                    // console.log("id: ", row._id)
+                    this.$router.push({name:'QnA', params:{id:row._id}})
                 }
             }
         }

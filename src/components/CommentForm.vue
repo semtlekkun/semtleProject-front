@@ -39,7 +39,7 @@ export default {
 
   methods:{
     inputAnswer(){
-      this.axios.post(`http://49.50.166.64/api/answer/${this.questionID}`,
+      this.axios.post(`http://49.50.166.64/api/answer`,
       {
         contents: this.contents,
         question: this.questionID

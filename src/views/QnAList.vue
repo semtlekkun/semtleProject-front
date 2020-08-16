@@ -14,7 +14,10 @@
                 </v-row>
                 <v-row>
                     <v-col>
-                        <Table :perPage="10" tableName="qna"/>
+                        <Table 
+                        :perPage="10" 
+                        tableName="qna"
+                        :contents="contents"/>
                     </v-col>
                 </v-row>
             </v-col>
@@ -27,12 +30,22 @@ import Table from '../components/Table.vue';
 import SubTitle from '../components/SubTitle.vue';
 
     export default {
-        mounted(){
-            this.axios.get('http://49.50.166.64/api/question/list/1')
+        created(){
+            this.axios.get('http://49.50.166.64/api/question/list')
             .then(res=>{
                 console.log(res)
                 if(res.status === 200){
                     console.log("200")
+                    this.contents = []
+                    res.data.questionList.forEach((item,index) => {
+                        let obj = new Object;
+                        obj.number = index+1;
+                        obj.title = item.title;
+                        obj.writer = item.writer;
+                        obj.date = item.date;
+                        obj._id = item._id;
+                        this.contents.push(obj)
+                    })
                 }
             }).catch(err=>{
                 console.log(err)
@@ -47,7 +60,8 @@ import SubTitle from '../components/SubTitle.vue';
                 subTitleObj:{
                     title:"Q&A 목록",
                     contents:"질문 목록이다."
-                }
+                },
+                contents:[]
             }
         },
         methods:{
