@@ -103,7 +103,9 @@ const routes = [
     path: '/admin/modify',
     name: 'adminModify',
     component: () => import('../views/AdminModify.vue')
-  }
+  },
+
+
 ]
 
 const router = new VueRouter({
