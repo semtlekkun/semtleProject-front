@@ -21,7 +21,7 @@
 
               <v-dialog v-model="dialog" width="3000px">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">새로 등록</v-btn>
+                  <v-btn color="rgb(80,130,155)" dark class="mb-2" v-bind="attrs" v-on="on">새로 등록</v-btn>
                 </template>
                 <v-card>
                   <v-card-title>
