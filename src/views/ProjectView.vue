@@ -12,7 +12,7 @@
 
                             <v-col cols="3" class="py-0">
                                 <v-btn
-                                    :href="this.Project.link"
+                                    :href="link"
                                     target="_blank"
                                     rounded="rounded"
                                     depressed="depressed"
@@ -107,6 +107,7 @@
             return {
                 Project: "",
                 members: [],
+                link:"",
                 test: '# test',
                 subTitleObj: {
                     title: "프로젝트",
@@ -126,7 +127,8 @@
                 .then((res) => {
                     // handle success
                     this.Project = res.data.portfolio[0],
-                    this.members = this.Project.students
+                    this.members = this.Project.students,
+                    this.link = this.Project.link
                 })
                 .catch((err) => {
                     // handle error
