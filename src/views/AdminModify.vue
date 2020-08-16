@@ -33,6 +33,7 @@
                       <v-row>
                         <v-col cols="12" sm="6" md="4">
                           <v-text-field
+                            color="rgb(80,130,155)"
                             v-model="editedItem.studentCode"
                             label="학번"
                             @keypress="checkNumber"
@@ -41,10 +42,16 @@
                           ></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
-                          <v-select v-model="editedItem.position" :items="positionItems" label="직책"></v-select>
+                          <v-select
+                            color="rgb(80,130,155)"
+                            v-model="editedItem.position"
+                            :items="positionItems"
+                            label="직책"
+                          ></v-select>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
                           <v-select
+                            color="rgb(80,130,155)"
                             v-if="editedItem.position ==='멘토' "
                             v-model="editedItem.language"
                             :items="languageItems"
@@ -53,6 +60,7 @@
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
                           <v-text-field
+                            color="rgb(80,130,155)"
                             v-model="editedItem.activeYear"
                             label="활동년도"
                             @keypress="checkNumber"
@@ -61,18 +69,28 @@
                           ></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
-                          <v-select v-model="editedItem.season" :items="seasonItems" label="활동학기"></v-select>
+                          <v-select
+                            color="rgb(80,130,155)"
+                            v-model="editedItem.season"
+                            :items="seasonItems"
+                            label="활동학기"
+                          ></v-select>
                         </v-col>
                         <v-col cols="12" sm="6" md="12">
-                          <v-text-field filled v-model="editedItem.contents" label="내용"></v-text-field>
+                          <v-text-field
+                            color="rgb(80,130,155)"
+                            filled
+                            v-model="editedItem.contents"
+                            label="내용"
+                          ></v-text-field>
                         </v-col>
                       </v-row>
                     </v-container>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                    <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                    <v-btn color="rgb(80,130,155)" text @click="close">Cancel</v-btn>
+                    <v-btn color="rgb(80,130,155)" text @click="save">Save</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -83,7 +101,7 @@
             <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
           </template>
           <template v-slot:no-data>
-            <v-btn color="primary" @click="initialize">Reset</v-btn>
+            <v-btn color="rgb(80,130,155)" @click="initialize">Reset</v-btn>
           </template>
         </v-data-table>
       </v-col>
