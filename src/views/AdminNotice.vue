@@ -68,7 +68,7 @@
           </div>
           <div v-else>
             <br/>
-            {{imageUrl}}
+
             <v-img
               :src="imageUrl"
               width="400"
@@ -175,7 +175,7 @@
       },
 
       onClickDel() {
-        this.imageUrl = null;
+        this.imageUrl = '';
       },
       //-----------------------
 
@@ -215,10 +215,13 @@
       },
 
       //작성이 되지 않은 영역으로 이동
-      //왜 PC 화면에선 안움직일까??????????????????????????????????????????????????????????????
       moveView() {
-        console.log(document.getElementById(this.item).offsetTop);
-        document.getElementById(this.item).focus();
+        if(this.item === 'title_') {
+          window.scrollBy(0,-650);
+        }
+        else {
+          window.scrollBy(0,-500);
+        }
       }
     },
   }
