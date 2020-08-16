@@ -187,6 +187,9 @@
                 else if(this.tableName === 'notice'){
                     this.$router.push({name:"notice", params:{id:row._id}})
                 }
+                else if(this.tableName === 'project'){
+                    this.$router.push({name:"project", params:{id:row._id}})
+                }
             }
         }
     }

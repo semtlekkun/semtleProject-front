@@ -24,8 +24,8 @@ const routes = [
     component: () => import('../views/ProjectInput.vue')
   },
   {
-    path: '/project/view',
-    name: 'projectView',
+    path: '/project/detail/:id',
+    name: 'project',
     component: () => import('../views/ProjectView.vue'),
     props: true
   },
@@ -81,7 +81,7 @@ const routes = [
   },
   {
     path: '/project/list',
-    name: 'prijectList',
+    name: 'projectList',
     component: () => import('../views/ProjectList.vue')
   },
   {

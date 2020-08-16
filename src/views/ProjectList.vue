@@ -14,7 +14,9 @@
                 </v-row>
                 <v-row>
                     <v-col>
-                        <Table :perPage="10"/>
+                        <Table :perPage="10"
+                        tableName="project"
+                        :contents="contents"/>
                     </v-col>
                 </v-row>
             </v-col>
@@ -26,12 +28,34 @@
 import Table from '../components/Table.vue';
 import SubTitle from '../components/SubTitle.vue';
     export default {
+        created(){
+            this.axios.get('http://49.50.166.64/api/pf/list')
+            .then(res=>{
+                // console.log(res)
+                if(res.status === 200){
+                    this.contents = []
+                    res.data.portfolioList.forEach((item, index)=>{
+                        let obj = new Object;
+                        obj.number = index+1;
+                        obj.title = item.projectTitle;
+                        obj.writer = item.writer;
+                        obj.date = item.date;
+                        obj._id = item._id;
+                        this.contents.push(obj)
+                    })
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        },
         components:{
             Table,
             SubTitle
         },
         data(){
             return{
+                contents:[],
                 subTitleObj:{
                     title:"프로젝트 목록",
                     contents:"프로젝트 목록이다."

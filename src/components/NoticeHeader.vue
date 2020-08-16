@@ -52,6 +52,7 @@ export default {
       },{})
       .then(res=>{
         console.log(res)
+        this.$router.push({name:'noticeList'})
       })
       .catch(err => {
         console.log(err)

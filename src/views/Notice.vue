@@ -15,7 +15,7 @@ export default {
     const noticeID = this.$route.params.id
     this.axios.get(`http://49.50.166.64/api/notice/${noticeID}`)
     .then(res=>{
-      console.log(res)
+      // console.log(res)
       this.noticeHeader = {
         title:res.data.notice.title,
         writerName:res.data.notice.writer,
