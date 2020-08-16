@@ -184,6 +184,9 @@
                     // console.log("id: ", row._id)
                     this.$router.push({name:'QnA', params:{id:row._id}})
                 }
+                else if(this.tableName === 'notice'){
+                    this.$router.push({name:"notice", params:{id:row._id}})
+                }
             }
         }
     }

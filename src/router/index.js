@@ -14,7 +14,7 @@ const routes = [
     component: () => import('../views/Management.vue')
   },
   {
-    path: '/notice',
+    path: '/notice/detail/:id',
     name: 'notice',
     component: () => import('../views/Notice.vue')
   },
