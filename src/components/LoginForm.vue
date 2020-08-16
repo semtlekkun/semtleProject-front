@@ -27,6 +27,8 @@
   </div>
 </template>
 <script>
+import {mapMutations} from 'vuex'
+
 export default {
   name: "LoginForm",
   data() {
@@ -48,12 +50,12 @@ export default {
             const token = res.data.token;
             sessionStorage.setItem("admin", admin);
             sessionStorage.setItem("token", token);
-            this.error = "성공";
+            this.setLogin() // 로그인 함수
+            this.$router.push('/') // 메인페이지로 이동
           }
           else{
             this.error = "아이디 및 비밀번호 입력을 확인해주세요";
           }
-          
         }).catch(err=>{
           console.log(err)
           this.error = "통신에 문제가 생겼습니다. 다시 시도해주세요."
@@ -64,6 +66,10 @@ export default {
       }
       e.preventDefault();
     },
+    
+    ...mapMutations([
+      'setLogin'
+    ]),
   },
 };
 </script>

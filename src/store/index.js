@@ -1,46 +1,30 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueRouter from 'vue-router'
 
 Vue.use(Vuex)
+Vue.use(VueRouter)
 
 export default new Vuex.Store({
   state: {
-    headers:[
-      {
-        text: '번호',
-        align: 'start',
-        sortable: false,
-        value: 'number',
-      },
-      { text: '제목', value: 'title' },
-      { text: '작성자', value: 'writer' },
-      { text: '작성 일시', value: 'date' },
-    ],
-    contents:[]
+    isLogin: false // 로그인 됐는 지 확인하는 변수
   },
   mutations: {
-    setList(state, res){
-      state.contents=[]
-      res.data.forEach((el,index) => {
-        let obj = {
-          number: index+1,
-          title: el.title,
-          writer: el.writer,
-          date: el.date,
-          id: el._id
-        }
-
-        state.contents.push(obj);
-      })
+    setLogin(state){ // 로그인하는 함수
+      state.isLogin = !state.isLogin
+    },
+    setLogout(state){ // MainMenuBar, MobileView에서 로그아웃할 때 실행하는 함수
+      state.isLogin = !state.isLogin // login true>false 전환
+      // 세션스토리지 token,admin 삭제
+      sessionStorage.removeItem("token")
+      sessionStorage.removeItem("admin")
+      location.reload(true); // 페이지 새로고침
     }
   },
   getters:{
-    getList(state){
-      return state.contents
+    getLogin(state){ // isLogin getter
+      return state.isLogin
     },
-    getHeaders(state){
-      return state.headers
-    }
   },
   actions: {
   },

@@ -24,7 +24,7 @@
     >
         <v-list-item>
     
-            <v-list-item-content> <!-- 로고 크기 줄여야함 -->
+            <v-list-item-content>
                 <v-img class="mx-auto my-4" 
                 :max-height="imgSize" 
                 :max-width="imgSize" 
@@ -62,6 +62,33 @@
                     
                 </v-list-item>
             </router-link>
+            
+            <div v-if="getLogin()"> <!-- 로그인일 때 메뉴 -->
+            <router-link
+            v-for="item in mainItemsLogIn"
+            :key="item.Title" :to="item.url">
+                <v-list-item link
+                    class="py-4" @click="item.method">
+                    <v-list-item-title class="text-center text-h5">
+                        {{item.Title}}
+                    </v-list-item-title>
+                </v-list-item>    
+            </router-link>
+            </div>
+
+            <div v-if="!getLogin()"> <!-- 로그아웃일 때 메뉴 -->
+            <router-link
+            v-for="item in mainItemsLogOut"
+            :key="item.Title" :to="item.url">
+                <v-list-item link
+                    class="py-4" @click="item.method">
+                    <v-list-item-title class="text-center text-h5">
+                        {{item.Title}}
+                    </v-list-item-title>
+                </v-list-item>  
+            </router-link>
+            </div>
+
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -84,11 +111,14 @@
                 <router-view />
             </v-col>
         </v-row>
+        
     </v-container>
   </v-card>
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
+import {mapGetters} from 'vuex'
   export default {
       beforeMount(){
             this.windowResize();
@@ -100,6 +130,8 @@
             drawer: false,
             imgSize: 150,
             projectClick: false,
+            issnackBar: false,
+            timeout: 2000,
             mainItems: [
                 {
                     Items: null,
@@ -125,6 +157,9 @@
                     method: ()=>{}
                 },
 
+            ],
+            // 로그아웃 때 메뉴
+            mainItemsLogOut: [
                 {
                     Items: null,
                     url: '/login',
@@ -132,9 +167,33 @@
                     method: ()=>{}
                 },
             ],
+            // 로그인 때 메뉴
+            mainItemsLogIn: [
+                {
+                    Items: null,
+                    url: '/mypage',
+                    Title: "마이페이지",
+                    method: ()=>{}
+                },
+
+                {
+                    Items: null,
+                    url: '',
+                    Title: "로그아웃",
+                    method: ()=>{
+                        this.setLogout()                 
+                    }
+                },
+            ]
         }
     },
     methods:{
+        ...mapMutations([
+            'setLogout'
+        ]),
+        ...mapGetters([
+            "getLogin"
+        ]),
         windowResize(){
             if(window.innerWidth <= 1263){
                 this.isMobile = true;
