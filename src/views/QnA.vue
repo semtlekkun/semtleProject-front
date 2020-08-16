@@ -42,7 +42,7 @@ export default {
 
     this.axios.get(`http://49.50.166.64/api/answer/${id}`)
     .then(res=>{
-      console.log(res)
+      // console.log(res)
       res.data.answer.forEach(el=>{
         let obj = {
           name: el.writer,

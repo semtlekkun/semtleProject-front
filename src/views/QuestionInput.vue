@@ -85,7 +85,7 @@ import SubTitle from '../components/SubTitle.vue';
                 form.append("title",this.title)
                 form.append("contents", this.contents)
                 form.append("image", this.files[0])
-                console.log(this.files[0])
+                // console.log(this.files[0])
                 this.axios.post(`http://49.50.166.64/api/question`,
                 form,
                 {
@@ -93,8 +93,8 @@ import SubTitle from '../components/SubTitle.vue';
                         'token': sessionStorage.getItem('token')
                     }
                 })
-                .then(res=>{
-                    console.log(res)
+                .then(()=>{
+                    // console.log(res)
                     this.$router.push({name:"QnAList"})
                 })
                 .catch(err=>{
