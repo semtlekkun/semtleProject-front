@@ -121,7 +121,7 @@ export default {
       { text: "과목", value: "language" },
       { text: "활동년도", value: "activeYear" },
       { text: "활동학기", value: "season" },
-      { text: "Actions", value: "actions" },
+      { text: "Actions", value: "actions", sortable: false },
     ],
     mentors: [],
 
