@@ -62,53 +62,58 @@ const routes = [
   {
     path: '/project/announce/read',
     name: 'projectAnnounceRead',
-    component: ()=> import('../views/ProjectAnnounceRead.vue')
+    component: () => import('../views/ProjectAnnounceRead.vue')
   },
   {
     path: '/mypage',
     name: 'myPage',
-    component: ()=>import('../views/MyPage.vue')
+    component: () => import('../views/MyPage.vue')
   },
   {
     path: '/login',
     name: 'login',
-    component: ()=>import('../views/Login.vue')
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/management',
     name: 'management',
-    component: ()=>import('../views/Management.vue')
+    component: () => import('../views/Management.vue')
   },
   {
     path: '/admin/mentor',
     name: 'mentor',
-    component: ()=>import('../views/AdminMentor.vue')
+    component: () => import('../views/AdminMentor.vue')
   },
   {
     path: '/project/list',
     name: 'prijectList',
-    component: ()=>import('../views/ProjectList.vue')
+    component: () => import('../views/ProjectList.vue')
   },
   {
     path: '/notice/list',
     name: 'noticeList',
-    component: ()=>import('../views/NoticeList.vue')
+    component: () => import('../views/NoticeList.vue')
   },
   {
     path: '/project/announce/list',
     name: 'projectAnnounceList',
-    component: ()=>import('../views/ProjectAnnounceList.vue')
+    component: () => import('../views/ProjectAnnounceList.vue')
   },
   {
     path: '/admin/menu',
     name: 'adminMenu',
-    component: ()=> import('../views/AdminMenu.vue')
+    component: () => import('../views/AdminMenu.vue')
   },
+  {
+    path: '/admin/modify',
+    name: 'adminModify',
+    component: () => import('../views/AdminModify.vue')
+  }
 ]
 
 const router = new VueRouter({
-  scrollBehavior(){
-    return {x:0,y:0}
+  scrollBehavior() {
+    return { x: 0, y: 0 }
   },
   mode: 'history',
   base: process.env.BASE_URL,
