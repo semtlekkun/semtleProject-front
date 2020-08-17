@@ -2,7 +2,13 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-data-table :headers="headers" :items="mentors" :search="search" sort-by="position" class="elevation-1">
+        <v-data-table
+          :headers="headers"
+          :items="mentors"
+          :search="search"
+          sort-by="position"
+          class="elevation-1"
+        >
           <template v-slot:top>
             <v-toolbar flat color="white">
               <v-toolbar-title>역대 간부 관리</v-toolbar-title>
@@ -189,7 +195,7 @@ export default {
       this.axios.get("http://49.50.166.64/api/management/list").then((res) => {
         console.log(res);
 
-        for (let idx = 1; idx < res.data.management.length; ++idx) {
+        for (let idx = 0; idx < res.data.management.length; ++idx) {
           var tempObj = {
             name: "",
             studentCode: "",
@@ -200,7 +206,7 @@ export default {
             contents: "",
             _id: "",
           };
-          tempObj.name = res.data.management[idx].Info[0].name;
+          tempObj.name = res.data.management[idx].name;
           tempObj.studentCode = res.data.management[idx].studentCode;
           tempObj.position = res.data.management[idx].position;
           tempObj.language = res.data.management[idx].language;
@@ -236,16 +242,14 @@ export default {
             }
           })
           .catch((err) => {
-            if(err.response.status === 400) {
+            if (err.response.status === 400) {
               alert("유효하지 않은 학생입니다.");
-            }
-            else if(err.response.status === 401) {
-              alert("권한이 없습니다."  );
-            }
-            else if(err.response.status === 500) {
+            } else if (err.response.status === 401) {
+              alert("권한이 없습니다.");
+            } else if (err.response.status === 500) {
               alert("서버에 문제가 있습니다.");
             }
-          })
+          });
       }
     },
 
@@ -292,19 +296,17 @@ export default {
           if (res.status === 200) {
             alert("수정 성공!");
             this.$router.go();
-          } 
+          }
         })
-          .catch((err) => {
-            if(err.response.status === 400) {
-              alert("유효하지 않은 학생입니다.");
-            }
-            else if(err.response.status === 401) {
-              alert("권한이 없습니다."  );
-            }
-            else if(err.response.status === 500) {
-              alert("서버에 문제가 있습니다.");
-            }
-          })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            alert("유효하지 않은 학생입니다.");
+          } else if (err.response.status === 401) {
+            alert("권한이 없습니다.");
+          } else if (err.response.status === 500) {
+            alert("서버에 문제가 있습니다.");
+          }
+        });
 
       this.close();
     },
@@ -373,16 +375,14 @@ export default {
             }
           })
           .catch((err) => {
-            if(err.response.status === 400) {
+            if (err.response.status === 400) {
               alert("유효하지 않은 학생입니다.");
-            }
-            else if(err.response.status === 401) {
-              alert("권한이 없습니다."  );
-            }
-            else if(err.response.status === 500) {
+            } else if (err.response.status === 401) {
+              alert("권한이 없습니다.");
+            } else if (err.response.status === 500) {
               alert("서버에 문제가 있습니다.");
             }
-          })
+          });
 
         this.close();
       }
