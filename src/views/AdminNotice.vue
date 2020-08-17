@@ -3,12 +3,11 @@
     <!-- 제목 -->
     <v-row class="mt-5 justify-center">
       <v-col cols="12" md="3" lg="2">
-        <label for="title_">제목</label>
+        <label>제목</label>
       </v-col>
 
       <v-col cols="12" md="9" lg="6">
         <v-text-field
-          id="title_"
           label="제목"
           outlined
           v-model="title"

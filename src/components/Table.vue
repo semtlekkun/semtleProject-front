@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import {Home} from '@/views/Home'
+    import Home from '@/views/Home'
     export default {
         props: {
             tableName: String,
