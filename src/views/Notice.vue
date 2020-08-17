@@ -36,7 +36,7 @@
                 <vue-markdown :source="contents"></vue-markdown>
               </v-card-text>
               <div id="imageContainer">
-                <v-img :src="imageUrl" @load="resizeImg"></v-img>
+                <img :src="imageUrl" width="100%;" />
               </div>
             </v-alert>
           </v-card>
@@ -108,9 +108,6 @@ export default {
             this.$router.push({ name: "noticeList" });
           }
         });
-    },
-    resizeImg() {
-      console.log("load!");
     },
   },
 };
