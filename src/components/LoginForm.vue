@@ -15,7 +15,13 @@
       </v-row>
       <v-row class="mt-5 center">
         <v-col cols="10" sm="6" md="5" xl="3">
-          <input placeholder="비밀번호" type="password" class="PasswordInput pl-10" v-model="Password" name="Password" />
+          <input
+            placeholder="비밀번호"
+            type="password"
+            class="PasswordInput pl-10"
+            v-model="Password"
+            name="Password"
+          />
         </v-col>
       </v-row>
       <v-row class="mt-5">
@@ -27,7 +33,7 @@
   </div>
 </template>
 <script>
-import {mapMutations} from 'vuex'
+import { mapMutations } from "vuex";
 
 export default {
   name: "LoginForm",
@@ -41,32 +47,32 @@ export default {
   methods: {
     CheckForm(e) {
       if (this.Password && this.StudentNumber) {
-        this.axios.post('http://49.50.166.64/api/log/in',{
-          _id: this.StudentNumber,
-          pw: this.Password,
-        }).then((res) => {
-          if(res.status === 200){
-            const admin = res.data.admin;
-            const token = res.data.token;
-            sessionStorage.setItem("admin", admin);
-            sessionStorage.setItem("token", token);
-            if(admin){
-              this.setAdmin();
+        this.axios
+          .post("http://49.50.166.64/api/log/in", {
+            _id: this.StudentNumber,
+            pw: this.Password,
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              const admin = res.data.admin;
+              const token = res.data.token;
+              sessionStorage.setItem("admin", admin);
+              sessionStorage.setItem("token", token);
+              if (admin) {
+                this.setAdmin(true);
+              }
+              this.setLogin(true); // 로그인 함수
+              this.$router.push("/"); // 메인페이지로 이동
             }
-            this.setLogin(true) // 로그인 함수
-            this.$router.push('/') // 메인페이지로 이동
-          }
-        }).catch((err)=>{
-          console.log(err)
-          if(err.response.status === 400) {
-            this.error ="아이디 혹은 비밀번호가 일치 하지 않습니다."
-          }
-
-          else if(err.response.status === 500){
-            this.error = "통신에 문제가 생겼습니다. 다시 시도해주세요."
-          }
-            
-        })
+          })
+          .catch((err) => {
+            console.log(err);
+            if (err.response.status === 400) {
+              this.error = "아이디 혹은 비밀번호가 일치 하지 않습니다.";
+            } else if (err.response.status === 500) {
+              this.error = "통신에 문제가 생겼습니다. 다시 시도해주세요.";
+            }
+          });
       }
 
       //입력이 아예 업는 경우
@@ -75,10 +81,8 @@ export default {
       }
       e.preventDefault();
     },
-    
-    ...mapMutations([
-      'setLogin','setAdmin'
-    ]),
+
+    ...mapMutations(["setLogin", "setAdmin"]),
   },
 };
 </script>

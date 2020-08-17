@@ -14,7 +14,6 @@
                 </v-col>
                 <v-col cols="2">
                   <v-btn v-show="admin" color="error" @click="deleteAnnounce">삭제</v-btn>
-                  <v-btn v-show="myself" color="primary" @click="addCandidater">지원자+</v-btn>
                 </v-col>
               </v-row>
               <v-divider class="mb-2"></v-divider>
