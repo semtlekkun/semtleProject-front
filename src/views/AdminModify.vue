@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-data-table :headers="headers" :items="mentors" :search="search" class="elevation-1">
+        <v-data-table :headers="headers" :items="mentors" :search="search" sort-by="position" class="elevation-1">
           <template v-slot:top>
             <v-toolbar flat color="white">
               <v-toolbar-title>역대 간부 관리</v-toolbar-title>
@@ -39,6 +39,8 @@
                             @keypress="checkNumber"
                             @keyup="checkHan"
                             type="number"
+                            counter
+                            maxlength="8"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
@@ -58,7 +60,7 @@
                             label="과목"
                           ></v-select>
                         </v-col>
-                        <v-col cols="12" sm="6" md="4">
+                        <v-col cols="12" sm="6" md="6">
                           <v-text-field
                             color="rgb(80,130,155)"
                             v-model="editedItem.activeYear"
@@ -68,7 +70,7 @@
                             type="number"
                           ></v-text-field>
                         </v-col>
-                        <v-col cols="12" sm="6" md="4">
+                        <v-col cols="12" sm="6" md="6">
                           <v-select
                             color="rgb(80,130,155)"
                             v-model="editedItem.season"
