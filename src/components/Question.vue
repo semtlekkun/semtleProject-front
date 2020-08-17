@@ -27,7 +27,7 @@
     <br />
     <VueMarkdown :source="Question.question"></VueMarkdown>
 
-    <img v-if="Question.image!==''" :src="imageURL" alt="첨부이미지" />
+    <v-img v-if="Question.image!==''" :src="imageURL" alt="첨부이미지" max-width="960px" class="mt-10" />
   </div>
 </template> 
 
@@ -70,10 +70,8 @@ export default {
           this.axios
             .get(`http://49.50.166.64/api/question/${res.data._id}`)
             .then((res) => {
-              console.log(res.data);
               this.imageURL =
                 "http://49.50.166.64/api/question/" + res.data.image;
-              console.log(this.imageURL);
             });
         }
       });
