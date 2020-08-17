@@ -6,7 +6,7 @@
           <SubTitle :subTitleObj="subTitleObj" />
         </v-col>
         <v-col cols="12" lg="9">
-          <v-card>
+          <v-card id="contentBox">
             <v-alert outlined color="#226db2">
               <v-row class="py-0">
                 <v-col cols="10" class="py-0">
@@ -36,7 +36,7 @@
                 <vue-markdown :source="contents"></vue-markdown>
               </v-card-text>
               <div id="imageContainer">
-                <v-img src="../assets/쿼카.jpg"></v-img>
+                <v-img :src="imageUrl" @load="resizeImg"></v-img>
               </div>
             </v-alert>
           </v-card>
@@ -65,6 +65,9 @@ export default {
           this.views = res.data.notice.view;
           this.date = res.data.notice.date;
           this.contents = res.data.notice.contents;
+          this.imageUrl = "http://49.50.166.64/api/notice/".concat(
+            res.data.notice.image
+          );
           // 이미지도 추가
         }
       })
@@ -79,6 +82,7 @@ export default {
     writer: "",
     date: "",
     views: 0,
+    imageUrl: "",
 
     contents: "",
     subTitleObj: {
@@ -104,6 +108,9 @@ export default {
             this.$router.push({ name: "noticeList" });
           }
         });
+    },
+    resizeImg() {
+      console.log("load!");
     },
   },
 };
