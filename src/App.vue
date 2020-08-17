@@ -5,7 +5,7 @@
       <MobileView v-show="isMobile" />
       <PCView v-show="!isMobile" />
       <TopBtn v-show="!isMobile" v-if="$route.name !== 'login'" />
-      <AdminBtn v-if="$route.name === 'Home'" id="adminBtn" style="display:none;" />
+      <AdminBtn v-if="$route.name === 'Home'" :class="getAdmin ? 'adminBbtn': 'notAdminBtn'" />
     </v-main>
   </v-app>
 </template>
@@ -16,14 +16,21 @@ import AdminBtn from "./components/AdminBtn.vue";
 import PCView from "./views/PCView.vue";
 import MobileView from "./views/MobileView.vue";
 import Intro from "./views/Intro.vue";
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   name: "App",
+  computed:{
+    ...mapGetters(['getAdmin'])
+  },
   created(){
-    if(sessionStorage.getItem('admin') === 'true'){
+    if(sessionStorage.getItem('token')){
       this.setLogin();
     }
+    if(sessionStorage.getItem('admin') === 'true'){
+      this.setAdmin();
+    }
+    
   },
   beforeMount() {
     this.windowResize();
@@ -36,14 +43,9 @@ export default {
     if (sessionStorage.getItem("token") !== null) {
       this.setLogin();
     }
+    
   },
-  updated() {
-    if (sessionStorage.getItem("token") !== null) {
-      if (sessionStorage.getItem("admin") === "true") {
-        document.querySelector("#adminBtn").style.display = "";
-      }
-    }
-  },
+
   components: {
     TopBtn,
     MobileView,
@@ -56,11 +58,10 @@ export default {
     isMobile: false,
     isLogin: false,
     isIntro: true,
-    isAdmin: false,
   }),
 
   methods: {
-    ...mapMutations(["setLogin"]),
+    ...mapMutations(["setLogin",'setAdmin']),
     switchScreen() {
       this.isIntro = false;
       sessionStorage.setItem("isIntro", this.isIntro);
@@ -71,10 +72,7 @@ export default {
       } else {
         this.isMobile = false;
       }
-    },
-    adminBtnActive() {
-      this.isAdmin = !this.isAdmin;
-    },
+    }
   },
 };
 </script>
@@ -98,6 +96,14 @@ export default {
 }
 
 ::-webkit-scrollbar {
+  display: none;
+}
+
+.adminBtn{
+  display: block;
+}
+
+.notAdminBtn{
   display: none;
 }
 </style>

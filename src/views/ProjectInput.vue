@@ -251,8 +251,8 @@ export default {
         form.append("projectEndDate", this.endDate);
         form.append("projectTeamName", this.teamName);
         form.append("teamLeaderCode", this.teamLeader);
-        form.append("projectImages", this.files);
         form.append("git", this.git);
+        form.append("projectImages", this.files);
 
         for (var value of form.values()) {
           console.log(value);

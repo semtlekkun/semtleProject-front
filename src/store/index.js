@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLogin: false // 로그인 됐는 지 확인하는 변수
+    isLogin: false, // 로그인 됐는 지 확인하는 변수
+    isAdmin: false,
   },
   mutations: {
     setLogin(state){ // 로그인하는 함수
       state.isLogin = !state.isLogin
+    },
+    setAdmin(state){
+      state.isAdmin = !state.isAdmin
     },
     setLogout(state){ // MainMenuBar, MobileView에서 로그아웃할 때 실행하는 함수
       state.isLogin = !state.isLogin // login true>false 전환
@@ -23,6 +27,9 @@ export default new Vuex.Store({
     getLogin(state){ // isLogin getter
       return state.isLogin
     },
+    getAdmin(state){
+      return state.isAdmin;
+    }
   },
   actions: {
   },
