@@ -103,7 +103,6 @@ export default {
 
       this.axios.get("http://49.50.166.64/api/mypage", config).then((res) => {
         this.outputPhonenum = res.data.student.phoneNum;
-        console.log(res);
       });
     },
     openDialog() {
@@ -135,7 +134,7 @@ export default {
         this.dialog2 = true;
       } else {
         this.resultPhoneNum = this.phoneNum1 + this.phoneNum2 + this.phoneNum3;
-        console.log(this.resultPhoneNum);
+
         let sendObj = {
           phoneNum: this.resultPhoneNum,
         };

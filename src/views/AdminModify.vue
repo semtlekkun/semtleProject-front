@@ -191,8 +191,6 @@ export default {
       // axios 로 데이터 받아와서 this.mentors 데이터 배열에 삽입 (+)
 
       this.axios.get("http://49.50.166.64/api/management/list").then((res) => {
-        console.log(res);
-
         for (let idx = 0; idx < res.data.management.length; ++idx) {
           var tempObj = {
             name: "",
@@ -328,10 +326,12 @@ export default {
       if (this.editedItem.contents === "")
         this.errorMsg.push("간단하게라도 내용을 적어주세요.");
 
-      if(this.editedItem.position === this.positionItems[2] && this.editedItem.language === "")
+      if (
+        this.editedItem.position === this.positionItems[2] &&
+        this.editedItem.language === ""
+      )
         this.errorMsg.push("멘토의 과목을 선택해 주세요.");
 
-      
       // 예외처리에 걸린 경우 -> 알람 띄우고 다시 폼 입력
       if (this.errorMsg.length !== 0) {
         let errString = "";
