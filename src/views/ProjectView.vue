@@ -86,63 +86,78 @@
   </v-container>
 </template> -->
 <template>
-  <div id="projectRead">
-    <v-container style="margin-top: 4rem; margin-bottom: 4rem;">
-      <v-row>
-        <v-col cols="12">
-          <v-card>
-            <v-alert outlined color="#226db2">
-              <v-row class="py-0">
-                <v-col cols="7" class="py-0">
-                  <v-card-title>{{title}}</v-card-title>
-                </v-col>
-                <v-col class="text-right">
-                  <v-btn cols="5" v-show="admin" color="error" rounded="rounded" @click="deleteProject">삭제</v-btn>
-                </v-col>
-              </v-row>
-              <v-divider class="mb-2"></v-divider>
-              <ul class="announceInfo">
-                <li>
-                  <b>작성자</b>
-                  {{writer}}
-                </li>
-                <li>
-                  <b>작성일</b>
-                  {{date}}
-                </li>
-                <li>
-                  <v-icon small>mdi-eye</v-icon>
-                  {{view}}
-                </li>
-              </ul>
-              <v-card-text style="color: #000;" width="100%">
-                <p>팀장 {{leaderNick}}</p>
-                <p>프로젝트 기간 {{startDate}} ~ {{endDate}}</p>
-                <p>
-                  링크
-                  <a :href="link">링크 바로가기</a>
-                </p>
-                <p>
-                  Github
-                  <a :href="Gitbub">링크 바로가기</a>
-                </p>
-                <p>프로젝트 기간 {{startDate}} ~ {{endDate}}</p>
-                <VueMarkdown :source="contents" class="mt-10"></VueMarkdown>
-              </v-card-text>
-              <div v-for="(image,i) in images" :key="i">
-                <img :src="imageURL+image" width="100%" />
-              </div>
-            </v-alert>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col cols="12" lg="3">
+        <SubTitle :subTitleObj="subTitleObj" />
+      </v-col>
+      <v-col cols="12" lg="9">
+        <div id="projectRead">
+          <v-container style="margin-top: 4rem; margin-bottom: 4rem;">
+            <v-row>
+              <v-col cols="12">
+                <v-card>
+                  <v-alert outlined color="#226db2">
+                    <v-row class="py-0">
+                      <v-col cols="7" class="py-0">
+                        <v-card-title>{{title}}</v-card-title>
+                      </v-col>
+                      <v-col class="text-right">
+                        <v-btn
+                          cols="5"
+                          v-show="admin"
+                          color="error"
+                          rounded="rounded"
+                          @click="deleteProject"
+                        >삭제</v-btn>
+                      </v-col>
+                    </v-row>
+                    <v-divider class="mb-2"></v-divider>
+                    <ul class="announceInfo">
+                      <li>
+                        <b>작성자</b>
+                        {{writer}}
+                      </li>
+                      <li>
+                        <b>작성일</b>
+                        {{date}}
+                      </li>
+                      <li>
+                        <v-icon small>mdi-eye</v-icon>
+                        {{view}}
+                      </li>
+                    </ul>
+                    <v-card-text style="color: #000;" width="100%">
+                      <p>팀장 {{leaderNick}}</p>
+                      <p>프로젝트 기간 {{startDate}} ~ {{endDate}}</p>
+                      <p>
+                        링크
+                        <a :href="link">링크 바로가기</a>
+                      </p>
+                      <p>
+                        Github
+                        <a :href="Gitbub">링크 바로가기</a>
+                      </p>
+                      <p>프로젝트 기간 {{startDate}} ~ {{endDate}}</p>
+                      <VueMarkdown :source="contents" class="mt-10"></VueMarkdown>
+                    </v-card-text>
+                    <div v-for="(image,i) in images" :key="i">
+                      <img :src="imageURL+image" width="70%" max-width="960px"/>
+                    </div>
+                  </v-alert>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 import VueMarkdown from "vue-markdown";
-// import SubTitle from "../components/SubTitle.vue";
+import SubTitle from "../components/SubTitle.vue";
 
 export default {
   created() {
@@ -175,7 +190,7 @@ export default {
   },
   components: {
     VueMarkdown,
-    // SubTitle,
+    SubTitle,
   },
   data() {
     return {
