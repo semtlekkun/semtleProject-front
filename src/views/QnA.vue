@@ -75,7 +75,6 @@ export default {
       },
       commentData: {
         writerName: "",
-
         comments: [],
       },
     };
