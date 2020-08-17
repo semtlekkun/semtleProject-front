@@ -45,7 +45,12 @@
 
               <v-date-picker v-model="startDate" no-title scrollable>
                 <v-spacer></v-spacer>
-                <v-btn id="menu1" flat color="primary" @click="()=> {temp(); $refs.menu1.save(startDate);}">확인</v-btn>
+                <v-btn
+                  id="menu1"
+                  flat
+                  color="primary"
+                  @click="()=> {temp(); $refs.menu1.save(startDate);}"
+                >확인</v-btn>
               </v-date-picker>
             </v-menu>
           </v-col>
@@ -65,7 +70,12 @@
               </template>
               <v-date-picker v-model="endDate" no-title scrollable>
                 <v-spacer></v-spacer>
-                <v-btn id="menu2" flat color="primary" @click="()=> {temp(); $refs.menu2.save(endDate); }">확인</v-btn>
+                <v-btn
+                  id="menu2"
+                  flat
+                  color="primary"
+                  @click="()=> {temp(); $refs.menu2.save(endDate); }"
+                >확인</v-btn>
               </v-date-picker>
             </v-menu>
           </v-col>
@@ -148,6 +158,20 @@
         </v-row>
       </v-col>
     </v-row>
+    <v-dialog v-model="dialog" persistent max-width="290">
+      <v-card>
+        <v-card-title class="headline error">
+          <p style="color:white !important;">Error</p>
+        </v-card-title>
+        <ul class="mt-5">
+          <li v-for="(error,i) in errorMsg" :key="i">{{error}}</li>
+        </ul>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="error" text @click="dialog = false">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -160,7 +184,7 @@ export default {
   },
   data() {
     return {
-      git:"",
+      git: "",
       link: "",
       teamLeader: "",
       teamName: "",
@@ -169,29 +193,34 @@ export default {
       startDate: new Date().toISOString().substr(0, 10),
       menu2: false,
       endDate: new Date().toISOString().substr(0, 10),
-      datecheck:false,
+      datecheck: false,
       members: [],
       memberNum: "",
       files: [],
       errorMsg: [],
-      rules:{
-        fileCheck :value =>!value || value.size < 2000000 ||"Avatar size should be less than 2 MB!",
-        counter: value=>value.length <= 8 || 'Student Code length should be 8!'
+      rules: {
+        fileCheck: (value) =>
+          !value ||
+          value.size < 2000000 ||
+          "Avatar size should be less than 2 MB!",
+        counter: (value) =>
+          value.length <= 8 || "Student Code length should be 8!",
       },
       contents: "",
       subTitleObj: {
         title: "프로젝트 작성",
         contents: "프로젝트 작성이다.",
       },
+      dialog: false,
     };
   },
   methods: {
     //날짜 확인 관련 예외 처리.
     temp() {
       //(잘못한 경우) 종료일자를 더 앞으로 한 경우
-      if(this.endDate < this.startDate) {
-        this.startDate = new Date().toISOString().substr(0,10);
-        this.endDate = new Date().toISOString().substr(0,10)
+      if (this.endDate < this.startDate) {
+        this.startDate = new Date().toISOString().substr(0, 10);
+        this.endDate = new Date().toISOString().substr(0, 10);
         alert("날짜 설정이 잘못 되었습니다.");
       }
     },
@@ -240,7 +269,7 @@ export default {
         for (var idx = 0; idx < this.errorMsg.length; idx++) {
           message = message + this.errorMsg[idx] + "\n";
         }
-        alert(message);
+        this.dialog = true;
       } else {
         var form = new FormData();
         form.append("projectTitle", this.projectTitle);
@@ -275,17 +304,19 @@ export default {
           })
           .catch((err) => {
             //팀장 학번이 셈틀꾼에 등록되어있지 않은 경우
-            if(err.response.ststus === 400 && err.response.data.status === "none") {
-              alert("팀장 학번이 셈틀꾼 에 등록되어있지 않습니다. 입력값을 확인하세요")
-            }
-
-            else if (err.response.status === 401) {
-              alert("로그인 후 이용 가능합니다.")
+            if (
+              err.response.ststus === 400 &&
+              err.response.data.status === "none"
+            ) {
+              alert(
+                "팀장 학번이 셈틀꾼 에 등록되어있지 않습니다. 입력값을 확인하세요"
+              );
+            } else if (err.response.status === 401) {
+              alert("로그인 후 이용 가능합니다.");
               location.href = "/login";
-
             }
             console.log(err.response);
-          })
+          });
       }
     },
   },
@@ -295,5 +326,8 @@ export default {
 <style scoped>
 .projectTitle {
   border-bottom: 1px solid black;
+}
+li {
+  list-style: none;
 }
 </style>
