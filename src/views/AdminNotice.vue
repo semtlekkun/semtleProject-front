@@ -150,9 +150,6 @@
               alert("로그인후 작성해 주세요");
               location.href = "/login";
             }
-            else if(error.response.ststus === 404) {
-              console.log("여기다 여기");
-            }
             console.log(error);
           });
           //e.preventDefault(); 
