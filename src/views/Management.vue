@@ -7,7 +7,7 @@
           <v-row>
             <v-col cols="6" sm="3" v-for="(member,j) in cadre[1][0]" :key="j">
               <v-card class="pa-10">
-                <v-img :src="imageURL+member.Info[0].image" min-height="250px" max-height="250px" />
+                <!-- <v-img :src="imageURL+member.Info[0].image" min-height="250px" max-height="250px" /> -->
                 <!-- <v-img :src="imageURL+member.Info[0].image" min-height="400px" max-height="400px"/> -->
                 <p class="position">{{member.language}}{{member.position}}</p>
                 <p class="number">{{member.studentCode}}</p>
@@ -23,7 +23,7 @@
           <v-row>
             <v-col cols="6" sm="3" v-for="(member,j) in cadre[1][1]" :key="j">
               <v-card class="pa-10">
-                <v-img :src="imageURL+member.Info[0].image" min-height="250px" max-height="250px" />
+                <!-- <v-img :src="imageURL+member.Info[0].image" min-height="250px" max-height="250px" /> -->
                 <p class="position">{{member.language}}{{member.position}}</p>
                 <p class="number">{{member.studentCode}}</p>
                 <p class="name">{{member.Info[0].name}}</p>
@@ -48,10 +48,9 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     this.getData();
   },
-
   methods: {
     getData() {
       axios
@@ -88,6 +87,7 @@ export default {
               }
             }
           });
+          console.log(this.CadreList);
         })
         .catch((error) => {
           console.log(error);
