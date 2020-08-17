@@ -117,6 +117,7 @@ export default {
           obj.date = item.date;
           obj._id = item._id;
           obj.imgSrc = "http://49.50.166.64/api/pf/"+item.projectImages[0];
+          console.log(item.projectImages[0], " 1")
           obj.contents = item.contents;
           this.cardViewList.push(obj)
         })

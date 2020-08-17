@@ -39,7 +39,6 @@ export default {
             "http://49.50.166.64/api/notice/" + res.data.notice.image;
         }
       });
-      console.log(this.imageURL);
     },
   },
 };
