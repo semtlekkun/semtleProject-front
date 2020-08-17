@@ -63,7 +63,7 @@
                 </v-list-item>
             </router-link>
             
-            <div v-if="getLogin()"> <!-- 로그인일 때 메뉴 -->
+            <div v-show="isLogin"> <!-- 로그인일 때 메뉴 -->
             <router-link
             v-for="item in mainItemsLogIn"
             :key="item.Title" :to="item.url">
@@ -76,7 +76,7 @@
             </router-link>
             </div>
 
-            <div v-if="!getLogin()"> <!-- 로그아웃일 때 메뉴 -->
+            <div v-show="!isLogin"> <!-- 로그아웃일 때 메뉴 -->
             <router-link
             v-for="item in mainItemsLogOut"
             :key="item.Title" :to="item.url">
@@ -117,15 +117,23 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
-import {mapGetters} from 'vuex'
+import {mapMutations,mapGetters} from 'vuex'
   export default {
-      beforeMount(){
-            this.windowResize();
-            window.addEventListener('resize', this.windowResize);
-        },
+    computed:{
+        ...mapGetters([
+            "getLogin"
+        ]),
+    },
+    beforeMount(){
+        this.windowResize();
+        window.addEventListener('resize', this.windowResize);
+        if(this.getLogin){
+            this.isLogin = true
+        }
+    },
     data(){
         return{
+            isLogin:false,
             isMobile : false,
             drawer: false,
             imgSize: 150,
@@ -196,9 +204,6 @@ import {mapGetters} from 'vuex'
     methods:{
         ...mapMutations([
             'setLogout'
-        ]),
-        ...mapGetters([
-            "getLogin"
         ]),
         windowResize(){
             if(window.innerWidth <= 1263){
