@@ -69,7 +69,6 @@ export default {
   border-color: transparent rgb(215,206,207);
   display: block;
   width: 0;
-  z-index: 1;
   right: -14px;
   top: 17px;
 }

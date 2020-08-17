@@ -317,9 +317,6 @@
                 }
             })
             .catch((err) => {
-                if(err.response.status === 404) {
-                    console.log("왜그래 진짜로")
-                }
                 console.log(err);
                 console.log(err.response.ststus);
             })
@@ -380,13 +377,12 @@
                     this.canAdd = true;
                     alert("추가완료");
                     console.log("추가완료");
-                    //this.$router.go();
+
+                    //자동 새로고침.
+                    this.$router.go();
                 }
             })
             .catch((err) => {
-                if(err.response.ststus === 404) {
-                    console.log("여기다 ㅆㅆㅂ")
-                }
                 console.log(err);
                 alert("[에러]중복데이터 존재");
                 console.log("에러코드 : " + err.response.status);
