@@ -30,9 +30,13 @@
 
 <script>
 import MenuElement from "./MenuElement.vue";
-import {mapMutations} from 'vuex';
-import {mapGetters} from 'vuex';
+import {mapMutations, mapGetters} from 'vuex';
 export default {
+  computed:{
+    ...mapGetters([
+      'getLogin'
+    ]),
+  },
   components: {
     MenuElement,
   },
@@ -129,15 +133,12 @@ export default {
     };
   },
   methods: {
-    ...mapGetters([
-      'getLogin'
-    ]),
     ...mapMutations([
       'setLogout'
     ]),
     // 로그인 됐는 지 확인하는 함수
     isLogin(){
-      if (this.getLogin()){ // 로그인일 때
+      if (this.getLogin){ // 로그인일 때
         // console.log("login success")
         this.Attributes = this.AttributesLogIn // 로그인 메뉴 받음
       }

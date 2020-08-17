@@ -20,6 +20,11 @@ import { mapMutations } from "vuex";
 
 export default {
   name: "App",
+  created(){
+    if(sessionStorage.getItem('admin') === 'true'){
+      this.setLogin();
+    }
+  },
   beforeMount() {
     this.windowResize();
     window.addEventListener("resize", this.windowResize);
