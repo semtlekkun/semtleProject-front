@@ -2,7 +2,7 @@
   <v-app>
     <Intro v-show="isIntro" :functions="switchScreen" />
     <v-main v-show="!isIntro">
-      <MobileView v-show="isMobile" />
+      <MobileView v-show="isMobile" :loginStatus="getLogin" />
       <PCView v-show="!isMobile" />
       <TopBtn v-show="!isMobile" v-if="$route.name !== 'login'" />
       <AdminBtn v-if="$route.name === 'Home'" :class="getAdmin ? 'adminBbtn': 'notAdminBtn'" />
@@ -20,17 +20,8 @@ import { mapMutations, mapGetters } from "vuex";
 
 export default {
   name: "App",
-  computed:{
-    ...mapGetters(['getAdmin'])
-  },
-  created(){
-    if(sessionStorage.getItem('token')){
-      this.setLogin();
-    }
-    if(sessionStorage.getItem('admin') === 'true'){
-      this.setAdmin();
-    }
-    
+  computed: {
+    ...mapGetters(["getAdmin", "getLogin"]),
   },
   beforeMount() {
     this.windowResize();
@@ -39,11 +30,17 @@ export default {
       this.isIntro = false;
     }
   },
-  mounted() {
+  created() {
     if (sessionStorage.getItem("token") !== null) {
-      this.setLogin();
+      this.setLogin(true);
+    } else {
+      this.setLogin(false);
     }
-    
+    if (sessionStorage.getItem("admin") === "true") {
+      this.setAdmin(true);
+    } else {
+      this.setAdmin(false);
+    }
   },
 
   components: {
@@ -61,7 +58,7 @@ export default {
   }),
 
   methods: {
-    ...mapMutations(["setLogin",'setAdmin']),
+    ...mapMutations(["setLogin", "setAdmin"]),
     switchScreen() {
       this.isIntro = false;
       sessionStorage.setItem("isIntro", this.isIntro);
@@ -72,7 +69,7 @@ export default {
       } else {
         this.isMobile = false;
       }
-    }
+    },
   },
 };
 </script>
@@ -99,11 +96,11 @@ export default {
   display: none;
 }
 
-.adminBtn{
+.adminBtn {
   display: block;
 }
 
-.notAdminBtn{
+.notAdminBtn {
   display: none;
 }
 </style>

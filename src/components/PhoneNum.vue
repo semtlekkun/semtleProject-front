@@ -23,16 +23,36 @@
 
         <v-divider></v-divider>
 
-        <v-col>
-          <v-text-field
-            v-model="phoneNum"
-            solo
-            maxlength="11"
-            @keypress="checkNumber"
-            @keyup="checkHan"
-            placeholder="'-'를 빼고 입력하세요."
-          ></v-text-field>
-        </v-col>
+        <v-row>
+          <v-col offset="1">
+            <v-text-field
+              v-model="phoneNum1"
+              solo
+              maxlength="3"
+              @keypress="checkNumber"
+              @keyup="checkHan"
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              v-model="phoneNum2"
+              solo
+              maxlength="4"
+              @keypress="checkNumber"
+              @keyup="checkHan"
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              v-model="phoneNum3"
+              solo
+              maxlength="4"
+              @keypress="checkNumber"
+              @keyup="checkHan"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="1"></v-col>
+        </v-row>
 
         <v-divider></v-divider>
 
@@ -51,7 +71,9 @@ export default {
     dialog: false,
     errMsg: [],
 
-    phoneNum: "",
+    phoneNum1: "",
+    phoneNum2: "",
+    phoneNum3: "",
     outputPhonenum: "",
   }),
   created() {
