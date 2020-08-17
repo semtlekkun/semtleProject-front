@@ -308,9 +308,10 @@ export default {
               err.response.status === 400 &&
               err.response.data.status === "none"
             ) {
-              alert(
+              this.errorMsg.push(
                 "팀장 학번이 셈틀꾼 에 등록되어있지 않습니다. 입력값을 확인하세요"
               );
+              this.dialog = true;
             } else if (err.response.status === 401) {
               alert("로그인 후 이용 가능합니다.");
               location.href = "/login";

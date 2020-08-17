@@ -2,31 +2,30 @@
   <div id="members">
     <v-container class="text-center">
       <div v-for="(cadre,i) in CadreList" :key="i">
-        <div v-if="cadre[1][0].length != 0">
+        <div v-if="cadre[1][0].length !== 0">
           <h1 class="text-left mt-5">{{cadre[0]}}년 1학기 (여름학기)</h1>
           <v-row>
             <v-col cols="6" sm="3" v-for="(member,j) in cadre[1][0]" :key="j">
               <v-card class="pa-10">
-                <v-img :src="imageURL+member.Info[0].image" min-height="250px" max-height="250px" />
-                <!-- <v-img :src="imageURL+member.Info[0].image" min-height="400px" max-height="400px"/> -->
+                <v-img :src="imageURL+member.image" min-height="250px" max-height="250px" />
                 <p class="position">{{member.language}}{{member.position}}</p>
                 <p class="number">{{member.studentCode}}</p>
-                <p class="name">{{member.Info[0].name}}</p>
+                <p class="name">{{member.name}}</p>
                 <p class="contents">{{member.contents}}</p>
               </v-card>
             </v-col>
           </v-row>
           <v-divider class="mt-16"></v-divider>
         </div>
-        <div v-if="cadre[1][1].length != 0">
+        <div v-if="cadre[1][1].length !== 0">
           <h1 class="text-left mt-5">{{cadre[0]}}년 2학기 (겨울학기)</h1>
           <v-row>
-            <v-col cols="6" sm="3" v-for="(member,j) in cadre[1][1]" :key="j">
+            <v-col cols="6" sm="3" v-for="(member,k) in cadre[1][1]" :key="k">
               <v-card class="pa-10">
-                <v-img :src="imageURL+member.Info[0].image" min-height="250px" max-height="250px" />
+                <v-img :src="imageURL+member.image" min-height="250px" max-height="250px" />
                 <p class="position">{{member.language}}{{member.position}}</p>
                 <p class="number">{{member.studentCode}}</p>
-                <p class="name">{{member.Info[0].name}}</p>
+                <p class="name">{{member.name}}</p>
                 <p class="contents">{{member.contents}}</p>
               </v-card>
             </v-col>
@@ -48,10 +47,10 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     this.getData();
+    console.log(this.CadreList);
   },
-
   methods: {
     getData() {
       axios
@@ -88,6 +87,7 @@ export default {
               }
             }
           });
+          console.log(this.CadreList);
         })
         .catch((error) => {
           console.log(error);
