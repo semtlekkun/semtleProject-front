@@ -1,194 +1,107 @@
 <template>
-    <v-data-table
-        :headers="headers"
-        :items="contents"
-        :items-per-page="perPage"
-        class="elevation-1"
-        @click:row="rowClick"
-    ></v-data-table>
+    <div>
+        <v-row cols="12" class="mb-0" v-if="$route.name !== 'Home'">
+            <v-col cols="3">
+                <v-select :items="items" label="검색"></v-select>
+            </v-col>
+            <v-col cols="8" class="p-8 ml-3">
+                <!-- 검색 -->
+                <v-text-field
+                    cols="3"
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Search"
+                    single-line="single-line"
+                    hide-details="hide-details"
+                    clearable="clearable"></v-text-field>
+                <v-spacer></v-spacer>
+            </v-col>
+
+        </v-row>
+
+        <v-data-table
+            :headers="headers"
+            :items="contents"
+            :items-per-page="perPage"
+            :search="search"
+            class="elevation-1"
+            @click:row="rowClick"></v-data-table>
+    </div>
+
 </template>
 
 <script>
+    import {Home} from '@/views/Home'
     export default {
-        props:{
-            tableName:String,
-            perPage:Number,
-            contents:Array
+        props: {
+            tableName: String,
+            perPage: Number,
+            contents: Array
         },
-        data () {
+        routes: [
+            {
+                path: '/',
+                name: 'Home',
+                component: Home
+            }
+        ],
+        data() {
             return {
+                items: [
+                    '제목', '작성자', '제목+작성자'
+                ],
+                search: '',
                 headers: [
                     {
                         text: '번호',
                         align: 'start',
                         sortable: false,
-                        value: 'number',
-                    },
-                    { text: '제목', value: 'title' },
-                    { text: '작성자', value: 'writer' },
-                    { text: '작성 일시', value: 'date' },
+                        value: 'number'
+                    }, {
+                        text: '제목',
+                        value: 'title'
+                    }, {
+                        text: '작성자',
+                        value: 'writer'
+                    }, {
+                        text: '작성 일시',
+                        value: 'date'
+                    }
                 ],
-                content: [
-                    {
-                        number: '1',
-                        title: '파이썬 여름 방학 특강 안내',
-                        writer: '김태호',
-                        date: '2020 / 06 / 30'
-                    },
-                    {
-                        number: '2',
-                        title: 'C언어 여름 방학 특강 안내',
-                        writer: '이정철',
-                        date: '2020 / 06 / 30'
-                    },
-                    {
-                        number: '3',
-                        title: '웹 프로그래밍 여름방학 특강 안내',
-                        writer: '이정철',
-                        date: '2020 / 06 / 30'
-                    },
-                    {
-                        number: '4',
-                        title: '종강 파티 안내 및 장소 투표',
-                        writer: '김태호',
-                        date: '2020 / 06 / 24'
-                    },
-                    {
-                        number: '5',
-                        title: '셈틀 프로젝트 참가자 모집',
-                        writer: '이정철',
-                        date: '2020 / 06 / 24'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-                    {
-                        number: '6',
-                        title: '2020-1학기 멘토링 종료',
-                        writer: '김태호',
-                        date: '2020 / 06 / 10'
-                    },
-
-                ],
+                content: []
             }
         },
-        methods:{
-            rowClick(row){
+        methods: {
+            rowClick(row) {
                 console.log(row)
-                if(this.tableName === 'qna'){
+                if (this.tableName === 'qna') {
                     // console.log("id: ", row._id)
-                    this.$router.push({name:'QnA', params:{id:row._id}})
-                }
-                else if(this.tableName === 'notice'){
-                    this.$router.push({name:"notice", params:{id:row._id}})
-                }
-                else if(this.tableName === 'project'){
-                    this.$router.push({name:"project", params:{id:row._id}})
+                    this
+                        .$router
+                        .push({
+                            name: 'QnA',
+                            params: {
+                                id: row._id
+                            }
+                        })
+                } else if (this.tableName === 'notice') {
+                    this
+                        .$router
+                        .push({
+                            name: "notice",
+                            params: {
+                                id: row._id
+                            }
+                        })
+                } else if (this.tableName === 'project') {
+                    this
+                        .$router
+                        .push({
+                            name: "project",
+                            params: {
+                                id: row._id
+                            }
+                        })
                 }
             }
         }
@@ -196,7 +109,7 @@
 </script>
 
 <style>
-.v-data-footer__select{
-    display: none !important;
-}
+    .v-data-footer__select {
+        display: none !important;
+    }
 </style>
