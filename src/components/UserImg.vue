@@ -4,16 +4,11 @@
       <template v-slot:activator="{on, attrs}">
         <!-- 회원정보 변경 화면에서 보여질 카드 -->
         <v-card height="200" light="light">
-          <!-- 이미지를 설정 안하면 기본 이미지 -->
-          <div v-if="userImg===null">
-            <v-img height="150" :src="require('../assets/sample.png')" />
+          <div class="text-center">
+            <img height="150" :src="imageUrl" />
           </div>
 
-          <!-- 이미지 있으면 해당 이미지 -->
-          <div v-else>
-            <v-img :src="imageUrl" style="width:auto; height:150px;" />
-          </div>
-          <v-card-actions>
+          <v-card-actions style="justify-content:center;">
             <v-btn v-bind="attrs" v-on="on" dark="dark" class="btn">이미지 변경</v-btn>
           </v-card-actions>
         </v-card>
@@ -50,7 +45,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn class="btn btn-dark" text="text" @click="checkImg()">확인</v-btn>
+          <v-btn class="btn btn-dark" text="text" @click="submit">확인</v-btn>
         </v-card-actions>
       </div>
     </v-dialog>
@@ -63,21 +58,36 @@ export default {
     dialog: false,
     img: "../assets/sample.png",
     selectImg: null,
-    userImg: null,
-    emptyfile: false,
     data: null,
     imageUrl: null,
   }),
+  created() {
+    this.initImage();
+  },
   methods: {
-    //이미지
+    submit() {
+      console.log(this.imageUrl);
+      //
 
-    checkImg() {
       this.dialog = false;
-      this.userImg = this.selectImg;
+    },
+    initImage() {
+      let config = {
+        headers: { token: sessionStorage.getItem("token") },
+      };
 
-      if (!this.chosenFile) {
-        return (this.emptyfile = true);
-      }
+      console.log(config);
+
+      this.axios
+        .get("http://49.50.166.64/api/mypage", config)
+        .then((res) => {
+          this.imageUrl = "http://49.50.166.64/api/student/";
+          this.imageUrl = this.imageUrl.concat(res.data.student.image);
+          console.log(this.imageUrl);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

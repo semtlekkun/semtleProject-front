@@ -23,6 +23,7 @@
             maxlength="11"
             @keypress="checkNumber"
             @keyup="checkHan"
+            placeholder="'-'를 빼고 입력하세요."
           ></v-text-field>
         </v-col>
 
@@ -105,3 +106,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+#inputPhonNum {
+  width: 1px;
+}
+</style>

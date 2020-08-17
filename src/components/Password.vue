@@ -17,11 +17,11 @@
         <v-divider></v-divider>
 
         <v-col>
-          <v-text-field type="password" v-model="before" :counter="12" label="이전 비밀번호" required></v-text-field>
+          <v-text-field type="password" v-model="before" placeholder="이전 비밀번호" solo></v-text-field>
 
-          <v-text-field type="password" v-model="after" :counter="12" label="새 비밀번호" required></v-text-field>
+          <v-text-field type="password" v-model="after" placeholder="새 비밀번호" solo></v-text-field>
 
-          <v-text-field type="password" v-model="checkafter" :counter="12" label="비밀번호 확인" required></v-text-field>
+          <v-text-field type="password" v-model="checkafter" placeholder="비밀번호 확인" solo></v-text-field>
         </v-col>
 
         <v-divider></v-divider>
