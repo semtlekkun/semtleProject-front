@@ -309,8 +309,6 @@
                      
                     //모든 학생정보를 가져와서 student 에 저장.
                     //저장하면 알아서 다 뜸.
-
-                    //let imageSrc = 'http://49.50.166.64/api/student/'
                     this.student = res.data.students;
                 }
                 else {
@@ -319,6 +317,9 @@
                 }
             })
             .catch((err) => {
+                if(err.response.status === 404) {
+                    console.log("왜그래 진짜로")
+                }
                 console.log(err);
             })
         },
@@ -377,6 +378,9 @@
                 }
             })
             .catch((err) => {
+                if(err.response.ststus === 404) {
+                    console.log("여기다 ㅆㅆㅂ")
+                }
                 console.log(err);
                 alert("[에러]중복데이터 존재");
                 console.log("에러코드 : " + err.response.status);

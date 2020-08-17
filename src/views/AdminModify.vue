@@ -65,6 +65,8 @@
                             color="rgb(80,130,155)"
                             v-model="editedItem.activeYear"
                             label="활동년도"
+                            counter
+                            maxlength="4"
                             @keypress="checkNumber"
                             @keyup="checkHan"
                             type="number"
@@ -231,14 +233,19 @@ export default {
             if (res.status === 200) {
               alert("성공적으로 삭제!");
               this.$router.go();
-            } else if (res.status === 400) {
+            }
+          })
+          .catch((err) => {
+            if(err.response.status === 400) {
               alert("유효하지 않은 학생입니다.");
-            } else if (res.status === 401) {
-              alert("권한이 없습니다.");
-            } else if (res.status === 500) {
+            }
+            else if(err.response.status === 401) {
+              alert("권한이 없습니다."  );
+            }
+            else if(err.response.status === 500) {
               alert("서버에 문제가 있습니다.");
             }
-          });
+          })
       }
     },
 
@@ -285,17 +292,19 @@ export default {
           if (res.status === 200) {
             alert("수정 성공!");
             this.$router.go();
-          } else if (res.status === 400) {
-            alert("유효하지 않은 학생입니다.");
-          } else if (res.status === 401) {
-            alert("권한이 없습니다.");
-          } else if (res.status === 500) {
-            alert("서버에 문제가 있습니다.");
-          }
+          } 
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .catch((err) => {
+            if(err.response.status === 400) {
+              alert("유효하지 않은 학생입니다.");
+            }
+            else if(err.response.status === 401) {
+              alert("권한이 없습니다."  );
+            }
+            else if(err.response.status === 500) {
+              alert("서버에 문제가 있습니다.");
+            }
+          })
 
       this.close();
     },
@@ -361,17 +370,19 @@ export default {
             if (res.status === 200) {
               alert("등록 성공!");
               this.$router.go();
-            } else if (res.status === 400) {
-              alert("유효하지 않은 학생입니다.");
-            } else if (res.status === 401) {
-              alert("권한이 없습니다.");
-            } else if (res.status === 500) {
-              alert("서버에 문제가 있습니다.");
             }
           })
           .catch((err) => {
-            console.log(err);
-          });
+            if(err.response.status === 400) {
+              alert("유효하지 않은 학생입니다.");
+            }
+            else if(err.response.status === 401) {
+              alert("권한이 없습니다."  );
+            }
+            else if(err.response.status === 500) {
+              alert("서버에 문제가 있습니다.");
+            }
+          })
 
         this.close();
       }
