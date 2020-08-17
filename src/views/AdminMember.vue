@@ -59,7 +59,8 @@
                             <!-- 학번 -->
                             <v-col cols="12">
                             <v-text-field
-                                type="number" 
+                                @keypress="checkNumber"
+                                @keyup="checkHan"
                                 v-model="editedItem._id" 
                                 label="학번"
                                 counter
@@ -92,11 +93,11 @@
                             <v-col cols="3">
                             <v-text-field 
                                 v-model="phonenum[0]" 
-                                label="전화번호"
-                                type="number"
-                                :rules="[rules.counter3]"
                                 counter
                                 maxlength="3"
+                                label="전화번호"
+                                @keypress="checkNumber"
+                                @keyup="checkHan"
                                 >
                             </v-text-field>
                             </v-col>
@@ -110,8 +111,8 @@
                             <v-text-field 
                                 v-model="phonenum[1]" 
                                 label="전화번호"
-                                type="number"
-                                :rules="[rules.counter4]"
+                                @keypress="checkNumber"
+                                @keyup="checkHan"
                                 counter
                                 maxlength="4"
                                  >
@@ -127,8 +128,8 @@
                             <v-text-field 
                                 v-model="phonenum[2]" 
                                 label="전화번호"
-                                type="number"
-                                :rules="[rules.counter4]"
+                                @keypress="checkNumber"
+                                @keyup="checkHan"
                                 counter
                                 maxlength="4" >
                             </v-text-field>
@@ -276,6 +277,19 @@
         },
 
         methods: {
+        //입력값 체크
+        checkNumber(e) {
+            if (e.keyCode < 48 || e.keyCode > 57) {
+                e.returnValue = false;
+            }
+        },
+
+        checkHan(e) {
+            e = e || window.e;
+            var keyID = e.which ? e.which : e.keyCode;
+            if (keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39) return;
+            else e.target.value = e.target.value.replace(/[^0-9]/g, "");
+        },
         
         //관리자 확인
         check() {
