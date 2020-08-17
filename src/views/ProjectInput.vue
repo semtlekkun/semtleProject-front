@@ -305,7 +305,7 @@ export default {
           .catch((err) => {
             //팀장 학번이 셈틀꾼에 등록되어있지 않은 경우
             if (
-              err.response.ststus === 400 &&
+              err.response.status === 400 &&
               err.response.data.status === "none"
             ) {
               alert(
