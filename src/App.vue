@@ -2,10 +2,40 @@
   <v-app>
     <Intro v-show="isIntro" :functions="switchScreen" />
     <v-main v-show="!isIntro">
-      <MobileView v-show="isMobile" :loginStatus="getLogin" />
-      <PCView v-show="!isMobile" />
-      <TopBtn v-show="!isMobile" v-if="$route.name !== 'login'" />
-      <AdminBtn v-if="$route.name === 'Home'" :class="getAdmin ? 'adminBbtn': 'notAdminBtn'" />
+      <SideBar v-if="isMobile" :loginStatus="getLogin"/>
+      <v-container>
+        <!-- <v-row class="mt-10" v-show="isMobile || $route.name === 'adminMenu'">
+          <v-col offset="4" cols="4">
+            <router-link to="/">
+              <v-img width="200px" class="mx-auto" src="./assets/logo.png" />
+            </router-link>
+          </v-col>
+        </v-row> -->
+
+        <v-row
+         v-show="isMobile || $route.name === 'adminMenu'"
+        class="mt-5" :id="!isMobile && 'stickyMenu'" v-if="$route.name !== 'login'">
+          <v-col offset-sm="3" sm="6" xl="6" offset-xl="3">
+            <router-link to="/">
+              <v-img class="mx-auto" src="./assets/logo.png" />
+            </router-link>
+          </v-col>
+        </v-row>
+
+        <v-row 
+         v-show="!isMobile &&  $route.name !== 'adminMenu'"
+         id="stickyMenu" v-if="$route.name !== 'login'">
+          <v-col>
+            <PCMenuBar />
+          </v-col>
+        </v-row>
+
+        <router-view />
+        <!-- <MobileView v-if="isMobile" :loginStatus="getLogin" />
+        <PCView v-if="!isMobile" /> -->
+        <TopBtn v-show="!isMobile" v-if="$route.name !== 'login'" />
+        <AdminBtn v-if="$route.name === 'Home'" :class="getAdmin ? 'adminBbtn': 'notAdminBtn'" />
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -13,10 +43,12 @@
 <script>
 import TopBtn from "./components/TopBtn.vue";
 import AdminBtn from "./components/AdminBtn.vue";
-import PCView from "./views/PCView.vue";
-import MobileView from "./views/MobileView.vue";
+// import PCView from "./views/PCView.vue";
+// import MobileView from "./views/MobileView.vue";
 import Intro from "./views/Intro.vue";
 import { mapMutations, mapGetters } from "vuex";
+import SideBar from './components/SideBar.vue';
+import PCMenuBar from "./components/MainMenuBar.vue";
 
 export default {
   name: "App",
@@ -45,10 +77,12 @@ export default {
 
   components: {
     TopBtn,
-    MobileView,
+    // MobileView,
     AdminBtn,
-    PCView,
+    // PCView,
     Intro,
+    SideBar,
+    PCMenuBar
   },
 
   data: () => ({
@@ -102,5 +136,11 @@ export default {
 
 .notAdminBtn {
   display: none;
+}
+#stickyMenu {
+  position: sticky;
+  top: 5px;
+  width: 0px;
+  z-index: 10;
 }
 </style>

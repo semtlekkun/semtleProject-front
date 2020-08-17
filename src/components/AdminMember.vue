@@ -3,12 +3,12 @@
     <v-row>
       <v-col cols="12">
         <nav>
-          <v-toolbar flat app>
+          <v-toolbar app>
             <v-toolbar-title class="text-uppercase grey--text">
               <span>[임시]동아리 아이콘, 상단바 들어갈 공간</span>
               </v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-btn flat color="blue">
+              <v-btn color="blue">
                 <span>[임시]버튼</span>
             </v-btn>
           </v-toolbar>
@@ -26,7 +26,7 @@
           class="elevation-1"
         >
           <template v-slot:top>
-            <v-toolbar flat color="white">
+            <v-toolbar color="white">
               <v-toolbar-title>회원 명단 관리</v-toolbar-title>
               <v-divider
                 class="mx-4"

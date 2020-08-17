@@ -108,6 +108,7 @@ export default {
     .then(res=>{
       // console.log(res)
       if(res.status === 200){
+        console.log(res);
         this.cardViewList=[]
         res.data.projectList.forEach((item,index)=>{
           let obj = new Object;
@@ -117,7 +118,6 @@ export default {
           obj.date = item.date;
           obj._id = item._id;
           obj.imgSrc = "http://49.50.166.64/api/pf/"+item.projectImages[0];
-          console.log(item.projectImages[0], " 1")
           obj.contents = item.contents;
           this.cardViewList.push(obj)
         })
