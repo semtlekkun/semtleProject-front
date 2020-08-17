@@ -57,6 +57,15 @@
 
                 <v-row>
                     <v-col cols="12" md="2" class="customTable text-center">
+                        팀명
+                    </v-col>
+                    <v-col class="text-center">
+                        {{teamName}}
+                    </v-col>
+                </v-row>
+
+                <v-row>
+                    <v-col cols="12" md="2" class="customTable text-center">
                         프로젝트 설명
                     </v-col>
 
@@ -109,7 +118,7 @@
             this.axios.get(`http://49.50.166.64/api/pf/${this.projectID}`)
                 .then((res) => {
                     // handle success
-                    // console.log(res)
+                    console.log(res)
                     this.title = res.data.portfolio.projectTitle;
                     this.startDate = res.data.portfolio.projectStartDate;
                     this.endDate = res.data.portfolio.projectEndDate;
@@ -119,6 +128,7 @@
                     this.view = res.data.portfolio.view;
                     this.date = res.data.portfolio.date;
                     this.link = res.data.portfolio.link;
+                    this.teamName = res.data.portfolio.projectTeamName;
                     res.data.portfolio.studentInfo.forEach(student=>{
                         this.members.push(student)
                     });
@@ -146,6 +156,7 @@
                 date:"",
                 members: [],
                 link:"",
+                teamName:"",
                 subTitleObj: {
                     title: "프로젝트",
                     contents: "프로젝트이다."
