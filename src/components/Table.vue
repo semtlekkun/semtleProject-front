@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row cols="12" class="mb-0">
+    <v-row cols="12" class="mb-0" v-if="$route.name !== 'Home'">
       <!--        
         콤보박스 이용 항목 별 검색 가능 기능->추후 업뎃    
             <v-col cols="3">
@@ -11,17 +11,18 @@
             </v-col>
       <v-col cols="9" class="p-8">-->
       <!-- 검색 -->
-      <v-text-field
-        v-if="$route.name !== 'Home'"
-        class="pl-3 mb-5"
-        v-model="search"
-        append-icon="mdi-file-search"
-        label="Search"
-        single-line="single-line"
-        hide-details
-        clearable="clearable"
-      ></v-text-field>
-      <v-spacer></v-spacer>
+      <v-col>
+        <v-text-field
+          class="pl-3 mb-5"
+          v-model="search"
+          append-icon="mdi-file-search"
+          label="Search"
+          single-line="single-line"
+          hide-details
+          clearable="clearable"
+        ></v-text-field>
+        <v-spacer></v-spacer>
+      </v-col>
       <!--            </v-col>-->
     </v-row>
 
@@ -37,20 +38,12 @@
 </template>
 
 <script>
-import { Home } from "@/views/Home";
 export default {
   props: {
     tableName: String,
     perPage: Number,
     contents: Array,
   },
-  routes: [
-    {
-      path: "/",
-      name: "Home",
-      component: Home,
-    },
-  ],
   data() {
     return {
       filters: {
@@ -113,13 +106,6 @@ export default {
           params: { id: row._id },
         });
       }
-    },
-  },
-  computed: {
-    filteredItems() {
-      return this.content.filter((i) => {
-        return !this.contentType || i.type === this.contentType;
-      });
     },
   },
 };
