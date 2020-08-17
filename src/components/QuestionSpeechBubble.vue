@@ -5,7 +5,7 @@
         <td width="120px" style="text-align-last: center; vertical-align:top;">
           <div class="userInfo">
             <div class="userImage">
-              <img src="../assets/쿼카.jpg" width="50" height="50" />
+              <img :src="writerURL" width="50" height="50" />
             </div>
             <div class="userName">{{comments.name}}</div>
           </div>
@@ -25,6 +25,11 @@
 import VueMarkdown from "vue-markdown"; //markdown import
 export default {
   name: "QuestionSpeechBubble",
+  data() {
+    return {
+      writerURL: "http://49.50.166.64/api/student/" + this.comments.image,
+    };
+  },
   components: {
     VueMarkdown,
   },

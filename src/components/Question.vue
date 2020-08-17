@@ -11,7 +11,7 @@
     <table class="table">
       <tr>
         <td rowspan="2">
-          <img src="../assets/쿼카.jpg" width="50" alt="profileImg" />
+          <img :src="writerURL" width="50" alt="profileImg" />
         </td>
         <td>
           <p style="font-weight:bold; margin-left:0.3em;">{{Question.writerName}}</p>
@@ -47,6 +47,7 @@ export default {
       QID: "",
       admin: false,
       imageURL: "",
+      writerURL: "",
     };
   },
 
@@ -67,12 +68,11 @@ export default {
       let id = this.$route.params.id;
       this.axios.get(`http://49.50.166.64/api/question/${id}`).then((res) => {
         if (res.status === 200) {
-          this.axios
-            .get(`http://49.50.166.64/api/question/${res.data._id}`)
-            .then((res) => {
-              this.imageURL =
-                "http://49.50.166.64/api/question/" + res.data.image;
-            });
+          this.imageURL =
+            "http://49.50.166.64/api/question/" + res.data.question.image;
+          this.writerURL =
+            "http://49.50.166.64/api/student/" + res.data.question.writerImage;
+          console.log(this.writerURL);
         }
       });
     },

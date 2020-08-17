@@ -166,8 +166,19 @@
                       </p>
                       <VueMarkdown :source="contents" class="mt-10"></VueMarkdown>
                     </v-card-text>
+                    <!-- 
+                        
+                        카로셀 작업중
+                        <v-carousel height="700px" hide-delimiters style="text-align:-webkit-center;">
+                      <v-carousel-item
+                        v-for="(image,i) in images"
+                        :key="i"
+                        :src="imageURL+image"
+                        width="100%"
+                      ></v-carousel-item>
+                    </v-carousel>-->
                     <div v-for="(image,i) in images" :key="i">
-                      <img :src="imageURL+image" width="50%" max-width="960px" />
+                      <img :src="imageURL+image" width="70%" max-width="960px" />
                     </div>
                   </v-alert>
                 </v-card>

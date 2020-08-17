@@ -11,9 +11,9 @@
         <td width="120px" style="text-align-last: center; vertical-align:top;">
           <div class="userInfo">
             <div class="userImage">
-              <img src="../assets/쿼카.jpg" width="50" height="50" />
+              <img :src="writerURL" width="50" height="50" />
             </div>
-            <div class="userName ">{{comments.name}}</div>
+            <div class="userName">{{comments.name}}</div>
           </div>
         </td>
       </tr>
@@ -24,15 +24,20 @@
 <script>
 import VueMarkdown from "vue-markdown"; //markdown import
 export default {
+  data() {
+    return {
+      writerURL: "http://49.50.166.64/api/student/" + this.comments.image,
+    };
+  },
   components: {
-    VueMarkdown
+    VueMarkdown,
   },
   props: {
     comments: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
@@ -59,14 +64,14 @@ export default {
   max-width: 40em;
   position: relative;
   display: inline-block;
-  background: rgb(215,206,207);
+  background: rgb(215, 206, 207);
 }
 .AnswerBubble:after {
   content: "";
   position: absolute;
   border-style: solid;
   border-width: 11px 0 11px 14px;
-  border-color: transparent rgb(215,206,207);
+  border-color: transparent rgb(215, 206, 207);
   display: block;
   width: 0;
   right: -14px;
