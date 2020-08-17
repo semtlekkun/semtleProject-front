@@ -44,7 +44,6 @@
                             label="학번"
                             @keypress="checkNumber"
                             @keyup="checkHan"
-                            type="number"
                             counter
                             maxlength="8"
                           ></v-text-field>
@@ -75,7 +74,6 @@
                             maxlength="4"
                             @keypress="checkNumber"
                             @keyup="checkHan"
-                            type="number"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
@@ -330,6 +328,10 @@ export default {
       if (this.editedItem.contents === "")
         this.errorMsg.push("간단하게라도 내용을 적어주세요.");
 
+      if(this.editedItem.position === this.positionItems[2] && this.editedItem.language === "")
+        this.errorMsg.push("멘토의 과목을 선택해 주세요.");
+
+      
       // 예외처리에 걸린 경우 -> 알람 띄우고 다시 폼 입력
       if (this.errorMsg.length !== 0) {
         let errString = "";

@@ -47,7 +47,6 @@
                 <v-spacer></v-spacer>
                 <v-btn
                   id="menu1"
-                  flat
                   color="primary"
                   @click="()=> {temp(); $refs.menu1.save(startDate);}"
                 >확인</v-btn>
@@ -72,7 +71,6 @@
                 <v-spacer></v-spacer>
                 <v-btn
                   id="menu2"
-                  flat
                   color="primary"
                   @click="()=> {temp(); $refs.menu2.save(endDate); }"
                 >확인</v-btn>
@@ -89,7 +87,7 @@
               label="Team Member(Number)"
               counter
               maxlength="8"
-              hint="학번을 8자리 숫자로 입력하세요."
+              placeholder="등록된 셈틀꾼 회원만 추가 가능합니다."
             />
           </v-col>
           <v-col cols="3">
@@ -308,10 +306,9 @@ export default {
               err.response.status === 400 &&
               err.response.data.status === "none"
             ) {
-              this.errorMsg.push(
-                "팀장 학번이 셈틀꾼 에 등록되어있지 않습니다. 입력값을 확인하세요"
+              alert(
+                "팀장또는 이 셈틀꾼 에 등록되어있지 않습니다. 입력값을 확인하세요"
               );
-              this.dialog = true;
             } else if (err.response.status === 401) {
               alert("로그인 후 이용 가능합니다.");
               location.href = "/login";
