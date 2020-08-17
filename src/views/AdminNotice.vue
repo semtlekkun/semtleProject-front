@@ -131,7 +131,7 @@
         form.append("image",this.imageUrl)
         this.axios
           .post(
-            "http://49.50.166.64/api/notice/input",form,
+            "http://49.50.166.64/api/notice",form,
             {
               headers: {
                 token: sessionStorage.getItem("token"),
@@ -142,8 +142,7 @@
           .then((response) => {
             if(response.status === 200) {
               console.log(response.data);
-              alert("성공");
-              location.href = "/";
+              location.href = "/admin/menu";
             }
           })
           .catch((error) => {

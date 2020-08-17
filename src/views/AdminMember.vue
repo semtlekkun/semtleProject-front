@@ -309,8 +309,6 @@
                      
                     //모든 학생정보를 가져와서 student 에 저장.
                     //저장하면 알아서 다 뜸.
-
-                    //let imageSrc = 'http://49.50.166.64/api/student/'
                     this.student = res.data.students;
                 }
                 else {
@@ -320,6 +318,7 @@
             })
             .catch((err) => {
                 console.log(err);
+                console.log(err.response.ststus);
             })
         },
         //수정 put
@@ -349,6 +348,10 @@
                 }
             })
             .catch((err) => {
+                if(err.response.ststus === 500) {
+                    console.log("문데")
+                }
+                console.log(err.responser.status);
                 console.log(err);
             })
         },
@@ -374,6 +377,9 @@
                     this.canAdd = true;
                     alert("추가완료");
                     console.log("추가완료");
+
+                    //자동 새로고침.
+                    this.$router.go();
                 }
             })
             .catch((err) => {

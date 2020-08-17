@@ -74,7 +74,7 @@ td {
   border-color: transparent #50829b;
   display: block;
   width: 0;
-  z-index: 1;
+  z-index: 0;
   left: -14px;
   top: 17px;
 }
