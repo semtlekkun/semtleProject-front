@@ -244,14 +244,14 @@ export default {
       if (this.memberNum === "") {
         this.errorMsg.push("학번 입력후 추가 버튼을 눌러주세요.");
         this.dialog = true;
-      } 
+      }
       //입력이 있긴 한경우
       else {
         //학번을 잘못 입력 한 경우
         if (this.memberNum.toString().length != 8) {
           this.errorMsg.push("학번을 제대로 입력해주세요.");
           this.dialog = true;
-        } 
+        }
         //학번을 잘 입력 한 경우
         else {
           this.members.push(this.memberNum.toString());
@@ -275,31 +275,29 @@ export default {
       if (this.teamLeader.toString().length != 8)
         this.errorMsg.push("팀장의 학번을 제대로 입력해주세요.");
 
+      console.log(this.errorMsg);
       // 에러가 있을 경우
-      if (this.errorMsg.length != 0) {
-        var message = "";
-        for (var idx = 0; idx < this.errorMsg.length; idx++) {
-          message = message + this.errorMsg[idx] + "\n";
-        }
+      if (this.errorMsg.length !== 0) {
         this.dialog = true;
-      } 
-      
-      else {
+      } else if (this.errorMsg.length === 0) {
         var form = new FormData();
         form.append("projectTitle", this.projectTitle);
-        form.append("students", this.members);
+        if (this.members.length != 0 && this.members != "none") {
+          form.append("students", this.members);
+        }
         form.append("contents", this.contents);
         form.append("link", this.link);
-        form.append("projectStartData", this.startDate);
+        form.append("projectStartDate", this.startDate);
         form.append("projectEndDate", this.endDate);
         form.append("projectTeamName", this.teamName);
         form.append("teamLeaderCode", this.teamLeader);
         form.append("git", this.git);
-        // form.append("projectImages", this.files);
-        for(let i=0; i<this.files.length; i++){
-          form.append('projectImages[]', this.files[i])
+        if (this.files != null) {
+          for (let i = 0; i < this.files.length; i++) {
+            form.append("projectImages[]", this.files[i]);
+          }
         }
-        // console.log("taese0ng: ", this.files)
+        console.log("taese0ng: ", this.files);
         for (var value of form.values()) {
           console.log(value);
         }
@@ -312,14 +310,13 @@ export default {
           },
         };
 
-        console.log("여기까지 오냐고 씨발 진짜")
         this.axios
-          .post('http://49.50.166.64/api/pf', form, config)
+          .post("http://49.50.166.64/api/pf", form, config)
           .then((res) => {
             console.log(res.status);
-                    //console.log("여기 들어와야 함");            
-            this.errorMsg.push("작성 성공. 프로젝트 리스트로 돌아갑니다.");
-            this.dialog = true;
+            //console.log("여기 들어와야 함");
+            // this.errorMsg.push("작성 성공. 프로젝트 리스트로 돌아갑니다.");
+            // this.dialog = true;
             location.href = "/project/list";
           })
           .catch((err) => {
@@ -328,8 +325,10 @@ export default {
               err.response.status === 400 &&
               err.response.data.status === "none"
             ) {
-                this.errorMsg.push("팀장, 팀원중에 셈틀꾼에 등록되어있지 않은 학번이 있습니다.");
-                this.dialog = true;
+              this.errorMsg.push(
+                "팀장, 팀원중에 셈틀꾼에 등록되어있지 않은 학번이 있습니다."
+              );
+              this.dialog = true;
             } else if (err.response.status === 401) {
               //로그인 안된 경우 글쓰기 버튼이 안보임
               //링크타고 들어오는 경우대비해서 남김.
