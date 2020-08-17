@@ -9,7 +9,14 @@
           </div>
 
           <v-card-actions class="justify-center">
-            <v-btn v-bind="attrs" v-on="on" dark class="btn" @click="openDialog">이미지 변경</v-btn>
+            <v-btn
+              color="rgb(80, 130, 155)"
+              v-bind="attrs"
+              v-on="on"
+              dark
+              class="btn"
+              @click="openDialog"
+            >이미지 변경</v-btn>
           </v-card-actions>
         </v-card>
       </template>
@@ -85,7 +92,6 @@ export default {
       this.axios
         .put("http://49.50.166.64/api/mypage/picture/update", form, config)
         .then((res) => {
-          alert("이미지 변경 성공!");
           console.log(res);
           this.dialog = false;
           this.$router.go();

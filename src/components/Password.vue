@@ -3,10 +3,17 @@
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{on, attrs}">
         <v-card height="200" light="light" class="pa-5">
-          <v-card-title primary="primary" class="title">PASSWORD</v-card-title>
+          <v-card-title primary="primary" class="title justify-center">PASSWORD</v-card-title>
 
-          <v-card-actions>
-            <v-btn v-bind="attrs" v-on="on" dark="dark" class="btn btn-dark m-3">변경</v-btn>
+          <v-card-actions class="justify-center">
+            <v-btn
+              color="rgb(80, 130, 155)"
+              v-bind="attrs"
+              v-on="on"
+              dark="dark"
+              class="btn btn-dark m-3"
+              @click="openDialog"
+            >변경</v-btn>
           </v-card-actions>
         </v-card>
       </template>
@@ -48,6 +55,9 @@ export default {
   }),
 
   methods: {
+    openDialog() {
+      (this.before = ""), (this.after = ""), (this.checkafter = "");
+    },
     submit() {
       this.errMsg = [];
       // 데이터베이스에서 불러온 비밀번호와 이전 비밀번호가 다를 경우 에러 추가
@@ -84,7 +94,6 @@ export default {
           .put("http://49.50.166.64/api/mypage/pw/update", sendObj, config)
           .then((res) => {
             if (res.status === 200) {
-              alert("수정 성공!");
               this.dialog = false;
             }
           })
