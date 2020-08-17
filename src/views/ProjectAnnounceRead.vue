@@ -2,7 +2,10 @@
   <div id="projectRead">
       <v-container style="margin-top: 4rem; margin-bottom: 4rem;">
         <v-row>
-          <v-col cols="12">
+          <v-col cols="12" lg="3">
+            <SubTitle :subTitleObj="subTitleObj"/>
+          </v-col>
+          <v-col cols="12" lg='9'>
             <v-card>
               <v-alert outlined color="#226db2">
                 <v-row class="py-0">
@@ -49,6 +52,7 @@
 
 <script>
 import VueMarkdown from "vue-markdown";
+import SubTitle from '../components/SubTitle.vue';
 
 export default {
   created(){
@@ -80,11 +84,16 @@ export default {
     deadline: "",
     views: 0,
     recruitment: 0,
-    content: ''
+    content: '',
+    subTitleObj: {
+        title: "프로젝트 공고",
+        contents: "프로젝트 공고이다."
+    }
   }),
 
   components: {
-    VueMarkdown
+    VueMarkdown,
+    SubTitle
   },
   methods:{
     deleteAnnounce(){
