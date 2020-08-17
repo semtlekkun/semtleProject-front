@@ -3,11 +3,12 @@
     <v-container class="text-center">
       <div v-for="(cadre,i) in CadreList" :key="i">
         <div v-if="cadre[1][0].length != 0">
-          <h1 class="text-left">{{cadre[0]}}년 1학기 (여름학기)</h1>
+          <h1 class="text-left mt-5">{{cadre[0]}}년 1학기 (여름학기)</h1>
           <v-row>
             <v-col cols="6" sm="3" v-for="(member,j) in cadre[1][0]" :key="j">
               <v-card class="pa-10">
-                <img v-bind:src="member.Info[0].image" />
+                <v-img :src="imageURL+member.Info[0].image" min-height="250px" max-height="250px" />
+                <!-- <v-img :src="imageURL+member.Info[0].image" min-height="400px" max-height="400px"/> -->
                 <p class="position">{{member.language}}{{member.position}}</p>
                 <p class="number">{{member.studentCode}}</p>
                 <p class="name">{{member.Info[0].name}}</p>
@@ -18,11 +19,11 @@
           <v-divider class="mt-16"></v-divider>
         </div>
         <div v-if="cadre[1][1].length != 0">
-          <h1 class="text-left">{{cadre[0]}}년 2학기 (겨울학기)</h1>
+          <h1 class="text-left mt-5">{{cadre[0]}}년 2학기 (겨울학기)</h1>
           <v-row>
             <v-col cols="6" sm="3" v-for="(member,j) in cadre[1][1]" :key="j">
               <v-card class="pa-10">
-                <img v-bind:src="member.Info[0].image" />
+                <v-img :src="imageURL+member.Info[0].image" min-height="250px" max-height="250px" />
                 <p class="position">{{member.language}}{{member.position}}</p>
                 <p class="number">{{member.studentCode}}</p>
                 <p class="name">{{member.Info[0].name}}</p>
@@ -43,6 +44,7 @@ export default {
   data() {
     return {
       CadreList: [],
+      imageURL: "http://49.50.166.64/api/student/",
     };
   },
 
