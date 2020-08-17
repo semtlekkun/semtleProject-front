@@ -12,7 +12,9 @@
             </router-link>
           </v-col>
         </v-row>
-        <Table :perPage="5"/>
+        <Table :perPage="5"
+        tableName="notice"
+        :contents="noticeContents"/>
 
         <v-row class="mt-15">
           <v-col cols="12" sm="8">
@@ -24,7 +26,9 @@
             </router-link>
           </v-col>
         </v-row>
-        <Table :perPage="5"/>
+        <Table :perPage="5"
+        tableName="projectAnnounce"
+        :contents="projectAnnounceContents"/>
       </v-col>
 
       <v-col>
@@ -45,7 +49,7 @@
            lg="6"
            xl="4"
            v-for="item in cardViewList" 
-           :key="item.index">
+           :key="item._id">
             <CardView :contentsObj="item"/>
           </v-col>
         </v-row>
@@ -59,68 +63,75 @@ import CardView from '../components/CardView.vue';
 import Table from '../components/Table.vue';
 
 export default {
+  created(){
+    this.axios.get('http://49.50.166.64/api/notice/list')
+    .then(res=>{
+      // console.log(res)
+      if(res.status === 200){
+        this.noticeContents=[];
+        res.data.noticeList.forEach((item, index)=>{
+            let obj = new Object;
+            obj.number = index+1;
+            obj.title = item.title;
+            obj.writer = item.writer;
+            obj.date = item.date;
+            obj._id = item._id;
+            this.noticeContents.push(obj);
+        })
+      }
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+
+    this.axios.get('http://49.50.166.64/api/recruit/list')
+    .then(res=>{
+        // console.log(res)
+        if(res.status === 200){
+          this.projectAnnounceContents=[]
+          res.data.recruitList.forEach((item,index)=>{
+              let obj = new Object;
+              obj.number = index+1;
+              obj.title = item.title;
+              obj.writer = item.writer;
+              obj.date = item.endDate;
+              obj._id = item._id;
+              this.projectAnnounceContents.push(obj)
+          })
+        }
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+
+    this.axios.get('http://49.50.166.64/api/pf/list/1')
+    .then(res=>{
+      // console.log(res)
+      if(res.status === 200){
+        this.cardViewList=[]
+        res.data.projectList.forEach((item,index)=>{
+          let obj = new Object;
+          obj.number = index+1;
+          obj.title = item.projectTitle;
+          obj.teamName = item.projectTeamName;
+          obj.date = item.date;
+          obj._id = item._id;
+          obj.imgSrc = item.projectImages[0];
+          obj.contents = item.contents;
+          this.cardViewList.push(obj)
+        })
+      }
+    })
+  },
   components: {
     CardView,
     Table,
   },
   data(){
     return{
-      cardViewList:[
-        {
-          title: "KUMOCraft",
-          teamName: "셈틀꾼",
-          imgSrc: "https://cdn.vuetifyjs.com/images/cards/mountain.jpg",
-          contents: "이시발 힘들었다."
-        },
-        {
-          title: "KUMOCraft",
-          teamName: "셈틀꾼",
-          imgSrc: "https://cdn.vuetifyjs.com/images/cards/mountain.jpg",
-          contents: "이시발 힘들었다."
-        },
-        {
-          title: "KUMOCraft",
-          teamName: "셈틀꾼",
-          imgSrc: "https://cdn.vuetifyjs.com/images/cards/mountain.jpg",
-          contents: "이시발 힘들었다."
-        },
-        {
-          title: "KUMOCraft",
-          teamName: "셈틀꾼",
-          imgSrc: "https://cdn.vuetifyjs.com/images/cards/mountain.jpg",
-          contents: "이시발 힘들었다."
-        },
-        {
-          title: "KUMOCraft",
-          teamName: "셈틀꾼",
-          imgSrc: "https://cdn.vuetifyjs.com/images/cards/mountain.jpg",
-          contents: "이시발 힘들었다."
-        },
-        {
-          title: "KUMOCraft",
-          teamName: "셈틀꾼",
-          imgSrc: "https://cdn.vuetifyjs.com/images/cards/mountain.jpg",
-          contents: "이시발 힘들었다."
-        },
-        {
-          title: "KUMOCraft",
-          teamName: "셈틀꾼",
-          imgSrc: "https://cdn.vuetifyjs.com/images/cards/mountain.jpg",
-          contents: "이시발 힘들었다."
-        },
-        {
-          title: "KUMOCraft",
-          teamName: "셈틀꾼",
-          imgSrc: "https://cdn.vuetifyjs.com/images/cards/mountain.jpg",
-          contents: "이시발 힘들었ddddddddddd다."
-        },
-        {
-          title: "KUMOCraft",
-          teamName: "셈틀꾼",
-          imgSrc: "https://cdn.vuetifyjs.com/images/cards/mountain.jpg",
-          contents: "이시발 힘들었ddddddddddd다."
-        },
-      ]
+      noticeContents:[],
+      projectAnnounceContents:[],
+      cardViewList:[]
     }
   }
 }
