@@ -112,10 +112,14 @@ import SubTitle from '../components/SubTitle.vue';
                     })
                     .then(()=>{
                         // console.log(res)
+                        
                         alert("작성 완료");
                         this.$router.push({name:"QnAList"})
                     })
                     .catch((err)=>{
+                        //로그인 안되어 있으면 글쓰기 버튼이 사라져서
+                        //질문 작성으로 들어올 수 없는데
+                        //혹시 몰라서 남겨놈.
                         if(err.response.status===401) {
                             alert("로그인후 이용 가능 합니다.");
                             location.href = "/login";

@@ -17,6 +17,21 @@
             <v-btn @click="inputAnswer" color="#50829b" large dark style="float:right;">등록</v-btn>
           </v-col>
         </v-row>
+
+        <!-- 다이얼로그 -->
+          <v-dialog v-model="dialog" persistent max-width="330">
+            <v-card>
+              <v-card-title class="headline error">
+                <p style="color:white !important;">Error</p>
+              </v-card-title>
+              <v-card-text><br/><br/><h2>{{this.errorMessage}}</h2></v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn v-show="this.isLogin" color="error" text @click="dialogBtn()">Login</v-btn>
+                <v-btn color="error" text @click="dialog = false">OK</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
       </v-form>
     </v-col>
   </v-row>
@@ -33,14 +48,25 @@ export default {
     return{
       contents:"",
       userToken:"",
-      questionID:""
+      questionID:"",
+      errorMessage:"",
+      isLogin:false,
+      dialog:false
     }
   },
 
   methods:{
+    dialogBtn() {
+      this.dialog = false;
+      location.href = "/login";
+    },
+
     inputAnswer(){
       if(this.contents === "") {
-        alert("입력값이 없습니다.")
+        this.dialog = true;
+        this.isLogin = false;
+        console.log(this.dialog);
+        this.errorMessage = "내용이 없습니다.";
       }
       else {
         this.axios.post(`http://49.50.166.64/api/answer`,
@@ -59,10 +85,13 @@ export default {
         .catch((err)=>{
           if(err.response.status===401) {
             console.log("상태 코드" + err.response.status)
-            alert("로그인후 이용 가능 합니다.");
-            location.href = "/login";
+            //로그인 안되어 있으면 다이얼로그 제어 변수 true, 에러 메시지 설정.
+            this.dialog = true;
+            this.isLogin = true;
+            this.errorMessage = "로그인후 이용 가능 합니다.";
           }
           console.log(err)
+          console.log("[에러] 비로그인 접근")
         })
       }
     }
