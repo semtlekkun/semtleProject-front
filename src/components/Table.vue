@@ -1,22 +1,27 @@
 <template>
     <div>
-        <v-row cols="12" class="mb-0" v-if="$route.name !== 'Home'">
+        <v-row cols="12" class="mb-0">
+<!--        
+        콤보박스 이용 항목 별 검색 가능 기능->추후 업뎃    
             <v-col cols="3">
-                <v-select :items="items" label="검색"></v-select>
+                <v-select
+                    :items="['전체','제목', '작성자', '작성 일시']"
+                    label="검색"
+                    v-model="contentType"></v-select>
             </v-col>
-            <v-col cols="8" class="p-8 ml-3">
+            <v-col cols="9" class="p-8">-->
                 <!-- 검색 -->
                 <v-text-field
-                    cols="3"
+                    v-if="$route.name !== 'Home'"
+                    class="pl-3 mb-5"
                     v-model="search"
-                    append-icon="mdi-magnify"
+                    append-icon="mdi-file-search"
                     label="Search"
                     single-line="single-line"
-                    hide-details="hide-details"
+                    hide-details
                     clearable="clearable"></v-text-field>
                 <v-spacer></v-spacer>
-            </v-col>
-
+<!--            </v-col>-->
         </v-row>
 
         <v-data-table
@@ -25,7 +30,8 @@
             :items-per-page="perPage"
             :search="search"
             class="elevation-1"
-            @click:row="rowClick"></v-data-table>
+            @click:row="rowClick">
+            </v-data-table>
     </div>
 
 </template>
@@ -47,10 +53,12 @@
         ],
         data() {
             return {
-                items: [
-                    '제목', '작성자', '제목+작성자'
-                ],
+                filters:{
+                    search:'',
+                    added_by:''
+                },
                 search: '',
+                contentType: null,
                 headers: [
                     {
                         text: '번호',
@@ -103,6 +111,15 @@
                             }
                         })
                 }
+            }
+        },
+        computed: {
+            filteredItems() {
+                return this
+                    .content
+                    .filter((i) => {
+                        return !this.contentType || (i.type === this.contentType);
+                    })
             }
         }
     }
