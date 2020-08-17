@@ -61,6 +61,7 @@ import SubTitle from '../components/SubTitle.vue';
         data(){
             return{
                 title:'',
+                errorMsg: [],
                 files: [],
                 rules: [
                     value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
@@ -81,25 +82,47 @@ import SubTitle from '../components/SubTitle.vue';
                 this.members = this.members.filter(el => el!==member);
             },
             writeConents(){
-                let form = new FormData;
-                form.append("title",this.title)
-                form.append("contents", this.contents)
-                form.append("image", this.files[0])
-                // console.log(this.files[0])
-                this.axios.post(`http://49.50.166.64/api/question`,
-                form,
-                {
-                    headers:{
-                        'token': sessionStorage.getItem('token')
+                this.errorMsg = [];
+                if(this.title === "") this.errorMsg.push("제목을 입력해 주세요");
+                if(this.contents==="") this.errorMsg.push("내용을 입력해 주세요");
+
+                //입력 에러가 있는 경우
+                if (this.errorMsg.length != 0) {
+                    var message = "";
+                    for (var idx = 0; idx < this.errorMsg.length; idx++) {
+                        message = message + this.errorMsg[idx] + "\n";
                     }
-                })
-                .then(()=>{
-                    // console.log(res)
-                    this.$router.push({name:"QnAList"})
-                })
-                .catch(err=>{
-                    console.log(err)
-                })
+
+                    alert(message);
+                }
+
+                //에러가 없는 경우
+                else {
+                    let form = new FormData;
+                    form.append("title",this.title)
+                    form.append("contents", this.contents)
+                    form.append("image", this.files[0])
+                    // console.log(this.files[0])
+                    this.axios.post(`http://49.50.166.64/api/question`,
+                    form,
+                    {
+                        headers:{
+                            'token': sessionStorage.getItem('token')
+                        }
+                    })
+                    .then(()=>{
+                        // console.log(res)
+                        alert("작성 완료");
+                        this.$router.push({name:"QnAList"})
+                    })
+                    .catch((err)=>{
+                        if(err.response.status===401) {
+                            alert("로그인후 이용 가능 합니다.");
+                            location.href = "/login";
+                        }
+                        console.log(err)
+                    })
+                }
             }
         }
     }

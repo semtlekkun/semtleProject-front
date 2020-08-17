@@ -36,6 +36,7 @@ export default {
       }
     })
     .catch(err=>{
+      
       console.log(err)
     })
 
@@ -55,7 +56,7 @@ export default {
         })
       }
     })
-    .catch(err=>{
+    .catch((err)=>{
       console.log(err)
     })
   },

@@ -15,10 +15,13 @@
         <v-row>
           <v-col cols="6">
             <v-text-field
-              label="Team Leader"
+              label="Team Leader(Number)"
               v-model="teamLeader"
               @keypress="checkNumber"
               @keyup="checkHan"
+              counter
+              maxlength="8"
+              hint="학번을 8자리 숫자로 입력하세요."
             />
           </v-col>
           <v-col cols="6">
@@ -42,7 +45,7 @@
 
               <v-date-picker v-model="startDate" no-title scrollable>
                 <v-spacer></v-spacer>
-                <v-btn flat color="primary" @click="$refs.menu1.save(startDate)">확인</v-btn>
+                <v-btn id="menu1" flat color="primary" @click="()=> {temp(); $refs.menu1.save(startDate);}">확인</v-btn>
               </v-date-picker>
             </v-menu>
           </v-col>
@@ -60,10 +63,9 @@
               <template v-slot:activator="{ on }">
                 <v-text-field v-model="endDate" label="End Date" readonly v-on="on"></v-text-field>
               </template>
-
               <v-date-picker v-model="endDate" no-title scrollable>
                 <v-spacer></v-spacer>
-                <v-btn flat color="primary" @click="$refs.menu2.save(endDate)">확인</v-btn>
+                <v-btn id="menu2" flat color="primary" @click="()=> {temp(); $refs.menu2.save(endDate); }">확인</v-btn>
               </v-date-picker>
             </v-menu>
           </v-col>
@@ -74,7 +76,10 @@
               @keypress="checkNumber"
               @keyup="checkHan"
               v-model.number="memberNum"
-              label="Team Member"
+              label="Team Member(Number)"
+              counter
+              maxlength="8"
+              hint="학번을 8자리 숫자로 입력하세요."
             />
           </v-col>
           <v-col cols="3">
@@ -92,6 +97,13 @@
             </v-row>
           </v-col>
         </v-row>
+
+        <v-row>
+          <v-col>
+            <v-text-field label="Git" v-model="git" />
+          </v-col>
+        </v-row>
+
         <v-row>
           <v-col>
             <v-text-field label="Link" v-model="link" />
@@ -115,7 +127,7 @@
           <v-col>
             <v-file-input
               v-model="files"
-              :roles="rules"
+              :roles="[rules.fileCheck]"
               accept="image/*"
               color="deep-purple accent-4"
               counter
@@ -148,6 +160,7 @@ export default {
   },
   data() {
     return {
+      git:"",
       link: "",
       teamLeader: "",
       teamName: "",
@@ -156,16 +169,15 @@ export default {
       startDate: new Date().toISOString().substr(0, 10),
       menu2: false,
       endDate: new Date().toISOString().substr(0, 10),
+      datecheck:false,
       members: [],
       memberNum: "",
       files: [],
       errorMsg: [],
-      rules: [
-        (value) =>
-          !value ||
-          value.size < 2000000 ||
-          "Avatar size should be less than 2 MB!",
-      ],
+      rules:{
+        fileCheck :value =>!value || value.size < 2000000 ||"Avatar size should be less than 2 MB!",
+        counter: value=>value.length <= 8 || 'Student Code length should be 8!'
+      },
       contents: "",
       subTitleObj: {
         title: "프로젝트 작성",
@@ -174,6 +186,16 @@ export default {
     };
   },
   methods: {
+    //날짜 확인 관련 예외 처리.
+    temp() {
+      //(잘못한 경우) 종료일자를 더 앞으로 한 경우
+      if(this.endDate < this.startDate) {
+        this.startDate = new Date().toISOString().substr(0,10);
+        this.endDate = new Date().toISOString().substr(0,10)
+        alert("날짜 설정이 잘못 되었습니다.");
+      }
+    },
+
     checkNumber(e) {
       if (e.keyCode < 48 || e.keyCode > 57) {
         e.returnValue = false;
@@ -203,6 +225,7 @@ export default {
     writeConents() {
       this.errorMsg = [];
 
+      //이미지, 팀원, 깃,  링크는 예외 사항에서 제외.
       if (this.projectTitle === "") this.errorMsg.push("제목을 입력해주세요.");
       if (this.contents === "") this.errorMsg.push("내용을 입력해주세요.");
       if (this.teamLeader === "")
@@ -229,6 +252,7 @@ export default {
         form.append("projectTeamName", this.teamName);
         form.append("teamLeaderCode", this.teamLeader);
         form.append("projectImages", this.files);
+        form.append("git", this.git);
 
         for (var value of form.values()) {
           console.log(value);
@@ -243,13 +267,25 @@ export default {
         };
 
         this.axios
-          .post(`http://49.50.166.64/api/pf/input`, form, config)
+          .post(`http://49.50.166.64/api/pf`, form, config)
           .then((res) => {
             console.log(res.status);
+            alert("작성 성공. 프로젝트 리스트로 돌아갑니다.");
+            location.href = "/project/list";
           })
           .catch((err) => {
+            //팀장 학번이 셈틀꾼에 등록되어있지 않은 경우
+            if(err.response.ststus === 400 && err.response.data.status === "none") {
+              alert("팀장 학번이 셈틀꾼 에 등록되어있지 않습니다. 입력값을 확인하세요")
+            }
+
+            else if (err.response.status === 401) {
+              alert("로그인 후 이용 가능합니다.")
+              location.href = "/login";
+
+            }
             console.log(err.response);
-          });
+          })
       }
     },
   },
