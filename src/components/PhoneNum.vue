@@ -23,16 +23,36 @@
 
         <v-divider></v-divider>
 
-        <v-col>
-          <v-text-field
-            v-model="phoneNum"
-            solo
-            maxlength="11"
-            @keypress="checkNumber"
-            @keyup="checkHan"
-            placeholder="'-'를 빼고 입력하세요."
-          ></v-text-field>
-        </v-col>
+        <v-row>
+          <v-col offset="1">
+            <v-text-field
+              v-model="phoneNum1"
+              solo
+              maxlength="3"
+              @keypress="checkNumber"
+              @keyup="checkHan"
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              v-model="phoneNum2"
+              solo
+              maxlength="4"
+              @keypress="checkNumber"
+              @keyup="checkHan"
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              v-model="phoneNum3"
+              solo
+              maxlength="4"
+              @keypress="checkNumber"
+              @keyup="checkHan"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="1"></v-col>
+        </v-row>
 
         <v-divider></v-divider>
 
@@ -42,6 +62,20 @@
         </v-card-actions>
       </div>
     </v-dialog>
+    <v-dialog v-model="dialog2" persistent max-width="400">
+      <v-card>
+        <v-card-title class="headline error">
+          <p style="color:white !important;">Error</p>
+        </v-card-title>
+        <ul class="mt-5">
+          <li v-for="(error,i) in errMsg" :key="i">{{error}}</li>
+        </ul>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="error" text @click="dialog2 = false">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -49,9 +83,13 @@
 export default {
   data: () => ({
     dialog: false,
+    dialog2: false,
     errMsg: [],
 
-    phoneNum: "",
+    resultPhoneNum: "",
+    phoneNum1: "",
+    phoneNum2: "",
+    phoneNum3: "",
     outputPhonenum: "",
   }),
   created() {
@@ -69,29 +107,37 @@ export default {
       });
     },
     openDialog() {
-      this.phoneNum = "";
+      this.phoneNum1 = "";
+      this.phoneNum2 = "";
+      this.phoneNum3 = "";
     },
     submit() {
       this.errMsg = [];
-      if (this.phoneNum.length < 11) {
+      if (
+        this.phoneNum1.length < 3 ||
+        this.phoneNum2.length < 4 ||
+        this.phoneNum3.length < 4
+      ) {
         this.errMsg.push("휴대폰 번호를 정확하게 입력해주세요.");
       }
 
       if (this.errMsg.length !== 0) {
-        let errString = "";
-        for (let idx = 0; idx < this.errMsg.length; ++idx) {
-          errString = errString.concat(this.errMsg[idx]);
+        // let errString = "";
+        // for (let idx = 0; idx < this.errMsg.length; ++idx) {
+        //   errString = errString.concat(this.errMsg[idx]);
 
-          if (idx === this.errMsg.length - 1) {
-            break;
-          }
-          errString = errString.concat("\n");
-        }
+        //   if (idx === this.errMsg.length - 1) {
+        //     break;
+        //   }
+        //   errString = errString.concat("\n");
+        // }
 
-        alert(errString);
+        this.dialog2 = true;
       } else {
+        this.resultPhoneNum = this.phoneNum1 + this.phoneNum2 + this.phoneNum3;
+        console.log(this.resultPhoneNum);
         let sendObj = {
-          phoneNum: this.phoneNum,
+          phoneNum: this.resultPhoneNum,
         };
 
         let config = {
@@ -133,5 +179,8 @@ export default {
 <style scoped>
 #inputPhonNum {
   width: 1px;
+}
+li {
+  list-style: none;
 }
 </style>

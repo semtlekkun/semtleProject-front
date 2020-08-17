@@ -53,7 +53,7 @@ export default {
             if(admin){
               this.setAdmin();
             }
-            this.setLogin() // 로그인 함수
+            this.setLogin(true) // 로그인 함수
             this.$router.push('/') // 메인페이지로 이동
           }
         }).catch((err)=>{

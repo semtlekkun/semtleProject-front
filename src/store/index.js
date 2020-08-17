@@ -9,13 +9,21 @@ export default new Vuex.Store({
     isAdmin: false,
   },
   mutations: {
-    setLogin(state){ // 로그인하는 함수
-      state.isLogin = !state.isLogin
+    setLogin(state, bool) { // 로그인하는 함수
+      if (bool)
+        state.isLogin = true
+      else {
+        state.isLogin = false
+      }
     },
-    setAdmin(state){
-      state.isAdmin = !state.isAdmin
+    setAdmin(state, bool) {
+      if (bool)
+        state.isAdmin = true
+      else {
+        state.isAdmin = false
+      }
     },
-    setLogout(state){ // MainMenuBar, MobileView에서 로그아웃할 때 실행하는 함수
+    setLogout(state) { // MainMenuBar, MobileView에서 로그아웃할 때 실행하는 함수
       state.isLogin = !state.isLogin // login true>false 전환
       // 세션스토리지 token,admin 삭제
       sessionStorage.removeItem("token")
@@ -23,11 +31,11 @@ export default new Vuex.Store({
       location.href = '/'; // 홈화면으로 이동
     }
   },
-  getters:{
-    getLogin(state){ // isLogin getter
+  getters: {
+    getLogin(state) { // isLogin getter
       return state.isLogin
     },
-    getAdmin(state){
+    getAdmin(state) {
       return state.isAdmin;
     }
   },
