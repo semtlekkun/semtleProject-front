@@ -119,17 +119,17 @@
                 .then((res) => {
                     // handle success
                     console.log(res)
-                    this.title = res.data.portfolio.projectTitle;
-                    this.startDate = res.data.portfolio.projectStartDate;
-                    this.endDate = res.data.portfolio.projectEndDate;
-                    this.contents = res.data.portfolio.contents;
-                    this.leaderNick = res.data.portfolio.leaderNick;
-                    this.writer = res.data.portfolio.writer;
-                    this.view = res.data.portfolio.view;
-                    this.date = res.data.portfolio.date;
-                    this.link = res.data.portfolio.link;
-                    this.teamName = res.data.portfolio.projectTeamName;
-                    res.data.portfolio.studentInfo.forEach(student=>{
+                    this.title = res.data.project.projectTitle;
+                    this.startDate = res.data.project.projectStartDate;
+                    this.endDate = res.data.project.projectEndDate;
+                    this.contents = res.data.project.contents;
+                    this.leaderNick = res.data.project.leaderNick;
+                    this.writer = res.data.project.writer;
+                    this.view = res.data.project.view;
+                    this.date = res.data.project.date;
+                    this.link = res.data.project.link;
+                    this.teamName = res.data.project.projectTeamName;
+                    res.data.studentInfo.forEach(student=>{
                         this.members.push(student)
                     });
                 })
