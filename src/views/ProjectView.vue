@@ -127,22 +127,58 @@
                         {{view}}
                       </li>
                     </ul>
+
+                    <!-- 팀원 카드 -->
+
                     <v-card-text style="color: #000;" width="100%">
+                      <v-card
+                        class="mr-5 my-5"
+                        max-width="150"
+                        v-for="member in members"
+                        :key="member.index"
+                        style="display:inline-block"
+                      >
+                        <v-img
+                          class="white--text align-end"
+                          height="150px"
+                          :src="studentImageURL+member.image"
+                        ></v-img>
+                        <v-card-subtitle class="pb-0" v-if="member.nick === leaderNick">
+                          <strong>팀장</strong>
+                        </v-card-subtitle>
+                        <v-card-subtitle class="pb-0" v-if="member.nick !== leaderNick">팀원</v-card-subtitle>
+                        <v-card-text class="text--primary">
+                          <div>{{member.nick}}</div>
+                        </v-card-text>
+                      </v-card>
+
+                      <!-- 팀원 카드 -->
+
                       <p>팀장 {{leaderNick}}</p>
                       <p>프로젝트 기간 {{startDate}} ~ {{endDate}}</p>
-                      <p>
-                        링크
+                      <p v-if="link !=''">
+                        참고페이지
                         <a :href="link">링크 바로가기</a>
                       </p>
-                      <p>
+                      <p v-if="git !=''">
                         Github
                         <a :href="Gitbub">링크 바로가기</a>
                       </p>
-                      <p>프로젝트 기간 {{startDate}} ~ {{endDate}}</p>
                       <VueMarkdown :source="contents" class="mt-10"></VueMarkdown>
                     </v-card-text>
+                    <!-- 
+                        
+                        카로셀 작업중
+                        <v-carousel height="700px" hide-delimiters style="text-align:-webkit-center;">
+                      <v-carousel-item
+                        v-for="(image,i) in images"
+                        :key="i"
+                        :src="imageURL+image"
+                        width="100%"
+                      ></v-carousel-item>
+                    </v-carousel>-->
                     <div v-for="(image,i) in images" :key="i">
-                      <img :src="imageURL+image" width="70%" max-width="960px"/>
+                      <img :src="imageURL+image" width="70%" max-width="960px" />
                     </div>
                   </v-alert>
                 </v-card>
@@ -195,6 +231,7 @@ export default {
   data() {
     return {
       imageURL: "http://49.50.166.64/api/pf/",
+      studentImageURL: "http://49.50.166.64/api/student/",
       projectID: "",
       admin: false,
       title: "",

@@ -22,16 +22,18 @@ export default {
     this.axios
       .get(`http://49.50.166.64/api/question/${id}`)
       .then((res) => {
+        console.log(res);
         if (res.status === 200) {
           this.QuestionData = {
-            title: res.data.title,
-            question: res.data.contents,
-            writerName: res.data.writer,
-            time: res.data.date,
-            views: 365,
-            id:res.data._id
+            title: res.data.question.title,
+            question: res.data.question.contents,
+            writerName: res.data.question.writer,
+            time: res.data.question.date,
+            id: res.data.question._id,
+            image: res.data.question.image,
+            views: res.data.question.view,
           };
-          this.commentData.writerName = res.data.writer;
+          this.commentData.writerName = res.data.question.writer;
         }
       })
       .catch((err) => {
@@ -41,14 +43,15 @@ export default {
     this.axios
       .get(`http://49.50.166.64/api/answer/${id}`)
       .then((res) => {
-        // console.log(res)
+        console.log(res);
         if (res.status === 200) {
-          res.data.answer.forEach((el) => {
+          res.data.answers.forEach((el) => {
             let obj = {
               name: el.writer,
               comment: el.contents,
               time: el.date,
               id: el._id,
+              image:el.writerImage
             };
             this.commentData.comments.push(obj);
           });
