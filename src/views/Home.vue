@@ -116,7 +116,7 @@ export default {
           obj.teamName = item.projectTeamName;
           obj.date = item.date;
           obj._id = item._id;
-          obj.imgSrc = item.projectImages[0];
+          obj.imgSrc = "http://49.50.166.64/api/pf/"+item.projectImages[0];
           obj.contents = item.contents;
           this.cardViewList.push(obj)
         })
