@@ -60,7 +60,7 @@ import SubTitle from '../components/SubTitle.vue';
         data(){
             return{
                 contents:[],
-                isLogin:true,
+                isLogin:'',
                 subTitleObj:{
                     title:"프로젝트 목록",
                     contents:"프로젝트 목록이다."
@@ -73,9 +73,11 @@ import SubTitle from '../components/SubTitle.vue';
             checkLogin() {
                 //토큰 X = 로그인 X
                 if(!sessionStorage.getItem("token")) {
-                    return !this.isLogin;
+                    return this.isLogin = false;
                 }
-                else return this.isLogin;
+                else {
+                    return this.isLogin = true;
+                }
             }    
         },
     }
