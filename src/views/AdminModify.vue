@@ -189,7 +189,7 @@ export default {
       this.axios.get("http://49.50.166.64/api/management/list").then((res) => {
         console.log(res);
 
-        for (let idx = 0; idx < res.data.management.length; ++idx) {
+        for (let idx = 1; idx < res.data.management.length; ++idx) {
           var tempObj = {
             name: "",
             studentCode: "",

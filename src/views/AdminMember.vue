@@ -321,6 +321,7 @@
                     console.log("왜그래 진짜로")
                 }
                 console.log(err);
+                console.log(err.response.ststus);
             })
         },
         //수정 put
@@ -350,6 +351,10 @@
                 }
             })
             .catch((err) => {
+                if(err.response.ststus === 500) {
+                    console.log("문데")
+                }
+                console.log(err.responser.status);
                 console.log(err);
             })
         },
@@ -375,6 +380,7 @@
                     this.canAdd = true;
                     alert("추가완료");
                     console.log("추가완료");
+                    //this.$router.go();
                 }
             })
             .catch((err) => {
