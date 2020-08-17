@@ -194,7 +194,7 @@ export default {
       datecheck: false,
       members: [],
       memberNum: "",
-      files: [],
+      files: null,
       errorMsg: [],
       rules: {
         fileCheck: (value) =>
@@ -279,8 +279,11 @@ export default {
         form.append("projectTeamName", this.teamName);
         form.append("teamLeaderCode", this.teamLeader);
         form.append("git", this.git);
-        form.append("projectImages", this.files);
-
+        // form.append("projectImages", this.files);
+        for(let i=0; i<this.files.length; i++){
+          form.append('projectImages[]', this.files[i])
+        }
+        // console.log("taese0ng: ", this.files)
         for (var value of form.values()) {
           console.log(value);
         }
