@@ -3,10 +3,17 @@
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{on, attrs}">
         <v-card height="200" light="light" class="pa-5">
-          <v-card-title primary="primary" class="title">Phone Number</v-card-title>
-
-          <v-card-actions>
-            <v-btn v-bind="attrs" v-on="on" dark="dark" class="btn btn-dark m-3">변경</v-btn>
+          <v-card-title primary="primary" class="title justify-center">Phone Number</v-card-title>
+          <v-card-text class="text-center">{{outputPhonenum}}</v-card-text>
+          <v-card-actions class="justify-center">
+            <v-btn
+              color="rgb(80, 130, 155)"
+              v-bind="attrs"
+              v-on="on"
+              dark="dark"
+              class="btn btn-dark m-3"
+              @click="openDialog"
+            >변경</v-btn>
           </v-card-actions>
         </v-card>
       </template>
@@ -23,6 +30,7 @@
             maxlength="11"
             @keypress="checkNumber"
             @keyup="checkHan"
+            placeholder="'-'를 빼고 입력하세요."
           ></v-text-field>
         </v-col>
 
@@ -44,8 +52,25 @@ export default {
     errMsg: [],
 
     phoneNum: "",
+    outputPhonenum: "",
   }),
+  created() {
+    this.initNumber();
+  },
   methods: {
+    initNumber() {
+      let config = {
+        headers: { token: sessionStorage.getItem("token") },
+      };
+
+      this.axios.get("http://49.50.166.64/api/mypage", config).then((res) => {
+        this.outputPhonenum = res.data.student.phoneNum;
+        console.log(res);
+      });
+    },
+    openDialog() {
+      this.phoneNum = "";
+    },
     submit() {
       this.errMsg = [];
       if (this.phoneNum.length < 11) {
@@ -83,8 +108,8 @@ export default {
           )
           .then((res) => {
             if (res.status === 200) {
-              alert("변경 성공!");
               this.dialog = false;
+              this.$router.go();
             }
           });
       }
@@ -105,3 +130,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+#inputPhonNum {
+  width: 1px;
+}
+</style>
