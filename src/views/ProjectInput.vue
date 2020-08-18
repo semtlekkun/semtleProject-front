@@ -207,7 +207,7 @@ export default {
       },
       contents: "",
       subTitleObj: {
-        title: "프로젝트 작성",
+        title: "📝프로젝트 작성",
         contents: "프로젝트 작성이다.",
       },
       dialog: false,

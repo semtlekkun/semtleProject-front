@@ -46,7 +46,7 @@ import SubTitle from '../components/SubTitle.vue';
             return{
                 contents:[],
                 subTitleObj:{
-                    title:"공지사항",
+                    title:"📌공지사항",
                     contents:"공지사항이다."
                 }
             }

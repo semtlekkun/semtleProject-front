@@ -202,6 +202,17 @@ export default {
 </script>
 
 <style scoped>
+             @font-face {
+    font-family: 'HangeulNuri-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+            
+            
+*{
+  font-family: 'HangeulNuri-Bold';
+}
 #transBox{
   /* background: red; */
   transform: translateY(-105%);
@@ -238,12 +249,6 @@ export default {
   align-items: center;
 
   overflow: hidden;
-}
-
-.child {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-
-  font-weight: bold;
 }
 
 .dummy1 {

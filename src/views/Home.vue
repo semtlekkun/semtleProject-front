@@ -139,6 +139,8 @@ export default {
 </script>
 
 <style scoped>
+     
+
 #projectView{
   max-height: 785px;
   overflow: auto;

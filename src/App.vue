@@ -109,15 +109,26 @@ export default {
 </script>
 
 <style>
-* {
-  text-decoration: none;
-  @font-face {
-    font-family: "BBTreeGL";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGL.woff")
-      format("woff");
+                  @font-face {
+    font-family: 'HangeulNuri-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-  }
+}
+             
+
+            @font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+    h1{
+      font-family: 'HangeulNuri-Bold';
+    }        
+* {
+  text-decoration: none;
+  font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 .customBtn {

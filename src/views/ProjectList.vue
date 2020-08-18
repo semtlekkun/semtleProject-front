@@ -62,7 +62,7 @@ import SubTitle from '../components/SubTitle.vue';
                 contents:[],
                 isLogin:'',
                 subTitleObj:{
-                    title:"프로젝트 목록",
+                    title:"💻프로젝트 목록",
                     contents:"프로젝트 목록이다."
                 }
             }

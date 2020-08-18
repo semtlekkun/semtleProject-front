@@ -87,7 +87,8 @@
 </template> -->
 <template>
   <v-container>
-    <v-row>
+    <v-row
+  class="pb-1">
       <v-col cols="12" lg="3">
         <SubTitle :subTitleObj="subTitleObj" />
       </v-col>
@@ -132,7 +133,7 @@
 
                     <v-card-text style="color: #000;" width="100%">
                       <v-card
-                        class="mr-5 my-5"
+                        class="mr-5 my-5 elevation-1"
                         max-width="150"
                         v-for="member in members"
                         :key="member.index"
