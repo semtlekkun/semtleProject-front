@@ -93,7 +93,8 @@
       </v-col>
       <v-col cols="12" lg="9">
         <div id="projectRead">
-          <v-container style="margin-top: 4rem; margin-bottom: 4rem;">
+          <!--<v-container style="margin-top: 4rem; margin-bottom: 4rem;">-->
+          <v-container>
             <v-row>
               <v-col cols="12">
                 <v-card>
@@ -177,9 +178,13 @@
                         width="100%"
                       ></v-carousel-item>
                     </v-carousel>-->
-                    <div v-for="(image,i) in images" :key="i">
-                      <img :src="imageURL+image" width="70%" max-width="960px" />
-                    </div>
+
+                    <v-card-text> <!-- 패딩이 그림부분이랑 위랑 달라서 v-card-text로 감쌈 -->
+                      <div v-for="(image,i) in images" :key="i">
+                        <img :src="imageURL+image" width="70%" max-width="960px" />
+                      </div>
+                    </v-card-text>
+                    
                   </v-alert>
                 </v-card>
               </v-col>

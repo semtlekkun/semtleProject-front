@@ -1,11 +1,12 @@
 <template>
   <div id="projectRead">
-    <v-container style="margin-top: 4rem; margin-bottom: 4rem;">
+    <!--<v-container style="margin-top: 4rem; margin-bottom: 4rem;">-->
+    <v-container>
       <v-row>
-        <v-col cols="12" lg="3">
+        <v-col cols="12" md="4" lg="4" xl="3">
           <SubTitle :subTitleObj="subTitleObj" />
         </v-col>
-        <v-col cols="12" lg="9">
+        <v-col cols="12" md="8" lg="8" xl="9">
           <v-card>
             <v-alert outlined color="#226db2">
               <v-row class="py-0">

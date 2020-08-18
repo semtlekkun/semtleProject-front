@@ -5,16 +5,16 @@
                 <SubTitle :subTitleObj="subTitleObj"/>
             </v-col>
             <v-col cols="12" md="8" lg="8" xl="9">
-                <v-row class="text-right">
-                    <v-col>
+                <v-row class="text-right" v-if="this.isLogin">
+                    <v-col class="my-0 py-0">
                         <router-link :to="{name:'projectAnnounceWrite'}">
                             <v-btn rounded depressed class="customBtn"
-                            v-show="this.isLogin">글쓰기</v-btn>
+                            >글쓰기</v-btn>
                         </router-link>
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col>
+                    <v-col class="my-0 py-0">
                         <Table :perPage="10"
                         tableName="projectAnnounce"
                         :contents="contents"/>

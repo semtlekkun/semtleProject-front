@@ -1,6 +1,7 @@
 <template>
   <div id="noticeRead">
-    <v-container style="margin-top: 4rem; margin-bottom: 4rem;">
+    <!--<v-container style="margin-top: 4rem; margin-bottom: 4rem;">-->
+    <v-container>
       <v-row>
         <v-col cols="12" lg="3">
           <SubTitle :subTitleObj="subTitleObj" />

@@ -13,13 +13,16 @@
       <!-- 검색 -->
       <v-col>
         <v-text-field
-          class="pl-3 mb-5"
+          class="pl-3 pr-3 mb-5"
           v-model="search"
           append-icon="mdi-file-search"
           label="Search"
           single-line="single-line"
           hide-details
           clearable="clearable"
+          rounded
+          color="#50829b"
+          background-color="#c5d4dc"
         ></v-text-field>
         <v-spacer></v-spacer>
       </v-col>
@@ -31,7 +34,6 @@
       :items="contents"
       :items-per-page="perPage"
       :search="search"
-      class="elevation-1"
       @click:row="rowClick"
     ></v-data-table>
   </div>
@@ -112,7 +114,18 @@ export default {
 </script>
 
 <style>
+tbody > tr{
+  cursor: pointer;
+}
 .v-data-footer__select {
   display: none !important;
+}
+.v-data-footer{
+  border-bottom: solid 2px;
+  border-color: #a6bbc5;
+}
+.v-data-table__wrapper {
+  border-top: solid 2px;
+  border-color: #a6bbc5;
 }
 </style>
