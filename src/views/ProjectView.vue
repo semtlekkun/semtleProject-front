@@ -246,7 +246,7 @@ export default {
       members: [],
       link: "",
       subTitleObj: {
-        title: "프로젝트",
+        title: "💻 프로젝트",
         contents: "프로젝트이다.",
       },
       git: "",
