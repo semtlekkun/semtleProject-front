@@ -26,7 +26,7 @@ import VueMarkdown from "vue-markdown"; //markdown import
 export default {
   data() {
     return {
-      writerURL: "http://49.50.166.64/api/student/" + this.comments.image,
+      writerURL: "http://49.50.166.64/api/student/images/" + this.comments.image,
     };
   },
   components: {

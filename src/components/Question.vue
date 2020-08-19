@@ -69,9 +69,9 @@ export default {
       this.axios.get(`http://49.50.166.64/api/question/${id}`).then((res) => {
         if (res.status === 200) {
           this.imageURL =
-            "http://49.50.166.64/api/question/" + res.data.question.image;
+            "http://49.50.166.64/api/question/images/" + res.data.question.image;
           this.writerURL =
-            "http://49.50.166.64/api/student/" + res.data.question.writerImage;
+            "http://49.50.166.64/api/student/images/" + res.data.question.writerImage;
           console.log(this.writerURL);
         }
       });

@@ -36,7 +36,7 @@ export default {
       this.axios.get(`http://49.50.166.64/api/notice/${id}`).then((res) => {
         if (res.status === 200) {
           this.imageURL =
-            "http://49.50.166.64/api/notice/" + res.data.notice.image;
+            "http://49.50.166.64/api/notice/images/" + res.data.notice.image;
         }
       });
     },

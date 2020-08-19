@@ -71,7 +71,7 @@ export default {
       this.axios
         .get("http://49.50.166.64/api/mypage", config)
         .then((res) => {
-          this.imageUrl = "http://49.50.166.64/api/student/";
+          this.imageUrl = "http://49.50.166.64/api/student/images/";
           this.imageUrl = this.imageUrl.concat(res.data.student.image);
         })
         .catch((err) => {

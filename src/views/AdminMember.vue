@@ -59,8 +59,7 @@
                             <!-- 학번 -->
                             <v-col cols="12">
                             <v-text-field
-                                @keypress="checkNumber"
-                                @keyup="checkHan"
+                                type="number" 
                                 v-model="editedItem._id" 
                                 label="학번"
                                 counter
@@ -93,11 +92,11 @@
                             <v-col cols="3">
                             <v-text-field 
                                 v-model="phonenum[0]" 
+                                label="전화번호"
+                                type="number"
+                                :rules="[rules.counter3]"
                                 counter
                                 maxlength="3"
-                                label="전화번호"
-                                @keypress="checkNumber"
-                                @keyup="checkHan"
                                 >
                             </v-text-field>
                             </v-col>
@@ -111,8 +110,8 @@
                             <v-text-field 
                                 v-model="phonenum[1]" 
                                 label="전화번호"
-                                @keypress="checkNumber"
-                                @keyup="checkHan"
+                                type="number"
+                                :rules="[rules.counter4]"
                                 counter
                                 maxlength="4"
                                  >
@@ -128,8 +127,8 @@
                             <v-text-field 
                                 v-model="phonenum[2]" 
                                 label="전화번호"
-                                @keypress="checkNumber"
-                                @keyup="checkHan"
+                                type="number"
+                                :rules="[rules.counter4]"
                                 counter
                                 maxlength="4" >
                             </v-text-field>
@@ -196,7 +195,7 @@
         data: () => ({
 
             //여기에 이미지 받아서 더해서 출력
-            imageSrc : 'http://49.50.166.64/api/student/',
+            imageSrc : 'http://49.50.166.64/api/student/images/',
 
             //각 폼에서 입력값 확인
             rules: {
@@ -277,19 +276,6 @@
         },
 
         methods: {
-        //입력값 체크
-        checkNumber(e) {
-            if (e.keyCode < 48 || e.keyCode > 57) {
-                e.returnValue = false;
-            }
-        },
-
-        checkHan(e) {
-            e = e || window.e;
-            var keyID = e.which ? e.which : e.keyCode;
-            if (keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39) return;
-            else e.target.value = e.target.value.replace(/[^0-9]/g, "");
-        },
         
         //관리자 확인
         check() {
@@ -323,6 +309,8 @@
                      
                     //모든 학생정보를 가져와서 student 에 저장.
                     //저장하면 알아서 다 뜸.
+
+                    //let imageSrc = 'http://49.50.166.64/api/student/'
                     this.student = res.data.students;
                 }
                 else {
@@ -332,7 +320,6 @@
             })
             .catch((err) => {
                 console.log(err);
-                console.log(err.response.ststus);
             })
         },
         //수정 put
@@ -362,10 +349,6 @@
                 }
             })
             .catch((err) => {
-                if(err.response.ststus === 500) {
-                    console.log("문데")
-                }
-                console.log(err.responser.status);
                 console.log(err);
             })
         },
@@ -391,9 +374,6 @@
                     this.canAdd = true;
                     alert("추가완료");
                     console.log("추가완료");
-
-                    //자동 새로고침.
-                    this.$router.go();
                 }
             })
             .catch((err) => {

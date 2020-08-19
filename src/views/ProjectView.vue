@@ -231,8 +231,8 @@ export default {
   },
   data() {
     return {
-      imageURL: "http://49.50.166.64/api/pf/",
-      studentImageURL: "http://49.50.166.64/api/student/",
+      imageURL: "http://49.50.166.64/api/pf/images/",
+      studentImageURL: "http://49.50.166.64/api/student/images/",
       projectID: "",
       admin: false,
       title: "",

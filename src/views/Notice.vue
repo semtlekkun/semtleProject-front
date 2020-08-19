@@ -65,7 +65,7 @@ export default {
           this.views = res.data.notice.view;
           this.date = res.data.notice.date;
           this.contents = res.data.notice.contents;
-          this.imageUrl = "http://49.50.166.64/api/notice/".concat(
+          this.imageUrl = "http://49.50.166.64/api/notice/images/".concat(
             res.data.notice.image
           );
           // 이미지도 추가

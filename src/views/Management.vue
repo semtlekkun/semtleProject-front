@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       CadreList: [],
-      imageURL: "http://49.50.166.64/api/student/",
+      imageURL: "http://49.50.166.64/api/student/images/",
     };
   },
 
