@@ -299,7 +299,6 @@ export default {
 }
 .announceInfo {
   color: gray;
-  margin-bottom: 30px;
 }
 .announceInfo li {
   list-style: none;

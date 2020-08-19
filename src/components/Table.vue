@@ -13,7 +13,7 @@
       <!-- 검색 -->
       <v-col>
         <v-text-field
-          class="pl-3 pr-3 mb-5"
+          class="px-3 mb-5"
           v-model="search"
           append-icon="mdi-file-search"
           label="Search"

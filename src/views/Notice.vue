@@ -1,50 +1,56 @@
 <template>
-  <div id="noticeRead">
-    <!--<v-container style="margin-top: 4rem; margin-bottom: 4rem;">-->
-    <v-container>
-      <v-row>
-        <v-col cols="12" lg="3">
-          <SubTitle :subTitleObj="subTitleObj" />
-        </v-col>
-        <v-col cols="12" lg="9">
-          <v-card id="contentBox">
-            <v-alert outlined color="#226db2">
-              <v-row class="py-0">
-                <v-col cols="10" class="py-0">
-                  <v-card-title>{{title}}</v-card-title>
-                </v-col>
-                <v-col cols="2">
-                  <v-btn v-show="admin" color="error" @click="deleteNotice">삭제</v-btn>
-                </v-col>
-              </v-row>
-              <v-divider class="mb-2"></v-divider>
-              <ul class="noticeInfo">
-                <li>
-                  <b>작성자</b>
-                  {{writer}}
-                </li>
-                <li>
-                  <b>작성일</b>
-                  {{date}}
-                </li>
+  <!--<v-container style="margin-top: 4rem; margin-bottom: 4rem;">-->
+  <v-container>
+    <v-row>
+      <v-col cols="12" lg="3">
+        <SubTitle :subTitleObj="subTitleObj" />
+      </v-col>
+      <v-col cols="12" lg="9">
+        <div id="noticeRead">
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <v-card id="contentBox">
+                  <v-alert outlined color="#226db2">
+                    <v-row class="py-0">
+                      <v-col cols="10" class="py-0">
+                        <v-card-title>{{title}}</v-card-title>
+                      </v-col>
+                      <v-col cols="2">
+                        <v-btn v-show="admin" color="error" @click="deleteNotice">삭제</v-btn>
+                      </v-col>
+                    </v-row>
+                    <v-divider class="mb-2"></v-divider>
+                    <ul class="noticeInfo">
+                      <li>
+                        <b>작성자</b>
+                        {{writer}}
+                      </li>
+                      <li>
+                        <b>작성일</b>
+                        {{date}}
+                      </li>
 
-                <li>
-                  <v-icon small>mdi-eye</v-icon>
-                  {{views}}
-                </li>
-              </ul>
-              <v-card-text style="color: #000;">
-                <vue-markdown :source="contents"></vue-markdown>
-              </v-card-text>
-              <div id="imageContainer">
-                <img :src="imageUrl" width="100%;" />
-              </div>
-            </v-alert>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+                      <li>
+                        <v-icon small>mdi-eye</v-icon>
+                        {{views}}
+                      </li>
+                    </ul>
+                    <v-card-text style="color: #000;">
+                      <vue-markdown :source="contents"></vue-markdown>
+                    </v-card-text>
+                    <div id="imageContainer">
+                      <img :src="imageUrl" width="100%;" />
+                    </div>
+                  </v-alert>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>  
+        </div>
+      </v-col>     
+    </v-row>        
+  </v-container>
 </template>
 
 <script>
