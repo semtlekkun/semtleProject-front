@@ -7,6 +7,13 @@
           <v-row>
             <v-col cols="6" sm="3" v-for="(member,j) in cadre[1][0]" :key="j">
               <v-card class="pa-10">
+              <!--
+              기본 이미지 오류 수정 
+                : 백엔드에서 라우터 대거 수정, 모든 컴포넌트와 view의 이미지경로를 images/로 모두 바꿔줌
+              그러나 계속 이미지가 업뎃되지 않는 현상 발견. 오류 수정 필요
+                : 간부진 중 이효진의 이미지를 계속 바꾸었으나 제일 처음 변경한 이미지인 computer.png가 계속 뜸
+                : 백엔드쪽을 확인하였으나 이상 없었음
+                -->
                 <v-img :src="imageURL+member.image" min-height="250px" max-height="250px" />
                 <p class="position">{{member.language}}{{member.position}}</p>
                 <p class="number">{{member.studentCode}}</p>
