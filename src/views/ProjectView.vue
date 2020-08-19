@@ -98,15 +98,17 @@
             <v-row>
               <v-col cols="12">
                 <v-card>
-                  <v-alert outlined color="#226db2">
+                  <v-alert outlined color="#365164">
                     <v-row class="py-0">
-                      <v-col cols="7" class="py-0">
+                      <v-col cols="12" class="py-0">
                         <v-card-title>{{title}}</v-card-title>
                       </v-col>
-                      <v-col class="text-right">
+                      <v-col 
+                        class="text-right"
+                        cols="12"
+                        v-show="admin"
+                      >
                         <v-btn
-                          cols="5"
-                          v-show="admin"
                           color="error"
                           rounded="rounded"
                           @click="deleteProject"
@@ -155,16 +157,23 @@
 
                       <!-- 팀원 카드 -->
 
-                      <p>팀장 {{leaderNick}}</p>
-                      <p>프로젝트 기간 {{startDate}} ~ {{endDate}}</p>
+                      <p>
+                        <v-btn rounded depressed class="customProjectViewBtn mr-2">팀명</v-btn> 
+                        {{TeamName}}
+                      </p>
+                      <p>
+                        <v-btn rounded depressed class="customProjectViewBtn mr-2">기간</v-btn> 
+                        {{startDate}} ~ {{endDate}}
+                      </p>
                       <p v-if="link !=''">
-                        참고페이지
-                        <a :href="link">링크 바로가기</a>
+                        <v-btn rounded depressed class="customProjectViewBtn mr-2">참고페이지</v-btn> 
+                        <a :href="link" style="color:#50829b">링크 바로가기</a>
                       </p>
                       <p v-if="git !=''">
-                        Github
-                        <a :href="Gitbub">링크 바로가기</a>
+                        <v-btn rounded depressed class="customProjectViewBtn mr-2">Github</v-btn> 
+                        <a :href="git" style="color:#50829b">링크 바로가기</a>
                       </p>
+
                       <VueMarkdown :source="contents" class="mt-10"></VueMarkdown>
                     </v-card-text>
                     <!-- 
@@ -215,9 +224,11 @@ export default {
         this.contents = res.data.project.contents;
         this.leaderNick = res.data.project.leaderNick;
         this.writer = res.data.project.writer;
+        this.TeamName = res.data.project.projectTeamName;
         this.view = res.data.project.view;
         this.date = res.data.project.date;
         this.link = res.data.project.link;
+        this.git = res.data.project.git;
         res.data.studentInfo.forEach((student) => {
           this.members.push(student);
         });
@@ -245,6 +256,7 @@ export default {
       contents: "",
       leaderNick: "",
       writer: "",
+      TeamName: "",
       view: "",
       date: "",
       members: [],
@@ -283,12 +295,16 @@ export default {
 </script>
 
 <style scoped="scoped">
-.customTable {
+/*.customTable {
   background: rgb(56, 82, 103);
   color: white;
+} >>> customTable class는 주석처리된 부분에서만 사용됨. */
+.customProjectViewBtn{
+  background-color: #a6bbc5 !important;
+  color: white !important;
 }
 #projectRead hr {
-  border-top: 1px solid #226db2;
+  border-top: 1px solid #365164;
 }
 #projectRead b {
   margin-right: 3px;

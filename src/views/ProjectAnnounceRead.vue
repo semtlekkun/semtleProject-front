@@ -11,7 +11,7 @@
             <v-row>
               <v-col cols="12">
                 <v-card>
-                  <v-alert outlined color="#226db2">
+                  <v-alert outlined color="#365164">
                     <v-row class="py-0">
                       <v-col cols="10" class="py-0">
                         <v-card-title>{{title}}</v-card-title>
@@ -125,7 +125,7 @@ export default {
 
 <style>
 #projectRead hr {
-  border-top: 1px solid #226db2;
+  border-top: 1px solid #365164;
 }
 #projectRead b {
   margin-right: 3px;

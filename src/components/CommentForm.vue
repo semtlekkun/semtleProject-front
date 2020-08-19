@@ -1,40 +1,42 @@
 <template>
-  <v-row>
-    <v-col :class="`rounded-lg`" class="CommentFormBubble px-4 py-2">
-      <v-form>
-        <v-row>
-          <v-col>
-            <v-textarea
-            v-model="contents" 
-            filled color="blue lighten-1" 
-            label="답변을 입력하세요" 
-            no-resize rows="8"></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-spacer></v-spacer>
-          <v-col>
-            <v-btn @click="inputAnswer" color="#50829b" large dark style="float:right;">등록</v-btn>
-          </v-col>
-        </v-row>
+  <v-container>
+    <v-row>
+      <v-col :class="`rounded-lg`" class="CommentFormBubble px-4 py-2">
+        <v-form>
+          <v-row>
+            <v-col>
+              <v-textarea
+              v-model="contents" 
+              filled color="blue lighten-1" 
+              label="답변을 입력하세요" 
+              no-resize rows="8"></v-textarea>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-spacer></v-spacer>
+            <v-col>
+              <v-btn @click="inputAnswer" color="#50829b" large dark style="float:right;">등록</v-btn>
+            </v-col>
+          </v-row>
 
-        <!-- 다이얼로그 -->
-          <v-dialog v-model="dialog" persistent max-width="330">
-            <v-card>
-              <v-card-title class="headline error">
-                <p style="color:white !important;">Error</p>
-              </v-card-title>
-              <v-card-text><br/><br/><h2>{{this.errorMessage}}</h2></v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn v-show="this.isLogin" color="error" text @click="dialogBtn()">Login</v-btn>
-                <v-btn color="error" text @click="dialog = false">OK</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-      </v-form>
-    </v-col>
-  </v-row>
+          <!-- 다이얼로그 -->
+            <v-dialog v-model="dialog" persistent max-width="330">
+              <v-card>
+                <v-card-title class="headline error">
+                  <p style="color:white !important;">Error</p>
+                </v-card-title>
+                <v-card-text><br/><br/><h2>{{this.errorMessage}}</h2></v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn v-show="this.isLogin" color="error" text @click="dialogBtn()">Login</v-btn>
+                  <v-btn color="error" text @click="dialog = false">OK</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+        </v-form>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

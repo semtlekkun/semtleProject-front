@@ -11,7 +11,7 @@
             <v-row>
               <v-col cols="12">
                 <v-card id="contentBox">
-                  <v-alert outlined color="#226db2">
+                  <v-alert outlined color="#365164">
                     <v-row class="py-0">
                       <v-col cols="10" class="py-0">
                         <v-card-title>{{title}}</v-card-title>
@@ -39,9 +39,11 @@
                     <v-card-text style="color: #000;">
                       <vue-markdown :source="contents"></vue-markdown>
                     </v-card-text>
-                    <div id="imageContainer">
-                      <img :src="imageUrl" width="100%;" />
-                    </div>
+                    <v-card-text>
+                      <div id="imageContainer">
+                        <img :src="imageUrl" width="100%;" />
+                      </div>
+                    </v-card-text>
                   </v-alert>
                 </v-card>
               </v-col>
@@ -122,7 +124,7 @@ export default {
 
 <style>
 #noticeRead hr {
-  border-top: 1px solid #226db2;
+  border-top: 1px solid #365164;
 }
 #noticeRead b {
   margin-right: 3px;
