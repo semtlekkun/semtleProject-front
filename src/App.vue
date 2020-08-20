@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <Intro v-show="isIntro" :functions="switchScreen"/>
+        <Intro v-if="isIntro" :functions="switchScreen"/>
         <v-main v-show="!isIntro">
             <SideBar v-if="isMobile" :loginStatus="getLogin"/>
             <v-container>
@@ -9,10 +9,8 @@
                 class="mx-auto" src="./assets/logo.png" /> </router-link> </v-col> </v-row> -->
 
                 <v-row
-                    v-show="isMobile || $route.name === 'adminMenu'"
-                    class="mt-5"
-                    :id="!isMobile && 'stickyMenu'"
-                    v-if="$route.name !== 'login'">
+                    v-if="isMobile || $route.name === 'login' || $route.name === 'adminMenu'"
+                    class="mt-5">
                     <v-col offset-sm="3" sm="6" xl="6" offset-xl="3">
                         <router-link to="/">
                             <v-img class="mx-auto" src="./assets/logo.png"/>
@@ -21,9 +19,8 @@
                 </v-row>
 
                 <v-row
-                    v-show="!isMobile &&  $route.name !== 'adminMenu'"
                     id="stickyMenu"
-                    v-if="$route.name !== 'login'">
+                    v-if="$route.name !== 'login' && !isMobile &&  $route.name !== 'adminMenu'">
                     <v-col>
                         <PCMenuBar/>
                     </v-col>
@@ -32,10 +29,7 @@
                 <router-view/>
                 <!-- <MobileView v-if="isMobile" :loginStatus="getLogin" /> <PCView
                 v-if="!isMobile" /> -->
-                <TopBtn v-show="!isMobile" v-if="$route.name !== 'login'"/>
-                <AdminBtn
-                    v-if="$route.name === 'Home'"
-                    :class="getAdmin ? 'adminBbtn': 'notAdminBtn'"/>
+                <TopBtn v-if="$route.name !== 'login' && !isMobile"/>
             </v-container>
         </v-main>
     </v-app>
@@ -43,9 +37,6 @@
 
 <script>
     import TopBtn from "./components/TopBtn.vue";
-    import AdminBtn from "./components/AdminBtn.vue";
-    // import PCView from "./views/PCView.vue"; import MobileView from
-    // "./views/MobileView.vue";
     import Intro from "./views/Intro.vue";
     import {mapMutations, mapGetters} from "vuex";
     import SideBar from './components/SideBar.vue';
@@ -78,15 +69,17 @@
 
         components: {
             TopBtn,
-            // MobileView,
-            AdminBtn,
-            // PCView,
             Intro,
             SideBar,
             PCMenuBar
         },
 
-        data: () => ({isMobile: false, isLogin: false, isIntro: true}),
+        data(){
+            return{
+                isMobile: false, 
+                isLogin: false, 
+                isIntro: true}
+        },
 
         methods: {
             ...mapMutations(["setLogin", "setAdmin"]),
@@ -137,14 +130,6 @@
     }
 
     ::-webkit-scrollbar {
-        display: none;
-    }
-
-    .adminBtn {
-        display: block;
-    }
-
-    .notAdminBtn {
         display: none;
     }
     #stickyMenu {

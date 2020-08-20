@@ -1,12 +1,12 @@
 <template>
     <v-container>
-        <v-row class="text-center">
+        <!-- <v-row class="text-center">
             <v-col>
                 <router-link to="/">
                     <img id="loginImg" src="../assets/logo.png"/>
                 </router-link>
             </v-col>
-        </v-row>
+        </v-row> -->
 
         <v-row class="text-center">
             <v-col>

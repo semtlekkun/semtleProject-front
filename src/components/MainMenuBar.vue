@@ -34,7 +34,8 @@ import {mapMutations, mapGetters} from 'vuex';
 export default {
   computed:{
     ...mapGetters([
-      'getLogin'
+      'getLogin',
+      'getAdmin'
     ]),
   },
   components: {
@@ -45,15 +46,7 @@ export default {
       // 현재 스크롤 위치와 호버에 대한 제어를 두기 위한 변수
       controller: false,
       subMenu:false,
-      Attributes: null,
-      functions:{
-        menuOpen : this.menuOpen,
-        menuClose : this.menuClose,
-        subMenuOpen : this.subMenuOpen,
-        subMenuClose : this.subMenuClose
-      },
-      // 로그아웃 시 들어갈 리스트 아이템과 버튼 제목
-      AttributesLogOut:[
+      Attributes: [
         {
           Items: [],
           url: '/notice/list',
@@ -81,6 +74,15 @@ export default {
           Title: "Q&A",
           method: ()=>{}
         },
+      ],
+      functions:{
+        menuOpen : this.menuOpen,
+        menuClose : this.menuClose,
+        subMenuOpen : this.subMenuOpen,
+        subMenuClose : this.subMenuClose
+      },
+      // 로그아웃 시 들어갈 리스트 아이템과 버튼 제목
+      logOutMenu:[
         {
           Items: [],
           url: '/login',
@@ -89,34 +91,7 @@ export default {
         },
       ],
       // 로그인 시 들어갈 리스트 아이템과 버튼 제목
-      AttributesLogIn:[
-        {
-          Items: [],
-          url: '/notice/list',
-          Title: "공지사항",
-          method: ()=>{}
-        },
-        {
-          Items: [
-            { title: "목록", url:'/project/list' },
-            { title: "공고", url: '/project/announce/list' },
-          ],
-          url: '',
-          Title: "프로젝트",
-          method: ()=>{}
-        },
-        {
-          Items: [],
-          url: '/management',
-          Title: "역대 간부",
-          method: ()=>{}
-        },
-        {
-          Items: [],
-          url: '/qna/list',
-          Title: "Q&A",
-          method: ()=>{}
-        },
+    logInMenu:[
         {
           Items: [],
           url: '/mypage',
@@ -129,7 +104,14 @@ export default {
           Title: "로그아웃",
           method: ()=>{this.setLogout()}
         },
-      ]
+      ],
+
+      adminMenu:{
+          Items: null,
+              url: "/admin/menu",
+              Title: "관리자페이지",
+              method: () => {this.activeMenu()},
+      }
     };
   },
   methods: {
@@ -140,11 +122,14 @@ export default {
     isLogin(){
       if (this.getLogin){ // 로그인일 때
         // console.log("login success")
-        this.Attributes = this.AttributesLogIn // 로그인 메뉴 받음
+        if(this.getAdmin){
+          this.logInMenu[0] = this.adminMenu;
+        }
+        this.Attributes = this.Attributes.concat(this.logInMenu) // 로그인 메뉴 받음
       }
       else { // 로그아웃일 때
         // console.log("login fail")
-        this.Attributes = this.AttributesLogOut // 로그아웃 메뉴 받음
+        this.Attributes = this.Attributes.concat(this.logOutMenu) // 로그아웃 메뉴 받음
       }
     },
     subMenuOpen(){

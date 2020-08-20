@@ -27,8 +27,7 @@
                     @click="item.method">
                         {{item.Title}}
                         <ul v-if="item.Items!==null"
-                        v-show="projectClick" 
-                        :class="projectClick? '':'closeProject'">
+                        :class="projectClick? 'openProject':'closeProject'">
                             <router-link v-for="subItem in item.Items" 
                             :key="subItem.title" :to="subItem.url">
                                 <li class="menuList py-1"  @click="subItem.method">
@@ -41,28 +40,29 @@
                     </li>
                  </router-link>
 
-
-                <router-link  v-for="item in mainItemsLogIn"
-                :key="item.Title" :to="item.url">
-                    <li class="menuList py-2" 
-                    v-show="loginStatus"
-                    @click="item.method">
+                <div v-if="loginStatus">
+                    <router-link  v-for="item in mainItemsLogIn"
+                    :key="item.Title" :to="item.url">
+                        <li class="menuList py-2" 
+                        @click="item.method">
+                        
+                            {{item.Title}}
                     
-                        {{item.Title}}
-                   
+                        </li>
+                    </router-link>
+                </div>
+
+                <div v-if="!loginStatus">
+                    <router-link  v-for="item in mainItemsLogOut"
+                    :key="item.Title" :to="item.url">
+                        <li class="menuList py-2"
+                        @click="item.method">
+                        
+                            {{item.Title}}
+                        
                     </li>
-                 </router-link>
-
-                <router-link v-for="item in mainItemsLogOut"
-                :key="item.Title" :to="item.url">
-                    <li class="menuList py-2" 
-                    v-show="!loginStatus" 
-                    @click="item.method">
-                    
-                        {{item.Title}}
-                    
-                </li>
-                </router-link>
+                    </router-link>
+                </div>
             </ul>
         </div>
 
@@ -75,8 +75,16 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
     export default {
+        computed:{
+            ...mapGetters(['getAdmin'])
+        },
+        created(){
+            if(this.getAdmin){
+                this.mainItemsLogIn[0] = this.adminMenu;
+            }
+        },
         props:{
             loginStatus: Boolean
         },
@@ -105,7 +113,7 @@ import { mapMutations } from "vuex";
                         },
                     },
                     {
-                        Items: [],
+                        Items: null,
                         url: "/management",
                         Title: "역대 간부",
                         method: () => {this.activeMenu()},
@@ -144,7 +152,14 @@ import { mapMutations } from "vuex";
                             this.setLogout();
                         },
                     },
-                ]
+                ],
+
+                adminMenu:{
+                    Items: null,
+                        url: "/admin/menu",
+                        Title: "관리자페이지",
+                        method: () => {this.activeMenu()},
+                }
             }
         },
 
@@ -165,11 +180,20 @@ a{
     color: #2b7aa1 !important;
     font-weight: 600;
 }
+.openProject{
+    height: 72px;
+    padding: 0;
+    margin: 0;
+    transition: all .5s;
+    overflow: hidden;
+}
 
 .closeProject {
   height: 0;
   padding: 0;
   margin: 0;
+  transition: all .5s;
+  overflow: hidden;
 }
 
 ul{
