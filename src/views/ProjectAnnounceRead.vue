@@ -31,21 +31,22 @@
                         {{date}}
                       </li>
                       <li>
-                        <b>마감일</b>
-                        {{deadline}}
-                      </li>
-                      <li>
-                        <b>모집인원</b>
-                        {{recruitment}}
-                      </li>
-
-                      <li>
                         <v-icon small>mdi-eye</v-icon>
                         {{views}}
                       </li>
                     </ul>
                     <v-card-text style="color: #000;">
-                      <vue-markdown :source="content"></vue-markdown>
+                      <v-row class="my-2 mx-1">
+                        <v-col cols="4" xs="4" sm="3" md="2" class="rounded-xl blue-grey lighten-3 font-weight-black text-center">마감일</v-col>
+                        <v-col cols="8" xs="8" sm="9" md="10" class="text-left">{{deadline}}</v-col>
+                      </v-row>
+
+                      <v-row class="my-2 mx-1">
+                        <v-col cols="4" xs="4" sm="3" md="2" class="rounded-xl blue-grey lighten-3 font-weight-bold text-center">모집인원</v-col>
+                        <v-col cols="12" xs="8" sm="9" md="10" class="text-left">{{recruitment}}</v-col>
+                      </v-row>
+                      <vue-markdown :source="content" class="mt-10 ml-2">
+                      </vue-markdown>
                     </v-card-text>
                   </v-alert>
                 </v-card>
@@ -124,6 +125,10 @@ export default {
 </script>
 
 <style>
+.customBtn{
+  background-color: #a6bbc5 !important;
+  color: white !important;
+}
 #projectRead hr {
   border-top: 1px solid #365164;
 }
