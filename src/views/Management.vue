@@ -3,7 +3,7 @@
     <v-container class="text-center">
       <div v-for="(cadre,i) in CadreList" :key="i">
         <div v-if="cadre[1][0].length !== 0">
-          <h1 class="text-left mt-5">{{cadre[0]}}년 1학기 (여름학기)</h1>
+          <h1 class="text-left my-5">{{cadre[0]}}년 1학기 (여름학기)</h1>
           <v-row>
             <v-col cols="6" sm="3" v-for="(member,j) in cadre[1][0]" :key="j">
               <v-card class="pa-10">
@@ -22,10 +22,10 @@
               </v-card>
             </v-col>
           </v-row>
-          <v-divider class="mt-16"></v-divider>
+          <v-divider class="my-10"></v-divider>
         </div>
         <div v-if="cadre[1][1].length !== 0">
-          <h1 class="text-left mt-5">{{cadre[0]}}년 2학기 (겨울학기)</h1>
+          <h1 class="text-left my-5">{{cadre[0]}}년 2학기 (겨울학기)</h1>
           <v-row>
             <v-col cols="6" sm="3" v-for="(member,k) in cadre[1][1]" :key="k">
               <v-card class="pa-10">
@@ -37,7 +37,7 @@
               </v-card>
             </v-col>
           </v-row>
-          <v-divider class="mt-16"></v-divider>
+          <v-divider class="my-10"></v-divider>
         </div>
       </div>
     </v-container>

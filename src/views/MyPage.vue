@@ -24,7 +24,7 @@ res.data.student.pfList -> 순회해서 출력
     </v-row>
     <v-row>
       <v-col cols="12">
-        <h1 class="mt-3 ml-2">나의 포트폴리오</h1>
+        <h1 class="mt-3 ml-2">나의 프로젝트</h1>
       </v-col>
     </v-row>
     <v-row>
@@ -32,7 +32,6 @@ res.data.student.pfList -> 순회해서 출력
         <v-data-table
           :headers="headers"
           :items="projects"
-          class="elevation-1"
           @click:row="clickRow"
         >
           <template v-slot:header.name="{ header }">{{ header.text.toUpperCase() }}</template>

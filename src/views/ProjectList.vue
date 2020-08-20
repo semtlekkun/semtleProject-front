@@ -6,7 +6,7 @@
             </v-col>
             <v-col cols="12" md="8" lg="8" xl="9">
                 <v-row class="text-right">
-                    <v-col>
+                    <v-col class="my-0 py-0">
                         <router-link 
                         :to="{name:'projectInput'}"
                         v-show="this.isLogin"
@@ -16,7 +16,7 @@
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col>
+                    <v-col class="my-0 py-0">
                         <Table :perPage="10"
                         tableName="project"
                         :contents="contents"/>
