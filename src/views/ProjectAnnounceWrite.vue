@@ -6,6 +6,8 @@
           <SubTitle :subTitleObj="subTitleObj" />
         </v-col>
         <v-col>
+          <v-card>
+            <v-alert outlined color="#365164">
               <v-form>
                 <v-row>
                   <v-col cols="12">
@@ -64,6 +66,8 @@
                   </v-col>
                 </v-row>
               </v-form>
+            </v-alert>
+          </v-card>
         </v-col>
         <v-dialog v-model="dialog" persistent max-width="290">
           <v-card>
