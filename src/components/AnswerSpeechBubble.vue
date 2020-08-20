@@ -64,14 +64,15 @@ export default {
   max-width: 40em;
   position: relative;
   display: inline-block;
-  background: rgb(215, 206, 207);
+  background: #365164;
+  color : white;
 }
 .AnswerBubble:after {
   content: "";
   position: absolute;
   border-style: solid;
   border-width: 11px 0 11px 14px;
-  border-color: transparent rgb(215, 206, 207);
+  border-color: transparent #365164;
   display: block;
   width: 0;
   right: -14px;
