@@ -1,14 +1,31 @@
 <template>
   <v-container>
-    <Question :Question="QuestionData" style="margin-top:20px;" />
-    <br />
-    <v-divider class="my-6"></v-divider>
-    <br />
-    <CommentList :commentData="commentData" />
-    <br />
-    <v-divider class="my-6"></v-divider>
-    <br />
-    <CommentForm />
+    <v-row class="pb-1">
+      <v-col cols="12" lg="3">
+        <SubTitle :subTitleObj="subTitleObj" />
+      </v-col>
+      <v-col cols="12" lg="9">
+        <v-container>
+          <v-row>
+            <v-col cols="12">
+              <v-card>
+                <v-alert outlined color="#365164">
+                  <Question :Question="QuestionData" />
+                  <br />
+                  <v-divider class="my-6"></v-divider>
+                  <br />
+                  <CommentList :commentData="commentData" />
+                  <br />
+                  <v-divider class="my-6"></v-divider>
+                  <br />
+                  <CommentForm />
+                </v-alert>
+              </v-card>  
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-col>        
+    </v-row>
   </v-container>
 </template>
 
@@ -16,6 +33,7 @@
 import CommentList from "../components/CommentList";
 import CommentForm from "../components/CommentForm";
 import Question from "../components/Question";
+import SubTitle from "../components/SubTitle.vue";
 export default {
   mounted() {
     let id = this.$route.params.id;
@@ -65,6 +83,7 @@ export default {
     CommentList,
     CommentForm,
     Question,
+    SubTitle,
   },
   data() {
     return {
@@ -80,6 +99,10 @@ export default {
         writerName: "",
         comments: [],
       },
+      subTitleObj: {
+        title: "❓ Q&A",
+        contents: "Q&A이다.",
+      },
     };
   },
   methods: {},
@@ -94,5 +117,8 @@ export default {
 }
 p {
   margin-bottom: 0 !important;
+}
+.v-alert__content{
+  width: 100%;
 }
 </style>
