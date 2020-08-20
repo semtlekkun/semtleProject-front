@@ -108,11 +108,7 @@
                         cols="12"
                         v-show="admin"
                       >
-                        <v-btn
-                          color="error"
-                          rounded="rounded"
-                          @click="deleteProject"
-                        >삭제</v-btn>
+                        <v-btn color="error" @click="deleteProject">삭제</v-btn>
                       </v-col>
                     </v-row>
                     <v-divider class="mb-2"></v-divider>

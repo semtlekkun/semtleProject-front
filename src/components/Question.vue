@@ -1,11 +1,15 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="10">
+      <v-col cols="12">
         <h2>{{Question.title}}</h2>
       </v-col>
-      <v-col class="text-right">
-        <v-btn v-show="admin" color="error" @click="deleteQuestion">삭제</v-btn>
+      <v-col 
+        class="text-right"
+        cols="12"
+        v-show="admin"
+      >
+        <v-btn color="error" @click="deleteQuestion">삭제</v-btn>
       </v-col>
     </v-row>
     <table class="table">
