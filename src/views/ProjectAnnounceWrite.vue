@@ -1,18 +1,15 @@
 <template>
   <div id="projectWrite">
-    <!--<v-container style="margin-top: 4rem; margin-bottom: 4rem">-->
     <v-container>
       <v-row>
         <v-col cols="12" md="4" lg="4" xl="3">
           <SubTitle :subTitleObj="subTitleObj" />
         </v-col>
         <v-col>
-          <v-card>
-            <v-alert outlined color="#226db2">
               <v-form>
                 <v-row>
                   <v-col cols="12">
-                    <v-text-field label="제목" required v-model="title"></v-text-field>
+                    <v-text-field label="공고 제목" required v-model="title"></v-text-field>
                   </v-col>
                 </v-row>
 
@@ -50,18 +47,23 @@
 
                 <v-row>
                   <v-col cols="12">
-                    <v-textarea v-model="contents" rows="7" auto-grow outlined label="내용"></v-textarea>
+                    <v-textarea
+                      v-model="contents"
+                      outlined
+                      no-resize
+                      height="300"
+                      name="content-input"
+                      label="공고 내용을 입력하세요"
+                    />
                   </v-col>
                 </v-row>
 
-                <v-row>
-                  <v-col cols="12" class="text-right">
-                    <v-btn block color="primary" @click="confirmAnnounce">완료</v-btn>
+                <v-row class="justify-end">
+                  <v-col cols="12" md="3" class="text-right">
+                    <v-btn color="#50829b" @click="confirmAnnounce" class="white--text" block>작성 완료</v-btn>
                   </v-col>
                 </v-row>
               </v-form>
-            </v-alert>
-          </v-card>
         </v-col>
         <v-dialog v-model="dialog" persistent max-width="290">
           <v-card>
