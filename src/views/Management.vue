@@ -3,9 +3,9 @@
     <v-container class="text-center">
       <div v-for="(cadre,i) in CadreList" :key="i">
         <div v-if="cadre[1][0].length !== 0">
-          <h1 class="text-left my-5">{{cadre[0]}}년 1학기 (여름학기)</h1>
+          <h1 class="text-left my-5">{{cadre[0]}}년 1학기</h1>
           <v-row>
-            <v-col cols="6" sm="3" v-for="(member,j) in cadre[1][0]" :key="j">
+            <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,j) in cadre[1][0]" :key="j">
               <v-card class="pa-10">
               <!--
               기본 이미지 오류 수정 
@@ -25,9 +25,9 @@
           <v-divider class="my-10"></v-divider>
         </div>
         <div v-if="cadre[1][1].length !== 0">
-          <h1 class="text-left my-5">{{cadre[0]}}년 2학기 (겨울학기)</h1>
+          <h1 class="text-left my-5">{{cadre[0]}}년 2학기</h1>
           <v-row>
-            <v-col cols="6" sm="3" v-for="(member,k) in cadre[1][1]" :key="k">
+            <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,k) in cadre[1][1]" :key="k">
               <v-card class="pa-10">
                 <v-img :src="imageURL+member.image" min-height="250px" max-height="250px" />
                 <p class="position">{{member.language}}{{member.position}}</p>
