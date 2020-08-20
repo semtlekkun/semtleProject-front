@@ -81,7 +81,7 @@
               </v-col>
             </v-row>
             <v-row class="align-center">
-              <v-col cols="9">
+              <v-col cols="7" xs="7" sm="8" md="10">
                 <v-text-field
                   @keypress="checkNumber"
                   @keyup="checkHan"
@@ -92,17 +92,17 @@
                   placeholder="등록된 셈틀꾼 회원만 추가 가능합니다. 팀장학번이 필수로 등록되어야 합니다."
                 />
               </v-col>
-              <v-col cols="3">
+              <v-col cols="5" xs="5" sm="4" md="2">
                 <v-btn @click="addMember" lage color="#50829b" class="white--text" block>추가하기</v-btn>
               </v-col>
             </v-row>
 
             <v-row>
-              <v-col cols="6" v-for="member in members" :key="member.index">
+              <v-col cols="12" xs="12" sm="6" md="6" v-for="member in members" :key="member.index">
                 <v-row class="align-center">
-                  <v-col cols="4">{{member}}</v-col>
-                  <v-col cols="5">
-                    <v-btn @click="()=>delMember(member)">Del</v-btn>
+                  <v-col cols="8">{{member}}</v-col>
+                  <v-col cols="4">
+                    <v-btn @click="()=>delMember(member)">삭제</v-btn>
                   </v-col>
                 </v-row>
               </v-col>
