@@ -86,10 +86,10 @@ export default {
 };
 </script>
 <style>
-.v-input textarea, .v-label {
+.parent .v-input textarea, .parent .v-label {
     color: white !important;
 }
-.v-text-field__details {
+.parent .v-text-field__details {
   display: none;
 }
 p {

@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col :class="`rounded-lg`" class="CommentFormBubble px-4 py-2">
-        <v-form>
+        <v-form class="parent">
           <v-row>
             <v-col>
               <v-textarea
