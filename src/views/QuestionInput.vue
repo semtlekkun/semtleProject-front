@@ -8,7 +8,7 @@
       <v-col cols="12" md="8" lg="8" xl="9">
         <v-row>
           <v-col>
-            <v-text-field label="Question Title" v-model="title" />
+            <v-text-field label="질문 제목" v-model="title" />
           </v-col>
         </v-row>
 
@@ -20,7 +20,7 @@
               no-resize
               height="300"
               name="content-input"
-              label="Contents"
+              label="질문할 내용을 입력하세요"
             />
           </v-col>
         </v-row>
@@ -33,8 +33,8 @@
               accept="image/*"
               color="deep-purple accent-4"
               counter
-              label="File input"
-              placeholder="Select your images"
+              label="사진 추가"
+              placeholder="사진을 추가하려면 여기를 클릭하세요"
               prepend-icon="mdi-camera"
               outlined
               :show-size="1000"
@@ -44,7 +44,7 @@
 
         <v-row class="justify-end">
           <v-col cols="12" md="3" class="text-right">
-            <v-btn @click="writeConents" color="primary" block>write</v-btn>
+            <v-btn @click="writeConents"  color="#50829b" class="white--text"  block>작성 완료</v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -72,7 +72,7 @@ export default {
       ],
       contents: "",
       subTitleObj: {
-        title: "질문 작성",
+        title: "❓질문 작성",
         contents: "질문 작성이다.",
       },
     };

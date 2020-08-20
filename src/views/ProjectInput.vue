@@ -8,14 +8,14 @@
       <v-col cols="12" md="8" lg="8" xl="9">
         <v-row>
           <v-col>
-            <v-text-field label="Project Title" v-model="projectTitle" />
+            <v-text-field label="프로젝트 제목" v-model="projectTitle" />
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="6">
             <v-text-field
-              label="Team Leader(Number)"
+              label="팀장 (학번)"
               v-model="teamLeader"
               @keypress="checkNumber"
               @keyup="checkHan"
@@ -25,7 +25,7 @@
             />
           </v-col>
           <v-col cols="6">
-            <v-text-field label="Team Name" v-model="teamName" />
+            <v-text-field label="팀명" v-model="teamName" />
           </v-col>
         </v-row>
         <v-row>
@@ -40,7 +40,7 @@
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
-                <v-text-field v-model="startDate" label="Start Date" readonly v-on="on"></v-text-field>
+                <v-text-field v-model="startDate" label="프로젝트 시작일" readonly v-on="on"></v-text-field>
               </template>
 
               <v-date-picker v-model="startDate" no-title scrollable>
@@ -65,7 +65,7 @@
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
-                <v-text-field v-model="endDate" label="End Date" readonly v-on="on"></v-text-field>
+                <v-text-field v-model="endDate" label="프로젝트 마감일" readonly v-on="on"></v-text-field>
               </template>
               <v-date-picker v-model="endDate" no-title scrollable>
                 <v-spacer></v-spacer>
@@ -84,14 +84,14 @@
               @keypress="checkNumber"
               @keyup="checkHan"
               v-model.number="memberNum"
-              label="Team Member(Number)"
+              label="팀원 (학번)"
               counter
               maxlength="8"
               placeholder="등록된 셈틀꾼 회원만 추가 가능합니다. 팀장학번이 필수로 등록되어야 합니다."
             />
           </v-col>
           <v-col cols="3">
-            <v-btn @click="addMember" lage color="primary" block>Add</v-btn>
+            <v-btn @click="addMember" lage color="#50829b" class="white--text" block>추가하기</v-btn>
           </v-col>
         </v-row>
 
@@ -126,7 +126,7 @@
               no-resize
               height="300"
               name="content-input"
-              label="Contents"
+              label="프로젝트 내용을 입력하세요"
             />
           </v-col>
         </v-row>
@@ -139,9 +139,9 @@
               accept="image/*"
               color="deep-purple accent-4"
               counter
-              label="File input"
+              label="사진 추가"
               multiple
-              placeholder="Select your images"
+              placeholder="사진을 추가하려면 여기를 클릭하세요"
               prepend-icon="mdi-camera"
               outlined
               :show-size="1000"
@@ -151,7 +151,7 @@
 
         <v-row class="justify-end">
           <v-col cols="12" md="3" class="text-right">
-            <v-btn @click="writeConents" color="success" block>write</v-btn>
+            <v-btn @click="writeConents" color="#50829b" class="white--text"  block>작성 완료</v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -207,7 +207,7 @@ export default {
       },
       contents: "",
       subTitleObj: {
-        title: "📝프로젝트 작성",
+        title: "✍프로젝트 작성",
         contents: "프로젝트 작성이다.",
       },
       dialog: false,

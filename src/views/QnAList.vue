@@ -60,7 +60,7 @@ import SubTitle from '../components/SubTitle.vue';
             return{
                 subTitleObj:{
                     isLogin:'',
-                    title:"Q&A 목록",
+                    title:"❓❗Q&A 목록",
                     contents:"질문 목록이다."
                 },
                 contents:[]
