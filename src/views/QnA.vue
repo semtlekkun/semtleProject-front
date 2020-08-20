@@ -2,11 +2,11 @@
   <v-container>
     <Question :Question="QuestionData" style="margin-top:20px;" />
     <br />
-    <hr />
+    <v-divider class="my-6"></v-divider>
     <br />
     <CommentList :commentData="commentData" />
     <br />
-    <hr />
+    <v-divider class="my-6"></v-divider>
     <br />
     <CommentForm />
   </v-container>

@@ -16,7 +16,7 @@
           class="px-3 mb-5"
           v-model="search"
           append-icon="mdi-file-search"
-          label="Search"
+          label="검색"
           single-line="single-line"
           hide-details
           clearable="clearable"
