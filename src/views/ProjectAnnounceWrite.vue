@@ -1,6 +1,7 @@
 <template>
   <div id="projectWrite">
-    <v-container style="margin-top: 4rem; margin-bottom: 4rem">
+    <!--<v-container style="margin-top: 4rem; margin-bottom: 4rem">-->
+    <v-container>
       <v-row>
         <v-col cols="12" md="4" lg="4" xl="3">
           <SubTitle :subTitleObj="subTitleObj" />
