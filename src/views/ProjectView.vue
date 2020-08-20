@@ -159,7 +159,7 @@
 
                       <v-row class="my-2 mx-1">
                         <v-col cols="4" xs="4" sm="3" md="2" class="rounded-xl blue-grey lighten-3 font-weight-bold text-center">기간</v-col>
-                        <v-col cols="12" xs="8" sm="9" md="10" class="text-left">{{startDate}} ~ {{endDate}}</v-col>
+                        <v-col cols="8" xs="8" sm="9" md="10" class="text-left">{{startDate}} ~ {{endDate}}</v-col>
                       </v-row>
                       
                       <v-row v-if="link !=''" class="my-2 mx-1">

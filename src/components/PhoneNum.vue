@@ -25,6 +25,7 @@
                 <v-row>
                     <v-col offset="1">
                         <v-text-field
+                            placeholder="010"
                             v-model="phoneNum1"
                             solo="solo"
                             maxlength="3"
@@ -33,6 +34,7 @@
                     </v-col>
                     <v-col>
                         <v-text-field
+                            placeholder="1234"
                             v-model="phoneNum2"
                             solo="solo"
                             maxlength="4"
@@ -41,6 +43,7 @@
                     </v-col>
                     <v-col>
                         <v-text-field
+                            placeholder="5678"
                             v-model="phoneNum3"
                             solo="solo"
                             maxlength="4"

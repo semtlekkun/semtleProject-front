@@ -42,7 +42,7 @@
 
                       <v-row class="my-2 mx-1">
                         <v-col cols="4" xs="4" sm="3" md="2" class="rounded-xl blue-grey lighten-3 font-weight-bold text-center">모집인원</v-col>
-                        <v-col cols="12" xs="8" sm="9" md="10" class="text-left">{{recruitment}}</v-col>
+                        <v-col cols="8" xs="8" sm="9" md="10" class="text-left">{{recruitment}}</v-col>
                       </v-row>
                       <vue-markdown :source="content" class="mt-10 ml-2">
                       </vue-markdown>
