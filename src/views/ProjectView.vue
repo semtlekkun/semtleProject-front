@@ -87,8 +87,7 @@
 </template> -->
 <template>
   <v-container>
-    <v-row
-  class="pb-1">
+    <v-row class="pb-1">
       <v-col cols="12" lg="3">
         <SubTitle :subTitleObj="subTitleObj" />
       </v-col>
@@ -157,24 +156,30 @@
                       </v-card>
 
                       <!-- 팀원 카드 -->
+                      <v-row class="my-2 mx-1">
+                        <v-col cols="4" xs="4" sm="3" md="2" class="blue-grey lighten-3 rounded-xl text-center">팀명</v-col>
+                        <v-col cols="8" xs="8" sm="9" md="10" class="text-left">{{TeamName}}</v-col>
+                      </v-row>
 
-                      <p>
-                        <v-btn rounded depressed class="customProjectViewBtn mr-2">팀명</v-btn> 
-                        {{TeamName}}
-                      </p>
-                      <p>
-                        <v-btn rounded depressed class="customProjectViewBtn mr-2">기간</v-btn> 
-                        {{startDate}} ~ {{endDate}}
-                      </p>
-                      <p v-if="link !=''">
-                        <v-btn rounded depressed class="customProjectViewBtn mr-2">참고페이지</v-btn> 
-                        <a :href="link" style="color:#50829b">링크 바로가기</a>
-                      </p>
-                      <p v-if="git !=''">
-                        <v-btn rounded depressed class="customProjectViewBtn mr-2">Github</v-btn> 
-                        <a :href="git" style="color:#50829b">링크 바로가기</a>
-                      </p>
+                      <v-row class="my-2 mx-1">
+                        <v-col cols="4" xs="4" sm="3" md="2" class="blue-grey lighten-3 rounded-xl text-center">기간</v-col>
+                        <v-col cols="12" xs="8" sm="9" md="10" class="text-left">{{startDate}} ~ {{endDate}}</v-col>
+                      </v-row>
+                      
+                      <v-row v-if="link !=''" class="my-2 mx-1">
+                        <v-col cols="4" xs="4" sm="3" md="2" class="blue-grey lighten-3 rounded-xl text-center">참고페이지</v-col>
+                        <v-col cols="8" xs="8" sm="9" md="10" class="text-left">
+                          <a :href="link" style="color:#50829b">링크 바로가기</a>
+                        </v-col>
+                      </v-row>
 
+                      <v-row v-if="git !=''" class="my-2 mx-1">
+                        <v-col cols="4" xs="4" sm="3" md="2" class="blue-grey lighten-3 rounded-xl text-center">Github</v-col>
+                        <v-col cols="8" xs="8" sm="9" md="10" class="text-left">
+                          <a :href="git" style="color:#50829b">링크 바로가기</a>
+                        </v-col>
+                      </v-row>
+                       
                       <VueMarkdown :source="contents" class="mt-10"></VueMarkdown>
                     </v-card-text>
                     <!-- 
@@ -300,10 +305,6 @@ export default {
   background: rgb(56, 82, 103);
   color: white;
 } >>> customTable class는 주석처리된 부분에서만 사용됨. */
-.customProjectViewBtn{
-  background-color: #a6bbc5 !important;
-  color: white !important;
-}
 #projectRead hr {
   border-top: 1px solid #365164;
 }
