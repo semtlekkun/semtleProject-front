@@ -21,7 +21,7 @@
                     ></v-img>
                 </li>
                 <v-divider></v-divider>
-                <router-link v-for="item in mainItems" 
+                <router-link v-for="item in Items" 
                 :key="item.Title" :to="item.url">
                     <li class="menuList py-2"  
                     @click="item.method">
@@ -78,11 +78,10 @@
 import { mapMutations, mapGetters } from "vuex";
     export default {
         computed:{
-            ...mapGetters(['getAdmin'])
-        },
-        created(){
-            if(this.getAdmin){
-                this.mainItemsLogIn[0] = this.adminMenu;
+            ...mapGetters(['getAdmin', 'getLogin']),
+            Items(){
+                this.isLogin()
+                return this.mainItems
             }
         },
         props:{
@@ -167,7 +166,14 @@ import { mapMutations, mapGetters } from "vuex";
             ...mapMutations(["setLogout"]),
             activeMenu(){
                 this.isOpen = !this.isOpen
-            }
+            },
+            isLogin(){
+                if(this.getLogin){
+                    if(this.getAdmin){
+                        this.mainItemsLogIn[0] = this.adminMenu;
+                    }
+                }
+            },
         }
     }
 </script>
