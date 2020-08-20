@@ -6,8 +6,8 @@
           <v-row>
             <v-col>
               <v-textarea
-              v-model="contents" 
-              filled color="blue lighten-1" 
+              v-model="contents"
+              filled color="#50829b" 
               label="답변을 입력하세요" 
               no-resize rows="8"></v-textarea>
             </v-col>
@@ -109,14 +109,14 @@ export default {
   width: 70em;
   position: relative;
   display: inline-block;
-  background: rgb(215,206,207);
+  background: #365164;
 }
 .CommentFormBubble:after {
   content: "";
   position: absolute;
   border-style: solid;
   border-width: 11px 0 11px 14px;
-  border-color: transparent rgb(215,206,207);
+  border-color: transparent #365164;
   display: block;
   width: 0;
   right: -14px;

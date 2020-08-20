@@ -86,6 +86,12 @@ export default {
 };
 </script>
 <style>
+.v-input textarea, .v-label {
+    color: white !important;
+}
+.v-text-field__details {
+  display: none;
+}
 p {
   margin-bottom: 0 !important;
 }
