@@ -3,7 +3,7 @@
         <v-card id="link" height="318" max-height="318" max-width="344" class="mx-auto">
             <v-list-item>
                 <v-list-item-content>
-                    <v-list-item-title class="headline">{{contentsObj.title}}</v-list-item-title>
+                    <v-list-item-title class="com-title">{{contentsObj.title}}</v-list-item-title>
                     <v-list-item-subtitle>by
                         {{contentsObj.teamName}}</v-list-item-subtitle>
                 </v-list-item-content>
@@ -35,6 +35,16 @@
 </script>
 
 <style scoped="scoped">
+    @font-face {
+        font-family: 'NEXON Lv1 Gothic OTF';
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff") format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    .com-title {
+        font-family: 'NEXON Lv1 Gothic OTF';
+        font-size : 125%;
+    }
     #link {
         z-index: 0 !important;
     }

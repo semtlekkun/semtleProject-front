@@ -96,7 +96,7 @@ export default {
       contents: "",
       recruitment: null,
       subTitleObj: {
-        title: "프로젝트 공고 작성",
+        title: "✍공고 작성",
         contents: "프로젝트 공고 작성이다.",
       },
       errorMsg: [],

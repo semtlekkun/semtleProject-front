@@ -95,7 +95,7 @@ export default {
 
     contents: "",
     subTitleObj: {
-      title: "공지사항",
+      title: "📌공지사항",
       contents: "공지사항이다.",
     },
   }),
