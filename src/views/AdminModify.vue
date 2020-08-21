@@ -348,6 +348,11 @@ export default {
       }
       // 예외처리에 걸리지 않을 경우 -> 데이터 전송 후 닫기
       else {
+        //멘토 아니면 선택된 과목값 삭제
+        if (this.editedItem.position !== "멘토") {
+          this.editedItem.language = "";
+        }
+
         let sendObj = {
           activeYear: this.editedItem.activeYear,
           season: this.editedItem.season,
@@ -359,9 +364,6 @@ export default {
 
         console.log(sendObj);
 
-        if (this.editedItem.position !== "멘토") {
-          sendObj.Subject = "";
-        }
 
         // 관리자임을 알 수 있도록 헤더 추가
         let config = {
