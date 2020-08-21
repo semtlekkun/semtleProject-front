@@ -87,7 +87,7 @@
 </template> -->
 <template>
   <v-container class="px-0">
-    <v-row class="pb-1">
+    <v-row>
       <v-col cols="12" lg="3">
         <SubTitle :subTitleObj="subTitleObj" />
       </v-col>

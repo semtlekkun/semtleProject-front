@@ -1,73 +1,81 @@
 <template>
   <div id="projectWrite">
-    <v-container>
+    <v-container class="px-0">
       <v-row>
-        <v-col cols="12" md="4" lg="4" xl="3">
+        <v-col cols="12" lg="3">
           <SubTitle :subTitleObj="subTitleObj" />
         </v-col>
-        <v-col>
-          <v-card>
-            <v-alert outlined color="#365164">
-              <v-form>
-                <v-row>
-                  <v-col cols="12">
-                    <v-text-field label="공고 제목" required v-model="title"></v-text-field>
-                  </v-col>
-                </v-row>
+        <v-col cols="12" lg="9">
+          <v-container class="px-0">
+            <v-row>
+              <v-col cols="12">
+              
+              
+                <v-card>
+                  <v-alert outlined color="#365164">
+                    <v-form>
+                      <v-row>
+                        <v-col cols="12">
+                          <v-text-field label="공고 제목" required v-model="title"></v-text-field>
+                        </v-col>
+                      </v-row>
 
-                <v-row>
-                  <v-col cols="6">
-                    <v-text-field
-                      label="모집인원"
-                      required
-                      v-model="recruitment"
-                      @keypress="checkNumber"
-                      @keyup="checkHan"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="6">
-                    <v-menu
-                      ref="menu"
-                      v-model="menu"
-                      :close-on-content-click="false"
-                      :return-value.sync="endDate"
-                      transition="scale-transition"
-                      offset-y
-                      min-width="290px"
-                    >
-                      <template v-slot:activator="{ on }">
-                        <v-text-field v-model="endDate" label="마감일" readonly v-on="on"></v-text-field>
-                      </template>
+                      <v-row>
+                        <v-col cols="6">
+                          <v-text-field
+                            label="모집인원"
+                            required
+                            v-model="recruitment"
+                            @keypress="checkNumber"
+                            @keyup="checkHan"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-menu
+                            ref="menu"
+                            v-model="menu"
+                            :close-on-content-click="false"
+                            :return-value.sync="endDate"
+                            transition="scale-transition"
+                            offset-y
+                            min-width="290px"
+                          >
+                            <template v-slot:activator="{ on }">
+                              <v-text-field v-model="endDate" label="마감일" readonly v-on="on"></v-text-field>
+                            </template>
 
-                      <v-date-picker v-model="endDate" no-title scrollable>
-                        <v-spacer></v-spacer>
-                        <v-btn color="primary" @click="temp(); $refs.menu.save(endDate)">확인</v-btn>
-                      </v-date-picker>
-                    </v-menu>
-                  </v-col>
-                </v-row>
+                            <v-date-picker v-model="endDate" no-title scrollable>
+                              <v-spacer></v-spacer>
+                              <v-btn color="primary" @click="temp(); $refs.menu.save(endDate)">확인</v-btn>
+                            </v-date-picker>
+                          </v-menu>
+                        </v-col>
+                      </v-row>
 
-                <v-row>
-                  <v-col cols="12">
-                    <v-textarea
-                      v-model="contents"
-                      outlined
-                      no-resize
-                      height="300"
-                      name="content-input"
-                      label="공고 내용을 입력하세요"
-                    />
-                  </v-col>
-                </v-row>
+                      <v-row>
+                        <v-col cols="12">
+                          <v-textarea
+                            v-model="contents"
+                            outlined
+                            no-resize
+                            height="300"
+                            name="content-input"
+                            label="공고 내용을 입력하세요"
+                          />
+                        </v-col>
+                      </v-row>
 
-                <v-row class="justify-end">
-                  <v-col cols="12" md="3" class="text-right">
-                    <v-btn color="#50829b" @click="confirmAnnounce" class="white--text" block>작성 완료</v-btn>
-                  </v-col>
-                </v-row>
-              </v-form>
-            </v-alert>
-          </v-card>
+                      <v-row class="justify-end">
+                        <v-col cols="12" md="3" class="text-right">
+                          <v-btn color="#50829b" @click="confirmAnnounce" class="white--text" block>작성 완료</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-form>
+                  </v-alert>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-col>
         <v-dialog v-model="dialog" persistent max-width="290">
           <v-card>

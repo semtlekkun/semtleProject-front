@@ -1,52 +1,62 @@
 <template>
-  <v-container>
+  <v-container class="px-0">
     <v-row>
-      <v-col cols="12" md="4" lg="4" xl="3">
+      <v-col cols="12" lg="3">
         <SubTitle :subTitleObj="subTitleObj" />
       </v-col>
 
-      <v-col cols="12" md="8" lg="8" xl="9">
-        <v-row>
-          <v-col>
-            <v-text-field label="질문 제목" v-model="title" />
-          </v-col>
-        </v-row>
+      <v-col cols="12" lg="9">
+        <v-container class="px-0">
+          <v-row>
+            <v-col cols="12">
+              <v-card>
+                <v-alert outlined color="#365164">
+                  <v-row>
+                    <v-col>
+                      <v-text-field label="질문 제목" v-model="title" />
+                    </v-col>
+                  </v-row>
 
-        <v-row>
-          <v-col cols="12">
-            <v-textarea
-              v-model="contents"
-              outlined
-              no-resize
-              height="300"
-              name="content-input"
-              label="질문할 내용을 입력하세요"
-            />
-          </v-col>
-        </v-row>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-textarea
+                        v-model="contents"
+                        outlined
+                        no-resize
+                        height="300"
+                        name="content-input"
+                        label="질문할 내용을 입력하세요"
+                      />
+                    </v-col>
+                  </v-row>
 
-        <v-row>
-          <v-col>
-            <v-file-input
-              v-model="files"
-              :roles="rules"
-              accept="image/*"
-              color="deep-purple accent-4"
-              counter
-              label="사진 추가"
-              placeholder="사진을 추가하려면 여기를 클릭하세요"
-              prepend-icon="mdi-camera"
-              outlined
-              :show-size="1000"
-            />
-          </v-col>
-        </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-file-input
+                        v-model="files"
+                        :roles="rules"
+                        accept="image/*"
+                        color="deep-purple accent-4"
+                        counter
+                        label="사진 추가"
+                        placeholder="사진을 추가하려면 여기를 클릭하세요"
+                        prepend-icon="mdi-camera"
+                        outlined
+                        :show-size="1000"
+                      />
+                    </v-col>
+                  </v-row>
 
-        <v-row class="justify-end">
-          <v-col cols="12" md="3" class="text-right">
-            <v-btn @click="writeConents"  color="#50829b" class="white--text"  block>작성 완료</v-btn>
-          </v-col>
-        </v-row>
+                  <v-row class="justify-end">
+                    <v-col cols="12" md="3" class="text-right">
+                      <v-btn @click="writeConents"  color="#50829b" class="white--text"  block>작성 완료</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-alert>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-col>
     </v-row>
   </v-container>
