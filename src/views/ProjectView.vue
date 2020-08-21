@@ -87,7 +87,7 @@
 </template> -->
 <template>
   <v-container class="px-0">
-    <v-row class="pb-1">
+    <v-row>
       <v-col cols="12" lg="3">
         <SubTitle :subTitleObj="subTitleObj" />
       </v-col>
@@ -162,20 +162,20 @@
                         <v-col cols="8" xs="8" sm="9" md="10" class="text-left">{{startDate}} ~ {{endDate}}</v-col>
                       </v-row>
                       
-                      <v-row v-if="link !=''" class="my-2 mx-1">
-                        <v-col cols="4" xs="4" sm="3" md="2" class="rounded-xl blue-grey lighten-3 font-weight-bold text-center">참고페이지</v-col>
-                        <v-col cols="8" xs="8" sm="9" md="10" class="text-left">
-                          <a :href="link" style="color:#50829b">링크 바로가기</a>
-                        </v-col>
-                      </v-row>
-
                       <v-row v-if="git !=''" class="my-2 mx-1">
                         <v-col cols="4" xs="4" sm="3" md="2" class="rounded-xl blue-grey lighten-3 font-weight-bold text-center">Github</v-col>
                         <v-col cols="8" xs="8" sm="9" md="10" class="text-left">
                           <a :href="git" style="color:#50829b">링크 바로가기</a>
                         </v-col>
                       </v-row>
-                       
+
+                      <v-row v-if="link !=''" class="my-2 mx-1">
+                        <v-col cols="4" xs="4" sm="3" md="2" class="rounded-xl blue-grey lighten-3 font-weight-bold text-center">Link</v-col>
+                        <v-col cols="8" xs="8" sm="9" md="10" class="text-left">
+                          <a :href="link" style="color:#50829b">링크 바로가기</a>
+                        </v-col>
+                      </v-row>
+ 
                       <VueMarkdown :source="contents" class="mt-10"></VueMarkdown>
                     </v-card-text>
                     <!-- 

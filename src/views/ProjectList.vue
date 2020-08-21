@@ -84,8 +84,5 @@ import SubTitle from '../components/SubTitle.vue';
 </script>
 
 <style scoped>
-@media ( max-width: 768px ) {
-  .container {padding: 5px;}
-}
 
 </style>
