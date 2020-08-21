@@ -123,6 +123,9 @@ export default {
 </script>
 
 <style>
+@media ( max-width: 768px ) {
+  .container {padding: 5px;}
+}
 #noticeRead hr {
   border-top: 1px solid #365164;
 }
