@@ -5,7 +5,7 @@ res.data.student.pfList -> 순회해서 출력
 -->
 
 <template>
-  <v-container>
+  <v-container class="px-0">
     <v-row cols="12">
       <h1 class="mt-3 ml-2">😶프로필 수정</h1>
     </v-row>
@@ -121,8 +121,4 @@ export default {
 </script>
 
 <style>
-
-@media ( max-width: 768px ) {
-  .container {padding: 5px;}
-}
 </style>
