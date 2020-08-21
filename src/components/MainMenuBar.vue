@@ -110,7 +110,7 @@ export default {
           Items: null,
               url: "/admin/menu",
               Title: "관리자페이지",
-              method: () => {this.activeMenu()},
+              method: () => {},
       }
     };
   },
