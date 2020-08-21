@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="px-0">
         <v-row>
             <v-col cols="12" md="4" lg="4" xl="3">
                 <SubTitle :subTitleObj="subTitleObj"/>

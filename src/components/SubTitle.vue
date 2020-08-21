@@ -3,9 +3,9 @@
         <h1>
             {{subTitleObj.title}}
         </h1>
-        <h2>
+        <h3>
             {{subTitleObj.contents}}
-        </h2>
+        </h3>
     </v-container>
 </template>
 
@@ -19,6 +19,6 @@
 
 <style scoped>
 h1{
-    font-size: 2.8rem;
+    font-size: 2.185rem;
 }
 </style>
