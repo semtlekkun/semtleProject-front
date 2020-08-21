@@ -57,21 +57,27 @@ export default {
       headers: [
         {
           text: "번호",
-          align: "start",
+          align: "center",
           sortable: false,
           value: "number",
+          width: "60px",
         },
         {
           text: "제목",
+          align: "start",
           value: "title",
         },
         {
           text: "작성자",
+          align: "center",
           value: "writer",
+          width: "120px",
         },
         {
           text: "작성 일시",
+          align: "center",
           value: "date",
+          width: "140px",
         },
       ],
       content: [],
