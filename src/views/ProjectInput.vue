@@ -6,154 +6,158 @@
       </v-col>
 
       <v-col cols="12" md="8" lg="8" xl="9">
-        <v-row>
-          <v-col>
-            <v-text-field label="프로젝트 제목" v-model="projectTitle" />
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col cols="6">
-            <v-text-field
-              label="팀장 (학번)"
-              v-model="teamLeader"
-              @keypress="checkNumber"
-              @keyup="checkHan"
-              counter
-              maxlength="8"
-              hint="학번을 8자리 숫자로 입력하세요."
-            />
-          </v-col>
-          <v-col cols="6">
-            <v-text-field label="팀명" v-model="teamName" />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="6">
-            <v-menu
-              ref="menu1"
-              v-model="menu1"
-              :close-on-content-click="false"
-              :return-value.sync="startDate"
-              transition="scale-transition"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field v-model="startDate" label="프로젝트 시작일" readonly v-on="on"></v-text-field>
-              </template>
-
-              <v-date-picker v-model="startDate" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn
-                  id="menu1"
-                  color="primary"
-                  @click="()=> {temp(); $refs.menu1.save(startDate);}"
-                >확인</v-btn>
-              </v-date-picker>
-            </v-menu>
-          </v-col>
-
-          <v-col cols="6">
-            <v-menu
-              ref="menu2"
-              v-model="menu2"
-              :close-on-content-click="false"
-              :return-value.sync="endDate"
-              transition="scale-transition"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field v-model="endDate" label="프로젝트 마감일" readonly v-on="on"></v-text-field>
-              </template>
-              <v-date-picker v-model="endDate" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn
-                  id="menu2"
-                  color="primary"
-                  @click="()=> {temp(); $refs.menu2.save(endDate); }"
-                >확인</v-btn>
-              </v-date-picker>
-            </v-menu>
-          </v-col>
-        </v-row>
-        <v-row class="align-center">
-          <v-col cols="9">
-            <v-text-field
-              @keypress="checkNumber"
-              @keyup="checkHan"
-              v-model.number="memberNum"
-              label="팀원 (학번)"
-              counter
-              maxlength="8"
-              placeholder="등록된 셈틀꾼 회원만 추가 가능합니다. 팀장학번이 필수로 등록되어야 합니다."
-            />
-          </v-col>
-          <v-col cols="3">
-            <v-btn @click="addMember" lage color="#50829b" class="white--text" block>추가하기</v-btn>
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col cols="6" v-for="member in members" :key="member.index">
-            <v-row class="align-center">
-              <v-col cols="4">{{member}}</v-col>
-              <v-col cols="5">
-                <v-btn @click="()=>delMember(member)">Del</v-btn>
+        <v-card>
+          <v-alert outlined color="#365164">
+            <v-row>
+              <v-col>
+                <v-text-field label="프로젝트 제목" v-model="projectTitle" />
               </v-col>
             </v-row>
-          </v-col>
-        </v-row>
 
-        <v-row>
-          <v-col>
-            <v-text-field label="Git" v-model="git" />
-          </v-col>
-        </v-row>
+            <v-row>
+              <v-col cols="6">
+                <v-text-field
+                  label="팀장 (학번)"
+                  v-model="teamLeader"
+                  @keypress="checkNumber"
+                  @keyup="checkHan"
+                  counter
+                  maxlength="8"
+                  hint="학번을 8자리 숫자로 입력하세요."
+                />
+              </v-col>
+              <v-col cols="6">
+                <v-text-field label="팀명" v-model="teamName" />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="6">
+                <v-menu
+                  ref="menu1"
+                  v-model="menu1"
+                  :close-on-content-click="false"
+                  :return-value.sync="startDate"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-text-field v-model="startDate" label="프로젝트 시작일" readonly v-on="on"></v-text-field>
+                  </template>
 
-        <v-row>
-          <v-col>
-            <v-text-field label="Link" v-model="link" />
-          </v-col>
-        </v-row>
+                  <v-date-picker v-model="startDate" no-title scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      id="menu1"
+                      color="primary"
+                      @click="()=> {temp(); $refs.menu1.save(startDate);}"
+                    >확인</v-btn>
+                  </v-date-picker>
+                </v-menu>
+              </v-col>
 
-        <v-row>
-          <v-col cols="12">
-            <v-textarea
-              v-model="contents"
-              outlined
-              no-resize
-              height="300"
-              name="content-input"
-              label="프로젝트 내용을 입력하세요"
-            />
-          </v-col>
-        </v-row>
+              <v-col cols="6">
+                <v-menu
+                  ref="menu2"
+                  v-model="menu2"
+                  :close-on-content-click="false"
+                  :return-value.sync="endDate"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-text-field v-model="endDate" label="프로젝트 마감일" readonly v-on="on"></v-text-field>
+                  </template>
+                  <v-date-picker v-model="endDate" no-title scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      id="menu2"
+                      color="primary"
+                      @click="()=> {temp(); $refs.menu2.save(endDate); }"
+                    >확인</v-btn>
+                  </v-date-picker>
+                </v-menu>
+              </v-col>
+            </v-row>
+            <v-row class="align-center">
+              <v-col cols="7" xs="7" sm="8" md="10">
+                <v-text-field
+                  @keypress="checkNumber"
+                  @keyup="checkHan"
+                  v-model.number="memberNum"
+                  label="팀원 (학번)"
+                  counter
+                  maxlength="8"
+                  placeholder="등록된 셈틀꾼 회원만 추가 가능합니다. 팀장학번이 필수로 등록되어야 합니다."
+                />
+              </v-col>
+              <v-col cols="5" xs="5" sm="4" md="2">
+                <v-btn @click="addMember" lage color="#50829b" class="white--text" block>추가하기</v-btn>
+              </v-col>
+            </v-row>
 
-        <v-row>
-          <v-col>
-            <v-file-input
-              v-model="files"
-              :roles="[rules.fileCheck]"
-              accept="image/*"
-              color="deep-purple accent-4"
-              counter
-              label="사진 추가"
-              multiple
-              placeholder="사진을 추가하려면 여기를 클릭하세요"
-              prepend-icon="mdi-camera"
-              outlined
-              :show-size="1000"
-            />
-          </v-col>
-        </v-row>
+            <v-row>
+              <v-col cols="12" xs="12" sm="6" md="6" v-for="member in members" :key="member.index">
+                <v-row class="align-center">
+                  <v-col cols="8">{{member}}</v-col>
+                  <v-col cols="4">
+                    <v-btn @click="()=>delMember(member)">삭제</v-btn>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
 
-        <v-row class="justify-end">
-          <v-col cols="12" md="3" class="text-right">
-            <v-btn @click="writeConents" color="#50829b" class="white--text"  block>작성 완료</v-btn>
-          </v-col>
-        </v-row>
+            <v-row>
+              <v-col>
+                <v-text-field label="Git" v-model="git" />
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col>
+                <v-text-field label="Link" v-model="link" />
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col cols="12">
+                <v-textarea
+                  v-model="contents"
+                  outlined
+                  no-resize
+                  height="300"
+                  name="content-input"
+                  label="프로젝트 내용을 입력하세요"
+                />
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col>
+                <v-file-input
+                  v-model="files"
+                  :roles="[rules.fileCheck]"
+                  accept="image/*"
+                  color="deep-purple accent-4"
+                  counter
+                  label="사진 추가"
+                  multiple
+                  placeholder="사진을 추가하려면 여기를 클릭하세요"
+                  prepend-icon="mdi-camera"
+                  outlined
+                  :show-size="1000"
+                />
+              </v-col>
+            </v-row>
+
+            <v-row class="justify-end">
+              <v-col cols="12" md="3" class="text-right">
+                <v-btn @click="writeConents" color="#50829b" class="white--text"  block>작성 완료</v-btn>
+              </v-col>
+            </v-row>
+          </v-alert>
+        </v-card>
       </v-col>
     </v-row>
     <v-dialog v-model="dialog" persistent max-width="290">
@@ -344,6 +348,9 @@ export default {
 </script>
 
 <style scoped>
+@media ( max-width: 768px ) {
+  .container {padding: 0;}
+}
 .projectTitle {
   border-bottom: 1px solid black;
 }
