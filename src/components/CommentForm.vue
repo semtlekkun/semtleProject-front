@@ -111,15 +111,4 @@ export default {
   display: inline-block;
   background: #365164;
 }
-.CommentFormBubble:after {
-  content: "";
-  position: absolute;
-  border-style: solid;
-  border-width: 11px 0 11px 14px;
-  border-color: transparent #365164;
-  display: block;
-  width: 0;
-  right: -14px;
-  top: 17px;
-}
 </style>
