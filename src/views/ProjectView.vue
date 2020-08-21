@@ -301,6 +301,9 @@ export default {
   background: rgb(56, 82, 103);
   color: white;
 } >>> customTable class는 주석처리된 부분에서만 사용됨. */
+@media ( max-width: 768px ) {
+  #projectRead .container {padding: 0;}
+}
 #projectRead hr {
   border-top: 1px solid #365164;
 }

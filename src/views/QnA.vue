@@ -5,25 +5,27 @@
         <SubTitle :subTitleObj="subTitleObj" />
       </v-col>
       <v-col cols="12" lg="9">
-        <v-container>
-          <v-row>
-            <v-col cols="12">
-              <v-card>
-                <v-alert outlined color="#365164">
-                  <Question :Question="QuestionData" />
-                  <br />
-                  <v-divider class="my-6"></v-divider>
-                  <br />
-                  <CommentList :commentData="commentData" />
-                  <br />
-                  <v-divider class="my-6"></v-divider>
-                  <br />
-                  <CommentForm />
-                </v-alert>
-              </v-card>  
-            </v-col>
-          </v-row>
-        </v-container>
+        <div id="qna">
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <v-card>
+                  <v-alert outlined color="#365164">
+                    <Question :Question="QuestionData" />
+                    <br />
+                    <v-divider class="my-6"></v-divider>
+                    <br />
+                    <CommentList :commentData="commentData" />
+                    <br />
+                    <v-divider class="my-6"></v-divider>
+                    <br />
+                    <CommentForm />
+                  </v-alert>
+                </v-card>  
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
       </v-col>        
     </v-row>
   </v-container>
@@ -109,6 +111,9 @@ export default {
 };
 </script>
 <style>
+@media ( max-width: 768px ) {
+  #qna .container {padding: 0;}
+}
 .parent .v-input textarea, .parent .v-label {
     color: white !important;
 }

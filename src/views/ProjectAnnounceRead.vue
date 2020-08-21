@@ -124,6 +124,9 @@ export default {
 </script>
 
 <style>
+@media ( max-width: 768px ) {
+  #projectRead .container {padding: 0;}
+}
 #projectRead hr {
   border-top: 1px solid #365164;
 }
