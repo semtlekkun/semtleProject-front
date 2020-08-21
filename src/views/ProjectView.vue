@@ -86,7 +86,7 @@
   </v-container>
 </template> -->
 <template>
-  <v-container>
+  <v-container class="px-0">
     <v-row class="pb-1">
       <v-col cols="12" lg="3">
         <SubTitle :subTitleObj="subTitleObj" />
@@ -94,7 +94,7 @@
       <v-col cols="12" lg="9">
         <div id="projectRead">
           <!--<v-container style="margin-top: 4rem; margin-bottom: 4rem;">-->
-          <v-container>
+          <v-container class="px-0">
             <v-row>
               <v-col cols="12">
                 <v-card>
@@ -264,7 +264,7 @@ export default {
       members: [],
       link: "",
       subTitleObj: {
-        title: "💻 프로젝트",
+        title: "💻프로젝트",
         contents: "프로젝트이다.",
       },
       git: "",
@@ -301,9 +301,6 @@ export default {
   background: rgb(56, 82, 103);
   color: white;
 } >>> customTable class는 주석처리된 부분에서만 사용됨. */
-@media ( max-width: 768px ) {
-  #projectRead .container {padding: 0;}
-}
 #projectRead hr {
   border-top: 1px solid #365164;
 }

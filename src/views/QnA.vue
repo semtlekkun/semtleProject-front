@@ -1,12 +1,12 @@
 <template>
-  <v-container>
+  <v-container class="px-0">
     <v-row class="pb-1">
       <v-col cols="12" lg="3">
         <SubTitle :subTitleObj="subTitleObj" />
       </v-col>
       <v-col cols="12" lg="9">
         <div id="qna">
-          <v-container>
+          <v-container class="px-0">
             <v-row>
               <v-col cols="12">
                 <v-card>
@@ -111,9 +111,6 @@ export default {
 };
 </script>
 <style>
-@media ( max-width: 768px ) {
-  #qna .container {padding: 0;}
-}
 .parent .v-input textarea, .parent .v-label {
     color: white !important;
 }

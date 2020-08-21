@@ -1,12 +1,12 @@
 <template>
-  <v-container>
+  <v-container class="px-0">
     <v-row>
-      <v-col cols="12" md="4" lg="4" xl="3">
+      <v-col cols="12" lg="3">
         <SubTitle :subTitleObj="subTitleObj" />
       </v-col>
-      <v-col cols="12" md="8" lg="8" xl="9">
+      <v-col cols="12" lg="9">
         <div id="projectRead">
-          <v-container>
+          <v-container class="px-0">
             <v-row>
               <v-col cols="12">
                 <v-card>
@@ -124,9 +124,6 @@ export default {
 </script>
 
 <style>
-@media ( max-width: 768px ) {
-  #projectRead .container {padding: 0;}
-}
 #projectRead hr {
   border-top: 1px solid #365164;
 }
