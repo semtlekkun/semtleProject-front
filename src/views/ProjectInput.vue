@@ -349,7 +349,7 @@ export default {
 
 <style scoped>
 @media ( max-width: 768px ) {
-  .container {padding: 0;}
+  .container {padding: 5px;}
 }
 .projectTitle {
   border-bottom: 1px solid black;
