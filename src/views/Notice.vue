@@ -48,10 +48,10 @@
                 </v-card>
               </v-col>
             </v-row>
-          </v-container>  
+          </v-container>
         </div>
-      </v-col>     
-    </v-row>        
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -106,25 +106,30 @@ export default {
   },
   methods: {
     deleteNotice() {
-      this.axios
-        .delete(`http://49.50.166.64/api/notice/${this.noticeID}`, {
-          headers: {
-            token: sessionStorage.getItem("token"),
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            this.$router.push({ name: "noticeList" });
-          }
-        });
+      let result = confirm("정말로 삭제하시겠습니까?");
+      if (result) {
+        this.axios
+          .delete(`http://49.50.166.64/api/notice/${this.noticeID}`, {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              this.$router.push({ name: "noticeList" });
+            }
+          });
+      }
     },
   },
 };
 </script>
 
 <style>
-@media ( max-width: 768px ) {
-  .container {padding: 5px;}
+@media (max-width: 768px) {
+  .container {
+    padding: 5px;
+  }
 }
 #noticeRead hr {
   border-top: 1px solid #365164;

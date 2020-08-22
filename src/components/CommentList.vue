@@ -19,47 +19,52 @@ import QuestionSpeechBubble from "./QuestionSpeechBubble";
 import AnswerSpeechBubble from "./AnswerSpeechBubble";
 
 export default {
-  mounted(){
-    this.admin = JSON.parse(sessionStorage.getItem('admin'));
-    this.token = sessionStorage.getItem('token');
+  mounted() {
+    this.admin = JSON.parse(sessionStorage.getItem("admin"));
+    this.token = sessionStorage.getItem("token");
     // console.log(this.admin)
   },
   components: {
     QuestionSpeechBubble,
-    AnswerSpeechBubble
+    AnswerSpeechBubble,
   },
   props: {
     commentData: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  data(){
-    return{
-      admin:false,
-      token:'',
-    }
+  data() {
+    return {
+      admin: false,
+      token: "",
+    };
   },
 
-  methods:{
-    deleteAnswer(id){
-      // console.log(id)
-      this.axios.delete(`http://49.50.166.64/api/answer/${id}`,
-      {
-        headers:{
-          'token' : this.token
-        }
-      },{})
-      .then(res=>{
-        // console.log(res)
-        if(res.status === 200){
-          this.$router.go()
-        }
-      })
-      .catch(err=>{
-        console.log(err)
-      })
-    }
-  }
+  methods: {
+    deleteAnswer(id) {
+      let result = confirm("정말로 삭제하시겠습니까?");
+      if (result) {
+        this.axios
+          .delete(
+            `http://49.50.166.64/api/answer/${id}`,
+            {
+              headers: {
+                token: this.token,
+              },
+            },
+            {}
+          )
+          .then((res) => {
+            if (res.status === 200) {
+              this.$router.go();
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+  },
 };
 </script>

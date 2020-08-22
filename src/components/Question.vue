@@ -4,11 +4,7 @@
       <v-col cols="12">
         <h2>{{Question.title}}</h2>
       </v-col>
-      <v-col 
-        class="text-right"
-        cols="12"
-        v-show="admin"
-      >
+      <v-col class="text-right" cols="12" v-show="admin">
         <v-btn color="error" @click="deleteQuestion">삭제</v-btn>
       </v-col>
     </v-row>
@@ -73,33 +69,38 @@ export default {
       this.axios.get(`http://49.50.166.64/api/question/${id}`).then((res) => {
         if (res.status === 200) {
           this.imageURL =
-            "http://49.50.166.64/api/question/images/" + res.data.question.image;
+            "http://49.50.166.64/api/question/images/" +
+            res.data.question.image;
           this.writerURL =
-            "http://49.50.166.64/api/student/images/" + res.data.question.writerImage;
+            "http://49.50.166.64/api/student/images/" +
+            res.data.question.writerImage;
           console.log(this.writerURL);
         }
       });
     },
     deleteQuestion() {
-      this.axios
-        .delete(
-          `http://49.50.166.64/api/question/${this.QID}`,
-          {
-            headers: {
-              token: sessionStorage.getItem("token"),
+      let result = confirm("정말로 삭제하시겠습니까?");
+      if (result) {
+        this.axios
+          .delete(
+            `http://49.50.166.64/api/question/${this.QID}`,
+            {
+              headers: {
+                token: sessionStorage.getItem("token"),
+              },
             },
-          },
-          {}
-        )
-        .then((res) => {
-          // console.log(res)
-          if (res.status === 200) {
-            this.$router.push("/qna/list");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+            {}
+          )
+          .then((res) => {
+            // console.log(res)
+            if (res.status === 200) {
+              this.$router.push("/qna/list");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
   },
 };

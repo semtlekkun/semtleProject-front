@@ -32,7 +32,7 @@ res.data.student.pfList -> 순회해서 출력
         <v-data-table
           :headers="headers"
           :items="projects"
-          :items-per-page=5
+          :items-per-page="5"
           @click:row="clickRow"
         >
           <template v-slot:header.name="{ header }">{{ header.text.toUpperCase() }}</template>
@@ -109,7 +109,7 @@ export default {
             tempObj.memberNum = res.data.student.pfList[idx].students.length;
             tempObj.projectLink = res.data.student.pfList[idx]._id;
 
-            this.projects.push(tempObj);
+            this.projects.unshift(tempObj);
           }
         })
         .catch((err) => {
