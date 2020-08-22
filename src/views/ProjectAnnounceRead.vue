@@ -13,7 +13,7 @@
                   <v-alert outlined color="#365164">
                     <v-row class="py-0">
                       <v-col cols="12" class="py-0">
-                        <v-card-title>{{title}}</v-card-title>
+                        <v-card-title class="font-weight-black">{{title}}</v-card-title>
                       </v-col>
                       <v-col class="text-right" cols="12" v-show="admin">
                         <v-btn color="error" @click="deleteAnnounce">삭제</v-btn>

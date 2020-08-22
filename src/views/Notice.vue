@@ -14,7 +14,7 @@
                   <v-alert outlined color="#365164">
                     <v-row class="py-0">
                       <v-col cols="12" class="py-0">
-                        <v-card-title>{{title}}</v-card-title>
+                        <v-card-title class="font-weight-black">{{title}}</v-card-title>
                       </v-col>
                       <v-col class="text-right" cols="12" v-show="admin">
                         <v-btn color="error" @click="deleteNotice">삭제</v-btn>
@@ -37,7 +37,7 @@
                       </li>
                     </ul>
                     <v-card-text style="color: #000;">
-                      <vue-markdown :source="contents"></vue-markdown>
+                      <vue-markdown :source="contents" class="ml-2"></vue-markdown>
                     </v-card-text>
                     <v-card-text>
                       <div id="imageContainer">
@@ -123,9 +123,6 @@ export default {
 </script>
 
 <style>
-@media ( max-width: 768px ) {
-  .container {padding: 5px;}
-}
 #noticeRead hr {
   border-top: 1px solid #365164;
 }
