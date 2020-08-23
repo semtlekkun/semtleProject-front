@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <v-row>
       <v-col cols="12">
         <h2>{{Question.title}}</h2>
@@ -11,7 +12,7 @@
     <table class="table">
       <tr>
         <td rowspan="2">
-          <img :src="writerURL" width="50" alt="profileImg" />
+          <img :src="Question.writerURL" width="50" alt="profileImg" />
         </td>
         <td>
           <p style="font-weight:bold; margin-left:0.3em;">{{Question.writerName}}</p>
@@ -27,7 +28,7 @@
     <br />
     <VueMarkdown :source="Question.question"></VueMarkdown>
 
-    <v-img v-if="Question.image!==''" :src="imageURL" alt="첨부이미지" max-width="960px" class="mt-10" />
+    <v-img v-if="Question.imageURL!=='http://49.50.166.64/api/question/images/null'" :src="Question.imageURL" alt="첨부이미지" max-width="960px" class="mt-10" />
   </div>
 </template> 
 
@@ -44,40 +45,19 @@ export default {
   },
   data() {
     return {
-      QID: "",
       admin: false,
-      imageURL: "",
-      writerURL: "",
-    };
+      QuestionData: Object,
+     };
   },
 
-  created() {
-    this.initImage();
-  },
   mounted() {
-    this.QID = this.$route.params.id;
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
-    this.initImage();
   },
   components: {
     VueMarkdown,
   },
 
   methods: {
-    initImage() {
-      let id = this.$route.params.id;
-      this.axios.get(`http://49.50.166.64/api/question/${id}`).then((res) => {
-        if (res.status === 200) {
-          this.imageURL =
-            "http://49.50.166.64/api/question/images/" +
-            res.data.question.image;
-          this.writerURL =
-            "http://49.50.166.64/api/student/images/" +
-            res.data.question.writerImage;
-          console.log(this.writerURL);
-        }
-      });
-    },
     deleteQuestion() {
       let result = confirm("정말로 삭제하시겠습니까?");
       if (result) {
@@ -92,7 +72,6 @@ export default {
             {}
           )
           .then((res) => {
-            // console.log(res)
             if (res.status === 200) {
               this.$router.push("/qna/list");
             }

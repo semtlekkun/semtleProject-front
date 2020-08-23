@@ -21,12 +21,12 @@
                     <br />
                     <CommentForm />
                   </v-alert>
-                </v-card>  
+                </v-card>
               </v-col>
             </v-row>
           </v-container>
         </div>
-      </v-col>        
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -37,7 +37,7 @@ import CommentForm from "../components/CommentForm";
 import Question from "../components/Question";
 import SubTitle from "../components/SubTitle.vue";
 export default {
-  mounted() {
+  created() {
     let id = this.$route.params.id;
     this.axios
       .get(`http://49.50.166.64/api/question/${id}`)
@@ -49,17 +49,21 @@ export default {
             question: res.data.question.contents,
             writerName: res.data.question.writer,
             time: res.data.question.date,
-            id: res.data.question._id,
-            image: res.data.question.image,
+            // id: res.data.question._id,
+            imageURL:
+              "http://49.50.166.64/api/question/images/" +
+              res.data.question.image,
             views: res.data.question.view,
+            writerURL:
+              "http://49.50.166.64/api/student/images/" +
+              res.data.question.writerImage,
           };
-          this.commentData.writerName = res.data.question.writer;
         }
+        this.commentData.writerName = res.data.question.writer;
       })
       .catch((err) => {
         console.log(err);
       });
-
     this.axios
       .get(`http://49.50.166.64/api/answer/${id}`)
       .then((res) => {
@@ -71,7 +75,7 @@ export default {
               comment: el.contents,
               time: el.date,
               id: el._id,
-              image:el.writerImage
+              image: el.writerImage,
             };
             this.commentData.comments.push(obj);
           });
@@ -95,7 +99,8 @@ export default {
         writerName: "",
         time: "",
         views: 365,
-        image: "",
+        imageURL: "",
+        writerURL: "",
       },
       commentData: {
         writerName: "",
@@ -111,8 +116,9 @@ export default {
 };
 </script>
 <style>
-.parent .v-input textarea, .parent .v-label {
-    color: white !important;
+.parent .v-input textarea,
+.parent .v-label {
+  color: white !important;
 }
 .parent .v-text-field__details {
   display: none;
@@ -120,7 +126,7 @@ export default {
 p {
   margin-bottom: 0 !important;
 }
-.v-alert__content{
+.v-alert__content {
   width: 100%;
 }
 </style>
