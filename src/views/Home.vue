@@ -58,7 +58,6 @@ export default {
     this.axios
       .get(`${ipObj.ip}/api/notice/list`)
       .then((res) => {
-        // console.log(res)
         if (res.status === 200) {
           this.noticeContents = [];
           res.data.noticeList.forEach((item, index) => {
@@ -79,7 +78,6 @@ export default {
     this.axios
       .get(`${ipObj.ip}/api/recruit/list`)
       .then((res) => {
-        // console.log(res)
         if (res.status === 200) {
           this.projectAnnounceContents = [];
           res.data.recruitList.forEach((item, index) => {
@@ -100,7 +98,6 @@ export default {
     this.axios.get(`${ipObj.ip}/api/pf/list/1`).then((res) => {
       // console.log(res)
       if (res.status === 200) {
-        console.log(res);
         this.cardViewList = [];
         res.data.projectList.forEach((item, index) => {
           let obj = new Object();

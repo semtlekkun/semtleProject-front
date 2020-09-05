@@ -193,6 +193,7 @@
 <script>
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
+import { mapMutations } from "vuex";
 export default {
   components: {
     // VueMarkdown
@@ -293,7 +294,6 @@ export default {
       if (this.teamLeader.toString().length != 8)
         this.errorMsg.push("팀장의 학번을 제대로 입력해주세요.");
 
-      console.log(this.errorMsg);
       // 에러가 있을 경우
       if (this.errorMsg.length !== 0) {
         this.dialog = true;
@@ -315,10 +315,6 @@ export default {
             form.append("projectImages[]", this.files[i]);
           }
         }
-        console.log("taese0ng: ", this.files);
-        for (var value of form.values()) {
-          console.log(value);
-        }
 
         let config = {
           headers: {
@@ -332,9 +328,6 @@ export default {
           .post(`${ipObj.ip}/api/pf`, form, config)
           .then((res) => {
             console.log(res.status);
-            //console.log("여기 들어와야 함");
-            // this.errorMsg.push("작성 성공. 프로젝트 리스트로 돌아갑니다.");
-            // this.dialog = true;
             location.href = "/project/list";
           })
           .catch((err) => {
@@ -348,15 +341,13 @@ export default {
               );
               this.dialog = true;
             } else if (err.response.status === 401) {
-              //로그인 안된 경우 글쓰기 버튼이 안보임
-              //링크타고 들어오는 경우대비해서 남김.
-              alert("로그인 후 이용 가능합니다.");
-              location.href = "/login";
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
             }
-            console.log(err.response);
           });
       }
     },
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>

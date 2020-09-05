@@ -48,6 +48,7 @@
 
 <script>
 import ipObj from "../key";
+import { mapMutations } from "vuex";
 
 export default {
   mounted() {
@@ -76,7 +77,6 @@ export default {
       if (this.contents === "") {
         this.dialog = true;
         this.isLogin = false;
-        console.log(this.dialog);
         this.errorMessage = "내용이 없습니다.";
       } else {
         this.axios
@@ -97,17 +97,13 @@ export default {
           })
           .catch((err) => {
             if (err.response.status === 401) {
-              console.log("상태 코드" + err.response.status);
-              //로그인 안되어 있으면 다이얼로그 제어 변수 true, 에러 메시지 설정.
-              this.dialog = true;
-              this.isLogin = true;
-              this.errorMessage = "로그인후 이용 가능 합니다.";
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
             }
-            console.log(err);
-            console.log("[에러] 비로그인 접근");
           });
       }
     },
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>

@@ -33,7 +33,6 @@ export default {
     this.axios
       .get(`${ipObj.ip}/api/question/list`)
       .then((res) => {
-        // console.log(res)
         if (res.status === 200) {
           this.contents = [];
           res.data.questionList.forEach((item, index) => {

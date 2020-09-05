@@ -32,7 +32,6 @@ export default {
     this.axios
       .get(`${ipObj.ip}/api/pf/list`)
       .then((res) => {
-        // console.log(res)
         if (res.status === 200) {
           this.contents = [];
           res.data.portfolioList.forEach((item, index) => {

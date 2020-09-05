@@ -63,6 +63,7 @@
 
 <script>
 import ipObj from "../key";
+import { mapMutations } from "vuex";
 export default {
   name: "HelloWorld",
 
@@ -109,16 +110,15 @@ export default {
         })
         .then((response) => {
           if (response.status === 200) {
-            console.log(response.data);
             location.href = "/admin/menu";
           }
         })
-        .catch((error) => {
-          if (sessionStorage.getItem("token") === null) {
-            alert("로그인후 작성해 주세요");
-            location.href = "/login";
+        .catch((err) => {
+          if (err.response.status === 401) {
+            this.text = "세션이 만료되어 홈 화면으로 이동합니다.";
+            this.setLogout();
           }
-          console.log(error);
+          console.log(err);
         });
       //e.preventDefault();
     },
@@ -152,6 +152,7 @@ export default {
         window.scrollBy(0, -50);
       }
     },
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>

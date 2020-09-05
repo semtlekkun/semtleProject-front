@@ -44,7 +44,6 @@ export default {
     this.axios
       .get(`${ipObj.ip}/api/question/${id}`)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           this.QuestionData = {
             title: res.data.question.title,
@@ -67,7 +66,6 @@ export default {
     this.axios
       .get(`${ipObj.ip}/api/answer/${id}`)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           res.data.answers.forEach((el) => {
             let obj = {

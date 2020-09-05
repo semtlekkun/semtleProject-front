@@ -121,14 +121,12 @@ export default {
     // 로그인 됐는 지 확인하는 함수
     isLogin(){
       if (this.getLogin){ // 로그인일 때
-        // console.log("login success")
         if(this.getAdmin){
           this.logInMenu[0] = this.adminMenu;
         }
         this.Attributes = this.Attributes.concat(this.logInMenu) // 로그인 메뉴 받음
       }
       else { // 로그아웃일 때
-        // console.log("login fail")
         this.Attributes = this.Attributes.concat(this.logOutMenu) // 로그아웃 메뉴 받음
       }
     },
@@ -149,7 +147,6 @@ export default {
         let boxObj = document.querySelector("#transBox");
         boxObj.style.width = "1000px";
       }
-      // console.log(this.subMenu)
     },
 
     // 메뉴가 닫히는 함수

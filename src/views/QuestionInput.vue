@@ -65,6 +65,7 @@
 <script>
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
+import { mapMutations } from "vuex";
 export default {
   components: {
     // VueMarkdown
@@ -117,7 +118,6 @@ export default {
         form.append("title", this.title);
         form.append("contents", this.contents);
         form.append("image", this.files);
-        console.log(this.files);
         this.axios
           .post(`${ipObj.ip}/api/question`, form, {
             headers: {
@@ -125,19 +125,19 @@ export default {
             },
           })
           .then(() => {
-            // console.log(res)
             alert("작성 완료");
             this.$router.push({ name: "QnAList" });
           })
           .catch((err) => {
             if (err.response.status === 401) {
-              alert("로그인후 이용 가능 합니다.");
-              location.href = "/login";
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
             }
             console.log(err);
           });
       }
     },
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>

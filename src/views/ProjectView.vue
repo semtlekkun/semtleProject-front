@@ -1,86 +1,3 @@
-<!--<template>
-<v-container>
-    <v-row>
-        <v-col cols="12" lg="3">
-            <SubTitle :subTitleObj="subTitleObj" />
-        </v-col>
-        <v-col cols="12" lg="9">
-            <v-row>
-                <v-col cols="12" class="customTable text-centerZ">
-                    <v-row class="pl-5">
-                        <v-col cols="6">
-                            <h2>{{title}}</h2>
-                        </v-col>
-                        <v-col cols="3" class="py-0 text-right">
-                            <v-btn :href="link" target="_blank" rounded="rounded" depressed="depressed" class="customBtn">Github</v-btn>
-                        </v-col>
-                        <v-col cols="3" class="py-0 text-right">
-                            <v-btn v-show="admin" color="error" @click="deleteProject">삭제</v-btn>
-                        </v-col>
-                    </v-row>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col cols="3" sm="2" class="customTable text-center">작성자</v-col>
-                <v-col cols="9" sm="2" class="text-center">{{writer}}</v-col>
-
-                <v-col cols="3" sm="2" class="customTable text-center">작성일</v-col>
-                <v-col cols="9" sm="2" class="text-center">{{date}}</v-col>
-
-                <v-col cols="3" sm="2" class="customTable text-center">view</v-col>
-                <v-col cols="9" sm="2" class="text-center">{{view}}</v-col>
-            </v-row>
-
-            <v-row>
-                <v-col cols="3" sm="2" class="customTable text-center">팀장</v-col>
-                <v-col cols="9" sm="2" class="text-center">{{leaderNick}}</v-col>
-
-                <v-col cols="3" sm="2" class="customTable text-center">개발기간</v-col>
-                <v-col cols="9" sm="6" class="text-center">
-                    {{startDate}}
-                    ~
-                    {{endDate}}
-                </v-col>
-            </v-row>
-
-            <v-row>
-                <v-col cols="12" md="2" class="customTable text-center">프로젝트 설명</v-col>
-
-                <v-col>
-                    <v-card-text class="text-center">
-                        <VueMarkdown :source="contents"></VueMarkdown>
-                    </v-card-text>
-                </v-col>
-            </v-row>
-
-            <v-row>
-                <v-col cols="12" md="2" class="customTable text-center">팀원</v-col>
-                <v-col cols="10" class="text-center">
-                    <v-row>
-                        <v-col v-for="member in members" :key="member.index" cols="12" md="6">
-                            <v-row align="center">
-                                <v-col cols="6">
-                                    <v-img :src="member.image" alt="test_img" />
-                                </v-col>
-
-                                <v-col cols="6">{{member.nick}}</v-col>
-                            </v-row>
-                        </v-col>
-                    </v-row>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col cols="12" md="2" class="customTable text-center">이미지</v-col>
-                <v-col cols="10" class="text-center">
-                    <div v-for="(image,i) in images" :key="i">
-                        <v-img :src="imageURL+image" />
-                    </div>
-                </v-col>
-            </v-row>
-        </v-col>
-    </v-row>
-</v-container>
-</template> -->
 <template>
   <v-container class="px-0">
     <v-row>
@@ -241,8 +158,6 @@ export default {
     this.axios
       .get(`${ipObj.ip}/api/pf/${this.projectID}`)
       .then((res) => {
-        // handle success
-        console.log(res.data);
         this.title = res.data.project.projectTitle;
         this.startDate = res.data.project.projectStartDate;
         this.endDate = res.data.project.projectEndDate;
@@ -295,9 +210,7 @@ export default {
     };
   },
   methods: {
-    goLinkEvent() {
-      console.log("Why not");
-    },
+
     deleteProject() {
       let result = confirm("정말로 삭제하시겠습니까?");
       if (result) {

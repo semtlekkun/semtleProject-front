@@ -67,7 +67,6 @@ export default {
             }
           })
           .catch((err) => {
-            console.log(err);
             if (err.response.status === 400) {
               this.error = "아이디 혹은 비밀번호가 일치 하지 않습니다.";
             } else if (err.response.status === 500) {
