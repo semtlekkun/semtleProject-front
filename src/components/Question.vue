@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <v-row>
       <v-col cols="12">
         <h2>{{Question.title}}</h2>
@@ -28,12 +27,19 @@
     <br />
     <VueMarkdown :source="Question.question"></VueMarkdown>
 
-    <v-img v-if="Question.imageURL!=='http://49.50.166.64/api/question/images/null'" :src="Question.imageURL" alt="첨부이미지" max-width="960px" class="mt-10" />
+    <v-img
+      v-if="Question.imageURL!==`${ipRouter}/api/question/images/null`"
+      :src="Question.imageURL"
+      alt="첨부이미지"
+      max-width="960px"
+      class="mt-10"
+    />
   </div>
 </template> 
 
 
 <script>
+import ipObj from "../key";
 import VueMarkdown from "vue-markdown";
 
 export default {
@@ -45,9 +51,10 @@ export default {
   },
   data() {
     return {
+      ipRouter: `${ipObj.ip}`,
       admin: false,
       QuestionData: Object,
-     };
+    };
   },
 
   mounted() {
@@ -63,7 +70,7 @@ export default {
       if (result) {
         this.axios
           .delete(
-            `http://49.50.166.64/api/question/${this.QID}`,
+            `${ipObj.ip}/api/question/${this.QID}`,
             {
               headers: {
                 token: sessionStorage.getItem("token"),

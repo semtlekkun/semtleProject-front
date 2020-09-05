@@ -118,6 +118,7 @@
 </template>
 
 <script>
+import ipObj from "../key";
 export default {
   data: () => ({
     search: "",
@@ -190,7 +191,7 @@ export default {
     initialize() {
       // axios 로 데이터 받아와서 this.mentors 데이터 배열에 삽입 (+)
 
-      this.axios.get("http://49.50.166.64/api/management/list").then((res) => {
+      this.axios.get(`${ipObj.ip}/api/management/list`).then((res) => {
         for (let idx = 0; idx < res.data.management.length; ++idx) {
           var tempObj = {
             name: "",
@@ -227,7 +228,7 @@ export default {
         // 여기 DELETE 비동기 함수 작성
 
         this.axios
-          .delete("http://49.50.166.64/api/management/delete", {
+          .delete(`${ipObj.ip}/api/management/delete`, {
             headers: { token: sessionStorage.getItem("token") },
             data: { _id: item._id },
           })
@@ -287,7 +288,7 @@ export default {
       };
 
       this.axios
-        .put("http://49.50.166.64/api/management/update", sendObj, config)
+        .put(`${ipObj.ip}/api/management/update`, sendObj, config)
         .then((res) => {
           if (res.status === 200) {
             alert("수정 성공!");
@@ -364,14 +365,13 @@ export default {
 
         console.log(sendObj);
 
-
         // 관리자임을 알 수 있도록 헤더 추가
         let config = {
           headers: { token: sessionStorage.getItem("token") },
         };
 
         this.axios
-          .post("http://49.50.166.64/api/management/input", sendObj, config)
+          .post(`${ipObj.ip}/api/management/input`, sendObj, config)
           .then((res) => {
             if (res.status === 200) {
               alert("등록 성공!");

@@ -48,14 +48,15 @@
                 </v-card>
               </v-col>
             </v-row>
-          </v-container>  
+          </v-container>
         </div>
-      </v-col>     
-    </v-row>        
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
+import ipObj from "../key";
 import VueMarkdown from "vue-markdown";
 import SubTitle from "../components/SubTitle.vue";
 
@@ -64,7 +65,7 @@ export default {
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
     this.noticeID = this.$route.params.id;
     this.axios
-      .get(`http://49.50.166.64/api/notice/${this.noticeID}`)
+      .get(`${ipObj.ip}/api/notice/${this.noticeID}`)
       .then((res) => {
         console.log(res);
 
@@ -74,7 +75,7 @@ export default {
           this.views = res.data.notice.view;
           this.date = res.data.notice.date;
           this.contents = res.data.notice.contents;
-          this.imageUrl = "http://49.50.166.64/api/notice/images/".concat(
+          this.imageUrl = `${ipObj.ip}/api/notice/images/`.concat(
             res.data.notice.image
           );
           // 이미지도 추가
@@ -106,17 +107,20 @@ export default {
   },
   methods: {
     deleteNotice() {
-      this.axios
-        .delete(`http://49.50.166.64/api/notice/${this.noticeID}`, {
-          headers: {
-            token: sessionStorage.getItem("token"),
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            this.$router.push({ name: "noticeList" });
-          }
-        });
+      let result = confirm("정말로 삭제하시겠습니까?");
+      if (result) {
+        this.axios
+          .delete(`${ipObj.ip}/api/notice/${this.noticeID}`, {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              this.$router.push({ name: "noticeList" });
+            }
+          });
+      }
     },
   },
 };

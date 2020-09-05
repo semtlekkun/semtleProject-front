@@ -101,7 +101,14 @@
                   </v-row>
 
                   <v-row>
-                    <v-col cols="12" xs="12" sm="6" md="6" v-for="member in members" :key="member.index">
+                    <v-col
+                      cols="12"
+                      xs="12"
+                      sm="6"
+                      md="6"
+                      v-for="member in members"
+                      :key="member.index"
+                    >
                       <v-row class="align-center">
                         <v-col cols="8">{{member}}</v-col>
                         <v-col cols="4">
@@ -156,7 +163,7 @@
 
                   <v-row class="justify-end">
                     <v-col cols="12" md="3" class="text-right">
-                      <v-btn @click="writeConents" color="#50829b" class="white--text"  block>작성 완료</v-btn>
+                      <v-btn @click="writeConents" color="#50829b" class="white--text" block>작성 완료</v-btn>
                     </v-col>
                   </v-row>
                 </v-alert>
@@ -184,6 +191,7 @@
 </template>
 
 <script>
+import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 export default {
   components: {
@@ -321,7 +329,7 @@ export default {
         };
 
         this.axios
-          .post("http://49.50.166.64/api/pf", form, config)
+          .post(`${ipObj.ip}/api/pf`, form, config)
           .then((res) => {
             console.log(res.status);
             //console.log("여기 들어와야 함");

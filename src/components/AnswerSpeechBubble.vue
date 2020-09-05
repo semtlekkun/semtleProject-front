@@ -22,11 +22,13 @@
 </template>
 
 <script>
+import ipObj from "../key";
+
 import VueMarkdown from "vue-markdown"; //markdown import
 export default {
   data() {
     return {
-      writerURL: "http://49.50.166.64/api/student/images/" + this.comments.image,
+      writerURL: `${ipObj.ip}/api/student/images/` + this.comments.image,
     };
   },
   components: {
@@ -65,7 +67,7 @@ export default {
   position: relative;
   display: inline-block;
   background: #365164;
-  color : white;
+  color: white;
 }
 .AnswerBubble:after {
   content: "";

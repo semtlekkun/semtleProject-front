@@ -22,12 +22,13 @@
 </template>
 
 <script>
+import ipObj from "../key";
 import VueMarkdown from "vue-markdown"; //markdown import
 export default {
   name: "QuestionSpeechBubble",
   data() {
     return {
-      writerURL: "http://49.50.166.64/api/student/images/" + this.comments.image,
+      writerURL: `${ipObj.ip}/api/student/images/` + this.comments.image,
     };
   },
   components: {

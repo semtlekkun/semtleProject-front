@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import ipObj from "../key";
 export default {
   data: () => ({
     dialog: false,
@@ -69,9 +70,9 @@ export default {
       };
 
       this.axios
-        .get("http://49.50.166.64/api/mypage", config)
+        .get(`${ipObj.ip}/api/mypage`, config)
         .then((res) => {
-          this.imageUrl = "http://49.50.166.64/api/student/images/";
+          this.imageUrl = `${ipObj.ip}/api/student/images/`;
           this.imageUrl = this.imageUrl.concat(res.data.student.image);
         })
         .catch((err) => {
@@ -90,7 +91,7 @@ export default {
       form.append("image", this.selectImg);
 
       this.axios
-        .put("http://49.50.166.64/api/mypage/picture/update", form, config)
+        .put(`${ipObj.ip}/api/mypage/picture/update`, form, config)
         .then((res) => {
           console.log(res);
           this.dialog = false;

@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import ipObj from "../key";
 import VueMarkdown from "vue-markdown";
 import SubTitle from "../components/SubTitle.vue";
 
@@ -78,7 +79,7 @@ export default {
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
     this.projectAnnounceID = this.$route.params.id;
     this.axios
-      .get(`http://49.50.166.64/api/recruit/${this.projectAnnounceID}`)
+      .get(`${ipObj.ip}/api/recruit/${this.projectAnnounceID}`)
       .then((res) => {
         // console.log(res)
         if (res.status === 200) {
@@ -121,7 +122,7 @@ export default {
       let result = confirm("정말로 삭제하시겠습니까?");
       if (result) {
         this.axios
-          .delete(`http://49.50.166.64/api/recruit/${this.projectAnnounceID}`, {
+          .delete(`${ipObj.ip}/api/recruit/${this.projectAnnounceID}`, {
             headers: {
               token: sessionStorage.getItem("token"),
             },

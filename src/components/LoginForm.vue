@@ -33,6 +33,7 @@
   </div>
 </template>
 <script>
+import ipObj from "../key";
 import { mapMutations } from "vuex";
 
 export default {
@@ -48,7 +49,7 @@ export default {
     CheckForm(e) {
       if (this.Password && this.StudentNumber) {
         this.axios
-          .post("http://49.50.166.64/api/log/in", {
+          .post(`${ipObj.ip}/api/log/in`, {
             _id: this.StudentNumber,
             pw: this.Password,
           })

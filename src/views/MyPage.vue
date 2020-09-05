@@ -43,6 +43,7 @@ res.data.student.pfList -> 순회해서 출력
 </template>
 
 <script>
+import ipObj from "../key";
 import Pw from "../components/Password.vue";
 import UserImg from "../components/UserImg.vue";
 import PhoneNum from "../components/PhoneNum.vue";
@@ -89,7 +90,7 @@ export default {
       };
 
       this.axios
-        .get("http://49.50.166.64/api/mypage", config)
+        .get(`${ipObj.ip}/api/mypage`, config)
         .then((res) => {
           console.log(res);
           for (let idx = 0; idx < res.data.student.pfList.length; ++idx) {

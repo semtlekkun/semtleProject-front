@@ -49,7 +49,7 @@
 
                   <v-row class="justify-end">
                     <v-col cols="12" md="3" class="text-right">
-                      <v-btn @click="writeConents"  color="#50829b" class="white--text"  block>작성 완료</v-btn>
+                      <v-btn @click="writeConents" color="#50829b" class="white--text" block>작성 완료</v-btn>
                     </v-col>
                   </v-row>
                 </v-alert>
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 export default {
   components: {
@@ -118,7 +119,7 @@ export default {
         form.append("image", this.files);
         console.log(this.files);
         this.axios
-          .post(`http://49.50.166.64/api/question`, form, {
+          .post(`${ipObj.ip}/api/question`, form, {
             headers: {
               token: sessionStorage.getItem("token"),
             },

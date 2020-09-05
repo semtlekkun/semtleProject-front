@@ -15,6 +15,7 @@
 
 
 <script>
+import ipObj from "../key";
 import QuestionSpeechBubble from "./QuestionSpeechBubble";
 import AnswerSpeechBubble from "./AnswerSpeechBubble";
 
@@ -47,7 +48,7 @@ export default {
       if (result) {
         this.axios
           .delete(
-            `http://49.50.166.64/api/answer/${id}`,
+            `${ipObj.ip}/api/answer/${id}`,
             {
               headers: {
                 token: this.token,

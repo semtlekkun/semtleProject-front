@@ -1,53 +1,51 @@
 <template>
-    <div>
-        <v-card height="200" light="light" class="pa-5">
-            <v-card-title primary="primary" class="com-title justify-center">학번+이름</v-card-title>
-            <v-card-text class="show mt-4 text-center">{{outputNick}}</v-card-text>
-        </v-card>
-    </div>
+  <div>
+    <v-card height="200" light="light" class="pa-5">
+      <v-card-title primary="primary" class="com-title justify-center">학번+이름</v-card-title>
+      <v-card-text class="show mt-4 text-center">{{outputNick}}</v-card-text>
+    </v-card>
+  </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {outputNick: ""};
+import ipObj from "../key";
+export default {
+  data() {
+    return { outputNick: "" };
+  },
+  created() {
+    this.initNickName();
+  },
+  methods: {
+    initNickName() {
+      let config = {
+        headers: {
+          token: sessionStorage.getItem("token"),
         },
-        created() {
-            this.initNickName();
-        },
-        methods: {
-            initNickName() {
-                let config = {
-                    headers: {
-                        token: sessionStorage.getItem("token")
-                    }
-                };
+      };
 
-                this
-                    .axios
-                    .get("http://49.50.166.64/api/mypage", config)
-                    .then((res) => {
-                        this.outputNick = res.data.student.nick;
-                        console.log(res);
-                    });
-            }
-        }
-    };
+      this.axios.get(`${ipObj.ip}/api/mypage`, config).then((res) => {
+        this.outputNick = res.data.student.nick;
+        console.log(res);
+      });
+    },
+  },
+};
 </script>
 
 <style scoped="scoped">
+@font-face {
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.com-title {
+  font-family: "NEXON Lv1 Gothic OTF";
+}
 
-    @font-face {
-        font-family: 'NEXON Lv1 Gothic OTF';
-        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff") format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
-    .com-title {
-        font-family: 'NEXON Lv1 Gothic OTF';
-    }
-
-    .show {
-        font-size: 150%;
-    }
+.show {
+  font-size: 150%;
+}
 </style>

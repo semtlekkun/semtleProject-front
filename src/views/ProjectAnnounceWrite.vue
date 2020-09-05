@@ -9,8 +9,6 @@
           <v-container class="px-0">
             <v-row>
               <v-col cols="12">
-              
-              
                 <v-card>
                   <v-alert outlined color="#365164">
                     <v-form>
@@ -67,7 +65,12 @@
 
                       <v-row class="justify-end">
                         <v-col cols="12" md="3" class="text-right">
-                          <v-btn color="#50829b" @click="confirmAnnounce" class="white--text" block>작성 완료</v-btn>
+                          <v-btn
+                            color="#50829b"
+                            @click="confirmAnnounce"
+                            class="white--text"
+                            block
+                          >작성 완료</v-btn>
                         </v-col>
                       </v-row>
                     </v-form>
@@ -97,6 +100,7 @@
 </template>
 
 <script>
+import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 export default {
   components: {
@@ -160,7 +164,7 @@ export default {
       } else {
         this.axios
           .post(
-            "http://49.50.166.64:/api/recruit",
+            `${ipObj.ip}/api/recruit`,
             {
               endDate: this.endDate,
               title: this.title,

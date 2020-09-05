@@ -38,12 +38,13 @@
 </template>
 
 <script>
+import ipObj from "../key";
 import axios from "axios";
 export default {
   data() {
     return {
       CadreList: [],
-      imageURL: "http://49.50.166.64/api/student/images/",
+      imageURL: `${ipObj.ip}/api/student/images/`,
     };
   },
 
@@ -54,7 +55,7 @@ export default {
   methods: {
     getData() {
       axios
-        .get("http://49.50.166.64/api/management/list")
+        .get(`${ipObj.ip}/api/management/list`)
         .then((res) => {
           this.CadreList = [];
           var managementList = res.data.management;
@@ -105,8 +106,8 @@ v-card img {
 .v-application p {
   margin-bottom: 0;
 }
-p{
-  margin:3px;
+p {
+  margin: 3px;
 }
 .position,
 .number,
