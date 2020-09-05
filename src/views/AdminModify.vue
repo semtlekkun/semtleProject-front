@@ -119,6 +119,7 @@
 
 <script>
 import ipObj from "../key";
+import { mapMutations } from "vuex";
 export default {
   data: () => ({
     search: "",
@@ -242,7 +243,8 @@ export default {
             if (err.response.status === 400) {
               alert("유효하지 않은 학생입니다.");
             } else if (err.response.status === 401) {
-              alert("권한이 없습니다.");
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
             } else if (err.response.status === 500) {
               alert("서버에 문제가 있습니다.");
             }
@@ -281,7 +283,6 @@ export default {
         _id: this.editedItem._id,
       };
 
-      console.log(sendObj);
 
       let config = {
         headers: { token: sessionStorage.getItem("token") },
@@ -299,7 +300,8 @@ export default {
           if (err.response.status === 400) {
             alert("유효하지 않은 학생입니다.");
           } else if (err.response.status === 401) {
-            alert("권한이 없습니다.");
+                          alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
           } else if (err.response.status === 500) {
             alert("서버에 문제가 있습니다.");
           }
@@ -363,7 +365,6 @@ export default {
           contents: this.editedItem.contents,
         };
 
-        console.log(sendObj);
 
         // 관리자임을 알 수 있도록 헤더 추가
         let config = {
@@ -382,7 +383,8 @@ export default {
             if (err.response.status === 400) {
               alert("유효하지 않은 학생입니다.");
             } else if (err.response.status === 401) {
-              alert("권한이 없습니다.");
+                            alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
             } else if (err.response.status === 500) {
               alert("서버에 문제가 있습니다.");
             }
@@ -404,6 +406,8 @@ export default {
       if (keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39) return;
       else e.target.value = e.target.value.replace(/[^0-9]/g, "");
     },
+
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>

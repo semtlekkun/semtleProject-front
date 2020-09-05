@@ -9,6 +9,7 @@
 
 <script>
 import ipObj from "../key";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return { outputNick: "" };
@@ -24,11 +25,12 @@ export default {
         },
       };
 
-      this.axios.get(`${ipObj.ip}/api/mypage`, config).then((res) => {
+      this.axios.get(`${ipObj.ip}/api/mypage`, config)
+      .then((res) => {
         this.outputNick = res.data.student.nick;
-        console.log(res);
       });
     },
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>

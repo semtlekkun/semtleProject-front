@@ -1,15 +1,6 @@
 <template>
   <div>
     <v-row cols="12" class="mb-0" v-if="$route.name !== 'Home'">
-      <!--        
-        콤보박스 이용 항목 별 검색 가능 기능->추후 업뎃    
-            <v-col cols="3">
-                <v-select
-                    :items="['전체','제목', '작성자', '작성 일시']"
-                    label="검색"
-                    v-model="contentType"></v-select>
-            </v-col>
-      <v-col cols="9" class="p-8">-->
       <!-- 검색 -->
       <v-col>
         <v-text-field
@@ -26,7 +17,6 @@
         ></v-text-field>
         <v-spacer></v-spacer>
       </v-col>
-      <!--            </v-col>-->
     </v-row>
 
     <v-data-table
@@ -85,9 +75,7 @@ export default {
   },
   methods: {
     rowClick(row) {
-      console.log(row);
       if (this.tableName === "qna") {
-        // console.log("id: ", row._id)
         this.$router.push({
           name: "QnA",
           params: {

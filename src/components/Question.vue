@@ -41,6 +41,7 @@
 <script>
 import ipObj from "../key";
 import VueMarkdown from "vue-markdown";
+import { mapMutations } from "vuex";
 
 export default {
   props: {
@@ -84,10 +85,14 @@ export default {
             }
           })
           .catch((err) => {
-            console.log(err);
+              if (err.response.status === 401) {
+                alert("세션이 만료되어 홈 화면으로 이동합니다.");
+                this.setLogout();
+            }
           });
       }
     },
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>

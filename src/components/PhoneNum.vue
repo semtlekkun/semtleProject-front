@@ -84,6 +84,7 @@
 
 <script>
 import ipObj from "../key";
+import { mapMutations } from "vuex";
 export default {
   data: () => ({
     dialog: false,
@@ -153,6 +154,13 @@ export default {
               this.dialog = false;
               this.$router.go();
             }
+          })
+          .catch((err) => {
+            console.log(err);
+            if (err.response.status === 401) {
+                alert("세션이 만료되어 홈 화면으로 이동합니다.");
+                this.setLogout();
+              }
           });
       }
     },
@@ -169,6 +177,8 @@ export default {
       if (keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39) return;
       else e.target.value = e.target.value.replace(/[^0-9]/g, "");
     },
+
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>

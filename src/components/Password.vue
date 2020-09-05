@@ -58,6 +58,7 @@
 
 <script>
 import ipObj from "../key";
+import { mapMutations } from "vuex";
 export default {
   data: () => ({
     dialog: false,
@@ -114,9 +115,14 @@ export default {
               this.errMsg.push("비밀번호가 틀립니다!");
               this.dialog2 = true;
             }
+            else if (err.response.status === 401) {
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
+            }
           });
       }
     },
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>

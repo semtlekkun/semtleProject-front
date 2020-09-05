@@ -102,6 +102,7 @@
 <script>
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
+import { mapMutations } from "vuex";
 export default {
   components: {
     SubTitle,
@@ -182,9 +183,17 @@ export default {
             if (res.status === 200) {
               this.$router.push({ name: "projectAnnounceList" });
             }
-          });
+          })
+           .catch((err) => {
+          console.log(err);
+          if (err.response.status === 401) {
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
+            }
+        });
       }
     },
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>

@@ -50,7 +50,6 @@ export default {
 
   created() {
     this.getData();
-    console.log(this.CadreList);
   },
   methods: {
     getData() {
@@ -59,7 +58,6 @@ export default {
         .then((res) => {
           this.CadreList = [];
           var managementList = res.data.management;
-          console.log(managementList);
           managementList.forEach((element) => {
             var flag = false;
             if (this.CadreList.length === 0) {
@@ -88,7 +86,6 @@ export default {
               }
             }
           });
-          console.log(this.CadreList);
         })
         .catch((error) => {
           console.log(error);

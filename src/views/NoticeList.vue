@@ -20,7 +20,6 @@ export default {
     this.axios
       .get(`${ipObj.ip}/api/notice/list`)
       .then((res) => {
-        // console.log(res)
         if (res.status === 200) {
           this.contents = [];
           res.data.noticeList.forEach((item, index) => {

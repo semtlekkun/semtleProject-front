@@ -48,6 +48,7 @@ import Pw from "../components/Password.vue";
 import UserImg from "../components/UserImg.vue";
 import PhoneNum from "../components/PhoneNum.vue";
 import MyPageNickName from "../components/MyPageNickName.vue";
+import { mapMutations } from "vuex";
 
 export default {
   data: () => ({
@@ -115,8 +116,13 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          if (err.response.status === 401) {
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
+            }
         });
     },
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>

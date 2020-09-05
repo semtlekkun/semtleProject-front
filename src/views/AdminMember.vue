@@ -166,6 +166,7 @@
 
 <script>
 import ipObj from "../key";
+import { mapMutations } from "vuex";
 //import VueMarkdown from 'vue-markdown';
 export default {
   components: {
@@ -293,7 +294,10 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err);
+          if (err.response.status === 401) {
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
+          }
         });
     },
     //수정 put
@@ -314,21 +318,24 @@ export default {
         .then((res) => {
           if (res.status === 200) {
             console.log(res);
-            console.log("put 성공");
+            
             alert("수정완료");
-            console.log("수정완료");
+            
           } else {
             console.log(res);
-            console.log("ststus : " + res.status);
+            
           }
         })
         .catch((err) => {
-          console.log(err);
+          if (err.response.status === 401) {
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
+          }
         });
     },
     //추가 post
     addData(adddata) {
-      console.log(adddata.phoneNum);
+      
       let config = {
         headers: {
           token: sessionStorage.getItem("token"),
@@ -345,19 +352,24 @@ export default {
         .then((res) => {
           if (res.ststus === 200) {
             console.log(res);
-            console.log("post 성공");
             this.canAdd = true;
             alert("추가완료");
-            console.log("추가완료");
+            
           }
         })
         .catch((err) => {
           console.log(err);
+
+          if (err.response.status === 401) {
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
+          }
+
           alert("[에러]중복데이터 존재");
-          console.log("에러코드 : " + err.response.status);
-          console.log("중복된 학번");
           this.canAdd = false;
           this.student.pop();
+
+
         });
     },
     //삭제 delete
@@ -375,15 +387,17 @@ export default {
         })
         .then((res) => {
           if (res.status === 200) {
-            console.log("delete 성공");
             console.log(res);
           } else {
             console.log(res);
-            console.log("ststus : " + res.status);
           }
         })
         .catch((err) => {
           console.log(err);
+          if (err.response.status === 401) {
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
+          }
         });
     },
     //-----통신 끝
@@ -393,7 +407,6 @@ export default {
       let index = 0;
       let idsArr = [];
       this.selected.forEach((element) => {
-        console.log(element.name);
         //백 : 서버에 넘겨주기 위해 학번을 배열에 하나씩 저장
         idsArr.push(element._id);
 
@@ -409,7 +422,6 @@ export default {
 
     //Action 에서 수정하는 부분
     editItem(item) {
-      console.log("수정시작");
       this.controll = false;
       this.editedIndex = this.student.indexOf(item);
 
@@ -423,8 +435,6 @@ export default {
       //전화번호를 '-' 로 잘라서 각 배열에 저장.
       this.phonenum = this.editedItem.phoneNum.split("-");
 
-      //console.log("원본 데이터 : " + this.editedItem.phoneNum);
-      //console.log("문자열 자른 결과 : " + this.phonenum);
 
       this.dialog = true;
     },
@@ -470,7 +480,6 @@ export default {
         this.editedItem._id.length != 8
       ) {
         alert("입력폼 형식 오류");
-        console.log("입력폼 형식 오류");
       }
 
       //입력값이 확인된 경우
@@ -498,6 +507,7 @@ export default {
       }
       this.close();
     },
+    ...mapMutations(["setLogout"]),
   },
 };
 </script>
