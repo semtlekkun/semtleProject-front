@@ -33,12 +33,13 @@
 
 <script>
 import ipObj from "../key";
+
 import CommentList from "../components/CommentList";
 import CommentForm from "../components/CommentForm";
 import Question from "../components/Question";
 import SubTitle from "../components/SubTitle.vue";
 export default {
-  mounted() {
+  created() {
     let id = this.$route.params.id;
     this.axios
       .get(`${ipObj.ip}/api/question/${id}`)
@@ -50,9 +51,11 @@ export default {
             question: res.data.question.contents,
             writerName: res.data.question.writer,
             time: res.data.question.date,
-            id: res.data.question._id,
-            image: res.data.question.image,
             views: res.data.question.view,
+            imageURL:
+              `${ipObj.ip}/api/question/images/` + res.data.question.image,
+            writerURL:
+              `${ipObj.ip}/api/student/images/` + res.data.question.writerImage,
           };
           this.commentData.writerName = res.data.question.writer;
         }
@@ -96,7 +99,8 @@ export default {
         writerName: "",
         time: "",
         views: 365,
-        image: "",
+        imageURL: "",
+        writerURL: "",
       },
       commentData: {
         writerName: "",
