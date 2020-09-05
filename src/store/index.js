@@ -32,17 +32,19 @@ export default new Vuex.Store({
 
       axios.post(`${ipObj.ip}/api/log/out`, {}, config).then(res => {
         if (res.status === 200) {
-
           state.isLogin = !state.isLogin
           sessionStorage.removeItem("token")
           sessionStorage.removeItem("admin")
           location.href = '/';
 
-          console.log(state.isLogin);
-          console.log('test!!!');
         }
       }).catch(err => {
-        console.log(err);
+        if (err.response.status === 401) {
+          state.isLogin = !state.isLogin
+          sessionStorage.removeItem("token")
+          sessionStorage.removeItem("admin")
+          location.href = '/';
+        }
       })
 
     }
