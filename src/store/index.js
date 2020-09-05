@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import ipObj from '../key'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -24,11 +26,25 @@ export default new Vuex.Store({
       }
     },
     setLogout(state) { // MainMenuBar, MobileView에서 로그아웃할 때 실행하는 함수
-      state.isLogin = !state.isLogin // login true>false 전환
-      // 세션스토리지 token,admin 삭제
-      sessionStorage.removeItem("token")
-      sessionStorage.removeItem("admin")
-      location.href = '/'; // 홈화면으로 이동
+      let config = {
+        headers: { token: sessionStorage.getItem("token") },
+      };
+
+      axios.post(`${ipObj.ip}/api/log/out`, {}, config).then(res => {
+        if (res.status === 200) {
+
+          state.isLogin = !state.isLogin
+          sessionStorage.removeItem("token")
+          sessionStorage.removeItem("admin")
+          location.href = '/';
+
+          console.log(state.isLogin);
+          console.log('test!!!');
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+
     }
   },
   getters: {
