@@ -116,7 +116,7 @@ export default {
       recruitment: null,
       subTitleObj: {
         title: "✍공고 작성",
-        contents: "프로젝트 공고 작성이다.",
+        contents: "프로젝트 모집 공고를 작성하는 공간입니다.",
       },
       errorMsg: [],
       dialog: false,

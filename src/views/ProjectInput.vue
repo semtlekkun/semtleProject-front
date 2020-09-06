@@ -227,7 +227,7 @@ export default {
       contents: "",
       subTitleObj: {
         title: "✍프로젝트 작성",
-        contents: "프로젝트 작성이다.",
+        contents: "프로젝트 게시물을 작성하는 공간입니다.",
       },
       dialog: false,
     };
