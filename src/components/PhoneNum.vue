@@ -152,6 +152,7 @@ export default {
           .put(`${ipObj.ip}/api/mypage/phoneNum/update`, sendObj, config)
           .then((res) => {
             if (res.status === 200) {
+              alert("전화번호 변경 완료!");
               this.dialog = false;
               this.$router.go();
             }
