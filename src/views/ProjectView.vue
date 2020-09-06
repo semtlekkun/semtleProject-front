@@ -98,7 +98,7 @@
                           class="rounded-xl blue-grey lighten-3 font-weight-bold text-center"
                         >Github</v-col>
                         <v-col cols="8" xs="8" sm="9" md="10" class="text-left">
-                          <a :href="git" style="color:#50829b">링크 바로가기</a>
+                          <a :href="git" target="_blank" style="color:#50829b">링크 바로가기</a>
                         </v-col>
                       </v-row>
 
@@ -111,7 +111,7 @@
                           class="rounded-xl blue-grey lighten-3 font-weight-bold text-center"
                         >Link</v-col>
                         <v-col cols="8" xs="8" sm="9" md="10" class="text-left">
-                          <a :href="link" style="color:#50829b">링크 바로가기</a>
+                          <a :href="link" target="_blank" style="color:#50829b">링크 바로가기</a>
                         </v-col>
                       </v-row>
 
