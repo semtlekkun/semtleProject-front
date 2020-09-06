@@ -108,6 +108,7 @@ export default {
           .then((res) => {
             if (res.status === 200) {
               this.dialog = false;
+              this.$router.go();
             }
           })
           .catch((err) => {
