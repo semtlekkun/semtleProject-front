@@ -55,9 +55,12 @@ export default {
       ipRouter: `${ipObj.ip}`,
       admin: false,
       QuestionData: Object,
+      QID: "",
     };
   },
-
+  created(){
+    this.QID = this.$route.params.id;
+  },
   mounted() {
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
   },
