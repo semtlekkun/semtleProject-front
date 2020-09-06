@@ -135,7 +135,8 @@ export default {
 
         this.dialog2 = true;
       } else {
-        this.resultPhoneNum = this.phoneNum1 + this.phoneNum2 + this.phoneNum3;
+        // this.resultPhoneNum = this.phoneNum1 + this.phoneNum2 + this.phoneNum3;
+        this.resultPhoneNum = `${this.phoneNum1}-${this.phoneNum2}-${this.phoneNum3}`
 
         let sendObj = {
           phoneNum: this.resultPhoneNum,
