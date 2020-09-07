@@ -92,7 +92,7 @@
                         label="팀원 (학번)"
                         counter
                         maxlength="8"
-                        placeholder="등록된 셈틀꾼 회원만 추가 가능합니다. 팀장학번이 필수로 등록되어야 합니다."
+                        placeholder="등록된 셈틀꾼 회원만 추가 가능합니다."
                       />
                     </v-col>
                     <v-col cols="5" xs="5" sm="4" md="2">
