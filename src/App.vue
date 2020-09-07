@@ -30,7 +30,11 @@
                 <!-- <MobileView v-if="isMobile" :loginStatus="getLogin" /> <PCView
                 v-if="!isMobile" /> -->
                 <TopBtn v-if="$route.name !== 'login' && !isMobile"/>
+
+                <Footer id="customFooter" class="text-center"/>
+
             </v-container>
+            
         </v-main>
     </v-app>
 </template>
@@ -41,6 +45,7 @@
     import {mapMutations, mapGetters} from "vuex";
     import SideBar from './components/SideBar.vue';
     import PCMenuBar from "./components/MainMenuBar.vue";
+    import Footer from "./components/Footer.vue";
 
     export default {
         name: "App",
@@ -71,7 +76,8 @@
             TopBtn,
             Intro,
             SideBar,
-            PCMenuBar
+            PCMenuBar,
+            Footer
         },
 
         data(){
@@ -99,7 +105,6 @@
 </script>
 
 <style>
-
     @font-face {
         font-family: 'NEXON Lv1 Gothic OTF Light';
         src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff") format('woff');
@@ -137,5 +142,9 @@
         top: 5px;
         width: 0;
         z-index: 10;
+    }
+    #customFooter{
+        border-top: 2px solid #659ab5;
+        background: white;
     }
 </style>

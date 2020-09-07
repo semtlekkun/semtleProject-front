@@ -131,5 +131,6 @@ export default {
 #projectView {
   max-height: 785px;
   overflow: auto;
+  margin-bottom: 190px;
 }
 </style>
