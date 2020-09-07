@@ -328,6 +328,7 @@ export default {
           .post(`${ipObj.ip}/api/pf`, form, config)
           .then((res) => {
             console.log(res.status);
+            alert("작성 완료");
             location.href = "/project/list";
           })
           .catch((err) => {

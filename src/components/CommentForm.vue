@@ -102,6 +102,7 @@ export default {
           )
           .then((res) => {
             if (res.status === 200) {
+              alert("작성 완료");
               this.$router.go();
             }
           })

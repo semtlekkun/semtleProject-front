@@ -181,6 +181,7 @@ export default {
           .then((res) => {
             console.log(res);
             if (res.status === 200) {
+              alert("작성 완료");
               this.$router.push({ name: "projectAnnounceList" });
             }
           })
