@@ -92,7 +92,7 @@ export default {
             recruitment: null,
             subTitleObj: {
                 title: "✍공고 작성",
-                contents: "프로젝트 공고 작성이다.",
+                contents: "프로젝트 모집 공고를 작성하는 공간입니다.",
             },
             errorMsg: [],
             dialog: false,
@@ -157,6 +157,7 @@ export default {
                     .then((res) => {
                         console.log(res);
                         if (res.status === 200) {
+                            alert("작성 완료");
                             this.$router.push({
                                 name: "projectAnnounceList"
                             });

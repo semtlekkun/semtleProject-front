@@ -53,7 +53,7 @@
                                 </v-row>
                                 <v-row class="align-center">
                                     <v-col cols="7" xs="7" sm="8" md="10">
-                                        <v-text-field @keypress="checkNumber" @keyup="checkHan" v-model.number="memberNum" label="팀원 (학번)" counter maxlength="8" placeholder="등록된 셈틀꾼 회원만 추가 가능합니다. 팀장학번이 필수로 등록되어야 합니다." />
+                                        <v-text-field @keypress="checkNumber" @keyup="checkHan" v-model.number="memberNum" label="팀원 (학번)" counter maxlength="8" placeholder="등록된 셈틀꾼 회원만 추가 가능합니다." />
                                     </v-col>
                                     <v-col cols="5" xs="5" sm="4" md="2">
                                         <v-btn @click="addMember" lage color="#50829b" class="white--text" block>추가하기</v-btn>
@@ -163,7 +163,7 @@ export default {
             contents: "",
             subTitleObj: {
                 title: "✍프로젝트 작성",
-                contents: "프로젝트 작성이다.",
+                contents: "프로젝트 게시물을 작성하는 공간입니다.",
             },
             dialog: false,
         };
@@ -264,6 +264,7 @@ export default {
                     .post(`${ipObj.ip}/api/pf`, form, config)
                     .then((res) => {
                         console.log(res.status);
+                        alert("작성 완료");
                         location.href = "/project/list";
                     })
                     .catch((err) => {
