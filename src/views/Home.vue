@@ -85,7 +85,7 @@ export default {
             obj.number = index + 1;
             obj.title = item.title;
             obj.writer = item.writer;
-            obj.date = item.endDate;
+            obj.date = item.date;
             obj._id = item._id;
             this.projectAnnounceContents.push(obj);
           });

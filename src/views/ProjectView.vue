@@ -98,7 +98,7 @@
                           class="rounded-xl blue-grey lighten-3 font-weight-bold text-center"
                         >Github</v-col>
                         <v-col cols="8" xs="8" sm="9" md="10" class="text-left">
-                          <a :href="git" style="color:#50829b">링크 바로가기</a>
+                          <a :href="git" target="_blank" style="color:#50829b">링크 바로가기</a>
                         </v-col>
                       </v-row>
 
@@ -111,7 +111,7 @@
                           class="rounded-xl blue-grey lighten-3 font-weight-bold text-center"
                         >Link</v-col>
                         <v-col cols="8" xs="8" sm="9" md="10" class="text-left">
-                          <a :href="link" style="color:#50829b">링크 바로가기</a>
+                          <a :href="link" target="_blank" style="color:#50829b">링크 바로가기</a>
                         </v-col>
                       </v-row>
 
@@ -203,7 +203,7 @@ export default {
       link: "",
       subTitleObj: {
         title: "💻프로젝트",
-        contents: "프로젝트이다.",
+        contents: "셈틀꾼 멤버들이 참여한 프로젝트를 올리는 공간입니다.",
       },
       git: "",
       images: [],

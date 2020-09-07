@@ -84,8 +84,8 @@ export default {
       ],
       contents: "",
       subTitleObj: {
-        title: "❓질문 작성",
-        contents: "질문 작성이다.",
+        title: "✍질문 작성",
+        contents: "질문을 작성하는 공간입니다.",
       },
     };
   },

@@ -106,7 +106,7 @@ export default {
       },
       subTitleObj: {
         title: "❓Q&A",
-        contents: "Q&A이다.",
+        contents: "질문과 답변을 올리는 공간입니다.",
       },
     };
   },

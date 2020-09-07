@@ -32,14 +32,14 @@ export default {
     this.axios
       .get(`${ipObj.ip}/api/recruit/list`)
       .then((res) => {
-        // console.log(res)
+        console.log(res)
         if (res.status === 200) {
           res.data.recruitList.forEach((item, index) => {
             let obj = new Object();
             obj.number = index + 1;
             obj.title = item.title;
             obj.writer = item.writer;
-            obj.date = item.endDate;
+            obj.date = item.date;
             obj._id = item._id;
             this.contents.push(obj);
           });
@@ -59,7 +59,7 @@ export default {
       isLogin: "",
       subTitleObj: {
         title: "📝프로젝트 공고",
-        contents: "프로젝트 공고이다.",
+        contents: "프로젝트 인원을 모집하는 공간입니다.",
       },
     };
   },

@@ -59,7 +59,7 @@ export default {
       isLogin: "",
       subTitleObj: {
         title: "💻프로젝트 목록",
-        contents: "프로젝트 목록이다.",
+        contents: "셈틀꾼 멤버들이 참여한 프로젝트를 올리는 공간입니다.",
       },
     };
   },

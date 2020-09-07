@@ -107,7 +107,9 @@ export default {
           .put(`${ipObj.ip}/api/mypage/pw/update`, sendObj, config)
           .then((res) => {
             if (res.status === 200) {
+              alert("비밀번호 변경 완료!");
               this.dialog = false;
+              // this.$router.go();
             }
           })
           .catch((err) => {

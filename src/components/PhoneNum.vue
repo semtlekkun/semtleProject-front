@@ -135,7 +135,8 @@ export default {
 
         this.dialog2 = true;
       } else {
-        this.resultPhoneNum = this.phoneNum1 + this.phoneNum2 + this.phoneNum3;
+        // this.resultPhoneNum = this.phoneNum1 + this.phoneNum2 + this.phoneNum3;
+        this.resultPhoneNum = `${this.phoneNum1}-${this.phoneNum2}-${this.phoneNum3}`
 
         let sendObj = {
           phoneNum: this.resultPhoneNum,
@@ -151,6 +152,7 @@ export default {
           .put(`${ipObj.ip}/api/mypage/phoneNum/update`, sendObj, config)
           .then((res) => {
             if (res.status === 200) {
+              alert("전화번호 변경 완료!");
               this.dialog = false;
               this.$router.go();
             }

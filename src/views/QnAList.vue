@@ -59,7 +59,7 @@ export default {
       subTitleObj: {
         isLogin: "",
         title: "❓Q&A 목록",
-        contents: "질문 목록이다.",
+        contents: "질문과 답변을 올리는 공간입니다.",
       },
       contents: [],
     };
