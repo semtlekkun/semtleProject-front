@@ -28,13 +28,16 @@
         <!-- 이미지 변경 다이얼로그 창 내용구성 -->
         <v-container>
           <v-row>
-            <v-col>
+            <v-col cols="12" class="pb-0">
               <v-file-input
                 label="이미지 첨부"
                 accept="image/*"
                 prepend-icon="mdi-camera"
                 v-model="selectImg"
               ></v-file-input>
+            </v-col>
+            <v-col cols="12" class="pt-0">
+              <h5>※ 기본 이미지는 이미지 선택을 하지 않고 확인 버튼을 눌러주세요.</h5>
             </v-col>
           </v-row>
         </v-container>
@@ -111,4 +114,7 @@ export default {
 </script>
 
 <style scoped>
+h5 {
+  color: gray;
+}
 </style>
