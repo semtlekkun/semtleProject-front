@@ -35,7 +35,8 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn v-show="this.isLogin" color="error" text @click="dialogBtn()">Login</v-btn>
+                <!--로그인이 안 됐다면 로그인 버튼 띄울 것-->
+                <v-btn v-show="!this.isLogin" color="error" text @click="dialogBtn()">Login</v-btn>
                 <v-btn color="error" text @click="dialog = false">OK</v-btn>
               </v-card-actions>
             </v-card>
@@ -51,6 +52,13 @@ import ipObj from "../key";
 import { mapMutations } from "vuex";
 
 export default {
+  created() {
+    if (!sessionStorage.getItem("token")) {
+        return (this.isLogin = false);
+    } else {
+      return (this.isLogin = true);
+    }
+  },
   mounted() {
     this.questionID = this.$route.params.id;
     this.userToken = sessionStorage.getItem("token");
@@ -68,17 +76,19 @@ export default {
   },
 
   methods: {
-    dialogBtn() {
+    dialogBtn() { // dialog에서 login을 눌렀을 경우
       this.dialog = false;
       location.href = "/login";
     },
 
     inputAnswer() {
-      if (this.contents === "") {
+      if (!this.isLogin){ // 로그인이 없는 경우
         this.dialog = true;
-        this.isLogin = false;
+        this.errorMessage = "로그인 후 작성해주세요.";
+      } else if (this.contents === "") { // 내용이 없는 경우
+        this.dialog = true;
         this.errorMessage = "내용이 없습니다.";
-      } else {
+      } else { 
         this.axios
           .post(
             `${ipObj.ip}/api/answer`,
