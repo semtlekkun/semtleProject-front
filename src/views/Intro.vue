@@ -30,6 +30,6 @@ export default {
     left: 20px;
     top: 20px;
     font-size: 1.1rem;
-
+    font-weight: bold;
 }
 </style>
