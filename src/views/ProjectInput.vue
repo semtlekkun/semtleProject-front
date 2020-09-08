@@ -34,7 +34,7 @@
 
                                             <v-date-picker v-model="startDate" no-title scrollable>
                                                 <v-spacer></v-spacer>
-                                                <v-btn id="menu1" color="primary" @click="()=> {temp(); $refs.menu1.save(startDate);}">확인</v-btn>
+                                                <v-btn id="menu1" color="primary" @click="$refs.menu1.save(startDate)">확인</v-btn>
                                             </v-date-picker>
                                         </v-menu>
                                     </v-col>
