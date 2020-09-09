@@ -30,6 +30,7 @@
           <v-row>
             <v-col cols="12" class="pb-0">
               <v-file-input
+                color="rgb(80,130,155)"
                 label="이미지 첨부"
                 accept="image/*"
                 prepend-icon="mdi-camera"
@@ -102,10 +103,10 @@ export default {
           this.$router.go();
         })
         .catch((err) => {
-            if (err.response.status === 401) {
-              alert("세션이 만료되어 홈 화면으로 이동합니다.");
-              this.setLogout();
-            }
+          if (err.response.status === 401) {
+            alert("세션이 만료되어 홈 화면으로 이동합니다.");
+            this.setLogout();
+          }
         });
     },
     ...mapMutations(["setLogout"]),

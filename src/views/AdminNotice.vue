@@ -7,7 +7,7 @@
       </v-col>
 
       <v-col cols="12" md="9" lg="6">
-        <v-text-field label="제목" outlined v-model="title"></v-text-field>
+        <v-text-field color="rgb(80, 130, 155)" label="제목" outlined v-model="title"></v-text-field>
       </v-col>
     </v-row>
 
@@ -18,6 +18,7 @@
       </v-col>
       <v-col cols="12" md="9" lg="6">
         <v-textarea
+          color="rgb(80, 130, 155)"
           id="contents_"
           outlined
           counter
@@ -36,7 +37,13 @@
       </v-col>
 
       <v-col cols="12" md="9" lg="6">
-        <v-file-input label="이미지 첨부" accept="image/*" prepend-icon="mdi-camera" v-model="imageUrl"></v-file-input>
+        <v-file-input
+          color="rgb(80, 130, 155)"
+          label="이미지 첨부"
+          accept="image/*"
+          prepend-icon="mdi-camera"
+          v-model="imageUrl"
+        ></v-file-input>
       </v-col>
     </v-row>
 
@@ -44,7 +51,7 @@
     <v-row>
       <v-col xs="12" md="8" offset-xs="0" offset-md="2">
         <!-- 스낵바 -->
-        <v-btn block x-large dark color="primary" @click="check">
+        <v-btn block x-large dark color="rgb(80, 130, 155)" @click="check">
           <v-icon>mdi-pencil</v-icon>확인
         </v-btn>
 

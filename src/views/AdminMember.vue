@@ -22,6 +22,7 @@
 
               <!-- 검색 -->
               <v-text-field
+                color="rgb(80, 130, 155)"
                 v-model="search"
                 append-icon="mdi-magnify"
                 label="Search"
@@ -35,7 +36,7 @@
               <!-- 회원 추가 버튼 + 다이얼로그 -->
               <v-dialog v-model="dialog" max-width="500px">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">회원 추가</v-btn>
+                  <v-btn color="rgb(80, 130, 155)" dark class="mb-2" v-bind="attrs" v-on="on">회원 추가</v-btn>
                 </template>
                 <v-card>
                   <v-card-title>
@@ -49,6 +50,7 @@
                         <!-- 학번 -->
                         <v-col cols="12">
                           <v-text-field
+                            color="rgb(80, 130, 155)"
                             type="number"
                             v-model="editedItem._id"
                             label="학번"
@@ -61,7 +63,11 @@
 
                         <!-- 이름 -->
                         <v-col cols="12">
-                          <v-text-field v-model="editedItem.name" label="이름"></v-text-field>
+                          <v-text-field
+                            color="rgb(80, 130, 155)"
+                            v-model="editedItem.name"
+                            label="이름"
+                          ></v-text-field>
                         </v-col>
 
                         <!-- 이건 기존 전화번호 입력 방식
@@ -78,6 +84,7 @@
                         <!--맨앞 3자리 -->
                         <v-col cols="3">
                           <v-text-field
+                            color="rgb(80, 130, 155)"
                             v-model="phonenum[0]"
                             label="전화번호"
                             type="number"
@@ -96,6 +103,7 @@
                         <!--가운데 4자리 -->
                         <v-col cols="3">
                           <v-text-field
+                            color="rgb(80, 130, 155)"
                             v-model="phonenum[1]"
                             label="전화번호"
                             type="number"
@@ -114,6 +122,7 @@
                         <!--마지막 4자리 -->
                         <v-col cols="3">
                           <v-text-field
+                            color="rgb(80, 130, 155)"
                             v-model="phonenum[2]"
                             label="전화번호"
                             type="number"
@@ -129,8 +138,8 @@
 
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="close">취소</v-btn>
-                    <v-btn color="blue darken-1" text @click="save">확인</v-btn>
+                    <v-btn color="rgb(80, 130, 155)" text @click="close">취소</v-btn>
+                    <v-btn color="rgb(80, 130, 155)" text @click="save">확인</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -295,8 +304,8 @@ export default {
         })
         .catch((err) => {
           if (err.response.status === 401) {
-              alert("세션이 만료되어 홈 화면으로 이동합니다.");
-              this.setLogout();
+            alert("세션이 만료되어 홈 화면으로 이동합니다.");
+            this.setLogout();
           }
         });
     },
@@ -318,24 +327,21 @@ export default {
         .then((res) => {
           if (res.status === 200) {
             console.log(res);
-            
+
             alert("수정완료");
-            
           } else {
             console.log(res);
-            
           }
         })
         .catch((err) => {
           if (err.response.status === 401) {
-              alert("세션이 만료되어 홈 화면으로 이동합니다.");
-              this.setLogout();
+            alert("세션이 만료되어 홈 화면으로 이동합니다.");
+            this.setLogout();
           }
         });
     },
     //추가 post
     addData(adddata) {
-      
       let config = {
         headers: {
           token: sessionStorage.getItem("token"),
@@ -350,26 +356,25 @@ export default {
       this.axios
         .post(`${ipObj.ip}/api/student/input`, data, config)
         .then((res) => {
+          console.log("post!");
           if (res.ststus === 200) {
             console.log(res);
             this.canAdd = true;
             alert("추가완료");
-            
+            this.$router.go();
           }
         })
         .catch((err) => {
           console.log(err);
 
           if (err.response.status === 401) {
-              alert("세션이 만료되어 홈 화면으로 이동합니다.");
-              this.setLogout();
+            alert("세션이 만료되어 홈 화면으로 이동합니다.");
+            this.setLogout();
           }
 
           alert("[에러]중복데이터 존재");
           this.canAdd = false;
           this.student.pop();
-
-
         });
     },
     //삭제 delete
@@ -388,6 +393,7 @@ export default {
         .then((res) => {
           if (res.status === 200) {
             console.log(res);
+            // this.$router.go();
           } else {
             console.log(res);
           }
@@ -395,8 +401,8 @@ export default {
         .catch((err) => {
           console.log(err);
           if (err.response.status === 401) {
-              alert("세션이 만료되어 홈 화면으로 이동합니다.");
-              this.setLogout();
+            alert("세션이 만료되어 홈 화면으로 이동합니다.");
+            this.setLogout();
           }
         });
     },
@@ -434,7 +440,6 @@ export default {
 
       //전화번호를 '-' 로 잘라서 각 배열에 저장.
       this.phonenum = this.editedItem.phoneNum.split("-");
-
 
       this.dialog = true;
     },

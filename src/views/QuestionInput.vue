@@ -13,13 +13,14 @@
                 <v-alert outlined color="#365164">
                   <v-row>
                     <v-col>
-                      <v-text-field label="질문 제목" v-model="title" />
+                      <v-text-field color="rgb(80,130,155)" label="질문 제목" v-model="title" />
                     </v-col>
                   </v-row>
 
                   <v-row>
                     <v-col cols="12">
                       <v-textarea
+                        color="rgb(80,130,155)"
                         v-model="contents"
                         outlined
                         no-resize
@@ -36,7 +37,7 @@
                         v-model="files"
                         :roles="rules"
                         accept="image/*"
-                        color="deep-purple accent-4"
+                        color="rgb(80,130,155)"
                         counter
                         label="사진 추가"
                         placeholder="사진을 추가하려면 여기를 클릭하세요"
