@@ -335,11 +335,23 @@ export default {
           form.append("students", this.members);
         }
         form.append("contents", this.contents);
+
+        // link 삽입 시 http 추가
+        if (this.link.substring(0, 4) !== "http") {
+          this.link = "http://" + this.link;
+        }
+
         form.append("link", this.link);
         form.append("projectStartDate", this.startDate);
         form.append("projectEndDate", this.endDate);
         form.append("projectTeamName", this.teamName);
         form.append("teamLeaderCode", this.teamLeader);
+
+        // git 삽입 시 http 추가
+        if (this.git.substring(0, 4) !== "http") {
+          this.git = "http://" + this.git;
+        }
+
         form.append("git", this.git);
         if (this.files != null) {
           for (let i = 0; i < this.files.length; i++) {

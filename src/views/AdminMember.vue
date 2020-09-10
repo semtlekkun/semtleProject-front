@@ -356,17 +356,13 @@ export default {
       this.axios
         .post(`${ipObj.ip}/api/student/input`, data, config)
         .then((res) => {
-          console.log("post!");
-          if (res.ststus === 200) {
-            console.log(res);
+          if (res.status === 200) {
             this.canAdd = true;
             alert("추가완료");
             this.$router.go();
           }
         })
         .catch((err) => {
-          console.log(err);
-
           if (err.response.status === 401) {
             alert("세션이 만료되어 홈 화면으로 이동합니다.");
             this.setLogout();
