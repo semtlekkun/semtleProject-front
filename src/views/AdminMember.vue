@@ -5,7 +5,6 @@
         <!-- :items="student" = 테이블 내용을 student(배열)로 채움. -->
         <v-data-table
           item-key="_id"
-          show-select
           v-model="selected"
           :headers="headers"
           :items="student"
