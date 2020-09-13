@@ -2,10 +2,10 @@
   <div id="members">
     <v-container class="text-center">
       <div v-for="(cadre,i) in CadreList" :key="i">
-        <div v-if="cadre[1][0].length !== 0">
-          <h1 class="text-left my-5">{{cadre[0]}}년 1학기</h1>
+        <div v-if="cadre[1][1].length !== 0">
+          <h1 class="text-left my-5">{{cadre[0]}}년 2학기</h1>
           <v-row>
-            <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,j) in cadre[1][0]" :key="j">
+            <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,k) in cadre[1][1]" :key="k">
               <v-card class="pa-10">
                 <v-img :src="imageURL+member.image" min-height="250px" max-height="250px" />
                 <p class="position">{{member.language}}{{member.position}}</p>
@@ -17,10 +17,10 @@
           </v-row>
           <v-divider class="my-10"></v-divider>
         </div>
-        <div v-if="cadre[1][1].length !== 0">
-          <h1 class="text-left my-5">{{cadre[0]}}년 2학기</h1>
+        <div v-if="cadre[1][0].length !== 0">
+          <h1 class="text-left my-5">{{cadre[0]}}년 1학기</h1>
           <v-row>
-            <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,k) in cadre[1][1]" :key="k">
+            <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,j) in cadre[1][0]" :key="j">
               <v-card class="pa-10">
                 <v-img :src="imageURL+member.image" min-height="250px" max-height="250px" />
                 <p class="position">{{member.language}}{{member.position}}</p>
@@ -85,7 +85,11 @@ export default {
                 }
               }
             }
+            this.CadreList.sort(function (a, b) {
+              return b[0] - a[0];
+            });
           });
+          console.log(this.CadreList);
         })
         .catch((error) => {
           console.log(error);
