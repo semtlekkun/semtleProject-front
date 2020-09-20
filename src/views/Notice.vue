@@ -39,7 +39,7 @@
                     <v-card-text style="color: #000;">
                       <vue-markdown :source="contents" class="ml-2"></vue-markdown>
                     </v-card-text>
-                    <v-card-text>
+                    <v-card-text v-if="isImage">
                       <div id="imageContainer">
                         <img :src="imageUrl" width="100%;" />
                       </div>
@@ -67,8 +67,6 @@ export default {
     this.axios
       .get(`${ipObj.ip}/api/notice/${this.noticeID}`)
       .then((res) => {
-        console.log(res);
-
         if (res.status === 200) {
           this.title = res.data.notice.title;
           this.writer = res.data.notice.writer;
@@ -78,7 +76,12 @@ export default {
           this.imageUrl = `${ipObj.ip}/api/notice/images/`.concat(
             res.data.notice.image
           );
-          // 이미지도 추가
+          if (
+            this.imageUrl ===
+            "http://sbmi.iptime.org:3000/api/notice/images/null"
+          ) {
+            this.isImage = false;
+          }
         }
       })
       .catch((err) => {
@@ -99,6 +102,8 @@ export default {
       title: "📌공지사항",
       contents: "셈틀꾼의 공지사항을 올리는 공간입니다.",
     },
+
+    isImage: true,
   }),
 
   components: {
