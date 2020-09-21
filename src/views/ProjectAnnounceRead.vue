@@ -56,7 +56,8 @@
                         >모집인원</v-col>
                         <v-col cols="8" xs="8" sm="9" md="10" class="text-left">{{recruitment}}</v-col>
                       </v-row>
-                      <vue-markdown :source="content" class="mt-10 ml-2"></vue-markdown>
+                      <br />
+                      {{content}}
                     </v-card-text>
                   </v-alert>
                 </v-card>
@@ -71,7 +72,6 @@
 
 <script>
 import ipObj from "../key";
-import VueMarkdown from "vue-markdown";
 import SubTitle from "../components/SubTitle.vue";
 
 export default {
@@ -114,7 +114,6 @@ export default {
   }),
 
   components: {
-    VueMarkdown,
     SubTitle,
   },
   methods: {

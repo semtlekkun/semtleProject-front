@@ -114,8 +114,8 @@
                           <a :href="link" target="_blank" style="color:#50829b">링크 바로가기</a>
                         </v-col>
                       </v-row>
-
-                      <VueMarkdown :source="contents" class="mt-10 ml-2"></VueMarkdown>
+                      <br />
+                      {{contents}}
                     </v-card-text>
                     <!-- 
 
@@ -148,7 +148,6 @@
 
 <script>
 import ipObj from "../key";
-import VueMarkdown from "vue-markdown";
 import SubTitle from "../components/SubTitle.vue";
 
 export default {
@@ -176,12 +175,10 @@ export default {
       })
 
       .catch((err) => {
-        // handle error
         console.log(err);
       });
   },
   components: {
-    VueMarkdown,
     SubTitle,
   },
   data() {
@@ -210,7 +207,6 @@ export default {
     };
   },
   methods: {
-
     deleteProject() {
       let result = confirm("정말로 삭제하시겠습니까?");
       if (result) {

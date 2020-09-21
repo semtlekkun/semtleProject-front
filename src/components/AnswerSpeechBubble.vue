@@ -4,9 +4,7 @@
       <tr>
         <td class="time" style="font-size:12px;">{{comments.time}}</td>
         <td>
-          <div :class="`rounded-lg`" class="AnswerBubble pa-6">
-            <VueMarkdown :source="comments.comment"></VueMarkdown>
-          </div>
+          <div :class="`rounded-lg`" class="AnswerBubble pa-6">{{comments.comment}}</div>
         </td>
         <td width="120px" style="text-align-last: center; vertical-align:top;">
           <div class="userInfo">
@@ -24,16 +22,13 @@
 <script>
 import ipObj from "../key";
 
-import VueMarkdown from "vue-markdown"; //markdown import
 export default {
   data() {
     return {
       writerURL: `${ipObj.ip}/api/student/images/` + this.comments.image,
     };
   },
-  components: {
-    VueMarkdown,
-  },
+
   props: {
     comments: {
       type: Object,

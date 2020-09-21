@@ -36,9 +36,7 @@
                         {{views}}
                       </li>
                     </ul>
-                    <v-card-text style="color: #000;">
-                      <vue-markdown :source="contents" class="ml-2"></vue-markdown>
-                    </v-card-text>
+                    <v-card-text style="color: #000;">{{contents}}</v-card-text>
                     <v-card-text>
                       <div id="imageContainer">
                         <img :src="imageUrl" width="100%;" />
@@ -57,7 +55,6 @@
 
 <script>
 import ipObj from "../key";
-import VueMarkdown from "vue-markdown";
 import SubTitle from "../components/SubTitle.vue";
 
 export default {
@@ -102,7 +99,6 @@ export default {
   }),
 
   components: {
-    VueMarkdown,
     SubTitle,
   },
   methods: {
