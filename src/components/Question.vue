@@ -25,8 +25,8 @@
     </table>
     <hr />
     <br />
-    <VueMarkdown :source="Question.question"></VueMarkdown>
 
+    {{Question.question}}
     <v-img
       v-if="Question.imageURL!==`${ipRouter}/api/question/images/null`"
       :src="Question.imageURL"
@@ -40,7 +40,6 @@
 
 <script>
 import ipObj from "../key";
-import VueMarkdown from "vue-markdown";
 import { mapMutations } from "vuex";
 
 export default {
@@ -58,14 +57,11 @@ export default {
       QID: "",
     };
   },
-  created(){
+  created() {
     this.QID = this.$route.params.id;
   },
   mounted() {
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
-  },
-  components: {
-    VueMarkdown,
   },
 
   methods: {
@@ -88,9 +84,9 @@ export default {
             }
           })
           .catch((err) => {
-              if (err.response.status === 401) {
-                alert("세션이 만료되어 홈 화면으로 이동합니다.");
-                this.setLogout();
+            if (err.response.status === 401) {
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
             }
           });
       }
