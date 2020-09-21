@@ -11,7 +11,9 @@
           </div>
         </td>
         <td>
-          <div :class="`rounded-lg`" class="QuestionBubble pa-6">{{comments.comment}}</div>
+          <div :class="`rounded-lg`" class="QuestionBubble pa-6">
+            <VueMarkdown :source="comments.comment"></VueMarkdown>
+          </div>
         </td>
         <td class="time" style="font-size:12px;">{{comments.time}}</td>
       </tr>
@@ -21,12 +23,17 @@
 
 <script>
 import ipObj from "../key";
+import VueMarkdown from "vue-markdown";
 export default {
   name: "QuestionSpeechBubble",
   data() {
     return {
       writerURL: `${ipObj.ip}/api/student/images/` + this.comments.image,
     };
+  },
+
+  components: {
+    VueMarkdown,
   },
 
   props: {

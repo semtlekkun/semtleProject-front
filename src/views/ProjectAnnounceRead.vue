@@ -56,8 +56,7 @@
                         >모집인원</v-col>
                         <v-col cols="8" xs="8" sm="9" md="10" class="text-left">{{recruitment}}</v-col>
                       </v-row>
-                      <br />
-                      {{content}}
+                      <VueMarkdown :source="content" class="mt-10 ml-2"></VueMarkdown>
                     </v-card-text>
                   </v-alert>
                 </v-card>
@@ -73,6 +72,7 @@
 <script>
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
+import VueMarkdown from "vue-markdown";
 
 export default {
   created() {
@@ -96,6 +96,7 @@ export default {
         console.log(err);
       });
   },
+
   data: () => ({
     admin: false,
     projectAnnounceID: "",
@@ -115,6 +116,7 @@ export default {
 
   components: {
     SubTitle,
+    VueMarkdown,
   },
   methods: {
     deleteAnnounce() {
@@ -156,5 +158,12 @@ export default {
   list-style: none;
   display: inline;
   margin-right: 10px;
+}
+.v-alert__content {
+  max-width: 100% !important;
+}
+pre,
+code {
+  white-space: pre-wrap !important;
 }
 </style>

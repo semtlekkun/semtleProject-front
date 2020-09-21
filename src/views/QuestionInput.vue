@@ -69,7 +69,6 @@ import SubTitle from "../components/SubTitle.vue";
 import { mapMutations } from "vuex";
 export default {
   components: {
-    // VueMarkdown
     SubTitle,
   },
   data() {

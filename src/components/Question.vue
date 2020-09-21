@@ -25,8 +25,7 @@
     </table>
     <hr />
     <br />
-
-    {{Question.question}}
+    <VueMarkdown :source="Question.question"></VueMarkdown>
     <v-img
       v-if="Question.imageURL!==`${ipRouter}/api/question/images/null`"
       :src="Question.imageURL"
@@ -41,6 +40,7 @@
 <script>
 import ipObj from "../key";
 import { mapMutations } from "vuex";
+import VueMarkdown from "vue-markdown";
 
 export default {
   props: {
@@ -48,6 +48,9 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  components: {
+    VueMarkdown,
   },
   data() {
     return {
@@ -99,5 +102,12 @@ export default {
 <style scoped>
 img {
   margin-top: 10px;
+}
+.v-alert__content {
+  max-width: 100% !important;
+}
+pre,
+code {
+  white-space: pre-wrap !important;
 }
 </style>

@@ -175,11 +175,8 @@
 <script>
 import ipObj from "../key";
 import { mapMutations } from "vuex";
-//import VueMarkdown from 'vue-markdown';
+
 export default {
-  components: {
-    //VueMarkdown
-  },
   data: () => ({
     //여기에 이미지 받아서 더해서 출력
     imageSrc: `${ipObj.ip}/api/student/images/`,

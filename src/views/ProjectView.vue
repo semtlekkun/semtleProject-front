@@ -114,8 +114,7 @@
                           <a :href="link" target="_blank" style="color:#50829b">링크 바로가기</a>
                         </v-col>
                       </v-row>
-                      <br />
-                      {{contents}}
+                      <VueMarkdown :source="contents" class="mt-10 ml-2"></VueMarkdown>
                     </v-card-text>
                     <!-- 
 
@@ -149,6 +148,7 @@
 <script>
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
+import VueMarkdown from "vue-markdown";
 
 export default {
   created() {
@@ -179,6 +179,7 @@ export default {
       });
   },
   components: {
+    VueMarkdown,
     SubTitle,
   },
   data() {
@@ -259,5 +260,13 @@ export default {
   list-style: none;
   display: inline;
   margin-right: 10px;
+}
+
+.v-alert__content {
+  max-width: 100% !important;
+}
+pre,
+code {
+  white-space: pre-wrap !important;
 }
 </style>
