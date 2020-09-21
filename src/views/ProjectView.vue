@@ -89,7 +89,7 @@
                         >{{startDate}} ~ {{endDate}}</v-col>
                       </v-row>
 
-                      <v-row v-if="git !=''" class="my-2 mx-1">
+                      <v-row v-if="git !='http://'" class="my-2 mx-1">
                         <v-col
                           cols="4"
                           xs="4"
@@ -102,7 +102,7 @@
                         </v-col>
                       </v-row>
 
-                      <v-row v-if="link !=''" class="my-2 mx-1">
+                      <v-row v-if="link !='http://'" class="my-2 mx-1">
                         <v-col
                           cols="4"
                           xs="4"
