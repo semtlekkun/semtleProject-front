@@ -142,4 +142,11 @@ export default {
   display: inline;
   margin-right: 10px;
 }
+.v-alert__content {
+  max-width: 100% !important;
+}
+pre,
+code {
+  white-space: pre-wrap !important;
+}
 </style>
