@@ -7,7 +7,14 @@
           <v-row>
             <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,k) in cadre[1][1]" :key="k">
               <v-card class="pa-10">
-                <v-img :src="imageURL+member.image" min-height="250px" max-height="250px" />
+                <v-row justify="center">
+                  <v-img
+                    :src="imageURL+member.image"
+                    min-height="250px"
+                    max-height="250px"
+                    max-width="250px"
+                  />
+                </v-row>
                 <p class="position">{{member.language}}{{member.position}}</p>
                 <p class="number">{{member.studentCode}}</p>
                 <p class="name">{{member.name}}</p>
@@ -22,7 +29,15 @@
           <v-row>
             <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,j) in cadre[1][0]" :key="j">
               <v-card class="pa-10">
-                <v-img :src="imageURL+member.image" min-height="250px" max-height="250px" />
+                <v-row justify="center">
+                  <v-img
+                    :src="imageURL+member.image"
+                    min-height="250px"
+                    max-height="250px"
+                    max-width="250px"
+                  />
+                </v-row>
+
                 <p class="position">{{member.language}}{{member.position}}</p>
                 <p class="number">{{member.studentCode}}</p>
                 <p class="name">{{member.name}}</p>
@@ -126,5 +141,8 @@ p {
 }
 .contents {
   color: #727272 !important;
+}
+.v-img {
+  margin: 0 auto !important;
 }
 </style>
