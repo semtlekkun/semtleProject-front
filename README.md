@@ -23,7 +23,3 @@
 * 18 전하영
 * 20 김혜진
 * 20 박수현
-
-
-
-![mainLogo](C:\Users\gunWoong\Documents\C_semtleProject-front\src\assets\mainLogo.png)
