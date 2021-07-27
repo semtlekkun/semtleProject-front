@@ -1,47 +1,65 @@
 <template>
   <div id="members">
     <v-container class="text-center">
-      <div v-for="(cadre,i) in CadreList" :key="i">
+      <div v-for="(cadre, i) in CadreList" :key="i">
         <div v-if="cadre[1][1].length !== 0">
-          <h1 class="text-left my-5">{{cadre[0]}}년 2학기</h1>
+          <h1 class="text-left my-5">{{ cadre[0] }}년 2학기</h1>
           <v-row>
-            <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,k) in cadre[1][1]" :key="k">
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+              lg="3"
+              v-for="(member, k) in cadre[1][1]"
+              :key="k"
+            >
               <v-card class="pa-10">
                 <v-row justify="center">
                   <v-img
-                    :src="imageURL+member.image"
+                    :src="imageURL + member.image"
                     min-height="250px"
                     max-height="250px"
                     max-width="250px"
                   />
                 </v-row>
-                <p class="position">{{member.language}}{{member.position}}</p>
-                <p class="number">{{member.studentCode}}</p>
-                <p class="name">{{member.name}}</p>
-                <p class="contents">{{member.contents}}</p>
+                <p class="position">
+                  {{ member.language }}{{ member.position }}
+                </p>
+                <p class="number">{{ member.studentCode }}</p>
+                <p class="name">{{ member.name }}</p>
+                <p class="contents">{{ member.contents }}</p>
               </v-card>
             </v-col>
           </v-row>
           <v-divider class="my-10"></v-divider>
         </div>
         <div v-if="cadre[1][0].length !== 0">
-          <h1 class="text-left my-5">{{cadre[0]}}년 1학기</h1>
+          <h1 class="text-left my-5">{{ cadre[0] }}년 1학기</h1>
           <v-row>
-            <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,j) in cadre[1][0]" :key="j">
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+              lg="3"
+              v-for="(member, j) in cadre[1][0]"
+              :key="j"
+            >
               <v-card class="pa-10">
                 <v-row justify="center">
                   <v-img
-                    :src="imageURL+member.image"
+                    :src="imageURL + member.image"
                     min-height="250px"
                     max-height="250px"
                     max-width="250px"
                   />
                 </v-row>
 
-                <p class="position">{{member.language}}{{member.position}}</p>
-                <p class="number">{{member.studentCode}}</p>
-                <p class="name">{{member.name}}</p>
-                <p class="contents">{{member.contents}}</p>
+                <p class="position">
+                  {{ member.language }}{{ member.position }}
+                </p>
+                <p class="number">{{ member.studentCode }}</p>
+                <p class="name">{{ member.name }}</p>
+                <p class="contents">{{ member.contents }}</p>
               </v-card>
             </v-col>
           </v-row>
