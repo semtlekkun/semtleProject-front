@@ -108,13 +108,13 @@ export default {
 </script>
 
 <style>
-tbody > tr{
+tbody > tr {
   cursor: pointer;
 }
 .v-data-footer__select {
   display: none !important;
 }
-.v-data-footer{
+.v-data-footer {
   border-bottom: solid 2px;
   border-color: #a6bbc5;
 }
