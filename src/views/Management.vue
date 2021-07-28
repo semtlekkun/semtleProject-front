@@ -76,7 +76,68 @@ import axios from "axios";
 export default {
   data() {
     return {
-      CadreList: [],
+      CadreList: [
+        // 각 리스트에는 [0]year-Number, [1]1학기(여름학기)-list, [2]2학기(겨울학기)-list 가 담긴다
+        [2017,
+          [ {position: "회장", name: "김제덕귀요미"},
+            {position: "부회장", name: "코리아화이팅"},
+            {position: "멘토", subject: "양궁", name: "김제덕"},
+            {position: "멘토", subject: "양궁", name: "안산"}
+          ], 
+          [ {position: "회장", name: "나는회장"},
+            {position: "부회장", name: "나는부회장"},
+            {position: "멘토", subject: "주세요", name: "달콤한"},
+            {position: "멘토", subject: "그맛", name: "아이스크림"}
+          ]
+        ],
+        [2018,
+          [ {position: "회장", name: "기기기"},
+            {position: "부회장", name: "니니니"},
+            {position: "멘토", subject: "뿌슝", name: "디디디"},
+            {position: "멘토", subject: "빠슝", name: "리리리"}
+          ], 
+          [ {position: "회장", name: "기기기"},
+            {position: "부회장", name: "디디디"},
+            {position: "멘토", subject: "뽀슝", name: "리리리"},
+            {position: "멘토", subject: "삐슝", name: "미미미"}
+          ]
+        ],
+        [2019, 
+          [ {position: "회장", name: "가가가"},
+            {position: "부회장", name: "나나나"},
+            {position: "멘토", subject: "파이썬", name: "다다다"},
+            {position: "멘토", subject: "자바", name: "라라라"}
+          ], 
+          [ {position: "회장", name: "가가가"},
+            {position: "부회장", name: "나나나"},
+            {position: "멘토", subject: "C언어", name: "마마마"},
+            {position: "멘토", subject: "리눅스", name: "바바바"}
+          ]
+        ],
+        [2020, 
+          [
+            {position: "회장", name: "거거거"},
+            {position: "부회장", name: "너너너"},
+            {position: "멘토", subject: "웹", name: "더더더"},
+            {position: "멘토", subject: "운영체제", name: "러러러"}
+          ], 
+          [
+            {position: "회장", name: "거거거"},
+            {position: "부회장", name: "너너너"},
+            {position: "멘토", subject: "딥러닝", name: "머머머"},
+            {position: "멘토", subject: "보안", name: "버버버"}
+          ]
+        ],
+        [2021, 
+          [
+            {position: "회장", name: "고고고"},
+            {position: "부회장", name: "노노노"},
+            {position: "멘토", subject: "자바스크립트", name: "도도도"},
+            {position: "멘토", subject: "자료구조", name: "라라라"}
+          ], 
+          [] // 2021-2 Empty
+        ]
+      ], // END CadreList
       imageURL: `${ipObj.ip}/api/student/images/`,
     };
   },
