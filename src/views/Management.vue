@@ -77,65 +77,60 @@ export default {
   data() {
     return {
       CadreList: [
-        // 각 리스트에는 [0]year-Number, [1]1학기(여름학기)-list, [2]2학기(겨울학기)-list 가 담긴다
+        // 각 리스트에는 [0]:year-Number, [1]:[1학기(여름학기)-list, [2]2학기(겨울학기)-list] 가 담긴다
         [2017,
-          [ {position: "회장", name: "김제덕귀요미"},
-            {position: "부회장", name: "코리아화이팅"},
-            {position: "멘토", subject: "양궁", name: "김제덕"},
-            {position: "멘토", subject: "양궁", name: "안산"}
-          ], 
-          [ {position: "회장", name: "나는회장"},
-            {position: "부회장", name: "나는부회장"},
-            {position: "멘토", subject: "주세요", name: "달콤한"},
-            {position: "멘토", subject: "그맛", name: "아이스크림"}
+          [ 
+            [ {position: "회장", studentCode: 20170000, name: "바보", contents: "바보아니다"},
+              {position: "부회장", studentCode: 20171111, name: "올림픽", contents: "코리아화이팅"},
+              {position: "멘토", studentCode: 20172222, language: "양궁", name: "김제덕", contents: "코리아화이팅"},
+              {position: "멘토", studentCode: 20173333, language: "양궁", name: "안산", contents: "안산을 안산시홍보대사로"} ], 
+            [ {position: "회장", studentCode: 20170000, name: "바보", contents: "바보아니다"},
+              {position: "부회장", studentCode: 20171111, name: "올림픽", contents: "코리아화이팅"} ]
           ]
         ],
         [2018,
-          [ {position: "회장", name: "기기기"},
-            {position: "부회장", name: "니니니"},
-            {position: "멘토", subject: "뿌슝", name: "디디디"},
-            {position: "멘토", subject: "빠슝", name: "리리리"}
-          ], 
-          [ {position: "회장", name: "기기기"},
-            {position: "부회장", name: "디디디"},
-            {position: "멘토", subject: "뽀슝", name: "리리리"},
-            {position: "멘토", subject: "삐슝", name: "미미미"}
+          [
+            [ {position: "회장", studentCode: 20180000, name: "기기기", contents: "기기기가 회장"},
+              {position: "부회장", studentCode: 20181111, name: "디디디", contents: "디디디가 부회장"},
+              {position: "멘토", studentCode: 20182222, language: "악", name: "니니니", contents: "힘들다"},
+              {position: "멘토", studentCode: 20183333, language: "옥", name: "리리리", contents: "난안힌듬데"} ], 
+            [ {position: "회장", studentCode: 20180000, name: "기기기", contents: "기기기가 회장"},
+              {position: "부회장", studentCode: 20181111, name: "디디디", contents: "디디디가 부회장"},
+              {position: "멘토", studentCode: 20184444, language: "익", name: "미미미", contents: "휴"},
+              {position: "멘토", studentCode: 20183333, language: "윽", name: "리리리", contents: "하"} ]
           ]
         ],
         [2019, 
-          [ {position: "회장", name: "가가가"},
-            {position: "부회장", name: "나나나"},
-            {position: "멘토", subject: "파이썬", name: "다다다"},
-            {position: "멘토", subject: "자바", name: "라라라"}
-          ], 
-          [ {position: "회장", name: "가가가"},
-            {position: "부회장", name: "나나나"},
-            {position: "멘토", subject: "C언어", name: "마마마"},
-            {position: "멘토", subject: "리눅스", name: "바바바"}
+          [
+            [ {position: "회장", studentCode: 20190000, name: "가가가", contents: "내가 회장"},
+              {position: "부회장", studentCode: 20191111, name: "나나나", contents: "내가 부회장"},
+              {position: "멘토", studentCode: 20194444, language: "파이썬", name: "다다다", contents: "최고의 멘토"},
+              {position: "멘토", studentCode: 20193333, language: "자바", name: "라라라", contents: "최고의 멘토"} ], 
+            [ {position: "회장", studentCode: 20190000, name: "가가가", contents: "내가 회장"},
+              {position: "부회장", studentCode: 20191111, name: "나나나", contents: "내가 부회장"},
+              {position: "멘토", studentCode: 20195555, language: "C언어", name: "마마마", contents: "최고의 멘토"},
+              {position: "멘토", studentCode: 20196666, language: "리눅스", name: "바바바", contents: "최고의 멘토"} ]
           ]
         ],
         [2020, 
           [
-            {position: "회장", name: "거거거"},
-            {position: "부회장", name: "너너너"},
-            {position: "멘토", subject: "웹", name: "더더더"},
-            {position: "멘토", subject: "운영체제", name: "러러러"}
-          ], 
-          [
-            {position: "회장", name: "거거거"},
-            {position: "부회장", name: "너너너"},
-            {position: "멘토", subject: "딥러닝", name: "머머머"},
-            {position: "멘토", subject: "보안", name: "버버버"}
+            [ {position: "회장", studentCode: 20200000, name: "거거거", contents: "내가 회장"},
+              {position: "부회장", studentCode: 20201111, name: "너너너", contents: "내가 부회장"},
+              {position: "멘토", studentCode: 20203333, language: "웹", name: "더더더", contents: "최고의 멘토"},
+              {position: "멘토", studentCode: 20204444, language: "운체", name: "러러러", contents: "최고의 멘토"} ], 
+            [ {position: "회장", studentCode: 20200000, name: "거거거", contents: "내가 회장"},
+              {position: "부회장", studentCode: 20201111, name: "너너너", contents: "내가 부회장"},
+              {position: "멘토", studentCode: 20205555, language: "딥러닝", name: "머머머", contents: "최고의 멘토"} ]
           ]
         ],
         [2021, 
           [
-            {position: "회장", name: "고고고"},
-            {position: "부회장", name: "노노노"},
-            {position: "멘토", subject: "자바스크립트", name: "도도도"},
-            {position: "멘토", subject: "자료구조", name: "라라라"}
-          ], 
-          [] // 2021-2 Empty
+            [ {position: "회장", studentCode: 20210000, name: "고고고", contents: "내가 회장"},
+              {position: "부회장", studentCode: 20211111, name: "노노노", contents: "내가 부회장"},
+              {position: "멘토", studentCode: 20212222, language: "파이썬", name: "도도도", contents: "최고의 멘토"},
+              {position: "멘토", studentCode: 20213333, language: "자바스크립트", name: "로로로", contents: "최고의 멘토"} ], 
+            [] // 2021-2 Empty
+          ]
         ]
       ], // END CadreList
       imageURL: `${ipObj.ip}/api/student/images/`,
@@ -143,7 +138,7 @@ export default {
   },
 
   created() {
-    this.getData();
+    // this.getData();
   },
   methods: {
     getData() {
