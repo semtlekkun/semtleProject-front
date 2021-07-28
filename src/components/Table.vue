@@ -24,8 +24,19 @@
       :items="contents"
       :items-per-page="perPage"
       :search="search"
+      hide-default-footer
       @click:row="rowClick"
+      @page-count="pageCount = $event"
+      :page.sync="page"
     ></v-data-table>
+
+    <div class="text-center pt-2">
+      <v-pagination
+        v-model="page"
+        :length="pageCount"
+        color="#50829b"
+      ></v-pagination>
+    </div>
   </div>
 </template>
 
@@ -71,6 +82,8 @@ export default {
         },
       ],
       content: [],
+      page: 1,
+      pageCount: 0,
     };
   },
   methods: {
