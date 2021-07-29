@@ -111,17 +111,19 @@ export default {
             CopyCadreList.forEach((el, idx) => {
               if (el.activeYear === element.activeYear) {
                 if (element.season === "1학기 (여름학기)") {
-                  // if (element.position === "회장")
-                  //   this.CadreList[idx].firstManagers.unshift(element);
-                  // else if (element.position === "부회장")
-                  //   this.CadreList[idx].firstManagers.splice(1, 0, element);
-                  CopyCadreList[idx].firstManagers.push(element);
+                  if (
+                    element.position === "회장" ||
+                    element.position === "부회장"
+                  )
+                    CopyCadreList[idx].firstManagers.unshift(element);
+                  else CopyCadreList[idx].firstManagers.push(element);
                 } else {
-                  // if (element.position === "회장")
-                  //   this.CadreList[idx].secondManagers.splice(0, 0, element);
-                  // else if (element.position === "부회장")
-                  //   this.CadreList[idx].secondManagers.splice(1, 0, element);
-                  CopyCadreList[idx].secondManagers.push(element);
+                  if (
+                    element.position === "회장" ||
+                    element.position === "부회장"
+                  )
+                    CopyCadreList[idx].secondManagers.unshift(element);
+                  else CopyCadreList[idx].secondManagers.push(element);
                 }
               }
             });
@@ -132,39 +134,39 @@ export default {
             return b.activeYear - a.activeYear;
           });
 
-          // this.CadreList = CopyCadreList.map((el) => {
-          //   if (el.firstManagers.length !== 0) {
-          //     let findIdx = el.firstManagers.findIndex(
-          //       (x) => x.position === "회장"
-          //     );
-          //     let tmpObj = el.firstManagers[findIdx];
-          //     el.firstManagers.splice(findIdx, 1);
-          //     el.firstManagers.unshift(tmpObj);
+          CopyCadreList.forEach((el) => {
+            if (el.firstManagers.length !== 0) {
+              let chairManIdx = el.firstManagers.findIndex(
+                (x) => x.position === "회장"
+              );
+              let viceChairManIdx = el.firstManagers.findIndex(
+                (x) => x.position === "부회장"
+              );
 
-          //     findIdx = el.firstManagers.findIndex(
-          //       (x) => x.position === "부회장"
-          //     );
-          //     tmpObj = el.firstManagers[findIdx];
-          //     el.firstManagers.splice(findIdx, 1);
-          //     el.firstManagers.splice(1, 0, tmpObj);
-          //   }
-          //   if (el.secondManagers.length !== 0) {
-          //     console.log(el);
-          //     let findIdx = el.secondManagers.findIndex(
-          //       (x) => x.position === "회장"
-          //     );
-          //     let tmpObj = el.secondManagers[findIdx];
-          //     el.secondManagers.splice(findIdx, 1);
-          //     el.secondManagers.unshift(tmpObj);
+              if (chairManIdx > viceChairManIdx) {
+                let tmpObj = el.firstManagers[viceChairManIdx];
+                el.firstManagers[viceChairManIdx] =
+                  el.firstManagers[chairManIdx];
+                el.firstManagers[chairManIdx] = tmpObj;
+              }
+            }
 
-          //     findIdx = el.secondManagers.findIndex((x) => {
-          //       return x.position === "부회장";
-          //     });
-          //     tmpObj = el.secondManagers[findIdx];
-          //     el.secondManagers.splice(findIdx, 1);
-          //     el.secondManagers.splice(1, 0, tmpObj);
-          //   }
-          // });
+            if (el.secondManagers.length !== 0) {
+              let chairManIdx = el.secondManagers.findIndex(
+                (x) => x.position === "회장"
+              );
+              let viceChairManIdx = el.secondManagers.findIndex(
+                (x) => x.position === "부회장"
+              );
+
+              if (chairManIdx > viceChairManIdx) {
+                let tmpObj = el.secondManagers[viceChairManIdx];
+                el.secondManagers[viceChairManIdx] =
+                  el.secondManagers[chairManIdx];
+                el.secondManagers[chairManIdx] = tmpObj;
+              }
+            }
+          });
 
           this.CadreList = CopyCadreList;
         })
