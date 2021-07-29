@@ -283,6 +283,10 @@ export default {
         _id: this.editedItem._id,
       };
 
+      // 멘토에서 회장/부회장으로 변경하는 경우 언어 기본값으로 설정
+      if ((sendObj.position === "회장" || sendObj.position === "부회장") && sendObj.language) {
+        sendObj.language = this.defaultItem.language; 
+      }
 
       let config = {
         headers: { token: sessionStorage.getItem("token") },
@@ -300,8 +304,8 @@ export default {
           if (err.response.status === 400) {
             alert("유효하지 않은 학생입니다.");
           } else if (err.response.status === 401) {
-                          alert("세션이 만료되어 홈 화면으로 이동합니다.");
-              this.setLogout();
+            alert("세션이 만료되어 홈 화면으로 이동합니다.");
+            this.setLogout();
           } else if (err.response.status === 500) {
             alert("서버에 문제가 있습니다.");
           }
