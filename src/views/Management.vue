@@ -64,7 +64,8 @@
             </v-col>
           </v-row>
 
-          <v-divider class="my-10"></v-divider>
+          <v-divider v-if="i !== (CadreList.length-1)" class="my-10"></v-divider>
+          <v-row v-if="i === (CadreList.length-1)" class="my-10"></v-row>
         </div>
       </div>
     </v-container>
