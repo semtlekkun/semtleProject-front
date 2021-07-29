@@ -92,45 +92,81 @@ export default {
         .get(`${ipObj.ip}/api/management/list`)
         .then((res) => {
           let managementList = res.data.management;
+          let CopyCadreList = [];
+
           managementList.forEach((element) => {
             if (
-              this.CadreList.findIndex(
+              CopyCadreList.findIndex(
                 (el) => el.activeYear === element.activeYear
               ) < 0 ||
-              this.CadreList.length === 0
+              CopyCadreList.length === 0
             ) {
-              this.CadreList.push({
+              CopyCadreList.push({
                 activeYear: element.activeYear,
                 firstManagers: [],
                 secondManagers: [],
               });
             }
 
-            this.CadreList.forEach((el, idx) => {
-              console.log(el);
-              console.log(element);
+            CopyCadreList.forEach((el, idx) => {
               if (el.activeYear === element.activeYear) {
                 if (element.season === "1학기 (여름학기)") {
-                  if (element.position === "회장")
-                    this.CadreList[idx].firstManagers.splice(0, 0, element);
-                  else if (element.position === "부회장")
-                    this.CadreList[idx].firstManagers.splice(1, 0, element);
-                  else this.CadreList[idx].firstManagers.push(element);
+                  // if (element.position === "회장")
+                  //   this.CadreList[idx].firstManagers.unshift(element);
+                  // else if (element.position === "부회장")
+                  //   this.CadreList[idx].firstManagers.splice(1, 0, element);
+                  CopyCadreList[idx].firstManagers.push(element);
                 } else {
-                  if (element.position === "회장")
-                    this.CadreList[idx].secondManagers.splice(0, 0, element);
-                  else if (element.position === "부회장")
-                    this.CadreList[idx].secondManagers.splice(1, 0, element);
-                  else this.CadreList[idx].secondManagers.push(element);
+                  // if (element.position === "회장")
+                  //   this.CadreList[idx].secondManagers.splice(0, 0, element);
+                  // else if (element.position === "부회장")
+                  //   this.CadreList[idx].secondManagers.splice(1, 0, element);
+                  CopyCadreList[idx].secondManagers.push(element);
                 }
               }
             });
-
-            // 년도를 내림차순으로 정렬
-            this.CadreList.sort(function (a, b) {
-              return b.activeYear - a.activeYear;
-            });
           });
+
+          // 년도를 내림차순으로 정렬
+          CopyCadreList.sort(function (a, b) {
+            return b.activeYear - a.activeYear;
+          });
+
+          // this.CadreList = CopyCadreList.map((el) => {
+          //   if (el.firstManagers.length !== 0) {
+          //     let findIdx = el.firstManagers.findIndex(
+          //       (x) => x.position === "회장"
+          //     );
+          //     let tmpObj = el.firstManagers[findIdx];
+          //     el.firstManagers.splice(findIdx, 1);
+          //     el.firstManagers.unshift(tmpObj);
+
+          //     findIdx = el.firstManagers.findIndex(
+          //       (x) => x.position === "부회장"
+          //     );
+          //     tmpObj = el.firstManagers[findIdx];
+          //     el.firstManagers.splice(findIdx, 1);
+          //     el.firstManagers.splice(1, 0, tmpObj);
+          //   }
+          //   if (el.secondManagers.length !== 0) {
+          //     console.log(el);
+          //     let findIdx = el.secondManagers.findIndex(
+          //       (x) => x.position === "회장"
+          //     );
+          //     let tmpObj = el.secondManagers[findIdx];
+          //     el.secondManagers.splice(findIdx, 1);
+          //     el.secondManagers.unshift(tmpObj);
+
+          //     findIdx = el.secondManagers.findIndex((x) => {
+          //       return x.position === "부회장";
+          //     });
+          //     tmpObj = el.secondManagers[findIdx];
+          //     el.secondManagers.splice(findIdx, 1);
+          //     el.secondManagers.splice(1, 0, tmpObj);
+          //   }
+          // });
+
+          this.CadreList = CopyCadreList;
         })
         .catch((error) => {
           console.log(error);
