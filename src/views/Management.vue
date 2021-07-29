@@ -1,50 +1,69 @@
 <template>
   <div id="members">
     <v-container class="text-center">
-      <div v-for="(cadre,i) in CadreList" :key="i">
-        <div v-if="cadre[1][1].length !== 0">
-          <h1 class="text-left my-5">{{cadre[0]}}년 2학기</h1>
+      <div v-for="(cadre, i) in CadreList" :key="i">
+        <!-- 2학기에 간부들이 있다면 조건부로 렌더링 -->
+        <div v-if="cadre.secondManagers.length !== 0">
+          <h1 class="text-left my-5">{{ cadre.activeYear }}년 2학기</h1>
           <v-row>
-            <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,k) in cadre[1][1]" :key="k">
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+              lg="3"
+              v-for="(member, k) in cadre.secondManagers"
+              :key="k"
+            >
               <v-card class="pa-10">
                 <v-row justify="center">
                   <v-img
-                    :src="imageURL+member.image"
+                    :src="imageURL + member.image"
                     min-height="250px"
                     max-height="250px"
                     max-width="250px"
                   />
                 </v-row>
-                <p class="position">{{member.language}}{{member.position}}</p>
-                <p class="number">{{member.studentCode}}</p>
-                <p class="name">{{member.name}}</p>
-                <p class="contents">{{member.contents}}</p>
+                <p class="position">
+                  {{ member.language }}{{ member.position }}
+                </p>
+                <p class="number">{{ member.studentCode }}</p>
+                <p class="name">{{ member.name }}</p>
+                <p class="contents">{{ member.contents }}</p>
               </v-card>
             </v-col>
           </v-row>
-          <v-divider class="my-10"></v-divider>
         </div>
-        <div v-if="cadre[1][0].length !== 0">
-          <h1 class="text-left my-5">{{cadre[0]}}년 1학기</h1>
+
+        <div v-if="cadre.firstManagers.length !== 0">
+          <h1 class="text-left my-5">{{ cadre.activeYear }}년 1학기</h1>
           <v-row>
-            <v-col cols="12" sm="6" md="4" lg="3" v-for="(member,j) in cadre[1][0]" :key="j">
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+              lg="3"
+              v-for="(member, k) in cadre.firstManagers"
+              :key="k"
+            >
               <v-card class="pa-10">
                 <v-row justify="center">
                   <v-img
-                    :src="imageURL+member.image"
+                    :src="imageURL + member.image"
                     min-height="250px"
                     max-height="250px"
                     max-width="250px"
                   />
                 </v-row>
-
-                <p class="position">{{member.language}}{{member.position}}</p>
-                <p class="number">{{member.studentCode}}</p>
-                <p class="name">{{member.name}}</p>
-                <p class="contents">{{member.contents}}</p>
+                <p class="position">
+                  {{ member.language }}{{ member.position }}
+                </p>
+                <p class="number">{{ member.studentCode }}</p>
+                <p class="name">{{ member.name }}</p>
+                <p class="contents">{{ member.contents }}</p>
               </v-card>
             </v-col>
           </v-row>
+
           <v-divider class="my-10"></v-divider>
         </div>
       </div>
@@ -63,48 +82,112 @@ export default {
     };
   },
 
-  created() {
+  mounted() {
     this.getData();
   },
+
   methods: {
     getData() {
       axios
         .get(`${ipObj.ip}/api/management/list`)
         .then((res) => {
-          this.CadreList = [];
-          var managementList = res.data.management;
+          let managementList = res.data.management;
+          let CopyCadreList = [];
+
           managementList.forEach((element) => {
-            var flag = false;
-            if (this.CadreList.length === 0) {
-              if (element.season === "2학기 (겨울학기)") {
-                this.CadreList.push([element.activeYear, [[], [element]]]);
-              } else if (element.season === "1학기 (여름학기)") {
-                this.CadreList.push([element.activeYear, [[element], []]]);
-              }
-            } else {
-              for (let i = 0; i < this.CadreList.length; i++) {
-                if (this.CadreList[i][0] === element.activeYear) {
-                  if (element.season === "1학기 (여름학기)") {
-                    this.CadreList[i][1][0].push(element);
-                  } else if (element.season === "2학기 (겨울학기)") {
-                    this.CadreList[i][1][1].push(element);
-                  }
-                  flag = true;
-                }
-              }
-              if (flag === false) {
-                if (element.season === "2학기 (겨울학기)") {
-                  this.CadreList.push([element.activeYear, [[], [element]]]);
-                } else if (element.season === "1학기 (여름학기)") {
-                  this.CadreList.push([element.activeYear, [[element], []]]);
-                }
-              }
+            // 최초의 배열이 비어있을 경우 추가하는 과정
+            if (
+              CopyCadreList.findIndex(
+                (el) => el.activeYear === element.activeYear
+              ) < 0 ||
+              CopyCadreList.length === 0
+            ) {
+              // 유심히 봐둬야 할 구조
+              CopyCadreList.push({
+                activeYear: element.activeYear,
+                firstManagers: [],
+                secondManagers: [],
+              });
             }
-            this.CadreList.sort(function (a, b) {
-              return b[0] - a[0];
+
+            // 학생 객체 삽입
+            CopyCadreList.forEach((el, idx) => {
+              if (el.activeYear === element.activeYear) {
+                if (element.season === "1학기 (여름학기)")
+                  CopyCadreList[idx].firstManagers.push(element);
+                else CopyCadreList[idx].secondManagers.push(element);
+              }
             });
           });
-          console.log(this.CadreList);
+
+          // 년도를 내림차순으로 정렬
+          CopyCadreList.sort(function (a, b) {
+            return b.activeYear - a.activeYear;
+          });
+
+          CopyCadreList.forEach((el) => {
+            if (el.firstManagers.length !== 0) {
+              // 학번순 정렬
+              el.firstManagers.sort((a, b) => {
+                return Number(a["studentCode"]) - Number(b["studentCode"]);
+              });
+
+              // 부회장, 회장에 해당하는 학생의 객체를 변수에 받아놓음
+              let viceChairMan =
+                el.firstManagers[
+                  el.firstManagers.findIndex((x) => x.position === "부회장")
+                ];
+              let chairMan =
+                el.firstManagers[
+                  el.firstManagers.findIndex((x) => x.position === "회장")
+                ];
+
+              // 현재 부회장, 회장에 해당하는 값들을 삭제
+              el.firstManagers.splice(
+                el.firstManagers.findIndex((x) => x.position === "부회장"),
+                1
+              );
+              el.firstManagers.splice(
+                el.firstManagers.findIndex((x) => x.position === "회장"),
+                1
+              );
+
+              // 위에서 받아놓은 값들을 배열의 앞에 붙임
+              el.firstManagers.unshift(viceChairMan);
+              el.firstManagers.unshift(chairMan);
+            }
+            if (el.secondManagers.length !== 0) {
+              el.secondManagers.sort((a, b) => {
+                return Number(a["studentCode"]) - Number(b["studentCode"]);
+              });
+
+              // 부회장, 회장에 해당하는 학생의 객체를 변수에 받아놓음
+              let viceChairMan =
+                el.secondManagers[
+                  el.secondManagers.findIndex((x) => x.position === "부회장")
+                ];
+              let chairMan =
+                el.secondManagers[
+                  el.secondManagers.findIndex((x) => x.position === "회장")
+                ];
+
+              // 현재 부회장, 회장에 해당하는 값들을 삭제
+              el.secondManagers.splice(
+                el.secondManagers.findIndex((x) => x.position === "부회장"),
+                1
+              );
+              el.secondManagers.splice(
+                el.secondManagers.findIndex((x) => x.position === "회장"),
+                1
+              );
+
+              // 위에서 받아놓은 값들을 배열의 앞에 붙임
+              el.secondManagers.unshift(viceChairMan);
+              el.secondManagers.unshift(chairMan);
+            }
+          });
+
+          this.CadreList = CopyCadreList;
         })
         .catch((error) => {
           console.log(error);
