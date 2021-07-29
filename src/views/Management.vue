@@ -95,12 +95,14 @@ export default {
           let CopyCadreList = [];
 
           managementList.forEach((element) => {
+            // 최초의 배열이 비어있을 경우 추가하는 과정
             if (
               CopyCadreList.findIndex(
                 (el) => el.activeYear === element.activeYear
               ) < 0 ||
               CopyCadreList.length === 0
             ) {
+              // 유심히 봐둬야 할 구조
               CopyCadreList.push({
                 activeYear: element.activeYear,
                 firstManagers: [],
@@ -108,23 +110,12 @@ export default {
               });
             }
 
+            // 학생 객체 삽입
             CopyCadreList.forEach((el, idx) => {
               if (el.activeYear === element.activeYear) {
-                if (element.season === "1학기 (여름학기)") {
-                  if (
-                    element.position === "회장" ||
-                    element.position === "부회장"
-                  )
-                    CopyCadreList[idx].firstManagers.unshift(element);
-                  else CopyCadreList[idx].firstManagers.push(element);
-                } else {
-                  if (
-                    element.position === "회장" ||
-                    element.position === "부회장"
-                  )
-                    CopyCadreList[idx].secondManagers.unshift(element);
-                  else CopyCadreList[idx].secondManagers.push(element);
-                }
+                if (element.season === "1학기 (여름학기)")
+                  CopyCadreList[idx].firstManagers.push(element);
+                else CopyCadreList[idx].secondManagers.push(element);
               }
             });
           });
@@ -136,35 +127,63 @@ export default {
 
           CopyCadreList.forEach((el) => {
             if (el.firstManagers.length !== 0) {
-              let chairManIdx = el.firstManagers.findIndex(
-                (x) => x.position === "회장"
+              // 학번순 정렬
+              el.firstManagers.sort((a, b) => {
+                return Number(a["studentCode"]) - Number(b["studentCode"]);
+              });
+
+              // 부회장, 회장에 해당하는 학생의 객체를 변수에 받아놓음
+              let viceChairMan =
+                el.firstManagers[
+                  el.firstManagers.findIndex((x) => x.position === "부회장")
+                ];
+              let chairMan =
+                el.firstManagers[
+                  el.firstManagers.findIndex((x) => x.position === "회장")
+                ];
+
+              // 현재 부회장, 회장에 해당하는 값들을 삭제
+              el.firstManagers.splice(
+                el.firstManagers.findIndex((x) => x.position === "부회장"),
+                1
               );
-              let viceChairManIdx = el.firstManagers.findIndex(
-                (x) => x.position === "부회장"
+              el.firstManagers.splice(
+                el.firstManagers.findIndex((x) => x.position === "회장"),
+                1
               );
 
-              if (chairManIdx > viceChairManIdx) {
-                let tmpObj = el.firstManagers[viceChairManIdx];
-                el.firstManagers[viceChairManIdx] =
-                  el.firstManagers[chairManIdx];
-                el.firstManagers[chairManIdx] = tmpObj;
-              }
+              // 위에서 받아놓은 값들을 배열의 앞에 붙임
+              el.firstManagers.unshift(viceChairMan);
+              el.firstManagers.unshift(chairMan);
             }
-
             if (el.secondManagers.length !== 0) {
-              let chairManIdx = el.secondManagers.findIndex(
-                (x) => x.position === "회장"
+              el.secondManagers.sort((a, b) => {
+                return Number(a["studentCode"]) - Number(b["studentCode"]);
+              });
+
+              // 부회장, 회장에 해당하는 학생의 객체를 변수에 받아놓음
+              let viceChairMan =
+                el.secondManagers[
+                  el.secondManagers.findIndex((x) => x.position === "부회장")
+                ];
+              let chairMan =
+                el.secondManagers[
+                  el.secondManagers.findIndex((x) => x.position === "회장")
+                ];
+
+              // 현재 부회장, 회장에 해당하는 값들을 삭제
+              el.secondManagers.splice(
+                el.secondManagers.findIndex((x) => x.position === "부회장"),
+                1
               );
-              let viceChairManIdx = el.secondManagers.findIndex(
-                (x) => x.position === "부회장"
+              el.secondManagers.splice(
+                el.secondManagers.findIndex((x) => x.position === "회장"),
+                1
               );
 
-              if (chairManIdx > viceChairManIdx) {
-                let tmpObj = el.secondManagers[viceChairManIdx];
-                el.secondManagers[viceChairManIdx] =
-                  el.secondManagers[chairManIdx];
-                el.secondManagers[chairManIdx] = tmpObj;
-              }
+              // 위에서 받아놓은 값들을 배열의 앞에 붙임
+              el.secondManagers.unshift(viceChairMan);
+              el.secondManagers.unshift(chairMan);
             }
           });
 
