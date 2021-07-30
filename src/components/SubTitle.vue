@@ -39,8 +39,6 @@ export default {
       this.url = "/qna/list";
 
     this.isList = curPath.slice(-4) === "list" ? true : false;
-
-    console.log(this.isList);
   },
 };
 </script>
