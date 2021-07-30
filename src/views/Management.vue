@@ -82,10 +82,13 @@
             </v-row>
 
             <v-divider
-              v-if="index !== CadreList.length - 1"
+              v-if="index !== CadreList.length - 1 && selectedYear === '전체'"
               class="my-10"
             ></v-divider>
-            <div v-if="index === CadreList.length - 1" class="my-15"></div>
+            <div 
+              v-if="!(index !== CadreList.length - 1 && selectedYear === '전체')" 
+              class="my-15"
+            ></div>
           </div>
         </div>
         
