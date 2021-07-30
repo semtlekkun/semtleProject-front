@@ -1,7 +1,7 @@
 <template>
   <div id="members">
     <v-container class="text-center">
-      <div v-for="(cadre, i) in CadreList" :key="i">
+      <div v-for="(cadre, index) in CadreList" :key="index">
         <!-- 2학기에 간부들이 있다면 조건부로 렌더링 -->
         <div v-if="cadre.secondManagers.length !== 0">
           <h1 class="text-left my-5">{{ cadre.activeYear }}년 2학기</h1>
@@ -64,8 +64,11 @@
             </v-col>
           </v-row>
 
-          <v-divider v-if="i !== (CadreList.length-1)" class="my-10"></v-divider>
-          <v-row v-if="i === (CadreList.length-1)" class="my-10"></v-row>
+          <v-divider
+            v-if="index !== CadreList.length - 1"
+            class="my-10"
+          ></v-divider>
+          <v-row v-if="index === CadreList.length - 1" class="my-10"></v-row>
         </div>
       </div>
     </v-container>
