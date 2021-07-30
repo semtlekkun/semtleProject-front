@@ -68,7 +68,7 @@
             v-if="index !== CadreList.length - 1"
             class="my-10"
           ></v-divider>
-          <v-row v-if="index === CadreList.length - 1" class="my-10"></v-row>
+          <div v-if="index === CadreList.length - 1" class="my-15"></div>
         </div>
       </div>
     </v-container>
