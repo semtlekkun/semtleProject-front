@@ -1,8 +1,8 @@
 <template>
   <v-btn
-    v-if="curScrollPos === 0 ? false : true"
     color="#50829b"
     class="top_btn"
+    :class="curScrollPos === 0 ? 'isTop' : 'isBody'"
     @click="go_top"
     fab
     :large="isMobile ? false : true"
@@ -51,5 +51,18 @@ export default {
   bottom: 2%;
   position: fixed;
   z-index: 999;
+
+  transition: all 1s;
+}
+
+.isTop {
+  opacity: 0;
+  transition: all 0.5s;
+  cursor: default;
+}
+
+.isBody {
+  opacity: 1;
+  transition: all 0.5s;
 }
 </style>
