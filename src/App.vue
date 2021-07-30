@@ -4,10 +4,6 @@
     <v-main v-show="!isIntro">
       <SideBar v-if="isMobile" :loginStatus="getLogin" />
       <v-container>
-        <!-- <v-row class="mt-10" v-show="isMobile || $route.name === 'adminMenu'">
-                <v-col offset="4" cols="4"> <router-link to="/"> <v-img width="200px"
-                class="mx-auto" src="./assets/logo.png" /> </router-link> </v-col> </v-row> -->
-
         <v-row
           v-if="
             isMobile || $route.name === 'login' || $route.name === 'adminMenu'

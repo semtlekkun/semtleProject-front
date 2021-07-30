@@ -14,7 +14,9 @@
                   <v-alert outlined color="#365164">
                     <v-row class="py-0">
                       <v-col cols="12" class="py-0">
-                        <v-card-title class="font-weight-black">{{title}}</v-card-title>
+                        <v-card-title class="font-weight-black">{{
+                          title
+                        }}</v-card-title>
                       </v-col>
                       <v-col class="text-right" cols="12" v-show="admin">
                         <v-btn color="error" @click="deleteNotice">삭제</v-btn>
@@ -24,20 +26,23 @@
                     <ul class="noticeInfo">
                       <li>
                         <b>작성자</b>
-                        {{writer}}
+                        {{ writer }}
                       </li>
                       <li>
                         <b>작성일</b>
-                        {{date}}
+                        {{ date }}
                       </li>
 
                       <li>
                         <v-icon small>mdi-eye</v-icon>
-                        {{views}}
+                        {{ views }}
                       </li>
                     </ul>
-                    <v-card-text style="color: #000;">
-                      <vue-markdown :source="contents" class="ml-2"></vue-markdown>
+                    <v-card-text style="color: #000">
+                      <vue-markdown
+                        :source="contents"
+                        class="ml-2"
+                      ></vue-markdown>
                     </v-card-text>
                     <v-card-text v-if="isImage">
                       <div id="imageContainer">
