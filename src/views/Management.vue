@@ -1,75 +1,94 @@
 <template>
   <div id="members">
     <v-container class="text-center">
-      <div v-for="(cadre, index) in CadreList" :key="index">
-        <!-- 2학기에 간부들이 있다면 조건부로 렌더링 -->
-        <div v-if="cadre.secondManagers.length !== 0">
-          <h1 class="text-left my-5">{{ cadre.activeYear }}년 2학기</h1>
-          <v-row>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-              lg="3"
-              v-for="(member, k) in cadre.secondManagers"
-              :key="k"
-            >
-              <v-card class="pa-10">
-                <v-row justify="center">
-                  <v-img
-                    :src="imageURL + member.image"
-                    min-height="250px"
-                    max-height="250px"
-                    max-width="250px"
-                  />
-                </v-row>
-                <p class="position">
-                  {{ member.language }}{{ member.position }}
-                </p>
-                <p class="number">{{ member.studentCode }}</p>
-                <p class="name">{{ member.name }}</p>
-                <p class="contents">{{ member.contents }}</p>
-              </v-card>
-            </v-col>
-          </v-row>
-        </div>
+      <v-row>
+        <v-col
+          cols="6"
+          sm="4"
+          lg="2"
+        >
+          <v-combobox
+            v-model="selectedYear"
+            :items="yearList"
+            label="연도별 보기"
+          ></v-combobox>
+        </v-col>
+      </v-row>   
+      <div 
+        v-for="(cadre, index) in CadreList"
+        :key="index"
+      >
+        <div v-if="selectedYear === '전체' || cadre.activeYear === selectedYear">
+          <!-- 2학기에 간부들이 있다면 조건부로 렌더링 -->
+          <div v-if="cadre.secondManagers.length !== 0">
+            <h1 class="text-left my-5">{{ cadre.activeYear }}년 2학기</h1>
+            <v-row>
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
+                lg="3"
+                v-for="(member, k) in cadre.secondManagers"
+                :key="k"
+              >
+                <v-card class="pa-10">
+                  <v-row justify="center">
+                    <v-img
+                      :src="imageURL + member.image"
+                      min-height="250px"
+                      max-height="250px"
+                      max-width="250px"
+                    />
+                  </v-row>
+                  <p class="position">
+                    {{ member.language }}{{ member.position }}
+                  </p>
+                  <p class="number">{{ member.studentCode }}</p>
+                  <p class="name">{{ member.name }}</p>
+                  <p class="contents">{{ member.contents }}</p>
+                </v-card>
+              </v-col>
+            </v-row>
+          </div>
 
-        <div v-if="cadre.firstManagers.length !== 0">
-          <h1 class="text-left my-5">{{ cadre.activeYear }}년 1학기</h1>
-          <v-row>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-              lg="3"
-              v-for="(member, k) in cadre.firstManagers"
-              :key="k"
-            >
-              <v-card class="pa-10">
-                <v-row justify="center">
-                  <v-img
-                    :src="imageURL + member.image"
-                    min-height="250px"
-                    max-height="250px"
-                    max-width="250px"
-                  />
-                </v-row>
-                <p class="position">
-                  {{ member.language }}{{ member.position }}
-                </p>
-                <p class="number">{{ member.studentCode }}</p>
-                <p class="name">{{ member.name }}</p>
-                <p class="contents">{{ member.contents }}</p>
-              </v-card>
-            </v-col>
-          </v-row>
+          <div v-if="cadre.firstManagers.length !== 0">
+            <h1 class="text-left my-5">{{ cadre.activeYear }}년 1학기</h1>
+            <v-row>
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
+                lg="3"
+                v-for="(member, k) in cadre.firstManagers"
+                :key="k"
+              >
+                <v-card class="pa-10">
+                  <v-row justify="center">
+                    <v-img
+                      :src="imageURL + member.image"
+                      min-height="250px"
+                      max-height="250px"
+                      max-width="250px"
+                    />
+                  </v-row>
+                  <p class="position">
+                    {{ member.language }}{{ member.position }}
+                  </p>
+                  <p class="number">{{ member.studentCode }}</p>
+                  <p class="name">{{ member.name }}</p>
+                  <p class="contents">{{ member.contents }}</p>
+                </v-card>
+              </v-col>
+            </v-row>
 
-          <v-divider
-            v-if="index !== CadreList.length - 1"
-            class="my-10"
-          ></v-divider>
-          <div v-if="index === CadreList.length - 1" class="my-15"></div>
+            <v-divider
+              v-if="index !== CadreList.length - 1"
+              class="my-10"
+            ></v-divider>
+            <div v-if="index === CadreList.length - 1" class="my-15"></div>
+          </div>
         </div>
+        
       </div>
     </v-container>
   </div>
@@ -83,6 +102,8 @@ export default {
     return {
       CadreList: [],
       imageURL: `${ipObj.ip}/api/student/images/`,
+      yearList: ["전체"],
+      selectedYear: "전체",
     };
   },
 
@@ -192,10 +213,17 @@ export default {
           });
 
           this.CadreList = CopyCadreList;
+
+          this.getYear();
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    getYear() {
+      this.CadreList.forEach((el) => {
+        this.yearList.push(el.activeYear);
+      });
     },
   },
 };
@@ -231,5 +259,8 @@ p {
 }
 .v-img {
   margin: 0 auto !important;
+}
+.v-text-field__details {
+  display: none;
 }
 </style>
