@@ -1,13 +1,27 @@
 <template>
-  <div>
-    <v-btn color="#50829b" class="top_btn" @click="go_top" fab large dark>
-      <v-icon>mdi-arrow-up-thick</v-icon>
-    </v-btn>
-  </div>
+  <v-btn
+    color="#50829b"
+    class="top_btn"
+    @click="go_top"
+    fab
+    :large="isMobile ? false : true"
+    :small="isMobile ? true : false"
+    dark
+  >
+    <v-icon>mdi-arrow-up-thick</v-icon>
+  </v-btn>
 </template>
 
 <script>
 export default {
+  props: {
+    isMobile: Boolean,
+  },
+
+  mounted() {
+    console.log(this.isMobile);
+  },
+
   methods: {
     go_top() {
       window.scrollTo({
@@ -22,8 +36,8 @@ export default {
 
 <style scoped>
 .top_btn {
-  right: 20px;
-  bottom: 20px;
+  right: 2%;
+  bottom: 2%;
   position: fixed;
   z-index: 999;
 }
