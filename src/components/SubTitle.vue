@@ -1,10 +1,15 @@
 <template>
   <v-container>
-    <router-link :to="url">
-      <h1 class="_title">
+    <router-link v-if="!isList" :to="url" style="color: black">
+      <h1>
         {{ subTitleObj.title }}
       </h1>
     </router-link>
+
+    <h1 v-if="isList">
+      {{ subTitleObj.title }}
+    </h1>
+
     <h3>
       {{ subTitleObj.contents }}
     </h3>
@@ -18,7 +23,7 @@ export default {
   },
 
   data() {
-    return { url: "" };
+    return { url: "", isList: false };
   },
 
   mounted() {
@@ -32,6 +37,10 @@ export default {
       this.url = "/project/announce/list";
     if (curPath.includes("qna") && curPath.includes("detail"))
       this.url = "/qna/list";
+
+    this.isList = curPath.slice(-4) === "list" ? true : false;
+
+    console.log(this.isList);
   },
 };
 </script>
@@ -40,7 +49,4 @@ export default {
 h1 {
   font-size: 2.185rem;
 }
-/* ._title {
-  cursor: pointer;
-} */
 </style>
