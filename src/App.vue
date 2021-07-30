@@ -33,8 +33,6 @@
         </v-row>
 
         <router-view />
-        <!-- <MobileView v-if="isMobile" :loginStatus="getLogin" /> <PCView
-                v-if="!isMobile" /> -->
         <TopBtn v-if="$route.name !== 'login'" :isMobile="isMobile" />
 
         <Footer id="customFooter" class="text-center" />

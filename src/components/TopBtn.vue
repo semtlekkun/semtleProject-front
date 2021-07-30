@@ -1,5 +1,6 @@
 <template>
   <v-btn
+    v-if="curScrollPos === 0 ? false : true"
     color="#50829b"
     class="top_btn"
     @click="go_top"
@@ -18,8 +19,15 @@ export default {
     isMobile: Boolean,
   },
 
+  data() {
+    return {
+      isTop: true,
+      curScrollPos: document.documentElement.scrollTop,
+    };
+  },
+
   mounted() {
-    console.log(this.isMobile);
+    addEventListener("scroll", this.onScroll);
   },
 
   methods: {
@@ -29,6 +37,9 @@ export default {
         left: 0,
         behavior: "smooth",
       });
+    },
+    onScroll() {
+      this.curScrollPos = document.documentElement.scrollTop;
     },
   },
 };
