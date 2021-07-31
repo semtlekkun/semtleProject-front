@@ -24,7 +24,11 @@
             </router-link>
           </v-col>
         </v-row>
-        <Table :perPage="5" tableName="projectAnnounce" :contents="projectAnnounceContents" />
+        <Table
+          :perPage="5"
+          tableName="projectAnnounce"
+          :contents="projectAnnounceContents"
+        />
       </v-col>
 
       <v-col>
@@ -39,12 +43,21 @@
           </v-col>
         </v-row>
         <v-row id="projectView">
-          <v-col xs="12" md="12" lg="6" xl="4" v-for="item in cardViewList" :key="item._id">
+          <v-col
+            xs="12"
+            md="12"
+            lg="6"
+            xl="4"
+            v-for="item in cardViewList"
+            :key="item._id"
+          >
             <CardView :contentsObj="item" />
           </v-col>
         </v-row>
       </v-col>
     </v-row>
+
+    <PhotoContainer />
   </v-container>
 </template>
 
@@ -52,6 +65,7 @@
 import ipObj from "../key";
 import CardView from "../components/CardView.vue";
 import Table from "../components/Table.vue";
+import PhotoContainer from "../components/PhotoContainer.vue";
 
 export default {
   created() {
@@ -116,6 +130,7 @@ export default {
   components: {
     CardView,
     Table,
+    PhotoContainer,
   },
   data() {
     return {
