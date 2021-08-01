@@ -7,8 +7,10 @@
       <v-col cols="12" md="8" lg="8" xl="9">
         <v-row class="text-right">
           <v-col class="my-0 py-0">
-            <router-link :to="{name:'QuestionInput'}">
-              <v-btn rounded depressed class="customBtn" v-show="this.isLogin">글쓰기</v-btn>
+            <router-link :to="{ name: 'QuestionInput' }">
+              <v-btn rounded depressed class="customBtn" v-show="this.isLogin"
+                >글쓰기</v-btn
+              >
             </router-link>
           </v-col>
         </v-row>
@@ -35,9 +37,9 @@ export default {
       .then((res) => {
         if (res.status === 200) {
           this.contents = [];
-          res.data.questionList.forEach((item, index) => {
+          res.data.questionList.forEach((item) => {
             let obj = new Object();
-            obj.number = index + 1;
+            obj.number = res.data.count--;
             obj.title = item.title;
             obj.writer = item.writer;
             obj.date = item.date;

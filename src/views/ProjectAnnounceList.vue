@@ -7,14 +7,18 @@
       <v-col cols="12" md="8" lg="8" xl="9">
         <v-row class="text-right" v-if="this.isLogin">
           <v-col class="my-0 py-0">
-            <router-link :to="{name:'projectAnnounceWrite'}">
+            <router-link :to="{ name: 'projectAnnounceWrite' }">
               <v-btn rounded depressed class="customBtn">글쓰기</v-btn>
             </router-link>
           </v-col>
         </v-row>
         <v-row>
           <v-col class="my-0 py-0">
-            <Table :perPage="10" tableName="projectAnnounce" :contents="contents" />
+            <Table
+              :perPage="10"
+              tableName="projectAnnounce"
+              :contents="contents"
+            />
           </v-col>
         </v-row>
       </v-col>
@@ -32,11 +36,11 @@ export default {
     this.axios
       .get(`${ipObj.ip}/api/recruit/list`)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         if (res.status === 200) {
-          res.data.recruitList.forEach((item, index) => {
+          res.data.recruitList.forEach((item) => {
             let obj = new Object();
-            obj.number = index + 1;
+            obj.number = res.data.count--;
             obj.title = item.title;
             obj.writer = item.writer;
             obj.date = item.date;
