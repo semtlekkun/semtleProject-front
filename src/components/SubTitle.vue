@@ -37,6 +37,8 @@ export default {
       this.url = "/project/announce/list";
     if (curPath.includes("qna") && curPath.includes("detail"))
       this.url = "/qna/list";
+    if (curPath.includes("photo") && curPath.includes("detail"))
+      this.url = "/photo/list";
 
     this.isList = curPath.slice(-4) === "list" ? true : false;
   },

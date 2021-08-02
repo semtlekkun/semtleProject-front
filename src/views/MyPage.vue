@@ -35,7 +35,9 @@ res.data.student.pfList -> 순회해서 출력
           :items-per-page="5"
           @click:row="clickRow"
         >
-          <template v-slot:header.name="{ header }">{{ header.text.toUpperCase() }}</template>
+          <template v-slot:header.name="{ header }">{{
+            header.text.toUpperCase()
+          }}</template>
         </v-data-table>
       </v-col>
     </v-row>
@@ -117,9 +119,9 @@ export default {
         .catch((err) => {
           console.log(err);
           if (err.response.status === 401) {
-              alert("세션이 만료되어 홈 화면으로 이동합니다.");
-              this.setLogout();
-            }
+            alert("세션이 만료되어 홈 화면으로 이동합니다.");
+            this.setLogout();
+          }
         });
     },
     ...mapMutations(["setLogout"]),

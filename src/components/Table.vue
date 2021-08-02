@@ -114,6 +114,11 @@ export default {
           name: "projectAnnounceRead",
           params: { id: row._id },
         });
+      } else if (this.tableName === "photoList") {
+        this.$router.push({
+          name: "photo",
+          params: { id: row._id },
+        });
       }
     },
   },
