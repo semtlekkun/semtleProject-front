@@ -14,7 +14,9 @@
                   <v-alert outlined color="#365164">
                     <v-row class="py-0">
                       <v-col cols="12" class="py-0">
-                        <v-card-title class="font-weight-black">{{title}}</v-card-title>
+                        <v-card-title class="font-weight-black">{{
+                          title
+                        }}</v-card-title>
                       </v-col>
                       <v-col class="text-right" cols="12" v-show="admin">
                         <v-btn color="error" @click="deleteProject">삭제</v-btn>
@@ -24,15 +26,15 @@
                     <ul class="announceInfo">
                       <li>
                         <b>작성자</b>
-                        {{writer}}
+                        {{ writer }}
                       </li>
                       <li>
                         <b>작성일</b>
-                        {{date}}
+                        {{ date }}
                       </li>
                       <li>
                         <v-icon small>mdi-eye</v-icon>
-                        {{view}}
+                        {{ view }}
                       </li>
                     </ul>
 
@@ -49,14 +51,21 @@
                         <v-img
                           class="white--text align-end"
                           height="150px"
-                          :src="studentImageURL+member.image"
+                          :src="studentImageURL + member.image"
                         ></v-img>
-                        <v-card-subtitle class="pb-0" v-if="member.nick === leaderNick">
+                        <v-card-subtitle
+                          class="pb-0"
+                          v-if="member.nick === leaderNick"
+                        >
                           <strong>팀장</strong>
                         </v-card-subtitle>
-                        <v-card-subtitle class="pb-0" v-if="member.nick !== leaderNick">팀원</v-card-subtitle>
+                        <v-card-subtitle
+                          class="pb-0"
+                          v-if="member.nick !== leaderNick"
+                          >팀원</v-card-subtitle
+                        >
                         <v-card-text class="text--primary">
-                          <div>{{member.nick}}</div>
+                          <div>{{ member.nick }}</div>
                         </v-card-text>
                       </v-card>
 
@@ -68,8 +77,16 @@
                           sm="3"
                           md="2"
                           class="rounded-xl blue-grey lighten-3 font-weight-black text-center"
-                        >팀명</v-col>
-                        <v-col cols="8" xs="8" sm="9" md="10" class="text-left">{{TeamName}}</v-col>
+                          >팀명</v-col
+                        >
+                        <v-col
+                          cols="8"
+                          xs="8"
+                          sm="9"
+                          md="10"
+                          class="text-left"
+                          >{{ TeamName }}</v-col
+                        >
                       </v-row>
 
                       <v-row class="my-2 mx-1">
@@ -79,42 +96,48 @@
                           sm="3"
                           md="2"
                           class="rounded-xl blue-grey lighten-3 font-weight-bold text-center"
-                        >기간</v-col>
-                        <v-col
-                          cols="12"
-                          xs="8"
-                          sm="9"
-                          md="10"
-                          class="text-left"
-                        >{{startDate}} ~ {{endDate}}</v-col>
+                          >기간</v-col
+                        >
+                        <v-col cols="12" xs="8" sm="9" md="10" class="text-left"
+                          >{{ startDate }} ~ {{ endDate }}</v-col
+                        >
                       </v-row>
 
-                      <v-row v-if="git !='http://'" class="my-2 mx-1">
+                      <v-row v-if="git != 'http://'" class="my-2 mx-1">
                         <v-col
                           cols="4"
                           xs="4"
                           sm="3"
                           md="2"
                           class="rounded-xl blue-grey lighten-3 font-weight-bold text-center"
-                        >Github</v-col>
+                          >Github</v-col
+                        >
                         <v-col cols="8" xs="8" sm="9" md="10" class="text-left">
-                          <a :href="git" target="_blank" style="color:#50829b">링크 바로가기</a>
+                          <a :href="git" target="_blank" style="color:#50829b"
+                            >링크 바로가기</a
+                          >
                         </v-col>
                       </v-row>
 
-                      <v-row v-if="link !='http://'" class="my-2 mx-1">
+                      <v-row v-if="link != 'http://'" class="my-2 mx-1">
                         <v-col
                           cols="4"
                           xs="4"
                           sm="3"
                           md="2"
                           class="rounded-xl blue-grey lighten-3 font-weight-bold text-center"
-                        >Link</v-col>
+                          >Link</v-col
+                        >
                         <v-col cols="8" xs="8" sm="9" md="10" class="text-left">
-                          <a :href="link" target="_blank" style="color:#50829b">링크 바로가기</a>
+                          <a :href="link" target="_blank" style="color:#50829b"
+                            >링크 바로가기</a
+                          >
                         </v-col>
                       </v-row>
-                      <VueMarkdown :source="contents" class="mt-10 ml-2"></VueMarkdown>
+                      <VueMarkdown
+                        :source="contents"
+                        class="mt-10 ml-2"
+                      ></VueMarkdown>
                     </v-card-text>
                     <!-- 
 
@@ -130,8 +153,12 @@
 
                     <v-card-text>
                       <!-- 패딩이 그림부분이랑 위랑 달라서 v-card-text로 감쌈 -->
-                      <div v-for="(image,i) in images" :key="i">
-                        <img :src="imageURL+image" width="70%" max-width="960px" />
+                      <div v-for="(image, i) in images" :key="i">
+                        <img
+                          :src="imageURL + image"
+                          width="70%"
+                          max-width="960px"
+                        />
                       </div>
                     </v-card-text>
                   </v-alert>
@@ -149,14 +176,15 @@
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 import VueMarkdown from "vue-markdown";
+import { initProjectListApi, initProjectViewApi } from "../api/api.js";
 
 export default {
   created() {
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
     this.projectID = this.$route.params.id;
-    this.axios
-      .get(`${ipObj.ip}/api/pf/${this.projectID}`)
-      .then((res) => {
+
+    initProjectListApi(this.projectID)
+      .then(res => {
         this.title = res.data.project.projectTitle;
         this.startDate = res.data.project.projectStartDate;
         this.endDate = res.data.project.projectEndDate;
@@ -168,19 +196,19 @@ export default {
         this.date = res.data.project.date;
         this.link = res.data.project.link;
         this.git = res.data.project.git;
-        res.data.studentInfo.forEach((student) => {
+        res.data.studentInfo.forEach(student => {
           this.members.push(student);
         });
         this.images = res.data.project.projectImages;
       })
 
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   components: {
     VueMarkdown,
-    SubTitle,
+    SubTitle
   },
   data() {
     return {
@@ -201,36 +229,26 @@ export default {
       link: "",
       subTitleObj: {
         title: "💻프로젝트",
-        contents: "셈틀꾼 멤버들이 참여한 프로젝트를 올리는 공간입니다.",
+        contents: "셈틀꾼 멤버들이 참여한 프로젝트를 올리는 공간입니다."
       },
       git: "",
-      images: [],
+      images: []
     };
   },
   methods: {
     deleteProject() {
       let result = confirm("정말로 삭제하시겠습니까?");
       if (result) {
-        this.axios
-          .delete(
-            `${ipObj.ip}/api/pf/${this.projectID}`,
-            {
-              headers: {
-                token: sessionStorage.getItem("token"),
-              },
-            },
-            {}
-          )
-          .then((res) => {
-            if (res.status === 200) {
-              this.$router.push({
-                name: "projectList",
-              });
-            }
-          });
+        initProjectViewApi(this.projectID).then(res => {
+          if (res.status === 200) {
+            this.$router.push({
+              name: "projectList"
+            });
+          }
+        });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

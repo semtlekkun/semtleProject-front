@@ -12,14 +12,13 @@
 </template>
 
 <script>
-import ipObj from "../key";
 import Table from "../components/Table.vue";
 import SubTitle from "../components/SubTitle.vue";
+import { getNoticeListApi } from "../api/api.js";
 export default {
   created() {
-    this.axios
-      .get(`${ipObj.ip}/api/notice/list`)
-      .then((res) => {
+    getNoticeListApi()
+      .then(res => {
         if (res.status === 200) {
           this.contents = [];
           res.data.noticeList.forEach((item, index) => {
@@ -33,25 +32,24 @@ export default {
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   components: {
     Table,
-    SubTitle,
+    SubTitle
   },
   data() {
     return {
       contents: [],
       subTitleObj: {
         title: "📌공지사항",
-        contents: "셈틀꾼의 공지사항을 올리는 공간입니다.",
-      },
+        contents: "셈틀꾼의 공지사항을 올리는 공간입니다."
+      }
     };
-  },
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

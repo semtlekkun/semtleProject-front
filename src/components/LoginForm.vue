@@ -1,6 +1,6 @@
 <template>
   <div class="LoginForm">
-    <p class="Error">{{error}}</p>
+    <p class="Error">{{ error }}</p>
     <v-form @submit="CheckForm" novalidate="true">
       <v-row class="center">
         <v-col cols="10" sm="6" md="5" xl="3">
@@ -33,27 +33,22 @@
   </div>
 </template>
 <script>
-import ipObj from "../key";
 import { mapMutations } from "vuex";
-
+import { LoginFormCheckFormApi } from "../api/api.js";
 export default {
   name: "LoginForm",
   data() {
     return {
       error: null,
       StudentNumber: null,
-      Password: null,
+      Password: null
     };
   },
   methods: {
     CheckForm(e) {
       if (this.Password && this.StudentNumber) {
-        this.axios
-          .post(`${ipObj.ip}/api/log/in`, {
-            _id: this.StudentNumber,
-            pw: this.Password,
-          })
-          .then((res) => {
+        LoginFormCheckFormApi(this.StudentNumber, this.Password)
+          .then(res => {
             if (res.status === 200) {
               const admin = res.data.admin;
               const token = res.data.token;
@@ -66,7 +61,7 @@ export default {
               this.$router.push("/"); // 메인페이지로 이동
             }
           })
-          .catch((err) => {
+          .catch(err => {
             if (err.response.status === 400) {
               this.error = "아이디 혹은 비밀번호가 일치 하지 않습니다.";
             } else if (err.response.status === 500) {
@@ -82,8 +77,8 @@ export default {
       e.preventDefault();
     },
 
-    ...mapMutations(["setLogin", "setAdmin"]),
-  },
+    ...mapMutations(["setLogin", "setAdmin"])
+  }
 };
 </script>
 <style scoped>

@@ -7,7 +7,7 @@
       <v-col cols="12" md="8" lg="8" xl="9">
         <v-row class="text-right">
           <v-col class="my-0 py-0">
-            <router-link :to="{name:'projectInput'}" v-show="this.isLogin">
+            <router-link :to="{ name: 'projectInput' }" v-show="this.isLogin">
               <v-btn rounded depressed class="customBtn">글쓰기</v-btn>
             </router-link>
           </v-col>
@@ -23,15 +23,14 @@
 </template>
 
 <script>
-import ipObj from "../key";
 import Table from "../components/Table.vue";
 import SubTitle from "../components/SubTitle.vue";
+import { initProjectListApi } from "../api/api.js";
 export default {
   created() {
     this.checkLogin();
-    this.axios
-      .get(`${ipObj.ip}/api/pf/list`)
-      .then((res) => {
+    initProjectListApi()
+      .then(res => {
         if (res.status === 200) {
           this.contents = [];
           res.data.portfolioList.forEach((item, index) => {
@@ -45,13 +44,13 @@ export default {
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   components: {
     Table,
-    SubTitle,
+    SubTitle
   },
   data() {
     return {
@@ -59,8 +58,8 @@ export default {
       isLogin: "",
       subTitleObj: {
         title: "💻프로젝트 목록",
-        contents: "셈틀꾼 멤버들이 참여한 프로젝트를 올리는 공간입니다.",
-      },
+        contents: "셈틀꾼 멤버들이 참여한 프로젝트를 올리는 공간입니다."
+      }
     };
   },
 
@@ -73,10 +72,9 @@ export default {
       } else {
         return (this.isLogin = true);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

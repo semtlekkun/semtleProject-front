@@ -64,8 +64,12 @@
                               <v-btn
                                 dark
                                 color="rgb(80, 130, 155)"
-                                @click="temp(); $refs.menu.save(endDate)"
-                              >확인</v-btn>
+                                @click="
+                                  temp();
+                                  $refs.menu.save(endDate);
+                                "
+                                >확인</v-btn
+                              >
                             </v-date-picker>
                           </v-menu>
                         </v-col>
@@ -92,7 +96,8 @@
                             @click="confirmAnnounce"
                             class="white--text"
                             block
-                          >작성 완료</v-btn>
+                            >작성 완료</v-btn
+                          >
                         </v-col>
                       </v-row>
                     </v-form>
@@ -108,7 +113,7 @@
               <p style="color:white !important;">Error</p>
             </v-card-title>
             <ul class="mt-5">
-              <li v-for="(error,i) in errorMsg" :key="i">{{error}}</li>
+              <li v-for="(error, i) in errorMsg" :key="i">{{ error }}</li>
             </ul>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -122,12 +127,13 @@
 </template>
 
 <script>
-import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 import { mapMutations } from "vuex";
+import { confirmAnnounceApi } from "../api/api.js";
+
 export default {
   components: {
-    SubTitle,
+    SubTitle
   },
   data() {
     return {
@@ -138,10 +144,10 @@ export default {
       recruitment: null,
       subTitleObj: {
         title: "✍공고 작성",
-        contents: "프로젝트 모집 공고를 작성하는 공간입니다.",
+        contents: "프로젝트 모집 공고를 작성하는 공간입니다."
       },
       errorMsg: [],
-      dialog: false,
+      dialog: false
     };
   },
   methods: {
@@ -186,31 +192,22 @@ export default {
         }
         this.dialog = true;
       } else {
-        this.axios
-          .post(
-            `${ipObj.ip}/api/recruit`,
-            {
-              endDate: this.endDate,
-              title: this.title,
-              recruitment: Number(this.recruitment),
-              contents: this.contents,
-            },
-            {
-              headers: {
-                token: sessionStorage.getItem("token"),
-              },
-            }
-          )
-          .then((res) => {
+        confirmAnnounceApi(
+          this.endDate,
+          this.title,
+          Number(this.recruitment),
+          this.contents
+        )
+          .then(res => {
             console.log(res);
             if (res.status === 200) {
               alert("작성 완료");
               this.$router.push({
-                name: "projectAnnounceList",
+                name: "projectAnnounceList"
               });
             }
           })
-          .catch((err) => {
+          .catch(err => {
             console.log(err);
             if (err.response.status === 401) {
               alert("세션이 만료되어 홈 화면으로 이동합니다.");
@@ -219,8 +216,8 @@ export default {
           });
       }
     },
-    ...mapMutations(["setLogout"]),
-  },
+    ...mapMutations(["setLogout"])
+  }
 };
 </script>
 

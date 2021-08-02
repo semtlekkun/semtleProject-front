@@ -14,7 +14,9 @@
                   <v-alert outlined color="#365164">
                     <v-row class="py-0">
                       <v-col cols="12" class="py-0">
-                        <v-card-title class="font-weight-black">{{title}}</v-card-title>
+                        <v-card-title class="font-weight-black">{{
+                          title
+                        }}</v-card-title>
                       </v-col>
                       <v-col class="text-right" cols="12" v-show="admin">
                         <v-btn color="error" @click="deleteNotice">삭제</v-btn>
@@ -24,20 +26,23 @@
                     <ul class="noticeInfo">
                       <li>
                         <b>작성자</b>
-                        {{writer}}
+                        {{ writer }}
                       </li>
                       <li>
                         <b>작성일</b>
-                        {{date}}
+                        {{ date }}
                       </li>
 
                       <li>
                         <v-icon small>mdi-eye</v-icon>
-                        {{views}}
+                        {{ views }}
                       </li>
                     </ul>
                     <v-card-text style="color: #000;">
-                      <vue-markdown :source="contents" class="ml-2"></vue-markdown>
+                      <vue-markdown
+                        :source="contents"
+                        class="ml-2"
+                      ></vue-markdown>
                     </v-card-text>
                     <v-card-text v-if="isImage">
                       <div id="imageContainer">
@@ -59,14 +64,15 @@
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 import VueMarkdown from "vue-markdown";
+import { getNoticeApi, deleteNoticeApi } from "../api/api.js";
 
 export default {
   created() {
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
     this.noticeID = this.$route.params.id;
-    this.axios
-      .get(`${ipObj.ip}/api/notice/${this.noticeID}`)
-      .then((res) => {
+
+    getNoticeApi(this.noticeID)
+      .then(res => {
         if (res.status === 200) {
           this.title = res.data.notice.title;
           this.writer = res.data.notice.writer;
@@ -85,7 +91,7 @@ export default {
           }
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
@@ -101,34 +107,28 @@ export default {
     contents: "",
     subTitleObj: {
       title: "📌공지사항",
-      contents: "셈틀꾼의 공지사항을 올리는 공간입니다.",
+      contents: "셈틀꾼의 공지사항을 올리는 공간입니다."
     },
 
-    isImage: true,
+    isImage: true
   }),
 
   components: {
     SubTitle,
-    VueMarkdown,
+    VueMarkdown
   },
   methods: {
     deleteNotice() {
       let result = confirm("정말로 삭제하시겠습니까?");
       if (result) {
-        this.axios
-          .delete(`${ipObj.ip}/api/notice/${this.noticeID}`, {
-            headers: {
-              token: sessionStorage.getItem("token"),
-            },
-          })
-          .then((res) => {
-            if (res.status === 200) {
-              this.$router.push({ name: "noticeList" });
-            }
-          });
+        deleteNoticeApi(this.noticeID).then(res => {
+          if (res.status === 200) {
+            this.$router.push({ name: "noticeList" });
+          }
+        });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

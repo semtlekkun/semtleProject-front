@@ -35,7 +35,9 @@ res.data.student.pfList -> 순회해서 출력
           :items-per-page="5"
           @click:row="clickRow"
         >
-          <template v-slot:header.name="{ header }">{{ header.text.toUpperCase() }}</template>
+          <template v-slot:header.name="{ header }">{{
+            header.text.toUpperCase()
+          }}</template>
         </v-data-table>
       </v-col>
     </v-row>
@@ -57,19 +59,19 @@ export default {
       {
         text: "프로젝트 이름",
         align: "start",
-        value: "projectName",
+        value: "projectName"
       },
       { text: "팀명", value: "teamName" },
       { text: "프로젝트 기간", value: "term" },
-      { text: "참여인원", value: "memberNum" },
+      { text: "참여인원", value: "memberNum" }
     ],
-    projects: [],
+    projects: []
   }),
   components: {
     Pw,
     PhoneNum,
     UserImg,
-    MyPageNickName,
+    MyPageNickName
   },
   created() {
     this.initPortfolio();
@@ -79,20 +81,20 @@ export default {
       this.$router.push({
         name: "project",
         params: {
-          id: row.projectLink,
-        },
+          id: row.projectLink
+        }
       });
     },
     initPortfolio() {
       let config = {
         headers: {
-          token: sessionStorage.getItem("token"),
-        },
+          token: sessionStorage.getItem("token")
+        }
       };
 
       this.axios
         .get(`${ipObj.ip}/api/mypage`, config)
-        .then((res) => {
+        .then(res => {
           console.log(res);
           for (let idx = 0; idx < res.data.student.pfList.length; ++idx) {
             var tempObj = {
@@ -100,7 +102,7 @@ export default {
               teamName: "",
               term: "",
               memberNum: "",
-              projectLink: "",
+              projectLink: ""
             };
             tempObj.projectName = res.data.student.pfList[idx].projectTitle;
             tempObj.teamName = res.data.student.pfList[idx].projectTeamName;
@@ -114,18 +116,19 @@ export default {
             this.projects.unshift(tempObj);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
+          console.log(err.response);
+          console.log("뭐냐니깐");
           if (err.response.status === 401) {
-              alert("세션이 만료되어 홈 화면으로 이동합니다.");
-              this.setLogout();
-            }
+            alert("세션이 만료되어 홈 화면으로 이동합니다.");
+            this.setLogout();
+          }
         });
     },
-    ...mapMutations(["setLogout"]),
-  },
+    ...mapMutations(["setLogout"])
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -18,7 +18,14 @@
           <v-row>
             <v-spacer></v-spacer>
             <v-col>
-              <v-btn @click="inputAnswer" color="#50829b" large dark style="float:right;">등록</v-btn>
+              <v-btn
+                @click="inputAnswer"
+                color="#50829b"
+                large
+                dark
+                style="float:right;"
+                >등록</v-btn
+              >
             </v-col>
           </v-row>
 
@@ -31,12 +38,18 @@
               <v-card-text>
                 <br />
                 <br />
-                <h2>{{this.errorMessage}}</h2>
+                <h2>{{ this.errorMessage }}</h2>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <!--로그인이 안 됐다면 로그인 버튼 띄울 것-->
-                <v-btn v-show="!this.isLogin" color="error" text @click="dialogBtn()">Login</v-btn>
+                <v-btn
+                  v-show="!this.isLogin"
+                  color="error"
+                  text
+                  @click="dialogBtn()"
+                  >Login</v-btn
+                >
                 <v-btn color="error" text @click="dialog = false">OK</v-btn>
               </v-card-actions>
             </v-card>
@@ -48,74 +61,67 @@
 </template>
 
 <script>
-import ipObj from "../key";
 import { mapMutations } from "vuex";
+import { InputAnswerApi } from "../api/api.js";
 
 export default {
   created() {
     if (!sessionStorage.getItem("token")) {
-        return (this.isLogin = false);
+      return (this.isLogin = false);
     } else {
       return (this.isLogin = true);
     }
   },
   mounted() {
     this.questionID = this.$route.params.id;
-    this.userToken = sessionStorage.getItem("token");
   },
 
   data() {
     return {
       contents: "",
-      userToken: "",
       questionID: "",
       errorMessage: "",
       isLogin: false,
-      dialog: false,
+      dialog: false
     };
   },
 
   methods: {
-    dialogBtn() { // dialog에서 login을 눌렀을 경우
+    dialogBtn() {
+      // dialog에서 login을 눌렀을 경우
       this.dialog = false;
       location.href = "/login";
     },
 
     inputAnswer() {
-      if (!this.isLogin){ // 로그인이 없는 경우
+      if (!this.isLogin) {
+        // 로그인이 없는 경우
         this.dialog = true;
         this.errorMessage = "로그인 후 작성해주세요.";
-      } else if (this.contents === "") { // 내용이 없는 경우
+      } else if (this.contents === "") {
+        // 내용이 없는 경우
         this.dialog = true;
         this.errorMessage = "내용이 없습니다.";
-      } else { 
-        this.axios
-          .post(
-            `${ipObj.ip}/api/answer`,
-            {
-              contents: this.contents,
-              question: this.questionID,
-            },
-            {
-              headers: { token: this.userToken },
-            }
-          )
-          .then((res) => {
+      } else {
+        // 통신함수 수정
+        InputAnswerApi(this.contents, this.questionID)
+          .then(res => {
             if (res.status === 200) {
               alert("작성 완료");
               this.$router.go();
             }
           })
-          .catch((err) => {
+          .catch(err => {
             if (err.response.status === 401) {
+              console.log(err);
               alert("세션이 만료되어 홈 화면으로 이동합니다.");
               this.setLogout();
             }
           });
       }
     },
-    ...mapMutations(["setLogout"]),
-  },
+    ...mapMutations(["setLogout"])
+  }
 };
 </script>
 

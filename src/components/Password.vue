@@ -1,9 +1,11 @@
 <template>
   <div>
     <v-dialog v-model="dialog" width="500">
-      <template v-slot:activator="{on, attrs}">
+      <template v-slot:activator="{ on, attrs }">
         <v-card height="200" light="light" class="pa-5">
-          <v-card-title primary="primary" class="com-title justify-center">비밀번호</v-card-title>
+          <v-card-title primary="primary" class="com-title justify-center"
+            >비밀번호</v-card-title
+          >
 
           <v-card-actions class="justify-center">
             <v-btn
@@ -13,7 +15,8 @@
               dark="dark"
               class="btn btn-dark m-3 mt-1"
               @click="openDialog"
-            >변경</v-btn>
+              >변경</v-btn
+            >
           </v-card-actions>
         </v-card>
       </template>
@@ -24,11 +27,26 @@
         <v-divider></v-divider>
 
         <v-col>
-          <v-text-field type="password" v-model="before" placeholder="이전 비밀번호" solo="solo"></v-text-field>
+          <v-text-field
+            type="password"
+            v-model="before"
+            placeholder="이전 비밀번호"
+            solo="solo"
+          ></v-text-field>
 
-          <v-text-field type="password" v-model="after" placeholder="새 비밀번호" solo="solo"></v-text-field>
+          <v-text-field
+            type="password"
+            v-model="after"
+            placeholder="새 비밀번호"
+            solo="solo"
+          ></v-text-field>
 
-          <v-text-field type="password" v-model="checkafter" placeholder="비밀번호 확인" solo="solo"></v-text-field>
+          <v-text-field
+            type="password"
+            v-model="checkafter"
+            placeholder="비밀번호 확인"
+            solo="solo"
+          ></v-text-field>
         </v-col>
 
         <v-divider></v-divider>
@@ -45,7 +63,7 @@
           <p style="color:white !important;">Error</p>
         </v-card-title>
         <ul class="mt-5">
-          <li v-for="(error,i) in errMsg" :key="i">{{error}}</li>
+          <li v-for="(error, i) in errMsg" :key="i">{{ error }}</li>
         </ul>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -57,8 +75,8 @@
 </template>
 
 <script>
-import ipObj from "../key";
 import { mapMutations } from "vuex";
+import { SubmitPasswordApi } from "../api/api.js";
 export default {
   data: () => ({
     dialog: false,
@@ -68,7 +86,7 @@ export default {
     after: "",
     checkafter: "",
 
-    errMsg: [],
+    errMsg: []
   }),
 
   methods: {
@@ -92,40 +110,27 @@ export default {
         // errString.concat("\n"); } alert(errString);
         this.dialog2 = true;
       } else {
-        let sendObj = {
-          currentPW: this.before,
-          changePW: this.after,
-        };
-
-        let config = {
-          headers: {
-            token: sessionStorage.getItem("token"),
-          },
-        };
-
-        this.axios
-          .put(`${ipObj.ip}/api/mypage/pw/update`, sendObj, config)
-          .then((res) => {
+        SubmitPasswordApi(this.before, this.after)
+          .then(res => {
             if (res.status === 200) {
               alert("비밀번호 변경 완료!");
               this.dialog = false;
               // this.$router.go();
             }
           })
-          .catch((err) => {
+          .catch(err => {
             if (err.response.status === 400) {
               this.errMsg.push("비밀번호가 틀립니다!");
               this.dialog2 = true;
-            }
-            else if (err.response.status === 401) {
+            } else if (err.response.status === 401) {
               alert("세션이 만료되어 홈 화면으로 이동합니다.");
               this.setLogout();
             }
           });
       }
     },
-    ...mapMutations(["setLogout"]),
-  },
+    ...mapMutations(["setLogout"])
+  }
 };
 </script>
 <style scoped="scoped">

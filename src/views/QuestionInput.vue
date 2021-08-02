@@ -13,7 +13,11 @@
                 <v-alert outlined color="#365164">
                   <v-row>
                     <v-col>
-                      <v-text-field color="rgb(80,130,155)" label="질문 제목" v-model="title" />
+                      <v-text-field
+                        color="rgb(80,130,155)"
+                        label="질문 제목"
+                        v-model="title"
+                      />
                     </v-col>
                   </v-row>
 
@@ -50,7 +54,13 @@
 
                   <v-row class="justify-end">
                     <v-col cols="12" md="3" class="text-right">
-                      <v-btn @click="writeConents" color="#50829b" class="white--text" block>작성 완료</v-btn>
+                      <v-btn
+                        @click="writeConents"
+                        color="#50829b"
+                        class="white--text"
+                        block
+                        >작성 완료</v-btn
+                      >
                     </v-col>
                   </v-row>
                 </v-alert>
@@ -64,12 +74,13 @@
 </template>
 
 <script>
-import ipObj from "../key";
+// import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 import { mapMutations } from "vuex";
+import { QuestionInputwriteConentsApi } from "../api/api.js";
 export default {
   components: {
-    SubTitle,
+    SubTitle
   },
   data() {
     return {
@@ -77,16 +88,16 @@ export default {
       errorMsg: [],
       files: [],
       rules: [
-        (value) =>
+        value =>
           !value ||
           value.size < 2000000 ||
-          "Avatar size should be less than 2 MB!",
+          "Avatar size should be less than 2 MB!"
       ],
       contents: "",
       subTitleObj: {
         title: "✍질문 작성",
-        contents: "질문을 작성하는 공간입니다.",
-      },
+        contents: "질문을 작성하는 공간입니다."
+      }
     };
   },
   methods: {
@@ -95,7 +106,7 @@ export default {
       this.memberNum = "";
     },
     delMember(member) {
-      this.members = this.members.filter((el) => el !== member);
+      this.members = this.members.filter(el => el !== member);
     },
     writeConents() {
       this.errorMsg = [];
@@ -118,17 +129,18 @@ export default {
         form.append("title", this.title);
         form.append("contents", this.contents);
         form.append("image", this.files);
-        this.axios
-          .post(`${ipObj.ip}/api/question`, form, {
-            headers: {
-              token: sessionStorage.getItem("token"),
-            },
-          })
+        QuestionInputwriteConentsApi(form)
+          // this.axios
+          //   .post(`${ipObj.ip}/api/question`, form, {
+          //     headers: {
+          //       token: sessionStorage.getItem("token"),
+          //     },
+          //   })
           .then(() => {
             alert("작성 완료");
             this.$router.push({ name: "QnAList" });
           })
-          .catch((err) => {
+          .catch(err => {
             if (err.response.status === 401) {
               alert("세션이 만료되어 홈 화면으로 이동합니다.");
               this.setLogout();
@@ -137,8 +149,8 @@ export default {
           });
       }
     },
-    ...mapMutations(["setLogout"]),
-  },
+    ...mapMutations(["setLogout"])
+  }
 };
 </script>
 

@@ -1,15 +1,18 @@
 <template>
   <div>
     <v-card height="200" light="light" class="pa-5">
-      <v-card-title primary="primary" class="com-title justify-center">학번+이름</v-card-title>
-      <v-card-text class="show mt-4 text-center">{{outputNick}}</v-card-text>
+      <v-card-title primary="primary" class="com-title justify-center"
+        >학번+이름</v-card-title
+      >
+      <v-card-text class="show mt-4 text-center">{{ outputNick }}</v-card-text>
     </v-card>
   </div>
 </template>
 
 <script>
-import ipObj from "../key";
+// import ipObj from "../key.js";
 import { mapMutations } from "vuex";
+import { InitNicknameApi } from "../api/api.js";
 export default {
   data() {
     return { outputNick: "" };
@@ -19,19 +22,16 @@ export default {
   },
   methods: {
     initNickName() {
-      let config = {
-        headers: {
-          token: sessionStorage.getItem("token"),
-        },
-      };
-
-      this.axios.get(`${ipObj.ip}/api/mypage`, config)
-      .then((res) => {
-        this.outputNick = res.data.student.nick;
-      });
+      InitNicknameApi()
+        .then(res => {
+          this.outputNick = res.data.student.nick;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
-    ...mapMutations(["setLogout"]),
-  },
+    ...mapMutations(["setLogout"])
+  }
 };
 </script>
 

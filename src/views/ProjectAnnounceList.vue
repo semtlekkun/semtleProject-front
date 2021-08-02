@@ -7,14 +7,18 @@
       <v-col cols="12" md="8" lg="8" xl="9">
         <v-row class="text-right" v-if="this.isLogin">
           <v-col class="my-0 py-0">
-            <router-link :to="{name:'projectAnnounceWrite'}">
+            <router-link :to="{ name: 'projectAnnounceWrite' }">
               <v-btn rounded depressed class="customBtn">글쓰기</v-btn>
             </router-link>
           </v-col>
         </v-row>
         <v-row>
           <v-col class="my-0 py-0">
-            <Table :perPage="10" tableName="projectAnnounce" :contents="contents" />
+            <Table
+              :perPage="10"
+              tableName="projectAnnounce"
+              :contents="contents"
+            />
           </v-col>
         </v-row>
       </v-col>
@@ -23,16 +27,15 @@
 </template>
 
 <script>
-import ipObj from "../key";
 import Table from "../components/Table.vue";
 import SubTitle from "../components/SubTitle.vue";
+import { getRecruitListApi } from "../api/api.js";
 export default {
   created() {
     this.checkLogin();
-    this.axios
-      .get(`${ipObj.ip}/api/recruit/list`)
-      .then((res) => {
-        console.log(res)
+    getRecruitListApi()
+      .then(res => {
+        console.log(res);
         if (res.status === 200) {
           res.data.recruitList.forEach((item, index) => {
             let obj = new Object();
@@ -45,13 +48,13 @@ export default {
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   components: {
     Table,
-    SubTitle,
+    SubTitle
   },
   data() {
     return {
@@ -59,8 +62,8 @@ export default {
       isLogin: "",
       subTitleObj: {
         title: "📝프로젝트 공고",
-        contents: "프로젝트 인원을 모집하는 공간입니다.",
-      },
+        contents: "프로젝트 인원을 모집하는 공간입니다."
+      }
     };
   },
 
@@ -73,10 +76,9 @@ export default {
       } else {
         return (this.isLogin = true);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

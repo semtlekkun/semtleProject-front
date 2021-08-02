@@ -7,8 +7,10 @@
       <v-col cols="12" md="8" lg="8" xl="9">
         <v-row class="text-right">
           <v-col class="my-0 py-0">
-            <router-link :to="{name:'QuestionInput'}">
-              <v-btn rounded depressed class="customBtn" v-show="this.isLogin">글쓰기</v-btn>
+            <router-link :to="{ name: 'QuestionInput' }">
+              <v-btn rounded depressed class="customBtn" v-show="this.isLogin"
+                >글쓰기</v-btn
+              >
             </router-link>
           </v-col>
         </v-row>
@@ -23,16 +25,18 @@
 </template>
 
 <script>
-import ipObj from "../key";
+// import ipObj from "../key";
 import Table from "../components/Table.vue";
 import SubTitle from "../components/SubTitle.vue";
+import { initQnAQuestionListApi } from "../api/api.js";
 
 export default {
   created() {
     this.checkLogin();
-    this.axios
-      .get(`${ipObj.ip}/api/question/list`)
-      .then((res) => {
+    initQnAQuestionListApi()
+      // this.axios
+      //   .get(`${ipObj.ip}/api/question/list`)
+      .then(res => {
         if (res.status === 200) {
           this.contents = [];
           res.data.questionList.forEach((item, index) => {
@@ -46,22 +50,22 @@ export default {
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   components: {
     Table,
-    SubTitle,
+    SubTitle
   },
   data() {
     return {
       subTitleObj: {
         isLogin: "",
         title: "❓Q&A 목록",
-        contents: "질문과 답변을 올리는 공간입니다.",
+        contents: "질문과 답변을 올리는 공간입니다."
       },
-      contents: [],
+      contents: []
     };
   },
   methods: {
@@ -73,10 +77,9 @@ export default {
       } else {
         return (this.isLogin = true);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

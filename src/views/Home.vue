@@ -24,7 +24,11 @@
             </router-link>
           </v-col>
         </v-row>
-        <Table :perPage="5" tableName="projectAnnounce" :contents="projectAnnounceContents" />
+        <Table
+          :perPage="5"
+          tableName="projectAnnounce"
+          :contents="projectAnnounceContents"
+        />
       </v-col>
 
       <v-col>
@@ -39,7 +43,14 @@
           </v-col>
         </v-row>
         <v-row id="projectView">
-          <v-col xs="12" md="12" lg="6" xl="4" v-for="item in cardViewList" :key="item._id">
+          <v-col
+            xs="12"
+            md="12"
+            lg="6"
+            xl="4"
+            v-for="item in cardViewList"
+            :key="item._id"
+          >
             <CardView :contentsObj="item" />
           </v-col>
         </v-row>
@@ -52,12 +63,16 @@
 import ipObj from "../key";
 import CardView from "../components/CardView.vue";
 import Table from "../components/Table.vue";
+import {
+  getNoticeListApi,
+  getRecruitListApi,
+  getPfListApi
+} from "../api/api.js";
 
 export default {
   created() {
-    this.axios
-      .get(`${ipObj.ip}/api/notice/list`)
-      .then((res) => {
+    getNoticeListApi()
+      .then(res => {
         if (res.status === 200) {
           this.noticeContents = [];
           res.data.noticeList.forEach((item, index) => {
@@ -71,13 +86,12 @@ export default {
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
 
-    this.axios
-      .get(`${ipObj.ip}/api/recruit/list`)
-      .then((res) => {
+    getRecruitListApi()
+      .then(res => {
         if (res.status === 200) {
           this.projectAnnounceContents = [];
           res.data.recruitList.forEach((item, index) => {
@@ -91,11 +105,11 @@ export default {
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
 
-    this.axios.get(`${ipObj.ip}/api/pf/list/1`).then((res) => {
+    getPfListApi().then(res => {
       // console.log(res)
       if (res.status === 200) {
         this.cardViewList = [];
@@ -115,15 +129,15 @@ export default {
   },
   components: {
     CardView,
-    Table,
+    Table
   },
   data() {
     return {
       noticeContents: [],
       projectAnnounceContents: [],
-      cardViewList: [],
+      cardViewList: []
     };
-  },
+  }
 };
 </script>
 
