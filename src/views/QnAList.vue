@@ -25,7 +25,6 @@
 </template>
 
 <script>
-// import ipObj from "../key";
 import Table from "../components/Table.vue";
 import SubTitle from "../components/SubTitle.vue";
 import { initQnAQuestionListApi } from "../api/api.js";
@@ -34,8 +33,6 @@ export default {
   created() {
     this.checkLogin();
     initQnAQuestionListApi()
-      // this.axios
-      //   .get(`${ipObj.ip}/api/question/list`)
       .then(res => {
         if (res.status === 200) {
           this.contents = [];
