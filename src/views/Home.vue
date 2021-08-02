@@ -57,7 +57,31 @@
       </v-col>
     </v-row>
 
-    <PhotoContainer />
+    <v-row>
+      <v-col>
+        <h1>📸 활동 사진</h1>
+      </v-col>
+      <v-col class="text-right my-auto">
+        <router-link to="/photo/list">
+          <v-btn rounded depressed class="customBtn">더보기</v-btn>
+        </router-link>
+      </v-col>
+    </v-row>
+    <v-row class="photoContainer">
+      <v-col
+        cols="4"
+        lg="2"
+        md="2"
+        sm="4"
+        xs="4"
+        v-for="photo in photoContents"
+        :key="photo._id"
+      >
+        <router-link :to="{ name: 'photo', params: { id: photo._id } }">
+          <v-img :src="photo.imgSrc"></v-img>
+        </router-link>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -65,18 +89,18 @@
 import ipObj from "../key";
 import CardView from "../components/CardView.vue";
 import Table from "../components/Table.vue";
-import PhotoContainer from "../components/PhotoContainer.vue";
 
 export default {
   created() {
+    // 공지사항
     this.axios
       .get(`${ipObj.ip}/api/notice/list`)
       .then((res) => {
         if (res.status === 200) {
           this.noticeContents = [];
-          res.data.noticeList.forEach((item, index) => {
+          res.data.noticeList.forEach((item) => {
             let obj = new Object();
-            obj.number = index + 1;
+            obj.number = res.data.count--;
             obj.title = item.title;
             obj.writer = item.writer;
             obj.date = item.date;
@@ -89,14 +113,15 @@ export default {
         console.log(err);
       });
 
+    // 프로젝트 공고
     this.axios
       .get(`${ipObj.ip}/api/recruit/list`)
       .then((res) => {
         if (res.status === 200) {
           this.projectAnnounceContents = [];
-          res.data.recruitList.forEach((item, index) => {
+          res.data.recruitList.forEach((item) => {
             let obj = new Object();
-            obj.number = index + 1;
+            obj.number = res.data.count--;
             obj.title = item.title;
             obj.writer = item.writer;
             obj.date = item.date;
@@ -109,13 +134,14 @@ export default {
         console.log(err);
       });
 
+    // 최근 프로젝트
     this.axios.get(`${ipObj.ip}/api/pf/list/1`).then((res) => {
       // console.log(res)
       if (res.status === 200) {
         this.cardViewList = [];
-        res.data.projectList.forEach((item, index) => {
+        res.data.projectList.forEach((item) => {
           let obj = new Object();
-          obj.number = index + 1;
+          obj.number = res.data.count--;
           obj.title = item.projectTitle;
           obj.teamName = item.projectTeamName;
           obj.date = item.date;
@@ -126,17 +152,42 @@ export default {
         });
       }
     });
+
+    // 활동 사진
+    this.axios
+      .get(`${ipObj.ip}/api/photo/list`)
+      .then((res) => {
+        if (res.status === 200) {
+          this.photoContents = [];
+          res.data.photoList.forEach((item) => {
+            // 최근 6개만
+            if (this.photoContents.length < 6) {
+              let obj = new Object();
+              obj.number = res.data.count--;
+              obj.title = item.title;
+              obj.writer = item.writer;
+              obj.date = item.date;
+              obj._id = item._id;
+              obj.imgSrc = `${ipObj.ip}/api/photo/images/` + item.photo[0];
+              this.photoContents.push(obj);
+            }
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   components: {
     CardView,
     Table,
-    PhotoContainer,
   },
   data() {
     return {
       noticeContents: [],
       projectAnnounceContents: [],
       cardViewList: [],
+      photoContents: [],
     };
   },
 };
