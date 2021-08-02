@@ -1,19 +1,31 @@
 <template>
-  <v-row class="photoContainer">
-    <v-col
-      cols="4"
-      lg="2"
-      md="2"
-      sm="4"
-      xs="4"
-      v-for="(photo, idx) in photoList"
-      :key="idx"
-    >
-      <router-link :to="photo.url">
-        <v-img :src="photo.thumbNail"></v-img>
-      </router-link>
-    </v-col>
-  </v-row>
+  <div>
+    <v-row>
+      <v-col>
+        <h1>📸 활동 사진</h1>
+      </v-col>
+      <v-col class="text-right my-auto">
+        <router-link to="/photo/list">
+          <v-btn rounded depressed class="customBtn">더보기</v-btn>
+        </router-link>
+      </v-col>
+    </v-row>
+    <v-row class="photoContainer">
+      <v-col
+        cols="4"
+        lg="2"
+        md="2"
+        sm="4"
+        xs="4"
+        v-for="(photo, idx) in photoList"
+        :key="idx"
+      >
+        <router-link :to="photo.url">
+          <v-img :src="photo.thumbNail"></v-img>
+        </router-link>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 <script>
 import DummyImage from "../assets/쿼카.jpg";
