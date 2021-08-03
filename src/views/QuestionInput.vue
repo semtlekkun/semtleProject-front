@@ -74,7 +74,6 @@
 </template>
 
 <script>
-// import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 import { mapMutations } from "vuex";
 import { QuestionInputwriteConentsApi } from "../api/api.js";
@@ -130,12 +129,6 @@ export default {
         form.append("contents", this.contents);
         form.append("image", this.files);
         QuestionInputwriteConentsApi(form)
-          // this.axios
-          //   .post(`${ipObj.ip}/api/question`, form, {
-          //     headers: {
-          //       token: sessionStorage.getItem("token"),
-          //     },
-          //   })
           .then(() => {
             alert("작성 완료");
             this.$router.push({ name: "QnAList" });

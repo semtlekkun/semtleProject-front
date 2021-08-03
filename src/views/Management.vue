@@ -87,8 +87,6 @@ export default {
   methods: {
     getData() {
       ManagementgetDataApi()
-        // axios
-        //   .get(`${ipObj.ip}/api/management/list`)
         .then(res => {
           this.CadreList = [];
           var managementList = res.data.management;

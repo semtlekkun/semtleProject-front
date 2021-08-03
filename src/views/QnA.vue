@@ -33,7 +33,6 @@
 
 <script>
 import ipObj from "../key";
-
 import CommentList from "../components/CommentList";
 import CommentForm from "../components/CommentForm";
 import Question from "../components/Question";
@@ -43,8 +42,6 @@ export default {
   created() {
     let id = this.$route.params.id;
     initQnAQuestionApi(id)
-      // this.axios
-      //   .get(`${ipObj.ip}/api/question/${id}`)
       .then(res => {
         if (res.status === 200) {
           this.QuestionData = {
@@ -66,8 +63,6 @@ export default {
       });
 
     initQnAAnswerApi(id)
-      // this.axios
-      //   .get(`${ipObj.ip}/api/answer/${id}`)
       .then(res => {
         if (res.status === 200) {
           res.data.answers.forEach(el => {
