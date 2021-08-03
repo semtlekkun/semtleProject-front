@@ -41,6 +41,10 @@ export default {
   data() {
     return {};
   },
+
+  created() {
+    console.log(this.contentsObj.contents);
+  },
   methods: {},
 };
 </script>
