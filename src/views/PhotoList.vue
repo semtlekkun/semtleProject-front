@@ -120,13 +120,11 @@ export default {
 
   watch: {
     curPage: function () {
-      if (this.curPage === this.pageLength) this.curContents = [];
-      else {
-        this.curContents = this.contents.slice(
-          (this.curPage - 1) * 6,
-          (this.curPage - 1) * 6 + 6
-        );
-      }
+      let count = this.curPage - 1;
+      // 마지막 페이지 예외처리
+      if (this.curPage === this.pageLength)
+        this.curContents = this.contents.slice(count * 6, this.contents.length);
+      else this.curContents = this.contents.slice(count * 6, count * 6 + 6);
     },
   },
 };
