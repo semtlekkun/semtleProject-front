@@ -1,6 +1,6 @@
 <template>
   <router-link :to="{ name: 'photo', params: { id: item._id } }">
-    <v-card height="300" max-height="300" max-width="250" class="mx-auto">
+    <v-card height="318" max-height="318" max-width="344" class="mx-auto">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="com-title">
