@@ -98,7 +98,7 @@ export default {
     contents: "",
     subTitleObj: {
       title: "📸활동 사진",
-        contents: "셈틀꾼의 활동 사진을 올리는 공간입니다.",
+      contents: "셈틀꾼의 활동 사진을 올리는 공간입니다.",
     },
 
     isImage: true,

@@ -67,7 +67,7 @@
         </router-link>
       </v-col>
     </v-row>
-    <v-row class="photoContainer">
+    <v-row class="photoContainer mb-7">
       <v-col
         cols="4"
         lg="2"

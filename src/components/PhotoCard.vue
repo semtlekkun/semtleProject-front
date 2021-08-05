@@ -13,17 +13,6 @@
       </v-list-item>
 
       <v-img :src="item.image" height="194"></v-img>
-
-      <v-card-text>
-        <span
-          v-for="(text, index) in item.contents"
-          :key="text.index"
-          v-show="index < 10"
-        >
-          {{ text }}
-        </span>
-        <span v-if="item.contents.length > 10">...</span>
-      </v-card-text>
     </v-card>
   </router-link>
 </template>
