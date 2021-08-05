@@ -35,7 +35,7 @@
         </v-row>
       </v-col>
     </v-row>
-    <div class="text-center pt-2">
+    <div class="text-center pb-3">
       <v-pagination
         v-model="page"
         :length="pageCount"
