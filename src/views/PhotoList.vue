@@ -6,8 +6,16 @@
       </v-col>
       <v-col cols="12" md="8" lg="8" xl="9">
         <v-row>
-          <v-col cols="12" md="4" lg="4" xl="4" sm="6">
-            <router-link to="">
+          <v-col
+            v-for="item in contents"
+            :key="item._id"
+            cols="12"
+            md="4"
+            lg="4"
+            xl="4"
+            sm="6"
+          >
+            <router-link :to="{ name: 'photo', params: { id: item._id } }">
               <v-card
                 height="300"
                 max-height="300"
@@ -17,17 +25,25 @@
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-title class="com-title">
-                      제목
+                      {{ item.title }}
                     </v-list-item-title>
-                    <v-list-item-subtitle> 날짜 </v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                      {{ item.date }}
+                    </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
 
-                <v-img src="../assets/쿼카.jpg" height="194"></v-img>
+                <v-img :src="item.image" height="194"></v-img>
 
                 <v-card-text>
-                  <span> 텍스트 </span>
-                  <span>10자 넘으면...</span>
+                  <span
+                    v-for="(text, index) in item.contents"
+                    :key="text.index"
+                    v-show="index < 10"
+                  >
+                    {{ text }}
+                  </span>
+                  <span v-if="item.contents.length > 10">...</span>
                 </v-card-text>
               </v-card>
             </router-link>
@@ -43,16 +59,6 @@
       ></v-pagination>
     </div>
   </v-container>
-  <!-- <v-container class="px-0">
-    <v-row>
-      <v-col cols="12" md="4" lg="4" xl="3">
-        <SubTitle :subTitleObj="subTitleObj" />
-      </v-col>
-      <v-col cols="12" md="8" lg="8" xl="9">
-        <Table :perPage="10" tableName="photo" :contents="contents" />
-      </v-col>
-    </v-row>
-  </v-container> -->
 </template>
 
 <script>
@@ -66,12 +72,14 @@ export default {
       .then((res) => {
         if (res.status === 200) {
           this.contents = [];
+          console.log(res.data.photoList);
+
           res.data.photoList.forEach((item) => {
             let obj = new Object();
             obj.title = item.title;
             obj.date = item.date;
-            // 추가해주세용
-            obj.image = item.image;
+            obj.contents = item.contents;
+            obj.image = `${ipObj.ip}/api/photo/images/` + item.image;
             obj._id = item._id;
             this.contents.push(obj);
           });

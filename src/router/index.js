@@ -34,6 +34,13 @@ const routes = [
     name: "QnA",
     component: () => import("../views/QnA.vue")
   },
+
+  {
+    path: "/photo/detail/:id",
+    name: "photo",
+    component: () => import("../views/Photo.vue")
+  },
+
   {
     path: "/qna/list",
     name: "QnAList",

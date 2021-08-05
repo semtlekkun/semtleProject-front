@@ -38,14 +38,6 @@ export default {
   props: {
     contentsObj: Object,
   },
-  data() {
-    return {};
-  },
-
-  created() {
-    console.log(this.contentsObj.contents);
-  },
-  methods: {},
 };
 </script>
 
