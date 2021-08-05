@@ -7,7 +7,7 @@
       <v-col cols="12" md="8" lg="8" xl="9">
         <v-row>
           <v-col
-            v-for="item in contents"
+            v-for="item in curContents"
             :key="item._id"
             cols="12"
             md="4"
@@ -51,10 +51,12 @@
         </v-row>
       </v-col>
     </v-row>
+
     <div class="text-center pb-3">
       <v-pagination
-        v-model="page"
-        :length="pageCount"
+        :value="curPage"
+        v-model="curPage"
+        :length="pageLength"
         color="#50829b"
       ></v-pagination>
     </div>
@@ -72,6 +74,7 @@ export default {
       .then((res) => {
         if (res.status === 200) {
           this.contents = [];
+
           console.log(res.data.photoList);
 
           res.data.photoList.forEach((item) => {
@@ -83,6 +86,16 @@ export default {
             obj._id = item._id;
             this.contents.push(obj);
           });
+
+          this.pageLength = Math.ceil(this.contents.length / 6);
+
+          // 사진이 5장 이하라면
+          if (this.contents.length < 6) this.curContents = this.contents;
+          // 사진이 6장 이상이라면
+          else {
+            // 최초의 1번 페이지를 할당
+            this.curContents = this.contents.slice(0, 6);
+          }
         }
       })
       .catch((err) => {
@@ -95,13 +108,26 @@ export default {
   data() {
     return {
       contents: [],
-      page: 1,
-      pageCount: 0,
+      curPage: 1,
+      pageLength: 0,
+      curContents: [],
       subTitleObj: {
         title: "📸활동 사진",
         contents: "셈틀꾼의 활동 사진을 올리는 공간입니다.",
       },
     };
+  },
+
+  watch: {
+    curPage: function () {
+      if (this.curPage === this.pageLength) this.curContents = [];
+      else {
+        this.curContents = this.contents.slice(
+          (this.curPage - 1) * 6,
+          (this.curPage - 1) * 6 + 6
+        );
+      }
+    },
   },
 };
 </script>
