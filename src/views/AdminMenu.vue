@@ -24,6 +24,13 @@
         </router-link>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col>
+        <router-link to="/admin/photo">
+          <v-btn class="py-10" block>활동 사진 관리</v-btn>
+        </router-link>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

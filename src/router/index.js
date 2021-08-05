@@ -1,120 +1,135 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+import Vue from "vue";
+import VueRouter from "vue-router";
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: () => import('../views/Home.vue')
+    path: "/",
+    name: "Home",
+    component: () => import("../views/Home.vue")
   },
   {
-    path: '/management',
-    name: 'Management',
-    component: () => import('../views/Management.vue')
+    path: "/management",
+    name: "Management",
+    component: () => import("../views/Management.vue")
   },
   {
-    path: '/notice/detail/:id',
-    name: 'notice',
-    component: () => import('../views/Notice.vue')
+    path: "/notice/detail/:id",
+    name: "notice",
+    component: () => import("../views/Notice.vue")
   },
   {
-    path: '/project/input',
-    name: 'projectInput',
-    component: () => import('../views/ProjectInput.vue')
+    path: "/project/input",
+    name: "projectInput",
+    component: () => import("../views/ProjectInput.vue")
   },
   {
-    path: '/project/detail/:id',
-    name: 'project',
-    component: () => import('../views/ProjectView.vue'),
+    path: "/project/detail/:id",
+    name: "project",
+    component: () => import("../views/ProjectView.vue"),
     props: true
   },
   {
-    path: '/qna/detail/:id',
-    name: 'QnA',
-    component: () => import('../views/QnA.vue')
-  },
-  {
-    path: '/qna/list',
-    name: 'QnAList',
-    component: () => import('../views/QnAList.vue')
-  },
-  {
-    path: '/qna/input',
-    name: 'QuestionInput',
-    component: () => import('../views/QuestionInput.vue')
-  },
-  {
-    path: '/admin/notice',
-    name: 'adminNotice',
-    component: () => import('../views/AdminNotice.vue')
-  },
-  {
-    path: '/admin/member',
-    name: 'adminMember',
-    component: () => import('../views/AdminMember.vue')
-  },
-  {
-    path: '/project/announce/write',
-    name: 'projectAnnounceWrite',
-    component: () => import('../views/ProjectAnnounceWrite.vue')
-  },
-  {
-    path: '/project/announce/detail/:id',
-    name: 'projectAnnounceRead',
-    component: () => import('../views/ProjectAnnounceRead.vue')
-  },
-  {
-    path: '/mypage',
-    name: 'myPage',
-    component: () => import('../views/MyPage.vue')
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/Login.vue')
-  },
-  {
-    path: '/management',
-    name: 'management',
-    component: () => import('../views/Management.vue')
-  },
-  {
-    path: '/project/list',
-    name: 'projectList',
-    component: () => import('../views/ProjectList.vue')
-  },
-  {
-    path: '/notice/list',
-    name: 'noticeList',
-    component: () => import('../views/NoticeList.vue')
-  },
-  {
-    path: '/project/announce/list',
-    name: 'projectAnnounceList',
-    component: () => import('../views/ProjectAnnounceList.vue')
-  },
-  {
-    path: '/admin/menu',
-    name: 'adminMenu',
-    component: () => import('../views/AdminMenu.vue')
-  },
-  {
-    path: '/admin/modify',
-    name: 'adminModify',
-    component: () => import('../views/AdminModify.vue')
+    path: "/qna/detail/:id",
+    name: "QnA",
+    component: () => import("../views/QnA.vue")
   },
 
+  {
+    path: "/photo/detail/:id",
+    name: "photo",
+    component: () => import("../views/Photo.vue")
+  },
 
-]
+  {
+    path: "/qna/list",
+    name: "QnAList",
+    component: () => import("../views/QnAList.vue")
+  },
+  {
+    path: "/qna/input",
+    name: "QuestionInput",
+    component: () => import("../views/QuestionInput.vue")
+  },
+  {
+    path: "/admin/notice",
+    name: "adminNotice",
+    component: () => import("../views/AdminNotice.vue")
+  },
+  {
+    path: "/admin/member",
+    name: "adminMember",
+    component: () => import("../views/AdminMember.vue")
+  },
+  {
+    path: "/project/announce/write",
+    name: "projectAnnounceWrite",
+    component: () => import("../views/ProjectAnnounceWrite.vue")
+  },
+  {
+    path: "/project/announce/detail/:id",
+    name: "projectAnnounceRead",
+    component: () => import("../views/ProjectAnnounceRead.vue")
+  },
+  {
+    path: "/mypage",
+    name: "myPage",
+    component: () => import("../views/MyPage.vue")
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/Login.vue")
+  },
+  {
+    path: "/management",
+    name: "management",
+    component: () => import("../views/Management.vue")
+  },
+  {
+    path: "/project/list",
+    name: "projectList",
+    component: () => import("../views/ProjectList.vue")
+  },
+  {
+    path: "/notice/list",
+    name: "noticeList",
+    component: () => import("../views/NoticeList.vue")
+  },
+  {
+    path: "/project/announce/list",
+    name: "projectAnnounceList",
+    component: () => import("../views/ProjectAnnounceList.vue")
+  },
+  {
+    path: "/photo/list",
+    name: "photoList",
+    component: () => import("../views/PhotoList.vue")
+  },
+  {
+    path: "/admin/menu",
+    name: "adminMenu",
+    component: () => import("../views/AdminMenu.vue")
+  },
+  {
+    path: "/admin/modify",
+    name: "adminModify",
+    component: () => import("../views/AdminModify.vue")
+  },
+  {
+    path: "/admin/photo",
+    name: "adminPhoto",
+    component: () => import("../views/AdminPhoto.vue")
+  }
+];
 
 const router = new VueRouter({
   scrollBehavior() {
-    return { x: 0, y: 0 }
+    return { x: 0, y: 0 };
   },
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;

@@ -22,9 +22,9 @@ export default {
       .then((res) => {
         if (res.status === 200) {
           this.contents = [];
-          res.data.noticeList.forEach((item, index) => {
+          res.data.noticeList.forEach((item) => {
             let obj = new Object();
-            obj.number = index + 1;
+            obj.number = res.data.count--;
             obj.title = item.title;
             obj.writer = item.writer;
             obj.date = item.date;

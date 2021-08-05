@@ -7,7 +7,7 @@
       <v-col cols="12" md="8" lg="8" xl="9">
         <v-row class="text-right">
           <v-col class="my-0 py-0">
-            <router-link :to="{name:'projectInput'}" v-show="this.isLogin">
+            <router-link :to="{ name: 'projectInput' }" v-show="this.isLogin">
               <v-btn rounded depressed class="customBtn">글쓰기</v-btn>
             </router-link>
           </v-col>
@@ -34,9 +34,9 @@ export default {
       .then((res) => {
         if (res.status === 200) {
           this.contents = [];
-          res.data.portfolioList.forEach((item, index) => {
+          res.data.portfolioList.forEach((item) => {
             let obj = new Object();
-            obj.number = index + 1;
+            obj.number = res.data.count--;
             obj.title = item.projectTitle;
             obj.writer = item.writer;
             obj.date = item.date;

@@ -5,7 +5,7 @@
         <SubTitle :subTitleObj="subTitleObj" />
       </v-col>
       <v-col cols="12" lg="9">
-        <div id="noticeRead">
+        <div id="photoRead">
           <v-container class="px-0">
             <v-row>
               <v-col cols="12">
@@ -18,11 +18,11 @@
                         }}</v-card-title>
                       </v-col>
                       <v-col class="text-right" cols="12" v-show="admin">
-                        <v-btn color="error" @click="deleteNotice">삭제</v-btn>
+                        <v-btn color="error" @click="deletePhoto">삭제</v-btn>
                       </v-col>
                     </v-row>
                     <v-divider class="mb-2"></v-divider>
-                    <ul class="noticeInfo">
+                    <ul class="photoInfo">
                       <li>
                         <b>작성자</b>
                         {{ writer }}
@@ -67,26 +67,19 @@ import VueMarkdown from "vue-markdown";
 export default {
   created() {
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
-    this.noticeID = this.$route.params.id;
+    this.photoID = this.$route.params.id;
     this.axios
-      .get(`${ipObj.ip}/api/notice/${this.noticeID}`)
+      .get(`${ipObj.ip}/api/photo/${this.photoID}`)
       .then((res) => {
         if (res.status === 200) {
-          this.title = res.data.notice.title;
-          this.writer = res.data.notice.writer;
-          this.views = res.data.notice.view;
-          this.date = res.data.notice.date;
-          this.contents = res.data.notice.contents;
-          this.imageUrl = `${ipObj.ip}/api/notice/images/`.concat(
-            res.data.notice.image
+          this.title = res.data.photo.title;
+          this.writer = res.data.photo.writer;
+          this.views = res.data.photo.view;
+          this.date = res.data.photo.date;
+          this.contents = res.data.photo.contents;
+          this.imageUrl = `${ipObj.ip}/api/photo/images/`.concat(
+            res.data.photo.image
           );
-          // 이미지도 추가
-          if (
-            this.imageUrl ===
-            "http://sbmi.iptime.org:3000/api/notice/images/null"
-          ) {
-            this.isImage = false;
-          }
         }
       })
       .catch((err) => {
@@ -95,7 +88,7 @@ export default {
   },
   data: () => ({
     admin: false,
-    noticeID: "",
+    photoID: "",
     title: "",
     writer: "",
     date: "",
@@ -104,8 +97,8 @@ export default {
 
     contents: "",
     subTitleObj: {
-      title: "📌공지사항",
-      contents: "셈틀꾼의 공지사항을 올리는 공간입니다.",
+      title: "📸활동 사진",
+      contents: "셈틀꾼의 활동 사진을 올리는 공간입니다.",
     },
 
     isImage: true,
@@ -116,18 +109,18 @@ export default {
     VueMarkdown,
   },
   methods: {
-    deleteNotice() {
+    deletePhoto() {
       let result = confirm("정말로 삭제하시겠습니까?");
       if (result) {
         this.axios
-          .delete(`${ipObj.ip}/api/notice/${this.noticeID}`, {
+          .delete(`${ipObj.ip}/api/photo/${this.photoID}`, {
             headers: {
               token: sessionStorage.getItem("token"),
             },
           })
           .then((res) => {
             if (res.status === 200) {
-              this.$router.push({ name: "noticeList" });
+              this.$router.push({ name: "photoList" });
             }
           });
       }
@@ -137,21 +130,21 @@ export default {
 </script>
 
 <style>
-#noticeRead hr {
+#photoRead hr {
   border-top: 1px solid #365164;
 }
-#noticeRead b {
+#photoRead b {
   margin-right: 3px;
 }
-#noticeRead ul {
+#photoRead ul {
   padding-left: 15px;
   font-size: 12px;
 }
-.noticeInfo {
+.photoInfo {
   color: gray;
   margin-bottom: 30px;
 }
-.noticeInfo li {
+.photoInfo li {
   list-style: none;
   display: inline;
   margin-right: 10px;

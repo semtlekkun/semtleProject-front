@@ -4,7 +4,7 @@
       <v-btn
         id="btn"
         @click="activeMenu"
-        :class="isOpen ? 'moveBtn':'reBtn'"
+        :class="isOpen ? 'moveBtn' : 'reBtn'"
         color="#50829b"
         elevation="0"
       >
@@ -29,30 +29,51 @@
         <v-divider></v-divider>
         <router-link v-for="item in Items" :key="item.Title" :to="item.url">
           <li class="menuList py-2" @click="item.method">
-            {{item.Title}}
-            <ul v-if="item.Items!==null" :class="projectClick? 'openProject':'closeProject'">
-              <router-link v-for="subItem in item.Items" :key="subItem.title" :to="subItem.url">
-                <li class="menuList py-1" @click="subItem.method">{{subItem.title}}</li>
+            {{ item.Title }}
+            <ul
+              v-if="item.Items !== null"
+              :class="projectClick ? 'openProject' : 'closeProject'"
+            >
+              <router-link
+                v-for="subItem in item.Items"
+                :key="subItem.title"
+                :to="subItem.url"
+              >
+                <li class="menuList py-1" @click="subItem.method">
+                  {{ subItem.title }}
+                </li>
               </router-link>
             </ul>
           </li>
         </router-link>
 
         <div v-if="loginStatus">
-          <router-link v-for="item in mainItemsLogIn" :key="item.Title" :to="item.url">
-            <li class="menuList py-2" @click="item.method">{{item.Title}}</li>
+          <router-link
+            v-for="item in mainItemsLogIn"
+            :key="item.Title"
+            :to="item.url"
+          >
+            <li class="menuList py-2" @click="item.method">{{ item.Title }}</li>
           </router-link>
         </div>
 
         <div v-if="!loginStatus">
-          <router-link v-for="item in mainItemsLogOut" :key="item.Title" :to="item.url">
-            <li class="menuList py-2" @click="item.method">{{item.Title}}</li>
+          <router-link
+            v-for="item in mainItemsLogOut"
+            :key="item.Title"
+            :to="item.url"
+          >
+            <li class="menuList py-2" @click="item.method">{{ item.Title }}</li>
           </router-link>
         </div>
       </ul>
     </div>
 
-    <div id="background" :class="isOpen ? 'backOpen' : 'backClose'" @click="activeMenu"></div>
+    <div
+      id="background"
+      :class="isOpen ? 'backOpen' : 'backClose'"
+      @click="activeMenu"
+    ></div>
   </div>
 </template>
 
@@ -120,6 +141,15 @@ export default {
           Items: null,
           url: "/qna/list",
           Title: "Q&A",
+          method: () => {
+            this.activeMenu();
+          },
+        },
+
+        {
+          Items: null,
+          url: "/photo/list",
+          Title: "활동 사진",
           method: () => {
             this.activeMenu();
           },

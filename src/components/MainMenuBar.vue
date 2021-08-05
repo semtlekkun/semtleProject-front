@@ -1,42 +1,39 @@
 <template>
-    <div id="container">
-      <router-link to="/">
-        <img src="../assets/mainLogo.png" 
-          width="150px" id="logo"
-        @mouseover="menuOpen" 
-        @mouseleave="menuClose"/>
-      </router-link>
-      
-      <div id="transBox"
-      @mouseover="menuOpen"
-      @mouseleave="menuClose">
-        <div id="box">
-        
-          <div class="dummy1"></div>
+  <div id="container">
+    <router-link to="/">
+      <img
+        src="../assets/mainLogo.png"
+        width="150px"
+        id="logo"
+        @mouseover="menuOpen"
+        @mouseleave="menuClose"
+      />
+    </router-link>
 
-          <MenuElement
-            :functions = "functions"
-            v-for="(item, index) in Attributes"
-            :key="index"
-            :Attribute="item"
-            ref="args"
-          />          
+    <div id="transBox" @mouseover="menuOpen" @mouseleave="menuClose">
+      <div id="box">
+        <div class="dummy1"></div>
 
-          <div class="dummy2"></div>
-        </div>
+        <MenuElement
+          :functions="functions"
+          v-for="(item, index) in Attributes"
+          :key="index"
+          :Attribute="item"
+          ref="args"
+        />
+
+        <div class="dummy2"></div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 import MenuElement from "./MenuElement.vue";
-import {mapMutations, mapGetters} from 'vuex';
+import { mapMutations, mapGetters } from "vuex";
 export default {
-  computed:{
-    ...mapGetters([
-      'getLogin',
-      'getAdmin'
-    ]),
+  computed: {
+    ...mapGetters(["getLogin", "getAdmin"]),
   },
   components: {
     MenuElement,
@@ -45,95 +42,102 @@ export default {
     return {
       // 현재 스크롤 위치와 호버에 대한 제어를 두기 위한 변수
       controller: false,
-      subMenu:false,
+      subMenu: false,
       Attributes: [
         {
           Items: [],
-          url: '/notice/list',
+          url: "/notice/list",
           Title: "공지사항",
-          method: ()=>{}
+          method: () => {},
         },
         {
           Items: [
-            { title: "목록", url:'/project/list' },
-            { title: "공고", url: '/project/announce/list' },
+            { title: "목록", url: "/project/list" },
+            { title: "공고", url: "/project/announce/list" },
           ],
-          url: '',
+          url: "",
           Title: "프로젝트",
-          method: ()=>{}
+          method: () => {},
         },
         {
           Items: [],
-          url: '/management',
+          url: "/management",
           Title: "역대 간부",
-          method: ()=>{}
+          method: () => {},
         },
         {
           Items: [],
-          url: '/qna/list',
+          url: "/qna/list",
           Title: "Q&A",
-          method: ()=>{}
+          method: () => {},
+        },
+        {
+          Items: [],
+          url: "/photo/list",
+          Title: "활동 사진",
+          method: () => {},
         },
       ],
-      functions:{
-        menuOpen : this.menuOpen,
-        menuClose : this.menuClose,
-        subMenuOpen : this.subMenuOpen,
-        subMenuClose : this.subMenuClose
+      functions: {
+        menuOpen: this.menuOpen,
+        menuClose: this.menuClose,
+        subMenuOpen: this.subMenuOpen,
+        subMenuClose: this.subMenuClose,
       },
       // 로그아웃 시 들어갈 리스트 아이템과 버튼 제목
-      logOutMenu:[
+      logOutMenu: [
         {
           Items: [],
-          url: '/login',
+          url: "/login",
           Title: "로그인",
-          method: ()=>{}
+          method: () => {},
         },
       ],
       // 로그인 시 들어갈 리스트 아이템과 버튼 제목
-    logInMenu:[
+      logInMenu: [
         {
           Items: [],
-          url: '/mypage',
+          url: "/mypage",
           Title: "마이페이지",
-          method: ()=>{}
+          method: () => {},
         },
         {
           Items: [],
-          url: '',
+          url: "",
           Title: "로그아웃",
-          method: ()=>{this.setLogout()}
+          method: () => {
+            this.setLogout();
+          },
         },
       ],
 
-      adminMenu:{
-          Items: null,
-              url: "/admin/menu",
-              Title: "관리자페이지",
-              method: () => {},
-      }
+      adminMenu: {
+        Items: null,
+        url: "/admin/menu",
+        Title: "관리자페이지",
+        method: () => {},
+      },
     };
   },
   methods: {
-    ...mapMutations([
-      'setLogout'
-    ]),
+    ...mapMutations(["setLogout"]),
     // 로그인 됐는 지 확인하는 함수
-    isLogin(){
-      if (this.getLogin){ // 로그인일 때
-        if(this.getAdmin){
+    isLogin() {
+      if (this.getLogin) {
+        // 로그인일 때
+        if (this.getAdmin) {
           this.logInMenu[0] = this.adminMenu;
         }
-        this.Attributes = this.Attributes.concat(this.logInMenu) // 로그인 메뉴 받음
-      }
-      else { // 로그아웃일 때
-        this.Attributes = this.Attributes.concat(this.logOutMenu) // 로그아웃 메뉴 받음
+        this.Attributes = this.Attributes.concat(this.logInMenu); // 로그인 메뉴 받음
+      } else {
+        // 로그아웃일 때
+        this.Attributes = this.Attributes.concat(this.logOutMenu); // 로그아웃 메뉴 받음
       }
     },
-    subMenuOpen(){
+    subMenuOpen() {
       this.subMenu = true;
     },
-    subMenuClose(){
+    subMenuClose() {
       this.subMenu = false;
     },
     // 메뉴가 펼쳐지는 함수
@@ -142,8 +146,7 @@ export default {
         let boxObj = document.querySelector("#transBox");
         boxObj.style.width = "1000px";
         boxObj.style.transition = ".5s";
-      }
-      else if(this.subMenu){
+      } else if (this.subMenu) {
         let boxObj = document.querySelector("#transBox");
         boxObj.style.width = "1000px";
       }
@@ -184,18 +187,18 @@ export default {
 </script>
 
 <style scoped>
-             @font-face {
-    font-family: 'HangeulNuri-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+@font-face {
+  font-family: "HangeulNuri-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
-            
-            
-*{
-  font-family: 'HangeulNuri-Bold';
+
+* {
+  font-family: "HangeulNuri-Bold";
 }
-#transBox{
+#transBox {
   /* background: red; */
   transform: translateY(-105%);
   height: 150px;
@@ -220,12 +223,12 @@ export default {
   top: 60.5px; */
   transform: translateY(137%);
   background-color: #50829b;
-  
+
   height: 40.5px;
   transition: 0.4s;
   margin-left: 4px;
   border-radius: 20px;
-  
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -240,5 +243,4 @@ export default {
 .dummy2 {
   width: 0px;
 }
-
 </style>
