@@ -15,38 +15,7 @@
             xl="4"
             sm="6"
           >
-            <router-link :to="{ name: 'photo', params: { id: item._id } }">
-              <v-card
-                height="300"
-                max-height="300"
-                max-width="250"
-                class="mx-auto"
-              >
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title class="com-title">
-                      {{ item.title }}
-                    </v-list-item-title>
-                    <v-list-item-subtitle>
-                      {{ item.date }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-
-                <v-img :src="item.image" height="194"></v-img>
-
-                <v-card-text>
-                  <span
-                    v-for="(text, index) in item.contents"
-                    :key="text.index"
-                    v-show="index < 10"
-                  >
-                    {{ text }}
-                  </span>
-                  <span v-if="item.contents.length > 10">...</span>
-                </v-card-text>
-              </v-card>
-            </router-link>
+            <PhotoCard :item="item" />
           </v-col>
         </v-row>
       </v-col>
@@ -66,6 +35,7 @@
 <script>
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
+import PhotoCard from "../components/PhotoCard.vue";
 
 export default {
   created() {
@@ -74,8 +44,6 @@ export default {
       .then((res) => {
         if (res.status === 200) {
           this.contents = [];
-
-          console.log(res.data.photoList);
 
           res.data.photoList.forEach((item) => {
             let obj = new Object();
@@ -91,11 +59,8 @@ export default {
 
           // 사진이 5장 이하라면
           if (this.contents.length < 6) this.curContents = this.contents;
-          // 사진이 6장 이상이라면
-          else {
-            // 최초의 1번 페이지를 할당
-            this.curContents = this.contents.slice(0, 6);
-          }
+          // 사진이 6장 이상이라면 최초의 1번 페이지를 할당
+          else this.curContents = this.contents.slice(0, 6);
         }
       })
       .catch((err) => {
@@ -104,6 +69,7 @@ export default {
   },
   components: {
     SubTitle,
+    PhotoCard,
   },
   data() {
     return {
@@ -131,4 +97,15 @@ export default {
 </script>
 
 <style scoped>
+@font-face {
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.com-title {
+  font-family: "NEXON Lv1 Gothic OTF";
+  font-size: 125%;
+}
 </style>

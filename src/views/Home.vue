@@ -74,12 +74,10 @@
         md="2"
         sm="4"
         xs="4"
-        v-for="photo in photoContents"
-        :key="photo._id"
+        v-for="item in photoContents"
+        :key="item._id"
       >
-        <router-link :to="{ name: 'photo', params: { id: photo._id } }">
-          <v-img :src="photo.imgSrc"></v-img>
-        </router-link>
+        <PhotoCard :item="item" />
       </v-col>
     </v-row>
   </v-container>
@@ -89,6 +87,7 @@
 import ipObj from "../key";
 import CardView from "../components/CardView.vue";
 import Table from "../components/Table.vue";
+import PhotoCard from "../components/PhotoCard.vue";
 
 export default {
   created() {
@@ -163,12 +162,11 @@ export default {
             // 최근 6개만
             if (this.photoContents.length < 6) {
               let obj = new Object();
-              obj.number = res.data.count--;
               obj.title = item.title;
-              obj.writer = item.writer;
               obj.date = item.date;
               obj._id = item._id;
-              obj.imgSrc = `${ipObj.ip}/api/photo/images/` + item.photo[0];
+              obj.contents = item.contents;
+              obj.image = `${ipObj.ip}/api/photo/images/` + item.image;
               this.photoContents.push(obj);
             }
           });
@@ -181,6 +179,7 @@ export default {
   components: {
     CardView,
     Table,
+    PhotoCard,
   },
   data() {
     return {
