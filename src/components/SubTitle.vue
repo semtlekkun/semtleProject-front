@@ -6,7 +6,7 @@
       </h1>
     </router-link>
 
-    <h1 v-if="isList">
+    <h1 v-if="isList" style="color: black">
       {{ subTitleObj.title }}
     </h1>
 
