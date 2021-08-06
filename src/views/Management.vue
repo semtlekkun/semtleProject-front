@@ -8,6 +8,7 @@
           lg="2"
         >
           <v-combobox
+            color="rgb(80, 130, 155)"
             v-model="selectedYear"
             :items="yearList"
             label="연도별 보기"
@@ -265,5 +266,8 @@ p {
 }
 .v-text-field__details {
   display: none;
+}
+.v-list .v-list-item--active {
+    color: rgb(80, 133, 155) !important;
 }
 </style>
