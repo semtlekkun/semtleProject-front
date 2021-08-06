@@ -42,7 +42,7 @@
             </router-link>
           </v-col>
         </v-row>
-        <v-row id="projectView">
+        <v-row id="projectView" class="mb-15">
           <v-col
             xs="12"
             md="12"
