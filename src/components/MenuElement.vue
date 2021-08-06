@@ -11,23 +11,32 @@
           v-on="on"
           @click="Attribute.method"
         >
-        {{Attribute.Title}}
+          {{ Attribute.Title }}
         </v-btn>
       </router-link>
     </template>
     <v-list flat class="pa-0 ma-0 text-center">
       <v-list-item-group>
         <router-link
-          v-for="(item, index) in Attribute.Items" 
-          :key="index" :to="item.url">
-          <v-list-item @mouseover="()=>{
-            functions.subMenuOpen();
-            functions.menuOpen();
-          }" 
-          @mouseleave="()=>{
-            functions.subMenuClose();
-            functions.menuClose();  
-          }">
+          v-for="(item, index) in Attribute.Items"
+          :key="index"
+          :to="item.url"
+        >
+          <v-list-item
+            color="black"
+            @mouseover="
+              () => {
+                functions.subMenuOpen();
+                functions.menuOpen();
+              }
+            "
+            @mouseleave="
+              () => {
+                functions.subMenuClose();
+                functions.menuClose();
+              }
+            "
+          >
             <v-list-item-title>
               {{ item.title }}
             </v-list-item-title>
@@ -47,9 +56,7 @@ export default {
       required: true,
     },
   },
-  methods: {
-    
-  },
+  methods: {},
 };
 </script>
 
