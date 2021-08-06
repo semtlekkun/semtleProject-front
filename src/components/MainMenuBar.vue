@@ -199,7 +199,6 @@ export default {
   font-family: "HangeulNuri-Bold";
 }
 #transBox {
-  /* background: red; */
   transform: translateY(-105%);
   height: 150px;
   width: 1000px;
@@ -211,16 +210,12 @@ export default {
 }
 
 #logo {
-  /* position: absolute;
-  top: 5px; */
   position: relative;
   z-index: 100;
   border-radius: 100%;
 }
 
 #box {
-  /* position: absolute;
-  top: 60.5px; */
   transform: translateY(137%);
   background-color: #50829b;
 

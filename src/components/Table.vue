@@ -37,6 +37,7 @@
         color="#50829b"
       ></v-pagination>
     </div>
+    <div class="my-15"></div>
   </div>
 </template>
 
@@ -66,17 +67,20 @@ export default {
         {
           text: "제목",
           align: "start",
+          sortable: false,
           value: "title",
         },
         {
           text: "작성자",
           align: "center",
+          sortable: false,
           value: "writer",
           width: "120px",
         },
         {
           text: "작성 일시",
           align: "center",
+          sortable: false,
           value: "date",
           width: "140px",
         },

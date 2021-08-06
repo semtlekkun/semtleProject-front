@@ -42,7 +42,7 @@
             </router-link>
           </v-col>
         </v-row>
-        <v-row id="projectView">
+        <v-row id="projectView" class="mb-15">
           <v-col
             xs="12"
             md="12"
@@ -67,19 +67,20 @@
         </router-link>
       </v-col>
     </v-row>
-    <v-row class="photoContainer mb-7">
+    <v-row class="photoContainer">
       <v-col
-        cols="4"
-        lg="2"
-        md="2"
-        sm="4"
-        xs="4"
+        cols="12"
+        lg="3"
+        md="3"
+        sm="6"
+        xs="12"
         v-for="item in photoContents"
         :key="item._id"
       >
         <PhotoCard :item="item" />
       </v-col>
     </v-row>
+    <div class="my-15"></div>
   </v-container>
 </template>
 
@@ -91,16 +92,16 @@ import PhotoCard from "../components/PhotoCard.vue";
 import {
   getNoticeListApi,
   getRecruitListApi,
-  getPfListApi
+  getPfListApi,
 } from "../api/api.js";
 
 export default {
   created() {
     getNoticeListApi()
-      .then(res => {
+      .then((res) => {
         if (res.status === 200) {
           this.noticeContents = [];
-          res.data.noticeList.forEach(item => {
+          res.data.noticeList.forEach((item) => {
             let obj = new Object();
             obj.number = res.data.count--;
             obj.title = item.title;
@@ -111,15 +112,15 @@ export default {
           });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
 
     getRecruitListApi()
-      .then(res => {
+      .then((res) => {
         if (res.status === 200) {
           this.projectAnnounceContents = [];
-          res.data.recruitList.forEach(item => {
+          res.data.recruitList.forEach((item) => {
             let obj = new Object();
             obj.number = res.data.count--;
             obj.title = item.title;
@@ -130,15 +131,15 @@ export default {
           });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
 
-    getPfListApi().then(res => {
+    getPfListApi().then((res) => {
       // console.log(res)
       if (res.status === 200) {
         this.cardViewList = [];
-        res.data.projectList.forEach(item => {
+        res.data.projectList.forEach((item) => {
           let obj = new Object();
           obj.number = res.data.count--;
           obj.title = item.projectTitle;
@@ -155,12 +156,12 @@ export default {
     // 활동 사진
     this.axios
       .get(`${ipObj.ip}/api/photo/list`)
-      .then(res => {
+      .then((res) => {
         if (res.status === 200) {
           this.photoContents = [];
-          res.data.photoList.forEach(item => {
-            // 최근 6개만
-            if (this.photoContents.length < 6) {
+          res.data.photoList.forEach((item) => {
+            // 최근 4개만
+            if (this.photoContents.length < 4) {
               let obj = new Object();
               obj.title = item.title;
               obj.date = item.date;
@@ -172,23 +173,23 @@ export default {
           });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   },
   components: {
     CardView,
     Table,
-    PhotoCard
+    PhotoCard,
   },
   data() {
     return {
       noticeContents: [],
       projectAnnounceContents: [],
       cardViewList: [],
-      photoContents: []
+      photoContents: [],
     };
-  }
+  },
 };
 </script>
 
