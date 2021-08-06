@@ -33,17 +33,16 @@
 
 <script>
 import ipObj from "../key";
-
 import CommentList from "../components/CommentList";
 import CommentForm from "../components/CommentForm";
 import Question from "../components/Question";
 import SubTitle from "../components/SubTitle.vue";
+import { initQnAQuestionApi, initQnAAnswerApi } from "../api/api.js";
 export default {
   created() {
     let id = this.$route.params.id;
-    this.axios
-      .get(`${ipObj.ip}/api/question/${id}`)
-      .then((res) => {
+    initQnAQuestionApi(id)
+      .then(res => {
         if (res.status === 200) {
           this.QuestionData = {
             title: res.data.question.title,
@@ -54,40 +53,40 @@ export default {
             imageURL:
               `${ipObj.ip}/api/question/images/` + res.data.question.image,
             writerURL:
-              `${ipObj.ip}/api/student/images/` + res.data.question.writerImage,
+              `${ipObj.ip}/api/student/images/` + res.data.question.writerImage
           };
           this.commentData.writerName = res.data.question.writer;
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
 
-    this.axios
-      .get(`${ipObj.ip}/api/answer/${id}`)
-      .then((res) => {
+    initQnAAnswerApi(id)
+      .then(res => {
         if (res.status === 200) {
-          res.data.answers.forEach((el) => {
+          res.data.answers.forEach(el => {
             let obj = {
               name: el.writer,
               comment: el.contents,
               time: el.date,
               id: el._id,
-              image: el.writerImage,
+              image: el.writerImage
             };
             this.commentData.comments.push(obj);
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
+        console.log(err.response);
       });
   },
   components: {
     CommentList,
     CommentForm,
     Question,
-    SubTitle,
+    SubTitle
   },
   data() {
     return {
@@ -98,19 +97,19 @@ export default {
         time: "",
         views: 365,
         imageURL: "",
-        writerURL: "",
+        writerURL: ""
       },
       commentData: {
         writerName: "",
-        comments: [],
+        comments: []
       },
       subTitleObj: {
         title: "❓Q&A",
-        contents: "질문과 답변을 올리는 공간입니다.",
-      },
+        contents: "질문과 답변을 올리는 공간입니다."
+      }
     };
   },
-  methods: {},
+  methods: {}
 };
 </script>
 

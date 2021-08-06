@@ -63,14 +63,15 @@
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 import VueMarkdown from "vue-markdown";
+import { getNoticeApi, deleteNoticeApi } from "../api/api.js";
 
 export default {
   created() {
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
     this.noticeID = this.$route.params.id;
-    this.axios
-      .get(`${ipObj.ip}/api/notice/${this.noticeID}`)
-      .then((res) => {
+
+    getNoticeApi(this.noticeID)
+      .then(res => {
         if (res.status === 200) {
           this.title = res.data.notice.title;
           this.writer = res.data.notice.writer;
@@ -81,15 +82,12 @@ export default {
             res.data.notice.image
           );
           // 이미지도 추가
-          if (
-            this.imageUrl ===
-            "http://sbmi.iptime.org:3000/api/notice/images/null"
-          ) {
+          if (this.imageUrl === `${ipObj.ip}/api/notice/images/null`) {
             this.isImage = false;
           }
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
@@ -105,34 +103,28 @@ export default {
     contents: "",
     subTitleObj: {
       title: "📌공지사항",
-      contents: "셈틀꾼의 공지사항을 올리는 공간입니다.",
+      contents: "셈틀꾼의 공지사항을 올리는 공간입니다."
     },
 
-    isImage: true,
+    isImage: true
   }),
 
   components: {
     SubTitle,
-    VueMarkdown,
+    VueMarkdown
   },
   methods: {
     deleteNotice() {
       let result = confirm("정말로 삭제하시겠습니까?");
       if (result) {
-        this.axios
-          .delete(`${ipObj.ip}/api/notice/${this.noticeID}`, {
-            headers: {
-              token: sessionStorage.getItem("token"),
-            },
-          })
-          .then((res) => {
-            if (res.status === 200) {
-              this.$router.push({ name: "noticeList" });
-            }
-          });
+        deleteNoticeApi(this.noticeID).then(res => {
+          if (res.status === 200) {
+            this.$router.push({ name: "noticeList" });
+          }
+        });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -35,7 +35,11 @@
                       />
                     </v-col>
                     <v-col cols="6">
-                      <v-text-field color="rgb(80, 130, 155)" label="팀명" v-model="teamName" />
+                      <v-text-field
+                        color="rgb(80, 130, 155)"
+                        label="팀명"
+                        v-model="teamName"
+                      />
                     </v-col>
                   </v-row>
                   <v-row>
@@ -71,7 +75,8 @@
                             id="menu1"
                             color="rgb(80, 130, 155)"
                             @click="$refs.menu1.save(startDate)"
-                          >확인</v-btn>
+                            >확인</v-btn
+                          >
                         </v-date-picker>
                       </v-menu>
                     </v-col>
@@ -106,8 +111,14 @@
                             dark
                             id="menu2"
                             color="rgb(80, 130, 155)"
-                            @click="()=> {temp(); $refs.menu2.save(endDate); }"
-                          >확인</v-btn>
+                            @click="
+                              () => {
+                                temp();
+                                $refs.menu2.save(endDate);
+                              }
+                            "
+                            >확인</v-btn
+                          >
                         </v-date-picker>
                       </v-menu>
                     </v-col>
@@ -126,7 +137,14 @@
                       />
                     </v-col>
                     <v-col cols="5" xs="5" sm="4" md="2">
-                      <v-btn @click="addMember" lage color="#50829b" class="white--text" block>추가하기</v-btn>
+                      <v-btn
+                        @click="addMember"
+                        lage
+                        color="#50829b"
+                        class="white--text"
+                        block
+                        >추가하기</v-btn
+                      >
                     </v-col>
                   </v-row>
 
@@ -140,9 +158,9 @@
                       :key="member.index"
                     >
                       <v-row class="align-center">
-                        <v-col cols="8">{{member}}</v-col>
+                        <v-col cols="8">{{ member }}</v-col>
                         <v-col cols="4">
-                          <v-btn @click="()=>delMember(member)">삭제</v-btn>
+                          <v-btn @click="() => delMember(member)">삭제</v-btn>
                         </v-col>
                       </v-row>
                     </v-col>
@@ -150,13 +168,21 @@
 
                   <v-row>
                     <v-col>
-                      <v-text-field label="Git" color="rgb(80, 130, 155)" v-model="git" />
+                      <v-text-field
+                        label="Git"
+                        color="rgb(80, 130, 155)"
+                        v-model="git"
+                      />
                     </v-col>
                   </v-row>
 
                   <v-row>
                     <v-col>
-                      <v-text-field color="rgb(80, 130, 155)" label="Link" v-model="link" />
+                      <v-text-field
+                        color="rgb(80, 130, 155)"
+                        label="Link"
+                        v-model="link"
+                      />
                     </v-col>
                   </v-row>
 
@@ -194,7 +220,13 @@
 
                   <v-row class="justify-end">
                     <v-col cols="12" md="3" class="text-right">
-                      <v-btn @click="writeConents" color="#50829b" class="white--text" block>작성 완료</v-btn>
+                      <v-btn
+                        @click="writeConents"
+                        color="#50829b"
+                        class="white--text"
+                        block
+                        >작성 완료</v-btn
+                      >
                     </v-col>
                   </v-row>
                 </v-alert>
@@ -210,7 +242,7 @@
           <p style="color:white !important;">Error</p>
         </v-card-title>
         <ul class="mt-5 px-5">
-          <li v-for="(error,i) in errorMsg" :key="i">{{error}}</li>
+          <li v-for="(error, i) in errorMsg" :key="i">{{ error }}</li>
         </ul>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -222,12 +254,12 @@
 </template>
 
 <script>
-import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 import { mapMutations } from "vuex";
+import { ProjectInputwriteConentsApi } from "../api/api.js";
 export default {
   components: {
-    SubTitle,
+    SubTitle
   },
 
   data() {
@@ -247,19 +279,19 @@ export default {
       files: null,
       errorMsg: [],
       rules: {
-        fileCheck: (value) =>
+        fileCheck: value =>
           !value ||
           value.size < 2000000 ||
           "Avatar size should be less than 2 MB!",
-        counter: (value) =>
-          value.length <= 8 || "Student Code length should be 8!",
+        counter: value =>
+          value.length <= 8 || "Student Code length should be 8!"
       },
       contents: "",
       subTitleObj: {
         title: "✍프로젝트 작성",
-        contents: "프로젝트 게시물을 작성하는 공간입니다.",
+        contents: "프로젝트 게시물을 작성하는 공간입니다."
       },
-      dialog: false,
+      dialog: false
     };
   },
   methods: {
@@ -310,7 +342,7 @@ export default {
     },
 
     delMember(member) {
-      this.members = this.members.filter((el) => el !== member);
+      this.members = this.members.filter(el => el !== member);
     },
     writeConents() {
       this.errorMsg = [];
@@ -358,22 +390,13 @@ export default {
           }
         }
 
-        let config = {
-          headers: {
-            token: sessionStorage.getItem("token"),
-            "Content-Type": "multipart/form-data",
-            Accept: "application/json",
-          },
-        };
-
-        this.axios
-          .post(`${ipObj.ip}/api/pf`, form, config)
-          .then((res) => {
+        ProjectInputwriteConentsApi(form)
+          .then(res => {
             console.log(res.status);
             alert("작성 완료");
             location.href = "/project/list";
           })
-          .catch((err) => {
+          .catch(err => {
             //팀장 학번이 셈틀꾼에 등록되어있지 않은 경우
             if (
               err.response.status === 400 &&
@@ -390,8 +413,8 @@ export default {
           });
       }
     },
-    ...mapMutations(["setLogout"]),
-  },
+    ...mapMutations(["setLogout"])
+  }
 };
 </script>
 

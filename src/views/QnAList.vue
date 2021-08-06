@@ -25,16 +25,15 @@
 </template>
 
 <script>
-import ipObj from "../key";
 import Table from "../components/Table.vue";
 import SubTitle from "../components/SubTitle.vue";
+import { initQnAQuestionListApi } from "../api/api.js";
 
 export default {
   created() {
     this.checkLogin();
-    this.axios
-      .get(`${ipObj.ip}/api/question/list`)
-      .then((res) => {
+    initQnAQuestionListApi()
+      .then(res => {
         if (res.status === 200) {
           this.contents = [];
           res.data.questionList.forEach((item) => {
@@ -48,22 +47,22 @@ export default {
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   components: {
     Table,
-    SubTitle,
+    SubTitle
   },
   data() {
     return {
       subTitleObj: {
         isLogin: "",
         title: "❓Q&A 목록",
-        contents: "질문과 답변을 올리는 공간입니다.",
+        contents: "질문과 답변을 올리는 공간입니다."
       },
-      contents: [],
+      contents: []
     };
   },
   methods: {
@@ -75,10 +74,9 @@ export default {
       } else {
         return (this.isLogin = true);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

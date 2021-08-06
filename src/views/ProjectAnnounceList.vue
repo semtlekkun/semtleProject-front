@@ -27,18 +27,16 @@
 </template>
 
 <script>
-import ipObj from "../key";
 import Table from "../components/Table.vue";
 import SubTitle from "../components/SubTitle.vue";
+import { getRecruitListApi } from "../api/api.js";
 export default {
   created() {
     this.checkLogin();
-    this.axios
-      .get(`${ipObj.ip}/api/recruit/list`)
-      .then((res) => {
-        console.log(res);
+    getRecruitListApi()
+      .then(res => {
         if (res.status === 200) {
-          res.data.recruitList.forEach((item) => {
+          res.data.recruitList.forEach(item => {
             let obj = new Object();
             obj.number = res.data.count--;
             obj.title = item.title;
@@ -49,13 +47,13 @@ export default {
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   components: {
     Table,
-    SubTitle,
+    SubTitle
   },
   data() {
     return {
@@ -63,8 +61,8 @@ export default {
       isLogin: "",
       subTitleObj: {
         title: "📝프로젝트 공고",
-        contents: "프로젝트 인원을 모집하는 공간입니다.",
-      },
+        contents: "프로젝트 인원을 모집하는 공간입니다."
+      }
     };
   },
 
@@ -77,10 +75,9 @@ export default {
       } else {
         return (this.isLogin = true);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

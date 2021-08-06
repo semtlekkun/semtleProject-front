@@ -88,16 +88,19 @@ import ipObj from "../key";
 import CardView from "../components/CardView.vue";
 import Table from "../components/Table.vue";
 import PhotoCard from "../components/PhotoCard.vue";
+import {
+  getNoticeListApi,
+  getRecruitListApi,
+  getPfListApi
+} from "../api/api.js";
 
 export default {
   created() {
-    // 공지사항
-    this.axios
-      .get(`${ipObj.ip}/api/notice/list`)
-      .then((res) => {
+    getNoticeListApi()
+      .then(res => {
         if (res.status === 200) {
           this.noticeContents = [];
-          res.data.noticeList.forEach((item) => {
+          res.data.noticeList.forEach(item => {
             let obj = new Object();
             obj.number = res.data.count--;
             obj.title = item.title;
@@ -108,17 +111,15 @@ export default {
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
 
-    // 프로젝트 공고
-    this.axios
-      .get(`${ipObj.ip}/api/recruit/list`)
-      .then((res) => {
+    getRecruitListApi()
+      .then(res => {
         if (res.status === 200) {
           this.projectAnnounceContents = [];
-          res.data.recruitList.forEach((item) => {
+          res.data.recruitList.forEach(item => {
             let obj = new Object();
             obj.number = res.data.count--;
             obj.title = item.title;
@@ -129,16 +130,15 @@ export default {
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
 
-    // 최근 프로젝트
-    this.axios.get(`${ipObj.ip}/api/pf/list/1`).then((res) => {
+    getPfListApi().then(res => {
       // console.log(res)
       if (res.status === 200) {
         this.cardViewList = [];
-        res.data.projectList.forEach((item) => {
+        res.data.projectList.forEach(item => {
           let obj = new Object();
           obj.number = res.data.count--;
           obj.title = item.projectTitle;
@@ -155,10 +155,10 @@ export default {
     // 활동 사진
     this.axios
       .get(`${ipObj.ip}/api/photo/list`)
-      .then((res) => {
+      .then(res => {
         if (res.status === 200) {
           this.photoContents = [];
-          res.data.photoList.forEach((item) => {
+          res.data.photoList.forEach(item => {
             // 최근 6개만
             if (this.photoContents.length < 6) {
               let obj = new Object();
@@ -172,23 +172,23 @@ export default {
           });
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   components: {
     CardView,
     Table,
-    PhotoCard,
+    PhotoCard
   },
   data() {
     return {
       noticeContents: [],
       projectAnnounceContents: [],
       cardViewList: [],
-      photoContents: [],
+      photoContents: []
     };
-  },
+  }
 };
 </script>
 

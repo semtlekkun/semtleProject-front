@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog v-model="dialog" width="500">
-      <template v-slot:activator="{on, attrs}">
+      <template v-slot:activator="{ on, attrs }">
         <!-- 회원정보 변경 화면에서 보여질 카드 -->
         <v-card height="200" light="light">
           <div class="text-center">
@@ -16,7 +16,8 @@
               dark
               class="btn"
               @click="openDialog"
-            >이미지 변경</v-btn>
+              >이미지 변경</v-btn
+            >
           </v-card-actions>
         </v-card>
       </template>
@@ -38,7 +39,9 @@
               ></v-file-input>
             </v-col>
             <v-col cols="12" class="pt-0">
-              <h5>※ 기본 이미지는 이미지 선택을 하지 않고 확인 버튼을 눌러주세요.</h5>
+              <h5>
+                ※ 기본 이미지는 이미지 선택을 하지 않고 확인 버튼을 눌러주세요.
+              </h5>
             </v-col>
           </v-row>
         </v-container>
@@ -57,60 +60,54 @@
 <script>
 import ipObj from "../key";
 import { mapMutations } from "vuex";
+import { InitImageApi, SubmitUserImgApi } from "../api/api.js";
+
 export default {
   data: () => ({
     dialog: false,
     img: "../assets/sample.png",
     data: null,
     imageUrl: null,
-    selectImg: null,
+    selectImg: null
   }),
   created() {
     this.initImage();
   },
   methods: {
     initImage() {
-      let config = {
-        headers: { token: sessionStorage.getItem("token") },
-      };
-
-      this.axios
-        .get(`${ipObj.ip}/api/mypage`, config)
-        .then((res) => {
+      InitImageApi()
+        .then(res => {
           this.imageUrl = `${ipObj.ip}/api/student/images/`;
           this.imageUrl = this.imageUrl.concat(res.data.student.image);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
+          console.log(err.response);
+          console.log("이미지");
         });
     },
     openDialog() {
       this.selectImg = null;
     },
     submit() {
-      let config = {
-        headers: { token: sessionStorage.getItem("token") },
-      };
-
       let form = new FormData();
       form.append("image", this.selectImg);
 
-      this.axios
-        .put(`${ipObj.ip}/api/mypage/picture/update`, form, config)
-        .then((res) => {
+      SubmitUserImgApi(form)
+        .then(res => {
           console.log(res);
           this.dialog = false;
           this.$router.go();
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status === 401) {
             alert("세션이 만료되어 홈 화면으로 이동합니다.");
             this.setLogout();
           }
         });
     },
-    ...mapMutations(["setLogout"]),
-  },
+    ...mapMutations(["setLogout"])
+  }
 };
 </script>
 

@@ -7,7 +7,12 @@
       </v-col>
 
       <v-col cols="12" md="9" lg="6">
-        <v-text-field color="rgb(80, 130, 155)" label="제목" outlined v-model="title"></v-text-field>
+        <v-text-field
+          color="rgb(80, 130, 155)"
+          label="제목"
+          outlined
+          v-model="title"
+        ></v-text-field>
       </v-col>
     </v-row>
 
@@ -60,7 +65,9 @@
           <!-- 띄울 메세지 -->
           {{ text }}
           <template v-slot:action="{ attrs }">
-            <v-btn :color="color" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+            <v-btn :color="color" text v-bind="attrs" @click="snackbar = false"
+              >Close</v-btn
+            >
           </template>
         </v-snackbar>
       </v-col>
@@ -69,8 +76,9 @@
 </template>
 
 <script>
-import ipObj from "../key";
+// import ipObj from "../key";
 import { mapMutations } from "vuex";
+import { AdminNoticeCheckFormApi } from "../api/api.js";
 export default {
   name: "HelloWorld",
 
@@ -98,7 +106,7 @@ export default {
     item: "",
 
     //스낵바 버튼 색상
-    color: "",
+    color: ""
   }),
 
   methods: {
@@ -108,19 +116,14 @@ export default {
       form.append("title", this.title);
       form.append("contents", this.contents);
       form.append("image", this.imageUrl);
-      this.axios
-        .post(`${ipObj.ip}/api/notice`, form, {
-          headers: {
-            token: sessionStorage.getItem("token"),
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((response) => {
+
+      AdminNoticeCheckFormApi(form)
+        .then(response => {
           if (response.status === 200) {
             location.href = "/admin/menu";
           }
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status === 401) {
             this.text = "세션이 만료되어 홈 화면으로 이동합니다.";
             this.setLogout();
@@ -159,7 +162,7 @@ export default {
         window.scrollBy(0, -50);
       }
     },
-    ...mapMutations(["setLogout"]),
-  },
+    ...mapMutations(["setLogout"])
+  }
 };
 </script>

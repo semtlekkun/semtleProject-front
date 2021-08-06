@@ -1,10 +1,14 @@
 <template>
   <div>
     <v-dialog v-model="dialog" width="500">
-      <template v-slot:activator="{on, attrs}">
+      <template v-slot:activator="{ on, attrs }">
         <v-card height="200" light="light" class="pa-5">
-          <v-card-title primary="primary" class="com-title justify-center">전화번호</v-card-title>
-          <v-card-text class="show text-center">{{outputPhonenum}}</v-card-text>
+          <v-card-title primary="primary" class="com-title justify-center"
+            >전화번호</v-card-title
+          >
+          <v-card-text class="show text-center">{{
+            outputPhonenum
+          }}</v-card-text>
           <v-card-actions class="justify-center">
             <v-btn
               color="rgb(80, 130, 155)"
@@ -13,7 +17,8 @@
               dark="dark"
               class="btn btn-dark m-3"
               @click="openDialog"
-            >변경</v-btn>
+              >변경</v-btn
+            >
           </v-card-actions>
         </v-card>
       </template>
@@ -71,7 +76,7 @@
           <p style="color:white !important;">Error</p>
         </v-card-title>
         <ul class="mt-5">
-          <li v-for="(error,i) in errMsg" :key="i">{{error}}</li>
+          <li v-for="(error, i) in errMsg" :key="i">{{ error }}</li>
         </ul>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -83,8 +88,8 @@
 </template>
 
 <script>
-import ipObj from "../key";
 import { mapMutations } from "vuex";
+import { initNumberApi, SubmitPhoneNumApi } from "../api/api.js";
 export default {
   data: () => ({
     dialog: false,
@@ -95,22 +100,21 @@ export default {
     phoneNum1: "",
     phoneNum2: "",
     phoneNum3: "",
-    outputPhonenum: "",
+    outputPhonenum: ""
   }),
   created() {
     this.initNumber();
   },
   methods: {
     initNumber() {
-      let config = {
-        headers: {
-          token: sessionStorage.getItem("token"),
-        },
-      };
-
-      this.axios.get(`${ipObj.ip}/api/mypage`, config).then((res) => {
-        this.outputPhonenum = res.data.student.phoneNum;
-      });
+      initNumberApi()
+        .then(res => {
+          this.outputPhonenum = res.data.student.phoneNum;
+        })
+        .catch(err => {
+          console.log(err);
+          console.log("핸드폰");
+        });
     },
     openDialog() {
       this.phoneNum1 = "";
@@ -136,33 +140,22 @@ export default {
         this.dialog2 = true;
       } else {
         // this.resultPhoneNum = this.phoneNum1 + this.phoneNum2 + this.phoneNum3;
-        this.resultPhoneNum = `${this.phoneNum1}-${this.phoneNum2}-${this.phoneNum3}`
+        this.resultPhoneNum = `${this.phoneNum1}-${this.phoneNum2}-${this.phoneNum3}`;
 
-        let sendObj = {
-          phoneNum: this.resultPhoneNum,
-        };
-
-        let config = {
-          headers: {
-            token: sessionStorage.getItem("token"),
-          },
-        };
-
-        this.axios
-          .put(`${ipObj.ip}/api/mypage/phoneNum/update`, sendObj, config)
-          .then((res) => {
+        SubmitPhoneNumApi(this.resultPhoneNum)
+          .then(res => {
             if (res.status === 200) {
               alert("전화번호 변경 완료!");
               this.dialog = false;
               this.$router.go();
             }
           })
-          .catch((err) => {
+          .catch(err => {
             console.log(err);
             if (err.response.status === 401) {
-                alert("세션이 만료되어 홈 화면으로 이동합니다.");
-                this.setLogout();
-              }
+              alert("세션이 만료되어 홈 화면으로 이동합니다.");
+              this.setLogout();
+            }
           });
       }
     },
@@ -180,8 +173,8 @@ export default {
       else e.target.value = e.target.value.replace(/[^0-9]/g, "");
     },
 
-    ...mapMutations(["setLogout"]),
-  },
+    ...mapMutations(["setLogout"])
+  }
 };
 </script>
 <style scoped="scoped">

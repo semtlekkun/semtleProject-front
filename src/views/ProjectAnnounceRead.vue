@@ -13,25 +13,29 @@
                   <v-alert outlined color="#365164">
                     <v-row class="py-0">
                       <v-col cols="12" class="py-0">
-                        <v-card-title class="font-weight-black">{{title}}</v-card-title>
+                        <v-card-title class="font-weight-black">{{
+                          title
+                        }}</v-card-title>
                       </v-col>
                       <v-col class="text-right" cols="12" v-show="admin">
-                        <v-btn color="error" @click="deleteAnnounce">삭제</v-btn>
+                        <v-btn color="error" @click="deleteAnnounce"
+                          >삭제</v-btn
+                        >
                       </v-col>
                     </v-row>
                     <v-divider class="mb-2"></v-divider>
                     <ul class="announceInfo">
                       <li>
                         <b>작성자</b>
-                        {{writer}}
+                        {{ writer }}
                       </li>
                       <li>
                         <b>작성일</b>
-                        {{date}}
+                        {{ date }}
                       </li>
                       <li>
                         <v-icon small>mdi-eye</v-icon>
-                        {{views}}
+                        {{ views }}
                       </li>
                     </ul>
                     <v-card-text style="color: #000;">
@@ -42,8 +46,16 @@
                           sm="3"
                           md="2"
                           class="rounded-xl blue-grey lighten-3 font-weight-black text-center"
-                        >마감일</v-col>
-                        <v-col cols="8" xs="8" sm="9" md="10" class="text-left">{{deadline}}</v-col>
+                          >마감일</v-col
+                        >
+                        <v-col
+                          cols="8"
+                          xs="8"
+                          sm="9"
+                          md="10"
+                          class="text-left"
+                          >{{ deadline }}</v-col
+                        >
                       </v-row>
 
                       <v-row class="my-2 mx-1">
@@ -53,10 +65,21 @@
                           sm="3"
                           md="2"
                           class="rounded-xl blue-grey lighten-3 font-weight-bold text-center"
-                        >모집인원</v-col>
-                        <v-col cols="8" xs="8" sm="9" md="10" class="text-left">{{recruitment}}</v-col>
+                          >모집인원</v-col
+                        >
+                        <v-col
+                          cols="8"
+                          xs="8"
+                          sm="9"
+                          md="10"
+                          class="text-left"
+                          >{{ recruitment }}</v-col
+                        >
                       </v-row>
-                      <VueMarkdown :source="content" class="mt-10 ml-2"></VueMarkdown>
+                      <VueMarkdown
+                        :source="content"
+                        class="mt-10 ml-2"
+                      ></VueMarkdown>
                     </v-card-text>
                   </v-alert>
                 </v-card>
@@ -70,17 +93,16 @@
 </template>
 
 <script>
-import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 import VueMarkdown from "vue-markdown";
+import { initRecruitApi, deleteAnnounceApi } from "../api/api.js";
 
 export default {
   created() {
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
     this.projectAnnounceID = this.$route.params.id;
-    this.axios
-      .get(`${ipObj.ip}/api/recruit/${this.projectAnnounceID}`)
-      .then((res) => {
+    initRecruitApi(this.projectAnnounceID)
+      .then(res => {
         // console.log(res)
         if (res.status === 200) {
           this.title = res.data.recruit.title;
@@ -92,7 +114,7 @@ export default {
           this.content = res.data.recruit.contents;
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
@@ -110,32 +132,26 @@ export default {
     content: "",
     subTitleObj: {
       title: "📝프로젝트 공고",
-      contents: "프로젝트 인원을 모집하는 공간입니다.",
-    },
+      contents: "프로젝트 인원을 모집하는 공간입니다."
+    }
   }),
 
   components: {
     SubTitle,
-    VueMarkdown,
+    VueMarkdown
   },
   methods: {
     deleteAnnounce() {
       let result = confirm("정말로 삭제하시겠습니까?");
       if (result) {
-        this.axios
-          .delete(`${ipObj.ip}/api/recruit/${this.projectAnnounceID}`, {
-            headers: {
-              token: sessionStorage.getItem("token"),
-            },
-          })
-          .then((res) => {
-            if (res.status === 200) {
-              this.$router.push({ name: "projectAnnounceList" });
-            }
-          });
+        deleteAnnounceApi(this.projectAnnounceID).then(res => {
+          if (res.status === 200) {
+            this.$router.push({ name: "projectAnnounceList" });
+          }
+        });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
