@@ -80,6 +80,7 @@
         <PhotoCard :item="item" />
       </v-col>
     </v-row>
+    <div class="my-15"></div>
   </v-container>
 </template>
 
