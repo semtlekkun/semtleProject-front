@@ -1,5 +1,6 @@
 import ipObj from "../key";
 import axios from "axios";
+import { tokHeaders } from "./getToken";
 
 // 원래 함수 이름뒤에 api 추가
 // 함수명 중복되면 앞에 컴포넌트 이름 추가
@@ -10,11 +11,6 @@ import axios from "axios";
 
 // 1.CommoentForm.vue
 const InputAnswerApi = (contents, questionID) => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
-
   const inputContents = {
     contents: contents,
     question: questionID
@@ -25,11 +21,6 @@ const InputAnswerApi = (contents, questionID) => {
 
 // 2. CommentList.vue
 const DelteAnswerApi = id => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
-
   return axios.delete(`${ipObj.ip}/api/answer/${id}`, tokHeaders);
 };
 
@@ -44,21 +35,11 @@ const LoginFormCheckFormApi = (id, pw) => {
 
 // 4. MyPageNickName.vue
 const InitNicknameApi = () => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
-
   return axios.get(`${ipObj.ip}/api/mypage`, tokHeaders);
 };
 
 // 5. Password.vue
 const SubmitPasswordApi = (current, change) => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
-
   const sendObj = {
     currentPW: current,
     changePW: change
@@ -69,11 +50,6 @@ const SubmitPasswordApi = (current, change) => {
 
 // 6. PhoneNum.vue
 const SubmitPhoneNumApi = resultPhoneNum => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
-
   const sendObj = {
     phoneNum: resultPhoneNum
   };
@@ -88,41 +64,21 @@ const SubmitPhoneNumApi = resultPhoneNum => {
 // 6. PhoneNum.vue
 //누락되었던 init 함수 Api
 const initNumberApi = () => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
-
   return axios.get(`${ipObj.ip}/api/mypage`, tokHeaders);
 };
 
 // 7. Question.vue
 const DeleteQuestionApi = QID => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
-
   return axios.delete(`${ipObj.ip}/api/question/${QID}`, tokHeaders);
 };
 
 // 8. UserImg.vue
 const InitImageApi = () => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
-
   return axios.get(`${ipObj.ip}/api/mypage`, tokHeaders);
 };
 
 // 9. UserImg.vue
 const SubmitUserImgApi = form => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
-
   return axios.put(`${ipObj.ip}/api/mypage/picture/update`, form, tokHeaders);
 };
 
@@ -213,10 +169,6 @@ const getNoticeApi = noticeID => {
 
 // 16. Notice.vue
 const deleteNoticeApi = noticeID => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
   return axios.delete(`${ipObj.ip}/api/notice/${noticeID}`, tokHeaders);
 };
 
@@ -233,10 +185,6 @@ const initRecruitApi = projectAnnounceID => {
 
 // 20. ProjectAnnounceRead.vue
 const deleteAnnounceApi = projectAnnounceID => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
   return axios.delete(
     `${ipObj.ip}/api/recruit/${projectAnnounceID}`,
     tokHeaders
@@ -245,11 +193,6 @@ const deleteAnnounceApi = projectAnnounceID => {
 
 // 21. ProjectAnnounceWrite.vue
 const confirmAnnounceApi = (endDate, title, recruitment, contents) => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
-
   const sendObj = {
     endDate: endDate,
     title: title,
@@ -284,10 +227,6 @@ const initProjectViewApi = projectID => {
 
 // 25. ProjectView.vue
 const deleteProjectApi = projectID => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
   return axios.delete(`${ipObj.ip}/api/pf/${projectID}`, tokHeaders);
 };
 
@@ -308,10 +247,6 @@ const initQnAQuestionListApi = () => {
 
 // 29. QuestionInput.vue
 const QuestionInputwriteConentsApi = form => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
   return axios.post(`${ipObj.ip}/api/question`, form, tokHeaders);
 };
 
@@ -322,10 +257,6 @@ const initPhotoApi = photoID => {
 
 //31. Photo.vue
 const deletePhotoApi = photoID => {
-  //Token
-  const tokHeaders = {
-    headers: { token: sessionStorage.getItem("token") }
-  };
   return axios.delete(`${ipObj.ip}/api/photo/${photoID}`, tokHeaders);
 };
 
