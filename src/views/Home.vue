@@ -14,7 +14,7 @@
         </v-row>
         <Table :perPage="5" tableName="notice" :contents="noticeContents" />
 
-        <v-row class="mt-15">
+        <v-row>
           <v-col cols="12" sm="8">
             <h1>📝 프로젝트 공고</h1>
           </v-col>
