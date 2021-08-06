@@ -176,14 +176,14 @@
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 import VueMarkdown from "vue-markdown";
-import { initProjectListApi, initProjectViewApi } from "../api/api.js";
+import { initProjectViewApi, deleteProjectApi } from "../api/api.js";
 
 export default {
   created() {
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
     this.projectID = this.$route.params.id;
 
-    initProjectListApi(this.projectID)
+    initProjectViewApi(this.projectID)
       .then(res => {
         this.title = res.data.project.projectTitle;
         this.startDate = res.data.project.projectStartDate;
@@ -239,7 +239,7 @@ export default {
     deleteProject() {
       let result = confirm("정말로 삭제하시겠습니까?");
       if (result) {
-        initProjectViewApi(this.projectID).then(res => {
+        deleteProjectApi(this.projectID).then(res => {
           if (res.status === 200) {
             this.$router.push({
               name: "projectList"

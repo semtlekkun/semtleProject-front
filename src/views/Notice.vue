@@ -83,10 +83,7 @@ export default {
             res.data.notice.image
           );
           // 이미지도 추가
-          if (
-            this.imageUrl ===
-            "http://sbmi.iptime.org:3000/api/notice/images/null"
-          ) {
+          if (this.imageUrl === `${ipObj.ip}/api/notice/images/null`) {
             this.isImage = false;
           }
         }
