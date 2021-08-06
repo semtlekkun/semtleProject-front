@@ -315,6 +315,25 @@ const QuestionInputwriteConentsApi = form => {
   return axios.post(`${ipObj.ip}/api/question`, form, tokHeaders);
 };
 
+//30. Photo.vue
+const initPhotoApi = photoID => {
+  return axios.get(`${ipObj.ip}/api/photo/${photoID}`);
+};
+
+//31. Photo.vue
+const deletePhotoApi = photoID => {
+  //Token
+  const tokHeaders = {
+    headers: { token: sessionStorage.getItem("token") }
+  };
+  return axios.delete(`${ipObj.ip}/api/photo/${photoID}`, tokHeaders);
+};
+
+//32. PhotoList.vue
+const initPhotoListApi = () => {
+  return axios.get(`${ipObj.ip}/api/photo/list`);
+};
+
 export {
   InputAnswerApi,
   DelteAnswerApi,
@@ -352,5 +371,8 @@ export {
   initQnAAnswerApi,
   initQnAQuestionListApi,
   QuestionInputwriteConentsApi,
-  initNumberApi
+  initNumberApi,
+  initPhotoApi,
+  deletePhotoApi,
+  initPhotoListApi
 };

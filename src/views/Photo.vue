@@ -63,14 +63,14 @@
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 import VueMarkdown from "vue-markdown";
+import { initPhotoApi, deletePhotoApi } from "../api/api.js";
 
 export default {
   created() {
     this.admin = JSON.parse(sessionStorage.getItem("admin"));
     this.photoID = this.$route.params.id;
-    this.axios
-      .get(`${ipObj.ip}/api/photo/${this.photoID}`)
-      .then((res) => {
+    initPhotoApi(this.photoID)
+      .then(res => {
         if (res.status === 200) {
           this.title = res.data.photo.title;
           this.writer = res.data.photo.writer;
@@ -82,7 +82,7 @@ export default {
           );
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
@@ -98,34 +98,28 @@ export default {
     contents: "",
     subTitleObj: {
       title: "📸활동 사진",
-      contents: "셈틀꾼의 활동 사진을 올리는 공간입니다.",
+      contents: "셈틀꾼의 활동 사진을 올리는 공간입니다."
     },
 
-    isImage: true,
+    isImage: true
   }),
 
   components: {
     SubTitle,
-    VueMarkdown,
+    VueMarkdown
   },
   methods: {
     deletePhoto() {
       let result = confirm("정말로 삭제하시겠습니까?");
       if (result) {
-        this.axios
-          .delete(`${ipObj.ip}/api/photo/${this.photoID}`, {
-            headers: {
-              token: sessionStorage.getItem("token"),
-            },
-          })
-          .then((res) => {
-            if (res.status === 200) {
-              this.$router.push({ name: "photoList" });
-            }
-          });
+        deletePhotoApi(this.photoID).then(res => {
+          if (res.status === 200) {
+            this.$router.push({ name: "photoList" });
+          }
+        });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

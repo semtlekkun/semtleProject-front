@@ -36,16 +36,18 @@
 import ipObj from "../key";
 import SubTitle from "../components/SubTitle.vue";
 import PhotoCard from "../components/PhotoCard.vue";
+import { initPhotoListApi } from "../api/api";
 
 export default {
   created() {
-    this.axios
-      .get(`${ipObj.ip}/api/photo/list`)
-      .then((res) => {
+    initPhotoListApi()
+      // this.axios
+      //   .get(`${ipObj.ip}/api/photo/list`)
+      .then(res => {
         if (res.status === 200) {
           this.contents = [];
 
-          res.data.photoList.forEach((item) => {
+          res.data.photoList.forEach(item => {
             let obj = new Object();
             obj.title = item.title;
             obj.date = item.date;
@@ -63,13 +65,13 @@ export default {
           else this.curContents = this.contents.slice(0, 6);
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   components: {
     SubTitle,
-    PhotoCard,
+    PhotoCard
   },
   data() {
     return {
@@ -79,20 +81,20 @@ export default {
       curContents: [],
       subTitleObj: {
         title: "📸활동 사진",
-        contents: "셈틀꾼의 활동 사진을 올리는 공간입니다.",
-      },
+        contents: "셈틀꾼의 활동 사진을 올리는 공간입니다."
+      }
     };
   },
 
   watch: {
-    curPage: function () {
+    curPage: function() {
       let count = this.curPage - 1;
       // 마지막 페이지 예외처리
       if (this.curPage === this.pageLength)
         this.curContents = this.contents.slice(count * 6, this.contents.length);
       else this.curContents = this.contents.slice(count * 6, count * 6 + 6);
-    },
-  },
+    }
+  }
 };
 </script>
 
