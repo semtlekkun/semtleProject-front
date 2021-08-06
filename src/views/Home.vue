@@ -69,11 +69,11 @@
     </v-row>
     <v-row class="photoContainer">
       <v-col
-        cols="4"
-        lg="2"
-        md="2"
-        sm="4"
-        xs="4"
+        cols="12"
+        lg="3"
+        md="3"
+        sm="6"
+        xs="12"
         v-for="item in photoContents"
         :key="item._id"
       >
@@ -160,8 +160,8 @@ export default {
         if (res.status === 200) {
           this.photoContents = [];
           res.data.photoList.forEach((item) => {
-            // 최근 6개만
-            if (this.photoContents.length < 6) {
+            // 최근 4개만
+            if (this.photoContents.length < 4) {
               let obj = new Object();
               obj.title = item.title;
               obj.date = item.date;
