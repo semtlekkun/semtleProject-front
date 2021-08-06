@@ -20,7 +20,7 @@
 
       <v-img :src="contentsObj.imgSrc" height="194"></v-img>
 
-      <v-card-text>
+      <!-- <v-card-text>
         <span
           v-for="(text, index) in contentsObj.contents"
           :key="text.index"
@@ -28,6 +28,11 @@
           >{{ text }}</span
         >
         <span v-if="contentsObj.contents.length > 10">...</span>
+      </v-card-text> -->
+      <v-card-text>
+        <v-list-item-subtitle>
+          {{ contentsObj.contents }}
+        </v-list-item-subtitle>
       </v-card-text>
     </v-card>
   </router-link>
