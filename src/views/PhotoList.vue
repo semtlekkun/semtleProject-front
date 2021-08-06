@@ -29,6 +29,7 @@
         color="#50829b"
       ></v-pagination>
     </div>
+    <div class="my-15"></div>
   </v-container>
 </template>
 
